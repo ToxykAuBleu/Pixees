@@ -1,0 +1,259 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>Main</nom>
+  <date_creation>7/11/2023 16:08</date_creation>
+  <Elements>
+    <Action>
+      <Position>666;61</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>tolerance, coordX, coordY, calque</PreAssertion>
+      <PostAssertion>calque</PostAssertion>
+      <Titre>Baguette magique</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Action>
+          <Position>570;232</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>calque</PreAssertion>
+          <PostAssertion>lab</PostAssertion>
+          <Titre>Convertir RGB vers Lab</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>309;395</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>?</PreAssertion>
+              <PostAssertion>?</PostAssertion>
+              <Titre>lab ← nouveau Calque 
+de hauteur calque.hauteur
+et de largeur calque.largeur</Titre>
+              <DetailsVisible>1</DetailsVisible>
+              <DetailsVideVisible>0</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Iteration>
+              <Position>525.5;420.5</Position>
+              <StyleLien>1</StyleLien>
+              <Titre>Pour x allant de 0 à calque.largeur</Titre>
+              <IterationFixe>1</IterationFixe>
+              <Enfants>
+                <Iteration>
+                  <Position>524.5;537.5</Position>
+                  <StyleLien>1</StyleLien>
+                  <Titre>Pour y allant de 0 à calque.hauteur</Titre>
+                  <IterationFixe>1</IterationFixe>
+                  <Enfants>
+                    <Action>
+                      <Position>5;755</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>calque, x, y</PreAssertion>
+                      <PostAssertion>unPixel</PostAssertion>
+                      <Titre>calque.getPixelAt(x, y)</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>221;632</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>unPixel</PreAssertion>
+                      <PostAssertion>pixelXYZ</PostAssertion>
+                      <Titre>RGBVersXYZ()</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>526;633</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>pixelXYZ</PreAssertion>
+                      <PostAssertion>pixelLab</PostAssertion>
+                      <Titre>XYZVersLAB()</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>620;762</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>lab, pixelLab</PreAssertion>
+                      <PostAssertion>lab</PostAssertion>
+                      <Titre>lab.ajouterPixel(pixelLab)</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                  </Enfants>
+                </Iteration>
+              </Enfants>
+            </Iteration>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>964;235</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>tolerance, calque, lab,
+coordX, coordY</PreAssertion>
+          <PostAssertion>calque</PostAssertion>
+          <Titre>Rechercher les pixels à sélectionner</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>908;432</Position>
+              <StyleLien>2</StyleLien>
+              <PreAssertion>coordX, coordY, lab</PreAssertion>
+              <PostAssertion>l1, a1, b1,
+fileTraitement</PostAssertion>
+              <Titre>Initialisation de la recherche</Titre>
+              <DetailsVisible>1</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants>
+                <Action>
+                  <Position>886;636</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>∅</PostAssertion>
+                  <Titre>l1 ← lab.getPixelAt(coordX, coordY)
+.getColor()[0]</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>1037;758</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>∅</PostAssertion>
+                  <Titre>a1 ← lab.getPixelAt(coordX, coordY)
+.getColor()[1]</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>1196;637</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>∅</PostAssertion>
+                  <Titre>b1 ← lab.getPixelAt(coordX, coordY)
+.getColor()[2]</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>1444;638</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>?</PreAssertion>
+                  <PostAssertion>?</PostAssertion>
+                  <Titre>fileTraitement ← File vide</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>0</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>1497;761</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>?</PreAssertion>
+                  <PostAssertion>?</PostAssertion>
+                  <Titre>fileTraitement.ajouter( coordX, coordY )</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+              </Enfants>
+            </Action>
+            <Action>
+              <Position>1727;433</Position>
+              <StyleLien>2</StyleLien>
+              <PreAssertion>tolerance, calque,
+ lab, l1, a1, b1,
+coordX, coordY,
+fileTraitement</PreAssertion>
+              <PostAssertion>calque</PostAssertion>
+              <Titre>Effectuer la recherche</Titre>
+              <DetailsVisible>1</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants>
+                <Procedure>
+                  <Position>1745;629</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>tolerance, calque,
+ lab, l1, a1, b1, 
+coordX, coordY,
+fileTraitement</PreAssertion>
+                  <PostAssertion>calque</PostAssertion>
+                  <Titre>spanFilling()</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Procedure>
+              </Enfants>
+            </Action>
+          </Enfants>
+        </Action>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary>
+    <Entry>
+      <Name>tolerance</Name>
+      <Type>integer</Type>
+      <Signification>Correspond à la tolérance que l'utilisateur a sélectionné au préalable.</Signification>
+    </Entry>
+    <Entry>
+      <Name>coordX</Name>
+      <Type>integer</Type>
+      <Signification>Correspond à la coordonnée x du pixel sélectionné par l'utilisateur.</Signification>
+    </Entry>
+    <Entry>
+      <Name>coordY</Name>
+      <Type>integer</Type>
+      <Signification>Correspond à la coordonnée y du pixel sélectionné par l'utilisateur.</Signification>
+    </Entry>
+    <Entry>
+      <Name>l1</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante L du pixel pixelSelected sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>a1</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante a du pixel pixelSelected sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>b1</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante b du pixel pixelSelected sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>unPixel</Name>
+      <Type>Pixel</Type>
+      <Signification>Correspond à un pixel.</Signification>
+    </Entry>
+    <Entry>
+      <Name>pixelXYZ</Name>
+      <Type>Pixel</Type>
+      <Signification>Correspond au pixel unPixel sous forme XYZ.</Signification>
+    </Entry>
+    <Entry>
+      <Name>pixelLab</Name>
+      <Type>Pixel</Type>
+      <Signification>Correspond au pixel unPixel sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>fileTraitement</Name>
+      <Type>FIle de tuple de integer</Type>
+      <Signification>Correspond à la file contenant les coordonnées (x,y) des pixels à traiter dans la recherche.</Signification>
+    </Entry>
+    <Entry>
+      <Name>lab</Name>
+      <Type>Pixel[]</Type>
+      <Signification>Correspond à la liste de pixel (sous forme Lab) dans le calque courant.</Signification>
+    </Entry>
+  </Dictionary>
+</Algorithme>

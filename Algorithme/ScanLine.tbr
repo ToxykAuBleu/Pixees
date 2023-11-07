@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>ScanLine</nom>
+  <date_creation>7/11/2023 11:45</date_creation>
+  <Elements>
+    <Action>
+      <Position>463;78</Position>
+      <StyleLien>1</StyleLien>
+      <PreAssertion>partieGaucheX, partieDroiteX,
+y, fileTraitement</PreAssertion>
+      <PostAssertion>fileTraitement</PostAssertion>
+      <Titre>scanLine()</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants/>
+    </Action>
+  </Elements>
+  <Dictionary/>
+</Algorithme>
