@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>RGBversXYZ</nom>
+  <date_creation>7/11/2023 14:59</date_creation>
+  <Elements>
+    <Action>
+      <Position>650;11</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>pixelRGB, M</PreAssertion>
+      <PostAssertion>pixelXYZ</PostAssertion>
+      <Titre>RGBversXYZ</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Action>
+          <Position>188;144</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>pixelRGB</PreAssertion>
+          <PostAssertion>pixelRGB</PostAssertion>
+          <Titre>Normaliser et linéariser le RGB</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Iteration>
+              <Position>404.5;272.5</Position>
+              <StyleLien>1</StyleLien>
+              <Titre>Pour i allant
+de 0 à 2</Titre>
+              <IterationFixe>1</IterationFixe>
+              <Enfants>
+                <Action>
+                  <Position>31;363</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>∅</PostAssertion>
+                  <Titre>pixelRGB.setColor(i, pixelRGB.getColor(i) /255)</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Condition>
+                  <Position>426.5;373</Position>
+                  <StyleLien>0</StyleLien>
+                  <estUnique>0</estUnique>
+                  <operationsLogiques>
+                    <operation>
+                      <Titre>pixelRGB.getColor(i) &lt;= 0.04045</Titre>
+                      <Enfants>
+                        <Action>
+                          <Position>38;513</Position>
+                          <StyleLien>1</StyleLien>
+                          <PreAssertion>∅</PreAssertion>
+                          <PostAssertion>∅</PostAssertion>
+                          <Titre>pixelRGB.setColor(i, pixelRGB.getColor(i) / 12.92)</Titre>
+                          <DetailsVisible>0</DetailsVisible>
+                          <DetailsVideVisible>1</DetailsVideVisible>
+                          <Enfants/>
+                        </Action>
+                      </Enfants>
+                    </operation>
+                    <operation>
+                      <Titre>Sinon</Titre>
+                      <Enfants>
+                        <Action>
+                          <Position>454;513</Position>
+                          <StyleLien>1</StyleLien>
+                          <PreAssertion>∅</PreAssertion>
+                          <PostAssertion>∅</PostAssertion>
+                          <Titre>pixelRGB.setColor(i, Math.pow(((pixelRGB.getColor(i) + 0.055) / 1.055), 2.4)</Titre>
+                          <DetailsVisible>0</DetailsVisible>
+                          <DetailsVideVisible>1</DetailsVideVisible>
+                          <Enfants/>
+                        </Action>
+                      </Enfants>
+                    </operation>
+                  </operationsLogiques>
+                </Condition>
+              </Enfants>
+            </Iteration>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>753;145</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>pixelRGB, pixelXYZ</PreAssertion>
+          <PostAssertion>pixelXYZ</PostAssertion>
+          <Titre>Convertir RGB vers XYZ</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Iteration>
+              <Position>1016.5;276.5</Position>
+              <StyleLien>1</StyleLien>
+              <Titre>Pour i allant
+de 0 à 2</Titre>
+              <IterationFixe>1</IterationFixe>
+              <Enfants>
+                <Iteration>
+                  <Position>1014.5;364.5</Position>
+                  <StyleLien>1</StyleLien>
+                  <Titre>Pour j allant
+de 0 à 2</Titre>
+                  <IterationFixe>1</IterationFixe>
+                  <Enfants>
+                    <Action>
+                      <Position>893;452</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>∅</PreAssertion>
+                      <PostAssertion>∅</PostAssertion>
+                      <Titre>pixelXYZ.setColor(i, pixelRGB.getPixel(j) * M[i][j])</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                  </Enfants>
+                </Iteration>
+              </Enfants>
+            </Iteration>
+          </Enfants>
+        </Action>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary>
+    <Entry>
+      <Name>pixelRGB</Name>
+      <Type>Pixel</Type>
+      <Signification>Pixel sous la forme RGB</Signification>
+    </Entry>
+    <Entry>
+      <Name>M</Name>
+      <Type>Matrice</Type>
+      <Signification>Matrice de pour convertir du RGB vers XYZ</Signification>
+    </Entry>
+    <Entry>
+      <Name>pixelXYZ</Name>
+      <Type>Pixel</Type>
+      <Signification>Pixel sous la forme XYZ</Signification>
+    </Entry>
+  </Dictionary>
+</Algorithme>

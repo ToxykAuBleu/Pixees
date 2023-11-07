@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>Algorithme</nom>
+  <date_creation>7/11/2023 15:03</date_creation>
+  <Elements>
+    <Action>
+      <Position>578;119</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>pixelXYZ, Xn, Yn, Zn</PreAssertion>
+      <PostAssertion>pixelLAB</PostAssertion>
+      <Titre>XYZversLAB</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Action>
+          <Position>28;265</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>pixelXYZ</PreAssertion>
+          <PostAssertion>X, Y, Z</PostAssertion>
+          <Titre>Calculer la correction
+de gamma du pixel</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>-5;418</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>X ← pixelXYZ.getColor(0) * 100</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>0</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>137;535</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>Y ← pixelXYZ.getColor(1) * 100</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>311;412</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>Z ← pixelXYZ.getColor(2) * 100</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>463;261</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>X, Y, Z
+Xn, Yn, Zn</PreAssertion>
+          <PostAssertion>xr, yr, zr</PostAssertion>
+          <Titre>Calculer les composantes
+de blanc de référence</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>540;517</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>xr ← X/Xn</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>628;410</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>yr ← Y/Yn</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>713;514</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>zr ← Z/Zn</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>948;260</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>pixelLAB, xr, yr, zr</PreAssertion>
+          <PostAssertion>pixelLAB</PostAssertion>
+          <Titre>Convertir le pixel 
+XYZ vers LAB</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>787;404</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>pixelLAB.setColor(0, 116*f(yr) - 16)</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>940;527</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>pixelLAB.setColor(1, 500*(f(xr) - f(yr)))</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>1135;401</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>pixelLAB.setColor(2, 200*(f(yr) - f(zr)))</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary>
+    <Entry>
+      <Name>pixelXYZ</Name>
+      <Type>Pixel</Type>
+      <Signification>Pixel sous form XYZ</Signification>
+    </Entry>
+    <Entry>
+      <Name>Xn</Name>
+      <Type>Float</Type>
+      <Signification>Composante X du tristimuli D65</Signification>
+    </Entry>
+    <Entry>
+      <Name>Yn</Name>
+      <Type>Float</Type>
+      <Signification>Composante Y du tristimuli D65</Signification>
+    </Entry>
+    <Entry>
+      <Name>Zn</Name>
+      <Type>Float</Type>
+      <Signification>Composante Z du tristimuli D65</Signification>
+    </Entry>
+    <Entry>
+      <Name>X</Name>
+      <Type>Float</Type>
+      <Signification>Composante X corrigée du pixel</Signification>
+    </Entry>
+    <Entry>
+      <Name>Y</Name>
+      <Type>Float</Type>
+      <Signification>Composante Y corrigée du pixel</Signification>
+    </Entry>
+    <Entry>
+      <Name>Z</Name>
+      <Type>Float</Type>
+      <Signification>Composante Z corrigée du pixel</Signification>
+    </Entry>
+    <Entry>
+      <Name>xr</Name>
+      <Type>Float</Type>
+      <Signification>Composante X selon le blanc de référence</Signification>
+    </Entry>
+    <Entry>
+      <Name>yr</Name>
+      <Type>Float</Type>
+      <Signification>Composante Y selon le blanc de référence</Signification>
+    </Entry>
+    <Entry>
+      <Name>zr</Name>
+      <Type>Flolat</Type>
+      <Signification>Composante Z selon le blanc de référence</Signification>
+    </Entry>
+    <Entry>
+      <Name>pixelLAB</Name>
+      <Type>Pixel</Type>
+      <Signification>Pixel sous forme L*a*b</Signification>
+    </Entry>
+  </Dictionary>
+</Algorithme>
