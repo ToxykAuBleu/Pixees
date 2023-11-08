@@ -1,0 +1,296 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>SpanFilling</nom>
+  <date_creation>7/11/2023 16:08</date_creation>
+  <Elements>
+    <Action>
+      <Position>445;93</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>tolerance, calque,
+ lab, l1, a1, b1
+coordX, coordY</PreAssertion>
+      <PostAssertion>calque</PostAssertion>
+      <Titre>spanFilling()</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Iteration>
+          <Position>620.5;268.5</Position>
+          <StyleLien>1</StyleLien>
+          <Titre>?</Titre>
+          <IterationFixe>0</IterationFixe>
+          <Enfants>
+            <Action>
+              <Position>48;374</Position>
+              <StyleLien>2</StyleLien>
+              <PreAssertion>fileTraitement</PreAssertion>
+              <PostAssertion>?</PostAssertion>
+              <Titre>Vérification sortie de boucle</Titre>
+              <DetailsVisible>1</DetailsVisible>
+              <DetailsVideVisible>0</DetailsVideVisible>
+              <Enfants>
+                <Condition>
+                  <Position>61.5;540</Position>
+                  <StyleLien>1</StyleLien>
+                  <estUnique>1</estUnique>
+                  <operationsLogiques>
+                    <operation>
+                      <Titre>fileTraitement est vide</Titre>
+                      <Enfants>
+                        <Sortie>
+                          <Position>136;706</Position>
+                        </Sortie>
+                      </Enfants>
+                    </operation>
+                    <operation>
+                      <Titre>Sinon</Titre>
+                      <Enfants/>
+                    </operation>
+                  </operationsLogiques>
+                </Condition>
+              </Enfants>
+            </Action>
+            <Action>
+              <Position>726;370</Position>
+              <StyleLien>2</StyleLien>
+              <PreAssertion>tolerance, calque,
+ lab, l1, a1, b1
+coordX, coordY,
+fileTraitement</PreAssertion>
+              <PostAssertion>calque</PostAssertion>
+              <Titre>Traitement d'une ligne de pixel</Titre>
+              <DetailsVisible>1</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants>
+                <Action>
+                  <Position>292;539</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>fileTraitement</PreAssertion>
+                  <PostAssertion>partieDroiteX, YFixe</PostAssertion>
+                  <Titre>fileTraitement.retirer()</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>751;541</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>partieDroiteX</PreAssertion>
+                  <PostAssertion>partieGaucheX</PostAssertion>
+                  <Titre>partieGaucheX ← partieDroiteX</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+                <Action>
+                  <Position>985;541</Position>
+                  <StyleLien>2</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>partieGaucheX,
+calque</PostAssertion>
+                  <Titre>Traitement de la partie gauche du pixel courant</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants>
+                    <Iteration>
+                      <Position>955.5;692.5</Position>
+                      <StyleLien>1</StyleLien>
+                      <Titre>?</Titre>
+                      <IterationFixe>0</IterationFixe>
+                      <Enfants>
+                        <Condition>
+                          <Position>704.5;808</Position>
+                          <StyleLien>0</StyleLien>
+                          <estUnique>0</estUnique>
+                          <operationsLogiques>
+                            <operation>
+                              <Titre>checkIfInside(calque,
+partieGaucheX - 1, yFixe) == Faux</Titre>
+                              <Enfants>
+                                <Sortie>
+                                  <Position>609;996</Position>
+                                </Sortie>
+                              </Enfants>
+                            </operation>
+                            <operation>
+                              <Titre>checkTolerance
+(tolerance, partieGaucheX - 1, yFixe,
+lab, l1, a1, b1) == Faux</Titre>
+                              <Enfants>
+                                <Sortie>
+                                  <Position>732;997</Position>
+                                </Sortie>
+                              </Enfants>
+                            </operation>
+                            <operation>
+                              <Titre>Sinon</Titre>
+                              <Enfants>
+                                <Action>
+                                  <Position>904;953</Position>
+                                  <StyleLien>2</StyleLien>
+                                  <PreAssertion>calque, yFixe
+partieGaucheX</PreAssertion>
+                                  <PostAssertion>partieGaucheX,
+calque</PostAssertion>
+                                  <Titre>Sélection du pixel courant, puis pixel suivant</Titre>
+                                  <DetailsVisible>1</DetailsVisible>
+                                  <DetailsVideVisible>1</DetailsVideVisible>
+                                  <Enfants>
+                                    <Action>
+                                      <Position>854;1108</Position>
+                                      <StyleLien>1</StyleLien>
+                                      <PreAssertion>∅</PreAssertion>
+                                      <PostAssertion>∅</PostAssertion>
+                                      <Titre>calque.getPixelAt(partieGaucheX -1, yFixe).setSelected(Vrai)</Titre>
+                                      <DetailsVisible>0</DetailsVisible>
+                                      <DetailsVideVisible>1</DetailsVideVisible>
+                                      <Enfants/>
+                                    </Action>
+                                    <Action>
+                                      <Position>1231;1106</Position>
+                                      <StyleLien>1</StyleLien>
+                                      <PreAssertion>∅</PreAssertion>
+                                      <PostAssertion>∅</PostAssertion>
+                                      <Titre>partieGaucheX -= 1</Titre>
+                                      <DetailsVisible>0</DetailsVisible>
+                                      <DetailsVideVisible>1</DetailsVideVisible>
+                                      <Enfants/>
+                                    </Action>
+                                  </Enfants>
+                                </Action>
+                              </Enfants>
+                            </operation>
+                          </operationsLogiques>
+                        </Condition>
+                      </Enfants>
+                    </Iteration>
+                  </Enfants>
+                </Action>
+                <Action>
+                  <Position>1515;543</Position>
+                  <StyleLien>2</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>partieDroiteX,
+calque</PostAssertion>
+                  <Titre>Traitement de la partie droite du pixel courant</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants>
+                    <Iteration>
+                      <Position>1656.5;707.5</Position>
+                      <StyleLien>1</StyleLien>
+                      <Titre>?</Titre>
+                      <IterationFixe>0</IterationFixe>
+                      <Enfants>
+                        <Condition>
+                          <Position>1432.5;801</Position>
+                          <StyleLien>0</StyleLien>
+                          <estUnique>0</estUnique>
+                          <operationsLogiques>
+                            <operation>
+                              <Titre>checkIfInside(calque,
+partieDroiteX, yFixe) == Faux</Titre>
+                              <Enfants>
+                                <Sortie>
+                                  <Position>1483;988</Position>
+                                </Sortie>
+                              </Enfants>
+                            </operation>
+                            <operation>
+                              <Titre>checkTolerance
+(tolerance, partieDroiteX, yFixe,
+lab, l1, a1, b1) == Faux</Titre>
+                              <Enfants>
+                                <Sortie>
+                                  <Position>1561;990</Position>
+                                </Sortie>
+                              </Enfants>
+                            </operation>
+                            <operation>
+                              <Titre>Sinon</Titre>
+                              <Enfants>
+                                <Action>
+                                  <Position>1676;955</Position>
+                                  <StyleLien>2</StyleLien>
+                                  <PreAssertion>calque, yFixe
+partieDroiteX</PreAssertion>
+                                  <PostAssertion>partieDroiteX,
+calque</PostAssertion>
+                                  <Titre>Sélection du pixel courant, puis pixel suivant</Titre>
+                                  <DetailsVisible>1</DetailsVisible>
+                                  <DetailsVideVisible>1</DetailsVideVisible>
+                                  <Enfants>
+                                    <Action>
+                                      <Position>1626;1110</Position>
+                                      <StyleLien>1</StyleLien>
+                                      <PreAssertion>∅</PreAssertion>
+                                      <PostAssertion>∅</PostAssertion>
+                                      <Titre>calque.getPixelAt(partieDroite, yFixe).setSelected(Vrai)</Titre>
+                                      <DetailsVisible>0</DetailsVisible>
+                                      <DetailsVideVisible>1</DetailsVideVisible>
+                                      <Enfants/>
+                                    </Action>
+                                    <Action>
+                                      <Position>2003;1108</Position>
+                                      <StyleLien>1</StyleLien>
+                                      <PreAssertion>∅</PreAssertion>
+                                      <PostAssertion>∅</PostAssertion>
+                                      <Titre>partieDroiteX += 1</Titre>
+                                      <DetailsVisible>0</DetailsVisible>
+                                      <DetailsVideVisible>1</DetailsVideVisible>
+                                      <Enfants/>
+                                    </Action>
+                                  </Enfants>
+                                </Action>
+                              </Enfants>
+                            </operation>
+                          </operationsLogiques>
+                        </Condition>
+                      </Enfants>
+                    </Iteration>
+                  </Enfants>
+                </Action>
+                <Action>
+                  <Position>2183;546</Position>
+                  <StyleLien>2</StyleLien>
+                  <PreAssertion>partieGaucheX, partieDroiteX,
+yFixe, fileTraitement</PreAssertion>
+                  <PostAssertion>fileTraitement</PostAssertion>
+                  <Titre>Scan dans les lignes du dessus et d'en dessous</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants>
+                    <Procedure>
+                      <Position>1969;794</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>partieGaucheX, partieDroiteX - 1,
+yFixe + 1, fileTraitement</PreAssertion>
+                      <PostAssertion>fileTraitement</PostAssertion>
+                      <Titre>scanLine()</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Procedure>
+                    <Procedure>
+                      <Position>2456;793</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>partieGaucheX, partieDroiteX - 1,
+yFixe - 1, fileTraitement</PreAssertion>
+                      <PostAssertion>fileTraitement</PostAssertion>
+                      <Titre>scanLine()</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Procedure>
+                  </Enfants>
+                </Action>
+              </Enfants>
+            </Action>
+          </Enfants>
+        </Iteration>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary/>
+</Algorithme>

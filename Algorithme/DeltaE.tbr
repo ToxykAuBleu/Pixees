@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>DeltaE</nom>
+  <date_creation>6/11/2023 10:50</date_creation>
+  <Elements>
+    <Action>
+      <Position>740;78</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>l1, l2, 
+a1, a2, 
+b1, b2</PreAssertion>
+      <PostAssertion>deltaE</PostAssertion>
+      <Titre>calculDeltaE</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Action>
+          <Position>79;265</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>l1, l2</PreAssertion>
+          <PostAssertion>lDiff</PostAssertion>
+          <Titre>Calcul de la différence entre l1 et l2</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>212;405</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>lDiff ← (l2-l1)²</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>477;265</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>a1, a2</PreAssertion>
+          <PostAssertion>aDiff</PostAssertion>
+          <Titre>Calcul de la différence entre a1 et a2</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>615;406</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>aDiff ← (a2-a1)²</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>888;265</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>b1, b2</PreAssertion>
+          <PostAssertion>bDiff</PostAssertion>
+          <Titre>Calcul de la différence entre b1 et b2</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>1027;417</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>bDiff ← (b2-b1)²</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>1328;266</Position>
+          <StyleLien>1</StyleLien>
+          <PreAssertion>∅</PreAssertion>
+          <PostAssertion>∅</PostAssertion>
+          <Titre>deltaE ← sqrt(lDiff + aDiff + bDiff)</Titre>
+          <DetailsVisible>0</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants/>
+        </Action>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary/>
+</Algorithme>

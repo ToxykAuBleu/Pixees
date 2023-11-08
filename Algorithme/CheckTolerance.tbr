@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<!DOCTYPE Tabula_Rasa>
+<Algorithme>
+  <nom>CheckTolerance</nom>
+  <date_creation>7/11/2023 14:07</date_creation>
+  <Elements>
+    <Action>
+      <Position>539;105</Position>
+      <StyleLien>2</StyleLien>
+      <PreAssertion>tolerance, x, y,
+ lab, l1, a1, b1</PreAssertion>
+      <PostAssertion>(booléen)</PostAssertion>
+      <Titre>checkTolerance()</Titre>
+      <DetailsVisible>1</DetailsVisible>
+      <DetailsVideVisible>1</DetailsVideVisible>
+      <Enfants>
+        <Action>
+          <Position>232;275</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>lab, x, y</PreAssertion>
+          <PostAssertion>l2, a2, b2</PostAssertion>
+          <Titre>Calcul des composantes Lab
+du pixel en coordonnées x, y</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>77;433</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>l2 ← lab.getPixelAt(x, y).getColor()[0]</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>332;434</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>a2 ← lab.getPixelAt(x, y).getColor()[1]</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+            <Action>
+              <Position>591;435</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>b2 ← lab.getPixelAt(x, y).getColor()[2]</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>715;274</Position>
+          <StyleLien>1</StyleLien>
+          <PreAssertion>l1, l2, 
+a1, a2, 
+b1, b2</PreAssertion>
+          <PostAssertion>deltaE</PostAssertion>
+          <Titre>calculDeltaE</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants/>
+        </Action>
+        <Condition>
+          <Position>1026.5;277</Position>
+          <StyleLien>0</StyleLien>
+          <estUnique>0</estUnique>
+          <operationsLogiques>
+            <operation>
+              <Titre>tolerance &lt;= deltaE</Titre>
+              <Enfants>
+                <Action>
+                  <Position>1012;419</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>?</PreAssertion>
+                  <PostAssertion>?</PostAssertion>
+                  <Titre>Retourne Vraie</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>0</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+              </Enfants>
+            </operation>
+            <operation>
+              <Titre>Sinon</Titre>
+              <Enfants>
+                <Action>
+                  <Position>1178;419</Position>
+                  <StyleLien>1</StyleLien>
+                  <PreAssertion>?</PreAssertion>
+                  <PostAssertion>?</PostAssertion>
+                  <Titre>Retourne Faux</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>0</DetailsVideVisible>
+                  <Enfants/>
+                </Action>
+              </Enfants>
+            </operation>
+          </operationsLogiques>
+        </Condition>
+      </Enfants>
+    </Action>
+  </Elements>
+  <Dictionary>
+    <Entry>
+      <Name>tolerance</Name>
+      <Type>integer</Type>
+      <Signification>Correspond à la tolérance que l'utilisateur a sélectionné au préalable.</Signification>
+    </Entry>
+    <Entry>
+      <Name>l1, l2</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante L d'un pixel sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>a1, a2</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante a d'un pixel sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>b1, b2</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la composante b d'un pixel sous forme L*a*b*.</Signification>
+    </Entry>
+    <Entry>
+      <Name>deltaE</Name>
+      <Type>float</Type>
+      <Signification>Correspond à la différence de couleur entre un pixel et un autre (selon la vue humaine).</Signification>
+    </Entry>
+    <Entry>
+      <Name>lab</Name>
+      <Type>Pixel[]</Type>
+      <Signification>Correspond à la liste de pixel (sous forme Lab) dans le calque courant.</Signification>
+    </Entry>
+  </Dictionary>
+</Algorithme>
