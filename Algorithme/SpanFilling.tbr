@@ -2,14 +2,15 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>SpanFilling</nom>
-  <date_creation>7/11/2023 16:08</date_creation>
+  <date_creation>13/11/2023 09:50</date_creation>
   <Elements>
     <Action>
       <Position>445;93</Position>
       <StyleLien>2</StyleLien>
       <PreAssertion>tolerance, calque,
- lab, l1, a1, b1
-coordX, coordY</PreAssertion>
+coordX, coordY,
+fileTraitement,
+pixelOrigine</PreAssertion>
       <PostAssertion>calque</PostAssertion>
       <Titre>spanFilling()</Titre>
       <DetailsVisible>1</DetailsVisible>
@@ -55,36 +56,16 @@ coordX, coordY</PreAssertion>
               <Position>726;370</Position>
               <StyleLien>2</StyleLien>
               <PreAssertion>tolerance, calque,
- lab, l1, a1, b1
 coordX, coordY,
-fileTraitement</PreAssertion>
+fileTraitement,
+pixelOrigine</PreAssertion>
               <PostAssertion>calque</PostAssertion>
               <Titre>Traitement d'une ligne de pixel</Titre>
               <DetailsVisible>1</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants>
                 <Action>
-                  <Position>292;539</Position>
-                  <StyleLien>1</StyleLien>
-                  <PreAssertion>fileTraitement</PreAssertion>
-                  <PostAssertion>partieDroiteX, YFixe</PostAssertion>
-                  <Titre>fileTraitement.retirer()</Titre>
-                  <DetailsVisible>1</DetailsVisible>
-                  <DetailsVideVisible>1</DetailsVideVisible>
-                  <Enfants/>
-                </Action>
-                <Action>
-                  <Position>751;541</Position>
-                  <StyleLien>1</StyleLien>
-                  <PreAssertion>partieDroiteX</PreAssertion>
-                  <PostAssertion>partieGaucheX</PostAssertion>
-                  <Titre>partieGaucheX ← partieDroiteX</Titre>
-                  <DetailsVisible>0</DetailsVisible>
-                  <DetailsVideVisible>1</DetailsVideVisible>
-                  <Enfants/>
-                </Action>
-                <Action>
-                  <Position>985;541</Position>
+                  <Position>1216;541</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>∅</PreAssertion>
                   <PostAssertion>partieGaucheX,
@@ -94,13 +75,13 @@ calque</PostAssertion>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Iteration>
-                      <Position>955.5;692.5</Position>
+                      <Position>1399.5;691.5</Position>
                       <StyleLien>1</StyleLien>
                       <Titre>?</Titre>
                       <IterationFixe>0</IterationFixe>
                       <Enfants>
                         <Condition>
-                          <Position>704.5;808</Position>
+                          <Position>999.5;786</Position>
                           <StyleLien>0</StyleLien>
                           <estUnique>0</estUnique>
                           <operationsLogiques>
@@ -109,7 +90,7 @@ calque</PostAssertion>
 partieGaucheX - 1, yFixe) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>609;996</Position>
+                                  <Position>1013;965</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -119,7 +100,7 @@ partieGaucheX - 1, yFixe) == Faux</Titre>
 lab, l1, a1, b1) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>732;997</Position>
+                                  <Position>1105;965</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -127,7 +108,7 @@ lab, l1, a1, b1) == Faux</Titre>
                               <Titre>Sinon</Titre>
                               <Enfants>
                                 <Action>
-                                  <Position>904;953</Position>
+                                  <Position>1199;931</Position>
                                   <StyleLien>2</StyleLien>
                                   <PreAssertion>calque, yFixe
 partieGaucheX</PreAssertion>
@@ -138,7 +119,7 @@ calque</PostAssertion>
                                   <DetailsVideVisible>1</DetailsVideVisible>
                                   <Enfants>
                                     <Action>
-                                      <Position>854;1108</Position>
+                                      <Position>1149;1086</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -148,7 +129,7 @@ calque</PostAssertion>
                                       <Enfants/>
                                     </Action>
                                     <Action>
-                                      <Position>1231;1106</Position>
+                                      <Position>1526;1086</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -168,7 +149,7 @@ calque</PostAssertion>
                   </Enfants>
                 </Action>
                 <Action>
-                  <Position>1515;543</Position>
+                  <Position>1900;542</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>∅</PreAssertion>
                   <PostAssertion>partieDroiteX,
@@ -178,13 +159,13 @@ calque</PostAssertion>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Iteration>
-                      <Position>1656.5;707.5</Position>
+                      <Position>2076.5;708.5</Position>
                       <StyleLien>1</StyleLien>
                       <Titre>?</Titre>
                       <IterationFixe>0</IterationFixe>
                       <Enfants>
                         <Condition>
-                          <Position>1432.5;801</Position>
+                          <Position>1817.5;800</Position>
                           <StyleLien>0</StyleLien>
                           <estUnique>0</estUnique>
                           <operationsLogiques>
@@ -193,7 +174,7 @@ calque</PostAssertion>
 partieDroiteX, yFixe) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1483;988</Position>
+                                  <Position>1868;987</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -203,7 +184,7 @@ partieDroiteX, yFixe) == Faux</Titre>
 lab, l1, a1, b1) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1561;990</Position>
+                                  <Position>1946;989</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -211,7 +192,7 @@ lab, l1, a1, b1) == Faux</Titre>
                               <Titre>Sinon</Titre>
                               <Enfants>
                                 <Action>
-                                  <Position>1676;955</Position>
+                                  <Position>2061;954</Position>
                                   <StyleLien>2</StyleLien>
                                   <PreAssertion>calque, yFixe
 partieDroiteX</PreAssertion>
@@ -222,7 +203,7 @@ calque</PostAssertion>
                                   <DetailsVideVisible>1</DetailsVideVisible>
                                   <Enfants>
                                     <Action>
-                                      <Position>1626;1110</Position>
+                                      <Position>2011;1109</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -232,7 +213,7 @@ calque</PostAssertion>
                                       <Enfants/>
                                     </Action>
                                     <Action>
-                                      <Position>2003;1108</Position>
+                                      <Position>2388;1107</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -252,7 +233,7 @@ calque</PostAssertion>
                   </Enfants>
                 </Action>
                 <Action>
-                  <Position>2183;546</Position>
+                  <Position>2568;545</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>partieGaucheX, partieDroiteX,
 yFixe, fileTraitement</PreAssertion>
@@ -262,7 +243,7 @@ yFixe, fileTraitement</PreAssertion>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Procedure>
-                      <Position>1969;794</Position>
+                      <Position>2354;793</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>partieGaucheX, partieDroiteX - 1,
 yFixe + 1, fileTraitement</PreAssertion>
@@ -273,7 +254,7 @@ yFixe + 1, fileTraitement</PreAssertion>
                       <Enfants/>
                     </Procedure>
                     <Procedure>
-                      <Position>2456;793</Position>
+                      <Position>2841;792</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>partieGaucheX, partieDroiteX - 1,
 yFixe - 1, fileTraitement</PreAssertion>
@@ -283,6 +264,61 @@ yFixe - 1, fileTraitement</PreAssertion>
                       <DetailsVideVisible>1</DetailsVideVisible>
                       <Enfants/>
                     </Procedure>
+                  </Enfants>
+                </Action>
+                <Action>
+                  <Position>291;537</Position>
+                  <StyleLien>2</StyleLien>
+                  <PreAssertion>fileTraitement</PreAssertion>
+                  <PostAssertion>coordsTraitement,
+partieGaucheX,
+yFixe</PostAssertion>
+                  <Titre>Récupération du pixel à traiter</Titre>
+                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants>
+                    <Action>
+                      <Position>310;682</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>∅</PreAssertion>
+                      <PostAssertion>∅</PostAssertion>
+                      <Titre>yFixe ← coordsTraitement.getY()</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>95;783</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>fileTraitement</PreAssertion>
+                      <PostAssertion>coordsTraitement</PostAssertion>
+                      <Titre>fileTraitement.retirer()</Titre>
+                      <DetailsVisible>1</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>530;785</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>partieDroiteX</PreAssertion>
+                      <PostAssertion>partieGaucheX</PostAssertion>
+                      <Titre>partieGaucheX ←
+ coordsTraitement.getX()</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>696;785</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>∅</PreAssertion>
+                      <PostAssertion>∅</PostAssertion>
+                      <Titre>partieDroiteX ←
+coordsTraitement.getX()</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
                   </Enfants>
                 </Action>
               </Enfants>
