@@ -1,12 +1,16 @@
-class Couleur {
+export class Couleur {
     #_comp1;
     #_comp2;
     #_comp3;
 
     constructor(comp1, comp2, comp3) {
-        this.#_comp1 = comp1;
-        this.#_comp2 = comp2;
-        this.#_comp3 = comp3;
+        if (this.constructor == Couleur) {
+            throw new Error("Classe abstraite ne peux pas être initialisé")
+        } else {
+            this.#_comp1 = comp1;
+            this.#_comp2 = comp2;
+            this.#_comp3 = comp3;
+        }
     }
 
     getComp(indComp) {
