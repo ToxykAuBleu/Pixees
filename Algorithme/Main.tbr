@@ -2,7 +2,7 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>Main</nom>
-  <date_creation>13/11/2023 09:30</date_creation>
+  <date_creation>13/11/2023 09:35</date_creation>
   <Elements>
     <Action>
       <Position>543;60</Position>
@@ -16,7 +16,7 @@
         <Action>
           <Position>556;224</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>tolerance, calque, cords</PreAssertion>
+          <PreAssertion>tolerance, calque, coords</PreAssertion>
           <PostAssertion>calque</PostAssertion>
           <Titre>Rechercher les pixels à sélectionner</Titre>
           <DetailsVisible>1</DetailsVisible>
