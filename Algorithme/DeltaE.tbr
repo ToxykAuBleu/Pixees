@@ -2,34 +2,36 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>DeltaE</nom>
-  <date_creation>6/11/2023 10:50</date_creation>
+  <date_creation>13/11/2023 10:10</date_creation>
   <Elements>
     <Action>
       <Position>740;78</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>l1, l2, 
-a1, a2, 
-b1, b2</PreAssertion>
-      <PostAssertion>deltaE</PostAssertion>
+      <PreAssertion>couleurLabOrigine,
+couleurLabCompare</PreAssertion>
+      <PostAssertion>(float)</PostAssertion>
       <Titre>calculDeltaE</Titre>
       <DetailsVisible>1</DetailsVisible>
       <DetailsVideVisible>1</DetailsVideVisible>
       <Enfants>
         <Action>
-          <Position>79;265</Position>
+          <Position>6;280</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>l1, l2</PreAssertion>
-          <PostAssertion>lDiff</PostAssertion>
-          <Titre>Calcul de la différence entre l1 et l2</Titre>
+          <PreAssertion>couleurLabOrigine,
+couleurLabCompare</PreAssertion>
+          <PostAssertion>comp1Diff</PostAssertion>
+          <Titre>Calcul de la différence 
+de la composante 1 entre
+ couleurLabOrigine et couleurLabComapre</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
           <Enfants>
             <Action>
-              <Position>212;405</Position>
+              <Position>91;425</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
-              <Titre>lDiff ← (l2-l1)²</Titre>
+              <Titre>comp1Diff ← ( couleurLabCompare.getComp(1) -couleurLabOrigine.getComp(1) )²</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
@@ -37,56 +39,62 @@ b1, b2</PreAssertion>
           </Enfants>
         </Action>
         <Action>
-          <Position>477;265</Position>
-          <StyleLien>2</StyleLien>
-          <PreAssertion>a1, a2</PreAssertion>
-          <PostAssertion>aDiff</PostAssertion>
-          <Titre>Calcul de la différence entre a1 et a2</Titre>
-          <DetailsVisible>1</DetailsVisible>
-          <DetailsVideVisible>1</DetailsVideVisible>
-          <Enfants>
-            <Action>
-              <Position>615;406</Position>
-              <StyleLien>1</StyleLien>
-              <PreAssertion>∅</PreAssertion>
-              <PostAssertion>∅</PostAssertion>
-              <Titre>aDiff ← (a2-a1)²</Titre>
-              <DetailsVisible>0</DetailsVisible>
-              <DetailsVideVisible>1</DetailsVideVisible>
-              <Enfants/>
-            </Action>
-          </Enfants>
-        </Action>
-        <Action>
-          <Position>888;265</Position>
-          <StyleLien>2</StyleLien>
-          <PreAssertion>b1, b2</PreAssertion>
-          <PostAssertion>bDiff</PostAssertion>
-          <Titre>Calcul de la différence entre b1 et b2</Titre>
-          <DetailsVisible>1</DetailsVisible>
-          <DetailsVideVisible>1</DetailsVideVisible>
-          <Enfants>
-            <Action>
-              <Position>1027;417</Position>
-              <StyleLien>1</StyleLien>
-              <PreAssertion>∅</PreAssertion>
-              <PostAssertion>∅</PostAssertion>
-              <Titre>bDiff ← (b2-b1)²</Titre>
-              <DetailsVisible>0</DetailsVisible>
-              <DetailsVideVisible>1</DetailsVideVisible>
-              <Enfants/>
-            </Action>
-          </Enfants>
-        </Action>
-        <Action>
-          <Position>1328;266</Position>
+          <Position>1665;279</Position>
           <StyleLien>1</StyleLien>
           <PreAssertion>∅</PreAssertion>
           <PostAssertion>∅</PostAssertion>
-          <Titre>deltaE ← sqrt(lDiff + aDiff + bDiff)</Titre>
+          <Titre>Retourne sqrt(comp1Diff + comp2Diff+ comp3Diff)</Titre>
           <DetailsVisible>0</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
           <Enfants/>
+        </Action>
+        <Action>
+          <Position>553;279</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>couleurLabOrigine,
+couleurLabCompare</PreAssertion>
+          <PostAssertion>comp2Diff</PostAssertion>
+          <Titre>Calcul de la différence 
+de la composante 2 entre
+ couleurLabOrigine et couleurLabComapre</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>635;424</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>comp2Diff ← ( couleurLabCompare.getComp(2) -couleurLabOrigine.getComp(2) )²</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
+        </Action>
+        <Action>
+          <Position>1100;280</Position>
+          <StyleLien>2</StyleLien>
+          <PreAssertion>couleurLabOrigine,
+couleurLabCompare</PreAssertion>
+          <PostAssertion>comp3Diff</PostAssertion>
+          <Titre>Calcul de la différence 
+de la composante 3 entre
+ couleurLabOrigine et couleurLabComapre</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants>
+            <Action>
+              <Position>1185;425</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>comp3Diff ← ( couleurLabCompare.getComp(3) -couleurLabOrigine.getComp(3) )²</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
+          </Enfants>
         </Action>
       </Enfants>
     </Action>
