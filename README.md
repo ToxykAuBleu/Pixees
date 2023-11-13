@@ -8,6 +8,10 @@ Nous voulons aussi que les données des utilisateurs ne soient pas utilisées à
 
 Nous avons décidé que notre application serait dédiée au pixel art car la communauté du pixel art est assez grande et n'ayant que très peu de lieu dédié à sa publication. Un réseau social réunissant tous les dessinateurs permettra de créer des liaisons entre eux, ils pourront discuter, s'aider sur des techniques de dessins ou autres, alimentant ainsi l'engouement que les gens ont pour le pixel afin de produire des œuvres de plus en plus créatives.
 
+# Documentation
+
+Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.github.io/Pixees/).
+
 # Formalisme des commits
 
 ``[+]`` → ajout de contenu (code ou fichier)  
