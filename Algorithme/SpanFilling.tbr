@@ -2,7 +2,7 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>SpanFilling</nom>
-  <date_creation>13/11/2023 09:50</date_creation>
+  <date_creation>14/11/2023 11:58</date_creation>
   <Elements>
     <Action>
       <Position>445;93</Position>
@@ -96,8 +96,8 @@ partieGaucheX - 1, yFixe) == Faux</Titre>
                             </operation>
                             <operation>
                               <Titre>checkTolerance
-(tolerance, partieGaucheX - 1, yFixe,
-lab, l1, a1, b1) == Faux</Titre>
+(calque, tolerance, partieGaucheX - 1, 
+yFixe, pixelOrigine) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
                                   <Position>1105;965</Position>
@@ -129,7 +129,7 @@ calque</PostAssertion>
                                       <Enfants/>
                                     </Action>
                                     <Action>
-                                      <Position>1526;1086</Position>
+                                      <Position>1537;1082</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -180,8 +180,8 @@ partieDroiteX, yFixe) == Faux</Titre>
                             </operation>
                             <operation>
                               <Titre>checkTolerance
-(tolerance, partieDroiteX, yFixe,
-lab, l1, a1, b1) == Faux</Titre>
+(calque, tolerance, partieDroiteX, 
+yFixe, pixelOrigine) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
                                   <Position>1946;989</Position>
