@@ -52,9 +52,9 @@ export class RGB extends Couleur {
         for (let i = 1; i < 4; i++) {
             this.setComp(i, this.getComp(i) / 255);
             if (this.getComp(i) <= 0.04045) {
-                this.getComp(i) /= 12.92;
+                this.setComp(i, this.getComp(i) / 12.92);
             } else {
-                this.getComp(i) = Math.pow(((this.getComp(i) + 0.055) / 1.055), 2.4);
+                this.setComp(i, Math.pow(((this.getComp(i) + 0.055) / 1.055), 2.4));
             }
         }
 
