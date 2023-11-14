@@ -15,10 +15,10 @@ export class RGB extends Couleur {
     // CONSTRUCTEUR
     /**
      * 
-     * @param {int} comp1 La valeur de la composante 1
-     * @param {int} comp2 La valeur de la composante 2
-     * @param {int} comp3 La valeur de la composante 3
-     * @param {int} alpha La valeur de la transparence
+     * @param {float} comp1 La valeur de la composante 1
+     * @param {float} comp2 La valeur de la composante 2
+     * @param {float} comp3 La valeur de la composante 3
+     * @param {float} alpha La valeur de la transparence
      */
     constructor(comp1, comp2, comp3, alpha) {
         super(comp1, comp2, comp3);

@@ -21,6 +21,9 @@ export class Couleur {
     /**
      * Créer une nouvelle Couleur avec (par défault du blanc) les composantes
      * respectives (RGB, XYZ, Lab)
+     * @param {float} comp1 La valeur de la composante 1
+     * @param {float} comp2 La valeur de la composante 2
+     * @param {float} comp3 La valeur de la composante 3
      */
     constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
         if (this.constructor == Couleur) {
