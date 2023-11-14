@@ -50,7 +50,7 @@ export class RGB extends Couleur {
     RGBversXYZ() {
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
         for (let i = 1; i < 4; i++) {
-            this.getComp(i) = this.getComp(i) / 255
+            this.setComp(i, this.getComp(i) / 255);
             if (this.getComp(i) <= 0.04045) {
                 this.getComp(i) /= 12.92;
             } else {
