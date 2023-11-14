@@ -1,9 +1,25 @@
 export class Couleur {
+
+    // ATTRIBUTS
+    /**
+     * Composante 1 de la Couleur
+     */
     #_comp1;
+    /**
+     * Composante 2 de la Couleur
+     */
     #_comp2;
+    /**
+     * Composante 3 de la Couleur
+     */
     #_comp3;
 
-    constructor(comp1, comp2, comp3) {
+    // CONSTRUCTEUR
+    /**
+     * Créer une nouvelle Couleur avec (par défault du blanc) les composantes
+     * respectives (RGB, XYZ, Lab)
+     */
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
         if (this.constructor == Couleur) {
             throw new Error("Classe abstraite ne peux pas être initialisé")
         } else {
@@ -13,6 +29,12 @@ export class Couleur {
         }
     }
 
+    // GETTERS & SETTERS
+    /**
+     * 
+     * @param {int} indComp L'indice de la composante
+     * @returns La valeur de la composante
+     */
     getComp(indComp) {
         switch (indComp) {
             case 1:
@@ -24,6 +46,11 @@ export class Couleur {
         }
     }
 
+    /**
+     * 
+     * @param {int} indComp L'indice de la composante
+     * @param {float} val La nouvelle valeur de la composante
+     */
     setComp(indComp, val) {
         switch (indComp) {
             case 1:
