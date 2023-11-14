@@ -2,12 +2,12 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>CheckTolerance</nom>
-  <date_creation>14/11/2023 11:54</date_creation>
+  <date_creation>14/11/2023 14:46</date_creation>
   <Elements>
     <Action>
       <Position>539;105</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>calque, tolerance, 
+      <PreAssertion>calque, tolerance, &#xd;
 x, y, pixelOrigine</PreAssertion>
       <PostAssertion>(booléen)</PostAssertion>
       <Titre>checkTolerance()</Titre>
@@ -17,11 +17,11 @@ x, y, pixelOrigine</PreAssertion>
         <Action>
           <Position>232;275</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>x, y,
+          <PreAssertion>x, y,&#xd;
 calque</PreAssertion>
-          <PostAssertion>pixelComp</PostAssertion>
-          <Titre>Récupération du pixel en 
-coordonnées x, y et 
+          <PostAssertion>couleurLab</PostAssertion>
+          <Titre>Récupération du pixel en &#xd;
+coordonnées x, y et &#xd;
 transformation en L*a*b*</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
@@ -37,17 +37,7 @@ transformation en L*a*b*</Titre>
               <Enfants/>
             </Action>
             <Action>
-              <Position>249;459</Position>
-              <StyleLien>1</StyleLien>
-              <PreAssertion>∅</PreAssertion>
-              <PostAssertion>∅</PostAssertion>
-              <Titre>couleurRGB ← pixelComp.getColor()</Titre>
-              <DetailsVisible>0</DetailsVisible>
-              <DetailsVideVisible>1</DetailsVideVisible>
-              <Enfants/>
-            </Action>
-            <Action>
-              <Position>479;459</Position>
+              <Position>230;569</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
@@ -57,21 +47,11 @@ transformation en L*a*b*</Titre>
               <Enfants/>
             </Action>
             <Action>
-              <Position>709;459</Position>
+              <Position>435;452</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
               <Titre>couleurLab ← couleurXYZ.XYZversLab()</Titre>
-              <DetailsVisible>0</DetailsVisible>
-              <DetailsVideVisible>1</DetailsVideVisible>
-              <Enfants/>
-            </Action>
-            <Action>
-              <Position>960;460</Position>
-              <StyleLien>1</StyleLien>
-              <PreAssertion>∅</PreAssertion>
-              <PostAssertion>∅</PostAssertion>
-              <Titre>pixelComp.setColor(couleurLab)</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
@@ -81,8 +61,8 @@ transformation en L*a*b*</Titre>
         <Action>
           <Position>738;276</Position>
           <StyleLien>1</StyleLien>
-          <PreAssertion>pixelOrigine.getColor(),
-pixelComp.getColor()</PreAssertion>
+          <PreAssertion>pixelOrigine,
+couleurLab</PreAssertion>
           <PostAssertion>deltaE</PostAssertion>
           <Titre>calculDeltaE</Titre>
           <DetailsVisible>1</DetailsVisible>
@@ -90,7 +70,7 @@ pixelComp.getColor()</PreAssertion>
           <Enfants/>
         </Action>
         <Condition>
-          <Position>1279.5;278</Position>
+          <Position>1127.5;283</Position>
           <StyleLien>0</StyleLien>
           <estUnique>0</estUnique>
           <operationsLogiques>
@@ -98,7 +78,7 @@ pixelComp.getColor()</PreAssertion>
               <Titre>tolerance &lt;= deltaE</Titre>
               <Enfants>
                 <Action>
-                  <Position>1263;458</Position>
+                  <Position>1103;411</Position>
                   <StyleLien>1</StyleLien>
                   <PreAssertion>?</PreAssertion>
                   <PostAssertion>?</PostAssertion>
@@ -113,7 +93,7 @@ pixelComp.getColor()</PreAssertion>
               <Titre>Sinon</Titre>
               <Enfants>
                 <Action>
-                  <Position>1429;458</Position>
+                  <Position>1311;417</Position>
                   <StyleLien>1</StyleLien>
                   <PreAssertion>?</PreAssertion>
                   <PostAssertion>?</PostAssertion>
@@ -143,10 +123,10 @@ pixelComp.getColor()</PreAssertion>
     <Entry>
       <Name>pixelOrgine</Name>
       <Type>Pixel</Type>
-      <Signification>Correspond au pixel que l'utilisateur a sélectionné.</Signification>
+      <Signification>Correspond au pixel, sous forme Lab, que l'utilisateur a sélectionné.</Signification>
     </Entry>
     <Entry>
-      <Name>pixelComp</Name>
+      <Name>pixelCompare</Name>
       <Type>Pixel</Type>
       <Signification>Correspond au pixel en cours de traitement.</Signification>
     </Entry>
