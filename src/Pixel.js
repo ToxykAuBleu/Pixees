@@ -1,7 +1,9 @@
+import { Coordonnees } from "./Coordonnees.js";
+
 /**
  * Classe représentant un Pixel.
  */
-class Pixel {
+export class Pixel {
     // ATTRIBUTS
     /**
      * Coordonnées (x, y) du Pixel
