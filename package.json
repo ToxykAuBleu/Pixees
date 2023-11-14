@@ -1,5 +1,12 @@
 {
+  "scripts": {
+    "generate-docs": "jsdoc src -c conf.json --verbose"
+  },
   "dependencies": {
     "jsdoc": "^4.0.2"
+  },
+  "devDependencies": {
+    "minami": "^1.2.3",
+    "taffydb": "^2.7.3"
   }
 }
