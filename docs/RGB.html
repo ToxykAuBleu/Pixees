@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Pixel - Documentation</title>
+    <title>RGB - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Pixel</h1>
+    <h1 class="page-title">RGB</h1>
     
 
     
@@ -42,10 +42,10 @@
 <header>
     
         <h2>
-        Pixel
+        RGB
         </h2>
         
-            <div class="class-description">Classe représentant un Pixel.</div>
+            <div class="class-description">Classe représentant une Couleur sous forme RGB</div>
         
     
 </header>
@@ -60,15 +60,11 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Pixel"><span class="type-signature"></span>new Pixel<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="RGB"><span class="type-signature"></span>new RGB<span class="signature">(comp1, comp2, comp3, alpha)</span><span class="type-signature"></span></h4>
 
     
 
 
-
-<div class="description">
-    Créé un nouveau Pixel avec (par défaut) des coordonnées, une couleur et est déselectionné.
-</div>
 
 
 
@@ -103,7 +99,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line4">line 4</a>
+        <a href="RGB.js.html">RGB.js</a>, <a href="RGB.js.html#line7">line 7</a>
     </li></ul></dd>
     
 
@@ -120,6 +116,136 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>comp1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>float</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La valeur de la composante 1
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>comp2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>float</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La valeur de la composante 2
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>comp3</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>float</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La valeur de la composante 3
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>alpha</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>float</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La valeur de la transparence
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -145,6 +271,13 @@
     
 
     
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="RGB.html">RGB</a></dt>
+            <dd></dd>
+        </dl>
+    
 
      
 
@@ -161,14 +294,14 @@
 
     
 
-    <h4 class="name" id="getColor"><span class="type-signature"></span>getColor<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Couleur.html">Couleur</a>}</span></h4>
+    <h4 class="name" id="RGBversXYZ"><span class="type-signature"></span>RGBversXYZ<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Obtient la couleur du Pixel.
+    Transformer une Couleur RGB vers XYZ
 </div>
 
 
@@ -204,7 +337,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line40">line 40</a>
+        <a href="RGB.js.html">RGB.js</a>, <a href="RGB.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -240,21 +373,9 @@
 
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
-
-
-    </dd>
-</dl>
-
 
 <div class="param-desc">
-    La couleur du Pixel.
+    La Couleur sous forme XYZ
 </div>
 
     
@@ -269,14 +390,14 @@
 
     
 
-    <h4 class="name" id="getCoord"><span class="type-signature"></span>getCoord<span class="signature">()</span><span class="type-signature"> &rarr; {Coordonnees}</span></h4>
+    <h4 class="name" id="getAlpha"><span class="type-signature"></span>getAlpha<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Obtient les coordonnées du Pixel.
+    Obtient la valeur de la transparence
 </div>
 
 
@@ -312,7 +433,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line35">line 35</a>
+        <a href="RGB.js.html">RGB.js</a>, <a href="RGB.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -348,21 +469,9 @@
 
         
 
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>Coordonnees</code></span>
-
-
-    </dd>
-</dl>
-
 
 <div class="param-desc">
-    Les coordonnées du Pixel.
+    La valeur de la transparence
 </div>
 
     
@@ -377,14 +486,14 @@
 
     
 
-    <h4 class="name" id="isSelected"><span class="type-signature"></span>isSelected<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="setAlpha"><span class="type-signature"></span>setAlpha<span class="signature">(a)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Indique si le Pixel est sélectionné ou non.
+    Définit la valeur de la transparence
 </div>
 
 
@@ -420,115 +529,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line45">line 45</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>boolean</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    true si sélectionné, false sinon.
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="setColor"><span class="type-signature"></span>setColor<span class="signature">(c)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Définit la couleur du Pixel.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line56">line 56</a>
+        <a href="RGB.js.html">RGB.js</a>, <a href="RGB.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -572,13 +573,13 @@
 
         <tr>
             
-                <td class="name"><code>c</code></td>
+                <td class="name"><code>a</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
+<span class="param-type"><code>int</code></span>
 
 
             
@@ -589,277 +590,7 @@
             
 
             <td class="description last">
-                La nouvelle couleur du Pixel.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="setCoord"><span class="type-signature"></span>setCoord<span class="signature">(val)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Définit les coordonnées du Pixel par val.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line51">line 51</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>val</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>Coordonnees</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Les nouvelles coordonnées du Pixel.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="setSelected"><span class="type-signature"></span>setSelected<span class="signature">(state)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Définit si le Pixel est sélectionné ou non.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line61">line 61</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>state</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>boolean</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Le nouvel état du Pixel.
+                La nouvelle valeur de la transparence
                 
             </td>
         </tr>
