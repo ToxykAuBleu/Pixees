@@ -1,3 +1,6 @@
+/**
+ * Classe représentant une Couleur
+ */
 export class Couleur {
 
     // ATTRIBUTS

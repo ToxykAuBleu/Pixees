@@ -1,6 +1,9 @@
 import { Couleur } from './Couleur.js';
 import { Lab } from './Lab.js';
 
+/**
+ * Classe représentant une Couleur sous forme XYZ
+ */
 export class XYZ extends Couleur {
     // CONSTRUCTEUR
     /**

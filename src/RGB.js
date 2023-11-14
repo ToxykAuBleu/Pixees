@@ -1,6 +1,9 @@
 import { Couleur } from './Couleur.js';
 import { XYZ } from './XYZ.js';
 
+/**
+ * Classe représentant une Couleur sous forme RGB
+ */
 export class RGB extends Couleur {
 
     // ATTRIBUTS
