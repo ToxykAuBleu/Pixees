@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Pixel - Documentation</title>
+    <title>Grille - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Pixel</h1>
+    <h1 class="page-title">Grille</h1>
     
 
     
@@ -42,10 +42,10 @@
 <header>
     
         <h2>
-        Pixel
+        Grille
         </h2>
         
-            <div class="class-description">Classe représentant un Pixel.</div>
+            <div class="class-description">Classe représentant une Grille.</div>
         
     
 </header>
@@ -60,14 +60,14 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Pixel"><span class="type-signature"></span>new Pixel<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Grille"><span class="type-signature"></span>new Grille<span class="signature">(h, l, pixels)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Créé un nouveau Pixel avec (par défaut) des coordonnées, une couleur et est déselectionné.
+    Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une liste de Pixels.
 </div>
 
 
@@ -103,7 +103,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line6">line 6</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -120,6 +120,110 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>h</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>int</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La hauteur de la Grille.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>l</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>int</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La largeur de la Grille.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pixels</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array.&lt;<a href="Pixel.html">Pixel</a>></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La liste de Pixels de la Grille.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -148,7 +252,7 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="Pixel.html">Pixel</a></dt>
+            <dt><a href="Grille.html">Grille</a></dt>
             <dd></dd>
         </dl>
     
@@ -168,14 +272,14 @@
 
     
 
-    <h4 class="name" id="getColor"><span class="type-signature"></span>getColor<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Couleur.html">Couleur</a>}</span></h4>
+    <h4 class="name" id="ajouterPixel"><span class="type-signature"></span>ajouterPixel<span class="signature">(unPixel)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Obtient la couleur du Pixel.
+    Ajoute un Pixel à la liste de Pixels "pixels"
 </div>
 
 
@@ -211,7 +315,142 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line42">line 42</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>unPixel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="getHauteur"><span class="type-signature"></span>getHauteur<span class="signature">()</span><span class="type-signature"> &rarr; {int}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Retourne la hauteur de la Grille.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line39">line 39</a>
     </li></ul></dd>
     
 
@@ -253,7 +492,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
+<span class="param-type"><code>int</code></span>
 
 
     </dd>
@@ -261,7 +500,7 @@
 
 
 <div class="param-desc">
-    La couleur du Pixel.
+    La hauteur de la Grille.
 </div>
 
     
@@ -276,14 +515,14 @@
 
     
 
-    <h4 class="name" id="getCoord"><span class="type-signature"></span>getCoord<span class="signature">()</span><span class="type-signature"> &rarr; {Coordonnees}</span></h4>
+    <h4 class="name" id="getLargeur"><span class="type-signature"></span>getLargeur<span class="signature">()</span><span class="type-signature"> &rarr; {int}</span></h4>
 
     
 
 
 
 <div class="description">
-    Obtient les coordonnées du Pixel.
+    Retourne la largeur de la Grille.
 </div>
 
 
@@ -319,7 +558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line37">line 37</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line44">line 44</a>
     </li></ul></dd>
     
 
@@ -361,7 +600,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>Coordonnees</code></span>
+<span class="param-type"><code>int</code></span>
 
 
     </dd>
@@ -369,7 +608,7 @@
 
 
 <div class="param-desc">
-    Les coordonnées du Pixel.
+    La largeur de la Grille.
 </div>
 
     
@@ -384,14 +623,14 @@
 
     
 
-    <h4 class="name" id="isSelected"><span class="type-signature"></span>isSelected<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    <h4 class="name" id="getPixelAt"><span class="type-signature"></span>getPixelAt<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {<a href="Pixel.html">Pixel</a>}</span></h4>
 
     
 
 
 
 <div class="description">
-    Indique si le Pixel est sélectionné ou non.
+    Retourne le Pixel à la position (x, y) de la Grille.
 </div>
 
 
@@ -427,7 +666,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line47">line 47</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line64">line 64</a>
     </li></ul></dd>
     
 
@@ -444,6 +683,244 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>int</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La position en x du Pixel.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>int</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                La position en y du Pixel.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    Le Pixel à la position (x, y) de la Grille.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="retirerPixel"><span class="type-signature"></span>retirerPixel<span class="signature">(unPixel)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Retire un Pixel de la liste de Pixels "pixels"
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line89">line 89</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>unPixel</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -477,7 +954,7 @@
 
 
 <div class="param-desc">
-    true si sélectionné, false sinon.
+    true si le Pixel a été retiré, false sinon.
 </div>
 
     
@@ -492,14 +969,14 @@
 
     
 
-    <h4 class="name" id="setColor"><span class="type-signature"></span>setColor<span class="signature">(c)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setHauteur"><span class="type-signature"></span>setHauteur<span class="signature">(h)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Définit la couleur du Pixel.
+    Définit la hauteur de la Grille.
 </div>
 
 
@@ -535,7 +1012,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line58">line 58</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line50">line 50</a>
     </li></ul></dd>
     
 
@@ -579,13 +1056,13 @@
 
         <tr>
             
-                <td class="name"><code>c</code></td>
+                <td class="name"><code>h</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
+<span class="param-type"><code>int</code></span>
 
 
             
@@ -596,7 +1073,7 @@
             
 
             <td class="description last">
-                La nouvelle couleur du Pixel.
+                La nouvelle hauteur de la Grille.
                 
             </td>
         </tr>
@@ -627,14 +1104,14 @@
 
     
 
-    <h4 class="name" id="setCoord"><span class="type-signature"></span>setCoord<span class="signature">(val)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setLargeur"><span class="type-signature"></span>setLargeur<span class="signature">(l)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Définit les coordonnées du Pixel par val.
+    Définit la largeur de la Grille.
 </div>
 
 
@@ -670,7 +1147,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line53">line 53</a>
+        <a href="Grille.js.html">Grille.js</a>, <a href="Grille.js.html#line55">line 55</a>
     </li></ul></dd>
     
 
@@ -714,13 +1191,13 @@
 
         <tr>
             
-                <td class="name"><code>val</code></td>
+                <td class="name"><code>l</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>Coordonnees</code></span>
+<span class="param-type"><code>int</code></span>
 
 
             
@@ -731,142 +1208,7 @@
             
 
             <td class="description last">
-                Les nouvelles coordonnées du Pixel.
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="setSelected"><span class="type-signature"></span>setSelected<span class="signature">(state)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Définit si le Pixel est sélectionné ou non.
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Pixel.js.html">Pixel.js</a>, <a href="Pixel.js.html#line63">line 63</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>state</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>boolean</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                Le nouvel état du Pixel.
+                La nouvelle largeur de la Grille.
                 
             </td>
         </tr>

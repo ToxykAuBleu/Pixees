@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Couleur.js - Documentation</title>
+    <title>Grille.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Couleur.js</h1>
+    <h1 class="page-title">Grille.js</h1>
     
 
     
@@ -39,74 +39,103 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Classe représentant une Couleur
+            <pre class="prettyprint source linenums"><code>import { Pixel } from "./Pixel.js";
+import { Coordonnees } from "./Coordonnees.js";
+/**
+ * Classe représentant une Grille.
  */
-export class Couleur {
-
+export class Grille {
     // ATTRIBUTS
     /**
-     * Composante 1 de la Couleur
+     * Hauteur de la Grille.
      */
-    #_comp1;
+    #_hauteur;
     /**
-     * Composante 2 de la Couleur
+     * Largeur de la Grille.
      */
-    #_comp2;
+    #_largeur;
     /**
-     * Composante 3 de la Couleur
+     * Liste de Pixels de la Grille.
      */
-    #_comp3;
+    #_pixels;
 
     // CONSTRUCTEUR
     /**
-     * Créer une nouvelle Couleur avec (par défault du blanc) les composantes
-     * respectives (RGB, XYZ, Lab)
-     * @param {float} comp1 La valeur de la composante 1
-     * @param {float} comp2 La valeur de la composante 2
-     * @param {float} comp3 La valeur de la composante 3
+     * Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une liste de Pixels.
+     * @param {int} h La hauteur de la Grille.
+     * @param {int} l La largeur de la Grille.
+     * @param {Array&lt;Pixel>} pixels La liste de Pixels de la Grille. 
      */
-    constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
-        if (this.constructor == Couleur) {
-            throw new Error("Classe abstraite ne peux pas être initialisé")
-        } else {
-            this.#_comp1 = comp1;
-            this.#_comp2 = comp2;
-            this.#_comp3 = comp3;
-        }
+    constructor(h, l, pixels = []) {
+        this.#_hauteur = h;
+        this.#_largeur = l;
+        this.#_pixels = pixels;
     }
 
     // GETTERS &amp; SETTERS
-    /**
-     * 
-     * @param {int} indComp L'indice de la composante
-     * @returns La valeur de la composante
+    /** 
+     * Retourne la hauteur de la Grille.
+     * @returns {int} La hauteur de la Grille.
      */
-    getComp(indComp) {
-        switch (indComp) {
-            case 1:
-                return this.#_comp1;
-            case 2:
-                return this.#_comp2;
-            case 3:
-                return this.#_comp3;
-        }
+    getHauteur() { return this.#_hauteur; }
+    /**
+     * Retourne la largeur de la Grille.
+     * @returns {int} La largeur de la Grille.
+     */
+    getLargeur() { return this.#_largeur; }
+
+    /**
+     * Définit la hauteur de la Grille.
+     * @param {int} h La nouvelle hauteur de la Grille.
+     */
+    setHauteur(h) { this.#_hauteur = h; }
+    /**
+     * Définit la largeur de la Grille.
+     * @param {int} l La nouvelle largeur de la Grille.
+     */
+    setLargeur(l) { this.#_largeur = l; }
+
+    // MÉTHODES
+    /**
+     * Retourne le Pixel à la position (x, y) de la Grille.
+     * @param {int} x La position en x du Pixel.
+     * @param {int} y La position en y du Pixel.
+     * @returns {Pixel} Le Pixel à la position (x, y) de la Grille.
+     */
+    getPixelAt(x, y) {
+        let coordPixelCherche = new Coordonnees(x, y);
+
+        this.#_pixels.forEach(pixel => {
+            if (pixel.getCoord() == coordPixelCherche) {
+                return pixel;
+            }
+        });
+
+        return null;
     }
 
     /**
-     * 
-     * @param {int} indComp L'indice de la composante
-     * @param {float} val La nouvelle valeur de la composante
+     * Ajoute un Pixel à la liste de Pixels "pixels"
+     * @param {Pixel} unPixel
      */
-    setComp(indComp, val) {
-        switch (indComp) {
-            case 1:
-                this.#_comp1 = val;
-            case 2:
-                this.#_comp2 = val;
-            case 3:
-                this.#_comp3 = val;
-        }
+    ajouterPixel(unPixel) {
+        this.#_pixels.push(unPixel);
+    }
+
+    /**
+     * Retire un Pixel de la liste de Pixels "pixels"
+     * @param {Pixel} unPixel
+     * @returns {boolean} true si le Pixel a été retiré, false sinon.
+     */
+    retirerPixel(unPixel) {
+        this.#_pixels.forEach(pixel => {
+            if (pixel == unPixel) {
+                this.#_pixels.splice(this.#_pixels.indexOf(pixel), 1);
+                return true;
+            }
+        });
+
+        return false;
     }
 }</code></pre>
         </article>
