@@ -1,8 +1,14 @@
-/* Exemple de style CSS pour les divs des pixels */
 .pixel {
-    width: 20px;
-    height: 20px;
-    display: inline-block; /* Assurez-vous que les divs s'affichent en ligne */
+    width: 8px;
+    height: 8px;
+    display: inline-block;
     border: 1px solid black;
+    margin: 0; /* Ajout de cette règle pour supprimer la marge par défaut */
+}
+
+#grilleListe {
+    margin: 0;
+    padding: 0;
+    line-height: 0;
     /* Ajoutez d'autres styles selon vos besoins */
 }

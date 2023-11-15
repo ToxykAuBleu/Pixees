@@ -22,6 +22,7 @@ console.log(grilleListe);
 
 // Ajouter les divs des pixels à la grille dans le HTML
 for (let x = 0; x < grilleListe.getHauteur(); x++) {
+    let br = document.createElement('br');
     for (let y = 0; y < grilleListe.getLargeur(); y++) {
         // Créer un élément div pour chaque pixel
         let divPixel = document.createElement('div');
@@ -33,4 +34,5 @@ for (let x = 0; x < grilleListe.getHauteur(); x++) {
         // Ajouter le div à la grille dans le HTML
         grilleContainer.appendChild(divPixel);
     }
+    grilleContainer.appendChild(br);
 }
