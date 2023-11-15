@@ -14,16 +14,16 @@ export class Grille {
      */
     #_largeur;
     /**
-     * Liste de Pixels de la Grille.
+     * Liste de Pixel de la Grille.
      */
     #_pixels;
 
     // CONSTRUCTEUR
     /**
-     * Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une liste de Pixels.
+     * Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une liste de Pixel.
      * @param {int} h La hauteur de la Grille.
      * @param {int} l La largeur de la Grille.
-     * @param {Array<Pixel>} pixels La liste de Pixels de la Grille. 
+     * @param {Array<Pixel>} pixels La liste de Pixel de la Grille. 
      */
     constructor(h, l, pixels = []) {
         this.#_hauteur = h;
@@ -74,7 +74,7 @@ export class Grille {
     }
 
     /**
-     * Ajoute un Pixel à la liste de Pixels "pixels"
+     * Ajoute un Pixel à la liste de Pixel "pixels"
      * @param {Pixel} unPixel
      */
     ajouterPixel(unPixel) {
@@ -82,7 +82,7 @@ export class Grille {
     }
 
     /**
-     * Retire un Pixel de la liste de Pixels "pixels"
+     * Retire un Pixel de la liste de Pixel "pixels"
      * @param {Pixel} unPixel
      * @returns {boolean} true si le Pixel a été retiré, false sinon.
      */
