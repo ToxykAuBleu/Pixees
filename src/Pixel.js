@@ -1,5 +1,5 @@
 import { Coordonnees } from "./Coordonnees.js";
-
+import { Couleur } from "./Couleur.js";
 /**
  * Classe représentant un Pixel.
  */
@@ -25,7 +25,6 @@ export class Pixel {
      */
     constructor() {
         this.#_coords = new Coordonnees();
-        this.#_couleur = new Couleur();
         this.#_estSelectionne = false;
     }
 
