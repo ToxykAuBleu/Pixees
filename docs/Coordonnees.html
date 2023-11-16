@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Couleur - Documentation</title>
+    <title>Coordonnees - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Couleur</h1>
+    <h1 class="page-title">Coordonnees</h1>
     
 
     
@@ -42,10 +42,10 @@
 <header>
     
         <h2>
-        Couleur
+        Coordonnees
         </h2>
         
-            <div class="class-description">Classe représentant une Couleur</div>
+            <div class="class-description">Classe représentant des coordonnées.</div>
         
     
 </header>
@@ -60,14 +60,14 @@
     <h2>Constructor</h2>
     
 
-    <h4 class="name" id="Couleur"><span class="type-signature"></span>new Couleur<span class="signature">(comp1, comp2, comp3)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Coordonnees"><span class="type-signature"></span>new Coordonnees<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Créer une nouvelle Couleur avec (par défault du blanc) les composantesrespectives (RGB, XYZ, Lab)
+    Crée de nouvelles coordonnées avec (par défaut) une coordonnée X et une coordonnée Y.
 </div>
 
 
@@ -103,7 +103,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Couleur.js.html">Couleur.js</a>, <a href="Couleur.js.html#line4">line 4</a>
+        <a href="Coordonnees.js.html">Coordonnees.js</a>, <a href="Coordonnees.js.html#line4">line 4</a>
     </li></ul></dd>
     
 
@@ -149,13 +149,13 @@
 
         <tr>
             
-                <td class="name"><code>comp1</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>float</code></span>
+<span class="param-type"><code>int</code></span>
 
 
             
@@ -172,7 +172,7 @@
             
 
             <td class="description last">
-                La valeur de la composante 1
+                La coordonnée X.
                 
             </td>
         </tr>
@@ -181,13 +181,13 @@
 
         <tr>
             
-                <td class="name"><code>comp2</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>float</code></span>
+<span class="param-type"><code>int</code></span>
 
 
             
@@ -204,39 +204,7 @@
             
 
             <td class="description last">
-                La valeur de la composante 2
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>comp3</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 3
+                La coordonnée Y.
                 
             </td>
         </tr>
@@ -272,7 +240,7 @@
         <h3 class="subsection-title">Classes</h3>
 
         <dl>
-            <dt><a href="Couleur.html">Couleur</a></dt>
+            <dt><a href="Coordonnees.html">Coordonnees</a></dt>
             <dd></dd>
         </dl>
     
@@ -292,11 +260,15 @@
 
     
 
-    <h4 class="name" id="getComp"><span class="type-signature"></span>getComp<span class="signature">(indComp)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="getX"><span class="type-signature"></span>getX<span class="signature">()</span><span class="type-signature"> &rarr; {int}</span></h4>
 
     
 
 
+
+<div class="description">
+    Retourne la coordonnée X.
+</div>
 
 
 
@@ -331,7 +303,223 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Couleur.js.html">Couleur.js</a>, <a href="Couleur.js.html#line44">line 44</a>
+        <a href="Coordonnees.js.html">Coordonnees.js</a>, <a href="Coordonnees.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>int</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    La coordonnée X.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="getY"><span class="type-signature"></span>getY<span class="signature">()</span><span class="type-signature"> &rarr; {int}</span></h4>
+
+    
+
+
+
+<div class="description">
+    Retourne la coordonnée Y.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Coordonnees.js.html">Coordonnees.js</a>, <a href="Coordonnees.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="section-returns">
+<h5>Returns:</h5>
+
+        
+
+<dl class="param-type">
+    <dt>
+        Type:
+    </dt>
+    <dd>
+        
+<span class="param-type"><code>int</code></span>
+
+
+    </dd>
+</dl>
+
+
+<div class="param-desc">
+    La coordonnée Y.
+</div>
+
+    
+</div>
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="setX"><span class="type-signature"></span>setX<span class="signature">(x)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Définit la coordonnée X.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Coordonnees.js.html">Coordonnees.js</a>, <a href="Coordonnees.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -375,7 +563,7 @@
 
         <tr>
             
-                <td class="name"><code>indComp</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
@@ -392,7 +580,7 @@
             
 
             <td class="description last">
-                L'indice de la composante
+                La nouvelle coordonnée X.
                 
             </td>
         </tr>
@@ -414,19 +602,6 @@
 
 
 
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-
-<div class="param-desc">
-    La valeur de la composante
-</div>
-
-    
-</div>
-
 
 
 </div>
@@ -436,11 +611,15 @@
 
     
 
-    <h4 class="name" id="setComp"><span class="type-signature"></span>setComp<span class="signature">(indComp, val)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="setY"><span class="type-signature"></span>setY<span class="signature">(y)</span><span class="type-signature"></span></h4>
 
     
 
 
+
+<div class="description">
+    Définit la coordonnée Y.
+</div>
 
 
 
@@ -475,7 +654,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Couleur.js.html">Couleur.js</a>, <a href="Couleur.js.html#line60">line 60</a>
+        <a href="Coordonnees.js.html">Coordonnees.js</a>, <a href="Coordonnees.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -519,7 +698,7 @@
 
         <tr>
             
-                <td class="name"><code>indComp</code></td>
+                <td class="name"><code>y</code></td>
             
 
             <td class="type">
@@ -536,33 +715,7 @@
             
 
             <td class="description last">
-                L'indice de la composante
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>val</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                La nouvelle valeur de la composante
+                La nouvelle coordonnée Y.
                 
             </td>
         </tr>

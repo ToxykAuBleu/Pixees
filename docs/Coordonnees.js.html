@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RGB.js - Documentation</title>
+    <title>Coordonnees.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">RGB.js</h1>
+    <h1 class="page-title">Coordonnees.js</h1>
     
 
     
@@ -39,75 +39,53 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { Couleur } from './Couleur.js';
-import { XYZ } from './XYZ.js';
-
-/**
- * Classe représentant une Couleur sous forme RGB
+            <pre class="prettyprint source linenums"><code>/**
+ * Classe représentant des coordonnées.
  */
-export class RGB extends Couleur {
-
+export class Coordonnees {
     // ATTRIBUTS
     /**
-     * Transparence de la couleur
+     * Coordonnée X.
      */
-    #_transparence;
+    #_xCoord;
+    /**
+     * Coordonnée Y.
+     */
+    #_yCoord;
 
     // CONSTRUCTEUR
     /**
-     * 
-     * @param {float} comp1 La valeur de la composante 1
-     * @param {float} comp2 La valeur de la composante 2
-     * @param {float} comp3 La valeur de la composante 3
-     * @param {float} alpha La valeur de la transparence
+     * Crée de nouvelles coordonnées avec (par défaut) une coordonnée X et une coordonnée Y.
+     * @param {int} x La coordonnée X.
+     * @param {int} y La coordonnée Y.
      */
-    constructor(comp1, comp2, comp3, alpha) {
-        super(comp1, comp2, comp3);
-        this.#_transparence = alpha;
+    constructor(x = 0, y = 0) {
+        this.#_xCoord = x;
+        this.#_yCoord = y;
     }
 
     // GETTERS &amp; SETTERS
     /**
-     * Obtient la valeur de la transparence
-     * @returns La valeur de la transparence
+     * Retourne la coordonnée X.
+     * @returns {int} La coordonnée X.
      */
-    getAlpha() {
-        return(this.#_transparence);
-    }
+    getX() { return this.#_xCoord; }
+    /**
+     * Retourne la coordonnée Y.
+     * @returns {int} La coordonnée Y.
+     */
+    getY() { return this.#_yCoord; }
 
     /**
-     * Définit la valeur de la transparence
-     * @param {int} a La nouvelle valeur de la transparence
+     * Définit la coordonnée X.
+     * @param {int} x La nouvelle coordonnée X.
      */
-    setAlpha(a) {
-        this.#_transparence = a;
-    }
-
-    // METHODES
+    setX(x) { this.#_xCoord = x; }
     /**
-     * Transformer une Couleur RGB vers XYZ
-     * @returns La Couleur sous forme XYZ
+     * Définit la coordonnée Y.
+     * @param {int} y La nouvelle coordonnée Y.
      */
-    RGBversXYZ() {
-        // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
-        for (let i = 1; i &lt; 4; i++) {
-            this.setComp(i, this.getComp(i) / 255);
-            if (this.getComp(i) &lt;= 0.04045) {
-                this.setComp(i, this.getComp(i) / 12.92);
-            } else {
-                this.setComp(i, Math.pow(((this.getComp(i) + 0.055) / 1.055), 2.4));
-            }
-        }
-
-        const XYZ = new XYZ();
-
-        // Conversion en XYZ
-        for (let i = 1; i &lt; 4; i++) {
-            XYZ.setComp(i, (this.getComp(i) * M[i-1][j-1]));
-        }
-
-        return XYZ
-    }
+    setY(y) { this.#_yCoord = y; }
 }</code></pre>
         </article>
     </section>
