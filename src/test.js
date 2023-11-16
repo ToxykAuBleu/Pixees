@@ -1,4 +1,5 @@
 import { Grille } from "./Grille.js";
+import { Pixel } from "./Pixel.js";
 import { RGB } from "./RGB.js";
 
 const canvas = document.getElementsByTagName("canvas")[0];
@@ -51,10 +52,18 @@ function handleImage() {
 }
 
 function getImageData() {
+    let ligne = 0;
+    let colonne = 0;
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
     for (let i = 0; i < data.length; i += 4) {
-        let pixel = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
-        grilleMain.ajouterPixel(pixel);
+        let rgba = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
+        let pixel = new Pixel(false);
+        pixel.setColor(rgba);
+        grilleMain.setPixelAt(colonne, ligne, pixel);
+        colonne++;
+        if (colonne == grilleMain.getLargeur()) {
+            colonne = 0;
+            ligne++;
+        }
     }
-    console.log(grilleMain);
 }
