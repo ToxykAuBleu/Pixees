@@ -1,5 +1,4 @@
 import { Pixel } from "./Pixel.js";
-import { Coordonnees } from "./Coordonnees.js";
 /**
  * Classe représentant une Grille.
  */
@@ -77,7 +76,7 @@ export class Grille {
      * Définit un Pixel pix en position (x, y).
      * @param {int} x La position en x du Pixel.
      * @param {int} y La position en y du Pixel.
-     * @param {Pixel} pix Le Pixel à définir en position (x, y)
+     * @param {Pixel} pix Le Pixel à attribuer en position (x, y)
      */
     setPixelAt(x, y, pix) {
         this.#_pixels[x][y] = pix;
