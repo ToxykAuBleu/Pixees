@@ -1,6 +1,7 @@
 import { Grille } from "./Grille.js";
 import { Pixel } from "./Pixel.js";
 import { Coordonnees } from "./Coordonnees.js";
+import { GrilleMatrice } from "./GrilleMatrice.js";
 
 // TEST - Grille avec une liste de Pixel.
 let grilleListe = new Grille(1000, 1000);
@@ -29,3 +30,18 @@ const h = grilleListe.getHauteur();
 calcGetTime(0,0);
 calcGetTime((l/2)-1,(h/2)-1);
 calcGetTime(l-1,h-1);
+
+// TEST - Grille avec une matrice de Pixel.
+let grilleMatrice = new GrilleMatrice(1000, 1000);
+
+// Initialisation de la grille.
+started = new Date();
+for (let x = 0; x < grilleMatrice.getHauteur(); x++) {
+    for (let y = 0; y < grilleMatrice.getLargeur(); y++) {
+        let pixel = new Pixel();
+        pixel.setCoord(new Coordonnees(x, y));
+        grilleMatrice.setPixelAt(x, y, pixel);
+    }
+}
+finished = new Date() - started; // Calcul du temps qu'a duré l'operation
+console.log(`grilleMatrice | Initialisation: ${finished} ms`, grilleMatrice);
