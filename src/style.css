@@ -1,0 +1,10 @@
+body {
+    background-color: grey;
+}
+
+canvas {
+    height: 80vh;
+    background-color: white;
+    border: 1px black solid;
+    image-rendering: pixelated;
+}
