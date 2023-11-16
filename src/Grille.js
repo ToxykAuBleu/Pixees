@@ -62,15 +62,14 @@ export class Grille {
      * @returns {Pixel} Le Pixel à la position (x, y) de la Grille.
      */
     getPixelAt(x, y) {
-        let coordPixelCherche = new Coordonnees(x, y);
-
+        let result = null;
         this.#_pixels.forEach(pixel => {
-            if (pixel.getCoord() == coordPixelCherche) {
-                return pixel;
+            if ((pixel.getCoord().getX() == x) && (pixel.getCoord().getY() == y)) {
+                result = pixel;
+                return;
             }
         });
-
-        return null;
+        return result;
     }
 
     /**
