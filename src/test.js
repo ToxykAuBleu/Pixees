@@ -25,12 +25,17 @@ const pattern = ctx.createPattern(patternCanvas, "repeat");
 ctx.fillStyle = pattern;
 ctx.fillRect(0, 0, grille.getLargeur(), grille.getHauteur());
 
+// Affichage de l'image sur le canvas
 const inputElement = document.getElementById("imageToLoad");
 inputElement.addEventListener("change", handleImage, false);
 function handleImage() {
     const image = new Image();
     image.src = URL.createObjectURL(this.files[0]);
     image.onload = function() {
+        grille.setHauteur(image.height);
+        grille.setLargeur(image.width);
+        canvas.width = grille.getLargeur();
+        canvas.height = grille.getHauteur();
         ctx.drawImage(image, 0, 0);
     }
 }
