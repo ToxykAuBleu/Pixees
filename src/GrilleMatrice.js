@@ -29,7 +29,7 @@ export class GrilleMatrice {
         this.#_hauteur = h;
         this.#_largeur = l;
         // Initialisation de la matrice.
-        let pixels;
+        let pixels = [];
         for (let i = 0; i < h; i++) {
             pixels[i] = [];
             for (let j = 0; j < l; j++) {
