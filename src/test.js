@@ -12,7 +12,7 @@ patternContext.fillRect(0, 0, 1, 1);
 patternContext.fillRect(1, 1, 1, 1);
 patternContext.stroke();
 
-let grille = new Grille(32, 32);
+let grille = new Grille(16, 16);
 
 let canvas = document.getElementsByTagName("canvas")[0];
 
@@ -24,3 +24,13 @@ const ctx = canvas.getContext("2d");
 const pattern = ctx.createPattern(patternCanvas, "repeat");
 ctx.fillStyle = pattern;
 ctx.fillRect(0, 0, grille.getLargeur(), grille.getHauteur());
+
+const inputElement = document.getElementById("imageToLoad");
+inputElement.addEventListener("change", handleImage, false);
+function handleImage() {
+    const image = new Image();
+    image.src = URL.createObjectURL(this.files[0]);
+    image.onload = function() {
+        ctx.drawImage(image, 0, 0);
+    }
+}
