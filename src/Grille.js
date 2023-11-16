@@ -1,5 +1,4 @@
 import { Pixel } from "./Pixel.js";
-import { Coordonnees } from "./Coordonnees.js";
 /**
  * Classe représentant une Grille.
  */
@@ -14,20 +13,28 @@ export class Grille {
      */
     #_largeur;
     /**
-     * Liste de Pixel de la Grille.
+     * Matrice de Pixel de la Grille.
      */
     #_pixels;
 
     // CONSTRUCTEUR
     /**
-     * Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une liste de Pixel.
+     * Crée une nouvelle Grille avec (par défaut) une hauteur, une largeur et une matrice de Pixel.
      * @param {int} h La hauteur de la Grille.
      * @param {int} l La largeur de la Grille.
-     * @param {Array<Pixel>} pixels La liste de Pixel de la Grille. 
+     * @param {Pixel[][]} pixels La matrice de Pixel de la Grille. 
      */
-    constructor(h, l, pixels = []) {
+    constructor(h, l) {
         this.#_hauteur = h;
         this.#_largeur = l;
+        // Initialisation de la matrice.
+        let pixels = [];
+        for (let i = 0; i < h; i++) {
+            pixels[i] = [];
+            for (let j = 0; j < l; j++) {
+                pixels[i][j] = null;
+            }
+        }
         this.#_pixels = pixels;
     }
 
@@ -62,38 +69,16 @@ export class Grille {
      * @returns {Pixel} Le Pixel à la position (x, y) de la Grille.
      */
     getPixelAt(x, y) {
-        let coordPixelCherche = new Coordonnees(x, y);
-
-        this.#_pixels.forEach(pixel => {
-            if (pixel.getCoord() == coordPixelCherche) {
-                return pixel;
-            }
-        });
-
-        return null;
+        return this.#_pixels[x][y];
     }
 
     /**
-     * Ajoute un Pixel à la liste de Pixel "pixels"
-     * @param {Pixel} unPixel
+     * Définit un Pixel pix en position (x, y).
+     * @param {int} x La position en x du Pixel.
+     * @param {int} y La position en y du Pixel.
+     * @param {Pixel} pix Le Pixel à attribuer en position (x, y)
      */
-    ajouterPixel(unPixel) {
-        this.#_pixels.push(unPixel);
-    }
-
-    /**
-     * Retire un Pixel de la liste de Pixel "pixels"
-     * @param {Pixel} unPixel
-     * @returns {boolean} true si le Pixel a été retiré, false sinon.
-     */
-    retirerPixel(unPixel) {
-        this.#_pixels.forEach(pixel => {
-            if (pixel == unPixel) {
-                this.#_pixels.splice(this.#_pixels.indexOf(pixel), 1);
-                return true;
-            }
-        });
-
-        return false;
+    setPixelAt(x, y, pix) {
+        this.#_pixels[x][y] = pix;
     }
 }
