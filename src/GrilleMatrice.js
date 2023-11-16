@@ -33,9 +33,7 @@ export class GrilleMatrice {
         for (let i = 0; i < h; i++) {
             pixels[i] = [];
             for (let j = 0; j < l; j++) {
-                let pixel = new Pixel();
-                pixel.setCoord(new Coordonnees(i, j));
-                pixels[i][j] = pixel;
+                pixels[i][j] = null;
             }
         }
         this.#_pixels = pixels;
