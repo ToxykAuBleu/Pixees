@@ -48,6 +48,7 @@ inputElement.addEventListener("change", handleImage, false);
 function handleImage() {
     // Création et stockage de l'Image
     const image = new Image();
+    // On change la source de l'image par un URL temporaire vers le fichier
     image.src = URL.createObjectURL(this.files[0]);
     image.onload = function () {
         // Dessin et redimension du Canvas
