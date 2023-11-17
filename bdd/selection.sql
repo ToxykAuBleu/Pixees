@@ -7,3 +7,7 @@ SELECT idSignalement, idUtilisateur Auteur, dateSignalement, idRaison,
  idCommentaire CommentaireSignalé, idPublication PublicationSignalé, idUtilisateur_1 ProfilSignalé
 FROM Signalement
 WHERE idUtilisateur = 3;
+
+-- 6. Combien d'adeptes suit un utilisateur ?
+SELECT SUM(idUtilisateur) FROM SuivreArtiste
+WHERE idUtilisateur_1 = 3;
