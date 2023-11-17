@@ -9,3 +9,7 @@ WHERE idUtilisateur = 1;
 # Requête 5
 SELECT SUM(idUtilisateur) FROM AimerPub
 WHERE idPublication = 1;
+
+# Requête 7
+SELECT SUM(idUtilisateur_1) FROM SuivreArtiste
+WHERE idUtilisateur = 1;
