@@ -2,9 +2,12 @@ import { Grille } from "./Grille.js";
 import { Pixel } from "./Pixel.js";
 import { RGB } from "./RGB.js";
 
+// On récupère le canvas et son contexte
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
+// Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
+// Création d'une grille par défaut
 let grilleMain = drawMainCanvas(16, 16);
 
 // Création du pattern
@@ -83,6 +86,7 @@ function getImageData() {
             ligne++;
         }
     }
+    // On indique qu'une image est chargée
     isImageLoaded = true;
 }
 
@@ -100,6 +104,7 @@ function getMousePosition(event) {
     // On met a jour l'interface avec les données
     document.getElementById("x").innerText = x;
     document.getElementById("y").innerText = y;
+    // Si une image est chargée (isImageLoaded) alors on peut récupérer la couleur du pixel sous le curseur
     if (isImageLoaded) {
         let couleur = grilleMain.getPixelAt(x, y).getColor();
         document.getElementById("couleur").innerText = couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3);
@@ -111,7 +116,9 @@ canvas.addEventListener("mousemove", function(e) {
     getMousePosition(e);
 });
 
+// Slider pour modifier la tolerance
 var slider = document.getElementById("tolerance");
+// Text Box pour modifier la tolerance
 var display = document.getElementById("toleranceValue");
 // affichage de la valeur par défaut du slider
 display.value = slider.value;
@@ -124,13 +131,9 @@ slider.oninput = function() {
 // Mise à jour du slider quand on change la valeur dans le text box 
 display.oninput = function() {
     slider.value = this.value;
-}
-
-// Pour rester dans un pourcentage
-display.onchange = function() {
-    if (Number(this.value) > 100) {
+    if (this.value > 100) {
         this.value = 100;
-    } else if (Number(this.value) < 0) {
+    } else if (this.value < 0) {
         this.value = 0;
     }
     console.log(slider.value);
