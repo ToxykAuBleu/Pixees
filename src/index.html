@@ -7,8 +7,19 @@
 </head>
 <body>
     <h1>Demo de la baguette magiques</h1>
-    <canvas id="drawingArea" width="1" height="1" style="height: 80vh;"></canvas>
-    <input type="file" name="imageToLoad " id="imageToLoad", accept="image/png, image/jpeg">
+    <div class="wrapper">
+        <div class="right">
+            <canvas id="drawingArea" width="1" height="1" style="height: 80vh;"></canvas>
+        </div>
+        <div class="left">
+            <p>Position x : <span id="x"></span></p>
+            <p>Position y : <span id="y"></span></p>
+            <p>Couleur : <span id="couleur"></span></p>
+            <p>Tolerance : <input type="text" id="toleranceValue" minlength="1" maxlength="3" size="3" max="100"></p>
+            <input type="range" id="tolerance" min="0" max="100"><br>
+            <input type="file" name="imageToLoad " id="imageToLoad", accept="image/png, image/jpeg"><br>
+        </div>
+    </div>
     <footer>
         <script type="module" src="test.js"></script>
     </footer>
