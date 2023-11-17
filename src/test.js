@@ -4,6 +4,7 @@ import { RGB } from "./RGB.js";
 
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
+let isImageLoaded = false;
 let grilleMain = drawMainCanvas(16, 16);
 
 // Création du pattern
@@ -66,4 +67,47 @@ function getImageData() {
             ligne++;
         }
     }
+    isImageLoaded = true;
+}
+
+function getMousePosition(event) {
+    let rect = canvas.getBoundingClientRect();
+    let scaleX = canvas.width / rect.width;
+    let scaleY = canvas.height / rect.height
+
+    let x = Math.floor((event.clientX - rect.left) * scaleX);
+    let y = Math.floor((event.clientY - rect.top) * scaleY);
+    
+    document.getElementById("x").innerText = x;
+    document.getElementById("y").innerText = y;
+    if (isImageLoaded) {
+        let couleur = grilleMain.getPixelAt(x, y).getColor();
+        document.getElementById("couleur").innerText = couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3);
+    }
+}
+
+canvas.addEventListener("mousemove", function(e) {
+    getMousePosition(e);
+});
+
+var slider = document.getElementById("tolerance");
+var display = document.getElementById("toleranceValue");
+display.value = slider.value; // Display the default slider value
+
+// Update the current slider value (each time you drag the slider handle)
+slider.oninput = function() {
+    display.value = this.value;
+}
+
+display.oninput = function() {
+    slider.value = this.value;
+}
+
+display.onchange = function() {
+    if (Number(this.value) > 100) {
+        this.value = 100;
+    } else if (Number(this.value) < 0) {
+        this.value = 0;
+    }
+    console.log(slider.value);
 }
