@@ -5,3 +5,7 @@ JOIN Editer E ON P.idProjet = E.idProjet;
 # Requête 4
 SELECT COUNT(idProjet) FROM Editer
 WHERE idUtilisateur = 1;
+
+# Requête 5
+SELECT SUM(idUtilisateur) FROM AimerPub
+WHERE idPublication = 1;
