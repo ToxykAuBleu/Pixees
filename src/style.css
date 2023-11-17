@@ -1,0 +1,31 @@
+h1 {
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.right {
+    margin: 0 2.5vw;
+}
+
+.left {
+    margin: 0 2.5vw;
+}
+
+#tolerance {
+    width: 100%;
+}
+body {
+    background-color: grey;
+}
+
+canvas {
+    height: 80vh;
+    background-color: white;
+    border: 1px black solid;
+    image-rendering: pixelated;
+}
