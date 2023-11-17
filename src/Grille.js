@@ -69,7 +69,7 @@ export class Grille {
      * @returns {Pixel} Le Pixel à la position (x, y) de la Grille.
      */
     getPixelAt(x, y) {
-        return this.#_pixels[x][y];
+        return this.#_pixels[y][x];
     }
 
     /**
@@ -79,6 +79,6 @@ export class Grille {
      * @param {Pixel} pix Le Pixel à attribuer en position (x, y)
      */
     setPixelAt(x, y, pix) {
-        this.#_pixels[x][y] = pix;
+        this.#_pixels[y][x] = pix;
     }
 }
