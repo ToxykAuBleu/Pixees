@@ -19,7 +19,7 @@ export class Lab extends Couleur {
     /**
      * Calcul le DeltaE de la couleur actuelle par rapport à une autre
      * @param {Lab} couleurLab Couleur sous forme Lab à comparer
-     * @returns DeltaE : mesure de la différence visuelle entre deux Couleurs
+     * @returns {float} DeltaE : mesure de la différence visuelle entre deux Couleurs
      */
     calculDeltaE(couleurLab) {
         comp1Diff = (couleurLab.getComp(1) - this.getComp(1))**2;

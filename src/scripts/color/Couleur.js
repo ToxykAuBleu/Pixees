@@ -39,7 +39,7 @@ export class Couleur {
     /**
      * 
      * @param {int} indComp L'indice de la composante
-     * @returns La valeur de la composante
+     * @returns {float} La valeur de la composante
      */
     getComp(indComp) {
         switch (indComp) {
