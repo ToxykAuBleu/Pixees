@@ -1,6 +1,8 @@
-h1 {
-    display: flex;
-    justify-content: center;
+@import url('https://fonts.googleapis.com/css?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans&display=swap');
+
+.title {
+    font-family: 'Pixelify Sans' !important;
 }
 
 .wrapper {
@@ -19,7 +21,9 @@ h1 {
 #tolerance {
     width: 100%;
 }
+
 body {
+    font-family: 'PT Sans';
     background-color: grey;
 }
 
