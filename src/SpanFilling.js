@@ -1,4 +1,7 @@
 import { Pixel } from "./Pixel";
+import { RGB } from "./RGB";
+import { XYZ } from "./XYZ";
+import { Lab } from "./Lab";
 import { Calque } from "./Calque";
 import { Coordonnees } from "./Coordonnees";
 
@@ -65,6 +68,29 @@ function checkIfInside(calque, x, y) {
         } else {
             return false;
         }
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Permet de vérifier si le pixel au coordonnées (x, y) doit être sélectionné.
+ * @param {Calque} calque Représente le calque sur lequel on travaille.
+ * @param {Float32Array} tolerance Représente la tolérance.
+ * @param {Number} x Représente la coordonnée en x du pixel.
+ * @param {Number} y Représente la coordonnée en y du pixel.
+ * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+ * @returns {Boolean} true si le pixel doit être sélectionné, false sinon.
+ */
+function checkTolerance(calque, tolerance, x, y, pixelOrigine) {
+    // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
+    let pixelCourant = calque.getGrille().getPixelAt(x, y);
+    let couleurRGB = new RGB(pixelCourant.getColor().getComp(1), pixelCourant.getColor().getComp(2), pixelCourant.getColor().getComp(3));
+    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+    
+    let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());    
+    if (deltaE <= tolerance) {
+        return true;
     } else {
         return false;
     }
