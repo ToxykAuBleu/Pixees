@@ -4,36 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo Pixees</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
     <div class="vh-100 d-flex flex-column">
         <nav class="navbar bg-primary">
-            <div class="container-fluid">
-                <span class="title navbar-brand mb-0 h1">Demo de la baguette magique</span>
+            <div class="container-fluid h">
+                <span class="title navbar-brand mb-0">Demo de la baguette magique</span>
             </div>
         </nav>
         <div class="h-100 d-flex flex-row justify-content-center align-items-center gap-5">
             <canvas id="drawingArea" width="1" height="1" style="height: 80vh;"></canvas>
             <div class="card">
-                <div class="card-header">
+                <div class="card-header bg-secondary title">
                     Informations
                 </div>
-                <div class="list-group list-group-flush">
-                    <li class="list-group-item">Position x : <span id="x"></span></li>
-                    <li class="list-group-item">Position y : <span id="y"></span></li>
-                    <li class="list-group-item">Couleur : <span id="couleur"></span></li>
-                    <li class="list-group-item">
-                        <div class="input-group">
-                            <span class="input-group-text">Tolerance </span>
-                            <input type="number" class="form-control" id="toleranceValue" min="0" max="100">
-                        </div>
-                        <input type="range" class="form-range" id="tolerance" min="0" max="100">
-                    </li>
-                    <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad " id="imageToLoad" ,
-                            accept="image/png, image/jpeg"></li>
+                <div class="card-body">
+                    <div class="list-group list-group-flush">
+                        <li class="list-group-item">Position x : <span id="x"></span></li>
+                        <li class="list-group-item">Position y : <span id="y"></span></li>
+                        <li class="list-group-item">Couleur : <span id="couleur"></span></li>
+                        <li class="list-group-item">
+                            <div class="input-group">
+                                <span class="input-group-text">Tolerance </span>
+                                <input type="number" class="form-control" id="toleranceValue" min="0" max="100">
+                            </div>
+                            <input type="range" class="form-range" id="tolerance" min="0" max="100">
+                        </li>
+                        <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad " id="imageToLoad" ,
+                                accept="image/png, image/jpeg"></li>
+                    </div>
                 </div>
             </div>
         </div>
