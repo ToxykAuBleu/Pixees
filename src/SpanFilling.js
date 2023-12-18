@@ -49,4 +49,25 @@ function spanFilling(tolerance, calque, fileTraitement, pixelOrigine) {
     }
 }
 
+/**
+ * Permet de vérifier si le pixel au coordonnées (x, y) est dans les limites du calque.
+ * @param {Calque} calque Représente le calque sur lequel on travaille.
+ * @param {Number} x Représente la coordonnée en x du pixel.
+ * @param {Number} y Représente la coordonnée en y du pixel.
+ * @returns {Boolean} true si le pixel est dans les limites du calque, false sinon.
+ */
+function checkIfInside(calque, x, y) {
+    let largeur = calque.getGrille().getLargeur();
+    if (largeur <= x <= largeur + x) {
+        let hauteur = calque.getGrille().getHauteur();
+        if (hauteur <= y <= hauteur + y) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
 export { spanFilling };
