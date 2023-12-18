@@ -53,6 +53,24 @@ function spanFilling(tolerance, calque, fileTraitement, pixelOrigine) {
 }
 
 /**
+ * Permet de trouver des nouveaux points à traiter pour l'algo de SpanFilling.
+ * @param {Number} partieGaucheX Représente la coordonnée en x du pixel le plus à gauche de la ligne.
+ * @param {Number} partieDroiteX Représente la coordonnée en x du pixel le plus à droite de la ligne.
+ * @param {Number} y Représente la coordonnée en y de la ligne.
+ * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
+ */
+function scanLine(partieGaucheX, partieDroiteX, y, fileTraitement) {
+    let x = partieGaucheX;
+    while (x <= partieDroiteX) {
+        if (checkIfInside(calque, x, y) && checkTolerance(calque, tolerance, x, y, pixelOrigine)) {
+            fileTraitement.push(new Coordonnees(x, y));
+            break;
+        }
+        x++;
+    }
+}
+
+/**
  * Permet de vérifier si le pixel au coordonnées (x, y) est dans les limites du calque.
  * @param {Calque} calque Représente le calque sur lequel on travaille.
  * @param {Number} x Représente la coordonnée en x du pixel.
