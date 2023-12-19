@@ -6,18 +6,23 @@ import { Coordonnees } from "../scripts/Coordonnees.js";
 // On récupère le canvas et son contexte
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
 // On récupère les labels pour afficher les coordonnées
 const cursorLabel = document.getElementById("cursorPos");
 const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
+
 // On initialise les labels à 0
 cursorLabel.innerText = "(0, 0)";
 couleurLabel.innerText = "(0, 0, 0)";
 sizeLabel.innerText = "0 x 0";
+
 // Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
+
 // Création d'une grille par défaut
 let grilleMain = drawMainCanvas(16, 16);
+
 // Coordonnées du curseur
 let coordMove = new Coordonnees(0, 0);
 let coordClick = new Coordonnees(0, 0);
@@ -27,13 +32,17 @@ function drawPattern() {
     // Création du Canvas pour dessiner le pattern
     const patternCanvas = document.createElement("canvas");
     const patternContext = patternCanvas.getContext("2d");
+
+    // Ajustement de la taille du Canvas
     patternCanvas.width = 2;
     patternCanvas.height = 2;
 
-    // Dessin du pattern
+    // Dessin du pattern : 2x2 pixels, 1 noir, 1 blanc
     patternContext.fillStyle = "#ddd";
     patternContext.fillRect(0, 0, 1, 1);
     patternContext.fillRect(1, 1, 1, 1);
+
+    // Dessin de la bordure
     patternContext.stroke();
 
     return patternCanvas;
@@ -63,16 +72,21 @@ inputElement.addEventListener("change", handleImage, false);
 function handleImage() {
     // Création et stockage de l'Image
     const image = new Image();
+
     // On change la source de l'image par un URL temporaire vers le fichier
     image.src = URL.createObjectURL(this.files[0]);
+
     image.onload = function () {
         // Dessin et redimension du Canvas
         grilleMain = drawMainCanvas(image.height, image.width);
         canvas.width = grilleMain.getLargeur();
         canvas.height = grilleMain.getHauteur();
+
         // Affichage de la taille de l'image
         sizeLabel.innerText = image.width + " x " + image.height;
         ctx.drawImage(image, 0, 0);
+
+        // On récupère les données de l'image
         getImageData();
     }
 }
@@ -81,19 +95,26 @@ function handleImage() {
 function getImageData() {
     let ligne = 0;
     let colonne = 0;
+
     // On récupère les données du Canvas
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
+
     // On parcours la liste de données
     for (let i = 0; i < data.length; i += 4) {
         // Création de la Couleur sous forme RGB
         let rgba = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
+
         // Création d'un nouveau Pixel
         let pixel = new Pixel(false);
+
         // On ajoute la couleur au Pixel
         pixel.setColor(rgba);
+
         // On place le pixel dans la Grille
         grilleMain.setPixelAt(colonne, ligne, pixel);
+
         colonne++;
+
         // Si on atteint la dernière colonne, on change de ligne et on revient à la première colonne
         if (colonne == grilleMain.getLargeur()) {
             colonne = 0;
@@ -115,17 +136,21 @@ function getMousePosition(event) {
     let x = Math.floor((event.clientX - rect.left) * scaleX);
     let y = Math.floor((event.clientY - rect.top) * scaleY);
 
+    // On retourne les coordonnées du Pixel
     return new Coordonnees(x, y);
 }
 
 
 // On écoute les mouvements de souris
 canvas.addEventListener("mousemove", function (e) {
+    // Si une image est chargée
     if (isImageLoaded) {
+        // On récupère les coordonnées du curseur
         coordMove = getMousePosition(e);
         let x = coordMove.getX();
         let y = coordMove.getY();
-        // Si une image est chargée (isImageLoaded) alors on peut récupérer la couleur du pixel sous le curseur
+
+        // On affiche les coordonnées du curseur et la couleur du pixel
         cursorLabel.innerText = "(" + x + ", " + y + ")";
         let couleur = grilleMain.getPixelAt(x, y).getColor();
         couleurLabel.innerText = "(" + couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3) + ")";
@@ -134,7 +159,9 @@ canvas.addEventListener("mousemove", function (e) {
 
 // On écoute les clics de souris
 canvas.addEventListener("click", function (e) {
+    // Si une image est chargée
     if (isImageLoaded) {
+        // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
         console.log(coordClick.getX() + ", " + coordClick.getY());
     }
@@ -142,9 +169,11 @@ canvas.addEventListener("click", function (e) {
 
 // Slider pour modifier la tolerance
 var slider = document.getElementById("tolerance");
+
 // Text Box pour modifier la tolerance
 var display = document.getElementById("toleranceValue");
-// affichage de la valeur par défaut du slider
+
+// Affichage de la valeur par défaut du slider
 display.value = slider.value;
 
 // Mise à jour de la text box quand on change la valeur du slider
