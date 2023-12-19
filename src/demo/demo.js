@@ -1,14 +1,26 @@
 import { Grille } from "../scripts/Grille.js";
 import { Pixel } from "../scripts/Pixel.js";
 import { RGB } from "../scripts/color/RGB.js";
+import { Coordonnees } from "../scripts/Coordonnees.js";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
+// On récupère les labels pour afficher les coordonnées
+const xLabel = document.getElementById("x");
+const yLabel = document.getElementById("y");
+const couleurLabel = document.getElementById("couleur");
+// On initialise les labels à 0
+xLabel.innerText = 0;
+yLabel.innerText = 0;
+couleurLabel.innerText = "(0, 0, 0)";
 // Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
 // Création d'une grille par défaut
 let grilleMain = drawMainCanvas(16, 16);
+// Coordonnées du curseur
+let coordMove = new Coordonnees(0, 0);
+let coordClick = new Coordonnees(0, 0);
 
 // Création du pattern
 function drawPattern() {
@@ -101,19 +113,30 @@ function getMousePosition(event) {
     let x = Math.floor((event.clientX - rect.left) * scaleX);
     let y = Math.floor((event.clientY - rect.top) * scaleY);
 
-    // On met a jour l'interface avec les données
-    document.getElementById("x").innerText = x;
-    document.getElementById("y").innerText = y;
-    // Si une image est chargée (isImageLoaded) alors on peut récupérer la couleur du pixel sous le curseur
-    if (isImageLoaded) {
-        let couleur = grilleMain.getPixelAt(x, y).getColor();
-        document.getElementById("couleur").innerText = couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3);
-    }
+    return new Coordonnees(x, y);
 }
 
+
 // On écoute les mouvements de souris
-canvas.addEventListener("mousemove", function(e) {
-    getMousePosition(e);
+canvas.addEventListener("mousemove", function (e) {
+    if (isImageLoaded) {
+        coordMove = getMousePosition(e);
+        let x = coordMove.getX();
+        let y = coordMove.getY();
+        // Si une image est chargée (isImageLoaded) alors on peut récupérer la couleur du pixel sous le curseur
+        xLabel.innerText = x;
+        yLabel.innerText = y;
+        let couleur = grilleMain.getPixelAt(x, y).getColor();
+        couleurLabel.innerText = "(" + couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3) + ")";
+    }
+});
+
+// ON écoute les clics de souris
+canvas.addEventListener("click", function (e) {
+    if (isImageLoaded) {
+        coordClick = getMousePosition(e);
+        console.log(coordClick.getX() + ", " + coordClick.getY());
+    }
 });
 
 // Slider pour modifier la tolerance
@@ -124,12 +147,12 @@ var display = document.getElementById("toleranceValue");
 display.value = slider.value;
 
 // Mise à jour de la text box quand on change la valeur du slider
-slider.oninput = function() {
+slider.oninput = function () {
     display.value = this.value;
 }
 
 // Mise à jour du slider quand on change la valeur dans le text box 
-display.oninput = function() {
+display.oninput = function () {
     slider.value = this.value;
     if (this.value > 100) {
         this.value = 100;
