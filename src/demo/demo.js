@@ -1,6 +1,6 @@
-import { Grille } from "../Grille.js";
-import { Pixel } from "../Pixel.js";
-import { RGB } from "../RGB.js";
+import { Grille } from "../scripts/Grille.js";
+import { Pixel } from "../scripts/Pixel.js";
+import { RGB } from "../scripts/color/RGB.js";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementsByTagName("canvas")[0];
