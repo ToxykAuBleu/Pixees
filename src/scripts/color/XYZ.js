@@ -1,6 +1,23 @@
 import { Couleur } from './Couleur.js';
 import { Lab } from './Lab.js';
 
+// Définition des constantes
+
+const Xn = 95.04;
+const Yn = 100.0;
+const Zn = 108.88;
+const delta = 6.0 / 29.0;
+
+// Fonction f utilisée dans la conversion XYZ vers Lab
+
+function f(t) {
+    if (t > delta**3) {
+        return Math.cbrt(t);
+    } else {
+        return (7.787 * t) + (16 / 116);
+    }
+}
+
 /**
  * Classe représentant une Couleur sous forme XYZ
  */
@@ -12,7 +29,7 @@ export class XYZ extends Couleur {
      * @param {float} comp2 La valeur de la composante 2
      * @param {float} comp3 La valeur de la composante 3
      */
-    constructor(comp1, comp2, comp3) {
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
         super(comp1, comp2, comp3);
     }
 
@@ -22,9 +39,9 @@ export class XYZ extends Couleur {
      * @returns {Lab} La Couleur sous forme Lab
      */
     XYZversLab() {
-        const X=this.getComp(1) * 100
-        const Y=this.getComp(2) * 100
-        const Z=this.getComp(3) * 100
+        const X=this.getComp(1) * 100;
+        const Y=this.getComp(2) * 100;
+        const Z=this.getComp(3) * 100;
     
         const xr = X/Xn;
         const yr = Y/Yn;

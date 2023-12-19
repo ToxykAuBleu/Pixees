@@ -14,13 +14,13 @@ export class RGB extends Couleur {
 
     // CONSTRUCTEUR
     /**
-     * 
+     * Créer une Couleur sous la forme RGB
      * @param {float} comp1 La valeur de la composante 1
      * @param {float} comp2 La valeur de la composante 2
      * @param {float} comp3 La valeur de la composante 3
      * @param {float} alpha La valeur de la transparence
      */
-    constructor(comp1, comp2, comp3, alpha) {
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0, alpha = 0) {
         super(comp1, comp2, comp3);
         this.#_transparence = alpha;
     }
@@ -48,6 +48,13 @@ export class RGB extends Couleur {
      * @returns {XYZ} La Couleur sous forme XYZ
      */
     RGBversXYZ() {
+        // Matrice de transformation.
+        const M = [
+            [0.4124564, 0.3575761, 0.1804375],
+            [0.2126729, 0.7151522, 0.0721750],
+            [0.0193339, 0.1191920, 0.9503041]
+        ];
+
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
         for (let i = 1; i < 4; i++) {
             this.setComp(i, this.getComp(i) / 255);
@@ -58,13 +65,15 @@ export class RGB extends Couleur {
             }
         }
 
-        const XYZ = new XYZ();
+        let xyz = new XYZ();
 
         // Conversion en XYZ
         for (let i = 1; i < 4; i++) {
-            XYZ.setComp(i, (this.getComp(i) * M[i-1][j-1]));
+            for (let j = 1; j < 4; j++) {
+                xyz.setComp(i, (this.getComp(i) * M[i-1][j-1]));
+            }
         }
 
-        return XYZ
+        return xyz;
     }
 }
