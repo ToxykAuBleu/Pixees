@@ -7,13 +7,13 @@ import { Coordonnees } from "../scripts/Coordonnees.js";
 const canvas = document.getElementsByTagName("canvas")[0];
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
 // On récupère les labels pour afficher les coordonnées
-const xLabel = document.getElementById("x");
-const yLabel = document.getElementById("y");
+const cursorLabel = document.getElementById("cursorPos");
+const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
 // On initialise les labels à 0
-xLabel.innerText = 0;
-yLabel.innerText = 0;
+cursorLabel.innerText = "(0, 0)";
 couleurLabel.innerText = "(0, 0, 0)";
+sizeLabel.innerText = "0 x 0";
 // Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
 // Création d'une grille par défaut
@@ -70,6 +70,8 @@ function handleImage() {
         grilleMain = drawMainCanvas(image.height, image.width);
         canvas.width = grilleMain.getLargeur();
         canvas.height = grilleMain.getHauteur();
+        // Affichage de la taille de l'image
+        sizeLabel.innerText = image.width + " x " + image.height;
         ctx.drawImage(image, 0, 0);
         getImageData();
     }
@@ -124,14 +126,13 @@ canvas.addEventListener("mousemove", function (e) {
         let x = coordMove.getX();
         let y = coordMove.getY();
         // Si une image est chargée (isImageLoaded) alors on peut récupérer la couleur du pixel sous le curseur
-        xLabel.innerText = x;
-        yLabel.innerText = y;
+        cursorLabel.innerText = "(" + x + ", " + y + ")";
         let couleur = grilleMain.getPixelAt(x, y).getColor();
         couleurLabel.innerText = "(" + couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3) + ")";
     }
 });
 
-// ON écoute les clics de souris
+// On écoute les clics de souris
 canvas.addEventListener("click", function (e) {
     if (isImageLoaded) {
         coordClick = getMousePosition(e);

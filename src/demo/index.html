@@ -16,14 +16,14 @@
         </nav>
         <div class="h-100 d-flex flex-row justify-content-center align-items-center gap-5">
             <canvas id="drawingArea" width="1" height="1" style="height: 80vh;"></canvas>
-            <div class="card">
+            <div class="card w-25">
                 <div class="card-header bg-secondary title">
                     Informations
                 </div>
                 <div class="card-body">
                     <div class="list-group list-group-flush">
-                        <li class="list-group-item">Position x : <span id="x"></span></li>
-                        <li class="list-group-item">Position y : <span id="y"></span></li>
+                        <li class="list-group-item">Position curseur : <span id="cursorPos"></span></li>
+                        <li class="list-group-item">Taille image : <span id="imageSize"></span></li>
                         <li class="list-group-item">Couleur : <span id="couleur"></span></li>
                         <li class="list-group-item">
                             <div class="input-group">
@@ -32,8 +32,8 @@
                             </div>
                             <input type="range" class="form-range" id="tolerance" min="0" max="100">
                         </li>
-                        <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad " id="imageToLoad" ,
-                                accept="image/png, image/jpeg"></li>
+                        <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad "
+                                id="imageToLoad" , accept="image/png, image/jpeg"></li>
                     </div>
                 </div>
             </div>
