@@ -12,7 +12,7 @@ export class XYZ extends Couleur {
      * @param {float} comp2 La valeur de la composante 2
      * @param {float} comp3 La valeur de la composante 3
      */
-    constructor(comp1, comp2, comp3) {
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
         super(comp1, comp2, comp3);
     }
 

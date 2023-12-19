@@ -14,13 +14,13 @@ export class RGB extends Couleur {
 
     // CONSTRUCTEUR
     /**
-     * 
+     * Créer une Couleur sous la forme RGB
      * @param {float} comp1 La valeur de la composante 1
      * @param {float} comp2 La valeur de la composante 2
      * @param {float} comp3 La valeur de la composante 3
      * @param {float} alpha La valeur de la transparence
      */
-    constructor(comp1, comp2, comp3, alpha) {
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0, alpha = 0) {
         super(comp1, comp2, comp3);
         this.#_transparence = alpha;
     }
