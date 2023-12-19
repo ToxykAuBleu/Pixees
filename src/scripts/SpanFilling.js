@@ -1,31 +1,39 @@
-import { Pixel } from "./Pixel";
-import { RGB } from "./color/RGB";
-import { Calque } from "./Calque";
-import { Coordonnees } from "./Coordonnees";
+import { Pixel } from "./Pixel.js";
+import { RGB } from "./color/RGB.js";
+import { Calque } from "./Calque.js";
+import { Coordonnees } from "./Coordonnees.js";
+import { Grille } from "./Grille.js";
 
 /**
  * Applique l'algorithme de la baguette magique sur le calque/grille.
  * @param {Coordonnees} coords Représente les coordonnées du pixel sélectionné par l'utilisateur.
  * @param {Float32Array} tolerance Représente la tolérance de remplissage.
- * @param {Calque} calque Représente le calque sur lequel on travaille.
+ * @param {Grille} grille Représente le calque sur lequel on travaille.
  * @returns {Calque} Le calque avec les pixels sélectionnés.
  */
-function baguetteMagique(coords, tolerance, calque) {
-    // coords, tolerance, calque >> Rechercher les pixels à sélectionner >> calque
+function baguetteMagique(coords, tolerance, grille) {
+    if (grille instanceof Calque) {
+        grille = new Grille(grille.getHauteur(), grille.getLargeur());
+    }
+    
+    // coords, tolerance, grille >> Rechercher les pixels à sélectionner >> grille
 
-    // coords, calque >> Initlisation de la recherche >> coordX, coordY, pixelOrigine, fileTraitement
+    // coords, grille >> Initlisation de la recherche >> coordX, coordY, pixelOrigine, fileTraitement
     let coordX = coords.getX();
     let coordY = coords.getY();
     // Conversion du pixel sélectionné en L*a*b*.
-    let pixelOrigine = calque.getGrille().getPixelAt(coordX, coordY);
+    let pixelOrigine = grille.getPixelAt(coordX, coordY);
+    console.log("RGB: ", pixelOrigine);
     let couleurRGB = new RGB(pixelOrigine.getColor().getComp(1), pixelOrigine.getColor().getComp(2), pixelOrigine.getColor().getComp(3));
-    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+    let couleurXYZ = couleurRGB.RGBversXYZ();
+    let couleurLab = couleurXYZ.XYZversLab();
     pixelOrigine.setColor(couleurLab);
+    console.log("Lab: ",pixelOrigine);
 
     let fileTraitement = [];
     fileTraitement.push(coords);
 
-    // coordX, coordY, tolerance, calque, pixelOrigine, fileTraitement >> Effectuer la recherche >> calque
+    // coordX, coordY, tolerance, grille, pixelOrigine, fileTraitement >> Effectuer la recherche >> grille
 }
 
 /**
