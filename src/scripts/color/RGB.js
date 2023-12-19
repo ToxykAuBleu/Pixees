@@ -48,6 +48,13 @@ export class RGB extends Couleur {
      * @returns {XYZ} La Couleur sous forme XYZ
      */
     RGBversXYZ() {
+        // Matrice de transformation.
+        const M = [
+            [0.4124564, 0.3575761, 0.1804375],
+            [0.2126729, 0.7151522, 0.0721750],
+            [0.0193339, 0.1191920, 0.9503041]
+        ];
+
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
         for (let i = 1; i < 4; i++) {
             this.setComp(i, this.getComp(i) / 255);
@@ -58,13 +65,15 @@ export class RGB extends Couleur {
             }
         }
 
-        const XYZ = new XYZ();
+        let xyz = new XYZ();
 
         // Conversion en XYZ
         for (let i = 1; i < 4; i++) {
-            XYZ.setComp(i, (this.getComp(i) * M[i-1][j-1]));
+            for (let j = 1; j < 4; j++) {
+                xyz.setComp(i, (this.getComp(i) * M[i-1][j-1]));
+            }
         }
 
-        return XYZ
+        return xyz;
     }
 }
