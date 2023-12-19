@@ -2,7 +2,7 @@ import { Grille } from "./Grille.js";
 /**
  * Classe représentant un Calque.
  */
-class Calque {
+export class Calque {
     // ATTRIBUTS
     /**
      * Grille du Calque.

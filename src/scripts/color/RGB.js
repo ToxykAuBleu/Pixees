@@ -28,7 +28,7 @@ export class RGB extends Couleur {
     // GETTERS & SETTERS
     /**
      * Obtient la valeur de la transparence
-     * @returns La valeur de la transparence
+     * @returns {float} La valeur de la transparence
      */
     getAlpha() {
         return(this.#_transparence);
@@ -45,7 +45,7 @@ export class RGB extends Couleur {
     // METHODES
     /**
      * Transformer une Couleur RGB vers XYZ
-     * @returns La Couleur sous forme XYZ
+     * @returns {XYZ} La Couleur sous forme XYZ
      */
     RGBversXYZ() {
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
