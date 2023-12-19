@@ -19,7 +19,7 @@ export class XYZ extends Couleur {
     // METHODES
     /**
      * Transformer une Couleur XYZ vers Lab
-     * @returns La Couleur sous forme Lab
+     * @returns {Lab} La Couleur sous forme Lab
      */
     XYZversLab() {
         const X=this.getComp(1) * 100

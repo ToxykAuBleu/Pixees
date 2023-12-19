@@ -1,4 +1,4 @@
-import { Couleur } from "./Couleur.js";
+import { Couleur } from "./color/Couleur.js";
 
 /**
  * Classe représentant un Pixel.
