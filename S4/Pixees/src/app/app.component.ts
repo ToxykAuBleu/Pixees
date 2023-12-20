@@ -30,6 +30,9 @@ export class AppComponent {
   goToProjet() {
     this.router.navigate(['/', 'projet']);
   }
+  goToNotification() {
+    this.router.navigate(['/', 'notifications']);
+  }
 }
 
 
