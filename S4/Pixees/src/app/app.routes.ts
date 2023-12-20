@@ -10,6 +10,7 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { CollectionComponent } from './pages/collection/collection.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { EditeurComponent } from './pages/editeur/editeur.component';
+import { CarouselComponent } from './pages/home/carousel/carousel.component';
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
@@ -23,7 +24,5 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
-
-
-
+    { path: '', component: CarouselComponent, pathMatch: 'full' },
 ];
