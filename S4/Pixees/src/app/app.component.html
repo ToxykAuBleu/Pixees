@@ -1,6 +1,6 @@
 <header id ={{couleur}}>
   <ul>
-    <li (click)="goToHome()"><h1>Pixees</h1></li>
+    <li (click)="goToHome()"><h1>{{title}}</h1></li>
     <li (click)="goToHome()">Home</li>
     <li><form> 
       <input type="text" name="text" class="search" placeholder="Recherchez non spécifiée...">
@@ -8,7 +8,7 @@
     </form>
     </li>
     <li (click)="goToProjet()" id="right">Projet</li>
-    <li id="right">Publier</li>
+    <li (click)="goToDiscussion()" id="right">Discussion</li>
     <li (click)="goToNotification()" id="right">Notifications</li>
     <li id="right">Compte</li>
   </ul>
