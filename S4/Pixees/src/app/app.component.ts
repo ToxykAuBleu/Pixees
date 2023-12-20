@@ -23,15 +23,23 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 })
 export class AppComponent {
   title = 'Pixees';
+  public couleur = "couleur0";
   constructor(private router: Router) {};
   goToHome() {
     this.router.navigate(['/', 'home']);
+    this.couleur = "couleur0";
   }
   goToProjet() {
     this.router.navigate(['/', 'projet']);
+    this.couleur = "couleur1";
   }
   goToNotification() {
     this.router.navigate(['/', 'notifications']);
+    this.couleur = "couleur0";
+  }
+  goToAccount() {
+    this.router.navigate(['/', 'compte']);
+    this.couleur = "couleur2";
   }
 }
 
