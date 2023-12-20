@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { CollectionComponent } from './pages/collection/collection.component';
@@ -22,4 +23,13 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 })
 export class AppComponent {
   title = 'Pixees';
+  constructor(private router: Router) {};
+  goToHome() {
+    this.router.navigate(['/', 'home']);
+  }
+  goToProjet() {
+    this.router.navigate(['/', 'projet']);
+  }
 }
+
+
