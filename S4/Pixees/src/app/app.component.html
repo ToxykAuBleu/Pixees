@@ -1,0 +1,17 @@
+<header>
+  <ul>
+    <li (click)="goToHome()"><h1>Pixees</h1></li>
+    <li (click)="goToHome()">Home</li>
+    <li><form> 
+      <input type="text" name="text" class="search" placeholder="Recherchez non spécifiée...">
+      <input type="submit" name="submit" class="submit" value="Search">
+    </form>
+    </li>
+    <li (click)="goToProjet()" id="right">Projet</li>
+    <li id="right">Publier</li>
+    <li (click)="goToNotification()" id="right">Notifications</li>
+    <li id="right">Compte</li>
+  </ul>
+</header>
+
+<router-outlet></router-outlet>

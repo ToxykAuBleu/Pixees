@@ -5,8 +5,12 @@ import { Coordonnees } from "../scripts/Coordonnees.js";
 import { baguetteMagique } from "../scripts/SpanFilling.js";
 
 // On récupère le canvas et son contexte
-const canvas = document.getElementsByTagName("canvas")[0];
+const canvas = document.getElementById("drawingArea");
 const ctx = canvas.getContext("2d", { willReadFrequently: true });
+
+// On récupère le canvas pour la sélection et son contexte
+const selectionCanvas = document.getElementById("selectionArea");
+const selectionCtx = selectionCanvas.getContext("2d", { willReadFrequently: true });
 
 // On récupère les labels pour afficher les coordonnées
 const cursorLabel = document.getElementById("cursorPos");
@@ -23,6 +27,7 @@ let isImageLoaded = false;
 
 // Création d'une grille par défaut
 let grilleMain = drawMainCanvas(16, 16);
+drawSelectionCanvas();
 
 // Coordonnées du curseur
 let coordMove = new Coordonnees(0, 0);
@@ -65,6 +70,28 @@ function drawMainCanvas(hauteur, largeur) {
     return grille;
 }
 
+function drawSelectionCanvas() {
+    // Ajustement de la taille du Canvas
+    selectionCanvas.width = grilleMain.getLargeur();
+    selectionCanvas.height = grilleMain.getHauteur();
+    
+    // Clear du canvas
+    selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
+}
+
+// Affichage de la sélection sur le canvas
+function showSelection() {
+    selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
+    selectionCtx.fillStyle = "rgba(0, 127, 255, 0.25)";
+    for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            if (grilleMain.getPixelAt(x, y).isSelected()) {
+                selectionCtx.fillRect(x, y, 1, 1);
+            }
+        }
+    }
+}
+
 // Affichage de l'image sur le canvas
 const inputElement = document.getElementById("imageToLoad");
 inputElement.addEventListener("change", handleImage, false);
@@ -78,10 +105,9 @@ function handleImage() {
     image.src = URL.createObjectURL(this.files[0]);
 
     image.onload = function () {
-        // Dessin et redimension du Canvas
+        // Dessin et redimension des canvas
         grilleMain = drawMainCanvas(image.height, image.width);
-        canvas.width = grilleMain.getLargeur();
-        canvas.height = grilleMain.getHauteur();
+        drawSelectionCanvas();
 
         // Affichage de la taille de l'image
         sizeLabel.innerText = image.width + " x " + image.height;
@@ -124,6 +150,7 @@ function getImageData() {
     }
     // On indique qu'une image est chargée
     isImageLoaded = true;
+    showSelection();
 }
 
 // Récuperer la position du curseur

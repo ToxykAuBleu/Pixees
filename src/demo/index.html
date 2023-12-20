@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Demo Pixees</title>
-    <link href="../css/custom.css" rel="stylesheet" type="text/css" />
+    <link href="/src/css/custom.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -15,7 +15,10 @@
             </div>
         </nav>
         <div class="h-100 d-flex flex-row justify-content-center align-items-center gap-5">
-            <canvas id="drawingArea" width="1" height="1" style="height: 80vh;"></canvas>
+            <div>
+                <canvas id="selectionArea" width="1" height="1" style="position: absolute;"></canvas>
+                <canvas id="drawingArea" width="1" height="1"></canvas>
+            </div>
             <div class="card w-25">
                 <div class="card-header bg-secondary title">
                     Informations
