@@ -23,15 +23,31 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
 })
 export class AppComponent {
   title = 'Pixees';
+  public couleur = "couleurAccueil";
   constructor(private router: Router) {};
   goToHome() {
     this.router.navigate(['/', 'home']);
+    this.couleur = "couleurAccueil";
   }
   goToProjet() {
     this.router.navigate(['/', 'projet']);
+    this.couleur = "couleurUtilisateur";
   }
   goToNotification() {
     this.router.navigate(['/', 'notifications']);
+    this.couleur = "couleurProfil";
+  }
+  goToAccount() {
+    this.router.navigate(['/', 'compte']);
+    this.couleur = "couleurProfil";
+  }
+  goToDiscussion() {
+    this.router.navigate(['/', 'discussion']);
+    this.couleur = "couleurDiscussion";
+  }
+  goToConnexion() {
+    this.router.navigate(['/', 'connexion']);
+    this.couleur = "couleurProfil";
   }
 }
 

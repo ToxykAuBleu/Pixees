@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Pixelify+Sans&display=swap');
+
 
 header{
-    background-color: #7CEB60 ;
     height: 70px ;
     display: flex ;
     flex-direction: row ;
     justify-content: flex-start ;
     align-items: center ;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'PT Sans', sans-serif;
 
     h1 {
         font-size: 30px ;
         cursor: pointer ;
+        font-family: 'Pixelify Sans', sans-serif;
     }
 
     ul{
@@ -28,4 +30,33 @@ header{
             cursor: pointer ;
         }
     }
+}
+
+#couleurAccueil {
+    background-color: #7CEB60 ;
+}
+
+#couleurUtilisateur {
+    background-color: #4D4C46 ;
+    color: #FFFFFF;
+}
+
+#couleurProfil {
+    background-color: #EA8080 ;
+}
+
+#couleurAdmin {
+    background-color: #EBBC60 ;
+}
+
+#couleurDiscussion {
+    background-color: #80D7EA ;
+}
+
+#couleurAdmin {
+    background-color: #EBBC60 ;
+}
+
+#couleurCreation {
+    background-color: #AF80EA ;
 }
