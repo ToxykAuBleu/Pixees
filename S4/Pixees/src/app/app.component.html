@@ -1,13 +1,9 @@
-<ul class="nav navbar-nav">
-  <li>
-    <h1 (click)="goToHome()">Pixees</h1>
-  </li>
-  <li>
-    <a (click)="goToHome()">Home</a>
-  </li>
-  <li>
-    <a (click)="goToProjet()">Projets</a>
-  </li>
-</ul>
+<header>
+  <ul>
+    <li (click)="goToHome()"><h1>Pixees</h1></li>
+    <li (click)="goToHome()">Home</li>
+    <li (click)="goToProjet()" id="right">Projet</li>
+  </ul>
+</header>
 
 <router-outlet></router-outlet>
