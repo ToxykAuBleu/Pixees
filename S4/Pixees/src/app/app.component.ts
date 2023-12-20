@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AdministrationComponent } from './pages/administration/administration.component';
 import { CollectionComponent } from './pages/collection/collection.component';
@@ -18,8 +19,20 @@ import { NotificationsComponent } from './pages/notifications/notifications.comp
   standalone: true,
   imports: [CommonModule, RouterOutlet, HomeComponent, AdministrationComponent, CollectionComponent, CompteComponent, ConnexionComponent, DiscussionComponent, EditeurComponent, InscriptionComponent, NotificationsComponent, ProfilComponent, ProjetComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'Pixees';
+  constructor(private router: Router) {};
+  goToHome() {
+    this.router.navigate(['/', 'home']);
+  }
+  goToProjet() {
+    this.router.navigate(['/', 'projet']);
+  }
+  goToNotification() {
+    this.router.navigate(['/', 'notifications']);
+  }
 }
+
+
