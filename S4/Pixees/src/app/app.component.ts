@@ -45,6 +45,10 @@ export class AppComponent {
     this.router.navigate(['/', 'discussion']);
     this.couleur = "couleurDiscussion";
   }
+  goToConnexion() {
+    this.router.navigate(['/', 'connexion']);
+    this.couleur = "couleurProfil";
+  }
 }
 
 
