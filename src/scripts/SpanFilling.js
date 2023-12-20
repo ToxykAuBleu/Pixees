@@ -22,9 +22,10 @@ function baguetteMagique(coords, tolerance, grille) {
     let coordX = coords.getX();
     let coordY = coords.getY();
     // Conversion du pixel sélectionné en L*a*b*.
-    let pixelOrigine = grille.getPixelAt(coordX, coordY);
-    let couleurRGB = new RGB(pixelOrigine.getColor().getComp(1), pixelOrigine.getColor().getComp(2), pixelOrigine.getColor().getComp(3));
+    let pixelClique = grille.getPixelAt(coordX, coordY);
+    let couleurRGB = new RGB(pixelClique.getColor().getComp(1), pixelClique.getColor().getComp(2), pixelClique.getColor().getComp(3));
     let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+    let pixelOrigine = new Pixel();
     pixelOrigine.setColor(couleurLab);
 
     let fileTraitement = [];
@@ -150,4 +151,4 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     }
 }
 
-export { baguetteMagique, checkIfInside };
+export { baguetteMagique };
