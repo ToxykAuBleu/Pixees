@@ -3,9 +3,12 @@
 
 canvas {
     height: 80vh;
-    background-color: white;
     border: 1px black solid;
     image-rendering: pixelated;
+}
+
+#drawingArea {
+    background-color: white;
 }
 
 @import "../../node_modules/bootstrap/scss/functions";
