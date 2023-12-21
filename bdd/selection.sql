@@ -46,9 +46,8 @@ GROUP BY idUtilisateur_1
 ORDER BY NombreAdeptes DESC;
 
 -- 12. Afficher les projets modifiés le plus récemment.​
-SELECT *
-FROM Projet
-ORDER BY dateModification DESC;
+SELECT * FROM Editer
+ORDER BY dateModif DESC;
 
 -- 13. Afficher tous les messages envoyés, du plus récent au plus ancien. 
 SELECT message FROM Discuter
