@@ -60,3 +60,14 @@ JOIN Utilisateur U ON U.idUtilisateur = D.idUtilisateur_1
 WHERE D.idUtilisateur = 6 AND 
 	pseudo LIKE '%sa%'
 ORDER BY dateEnvoi DESC;
+
+-- 16. Afficher toutes les publications ayant un tag avec la sélection de l'utilisateur.
+-- (sans sous requête)
+SELECT * FROM Taguer T1
+JOIN Publication P ON T1.idPublication = P.idPublication
+JOIN Tag T2 ON T1.idTag = T2.idTag
+WHERE T2.libelle LIKE "%o%";
+-- (avec sous requête)
+SELECT * FROM Taguer T1
+JOIN Publication P ON T1.idPublication = P.idPublication
+WHERE idTag IN (SELECT idTag FROM Tag WHERE libelle LIKE '%o%');
