@@ -27,6 +27,30 @@ header {
             cursor: pointer;
         }
 
+        
+        .black {
+            display: inline-block;
+            border-radius: 50%;
+            padding: 0.5em;
+            background-color: #000000;
+            fa-icon {
+                color: white;
+                mix-blend-mode: difference;
+            }
+        }
+
+        .white {
+            display: inline-block;
+            border-radius: 50%;
+            padding: 0.5em;
+            background-color: #FFFFFF;
+            fa-icon {
+                color: white;
+                mix-blend-mode: difference;
+            }
+        }
+
+
         div {
             display: inherit;
             align-items: inherit;
