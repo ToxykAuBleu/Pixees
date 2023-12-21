@@ -31,3 +31,10 @@ WHERE idUtilisateur = 1;
 -- 8. Afficher le nombre de commentaire sur une publication
 SELECT COUNT(idCommentaire) FROM Commentaire
 WHERE idPublication = 1;
+
+-- 10. Afficher les publications ayant eu le plus de likes dans les dernières 24 heures
+SELECT idPublication, COUNT(idUtilisateur) AS TotalLikes
+FROM AimerPub
+WHERE dateAime >= NOW() - INTERVAL 24 HOUR
+GROUP BY idPublication
+ORDER BY TotalLikes DESC;
