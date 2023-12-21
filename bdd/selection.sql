@@ -61,6 +61,9 @@ WHERE D.idUtilisateur = 6 AND
 	pseudo LIKE '%sa%'
 ORDER BY dateEnvoi DESC;
 
+-- 22. Suivre un artiste 
+INSERT INTO SuivreArtiste(idUtilisateur, idUtilisateur_1)
+
 -- 23. Ne plus suivre un artiste
 DELETE FROM SuivreArtiste
 WHERE idUtilisateur = 1 AND idUtilisateur_1 = 3;
