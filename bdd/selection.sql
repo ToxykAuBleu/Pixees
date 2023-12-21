@@ -72,6 +72,10 @@ SELECT * FROM Taguer T1
 JOIN Publication P ON T1.idPublication = P.idPublication
 WHERE idTag IN (SELECT idTag FROM Tag WHERE libelle LIKE '%o%');
 
+-- 20. Créer un compte
+INSERT INTO Utilisateur(email, dateInscription, pseudo, motDePasse, dateNaiss, nom, prenom, role, biographie, couleurFond)
+VALUES ('example@example.com', NOW(), 'username', 'password', '1990-01-01', 'Doe', 'John', 1, 'Lorem ipsum dolor sit amet', '#FFFFFF');
+
 -- 21. Ajouter un commentaire à une publication​
 INSERT INTO Commentaire(contenu, dateComment, estMasque, estSupprime, idPublication, idUtilisateur) VALUES ('Ceci est un commentaire', NOW(), 0, 0, 1, 1)
 
