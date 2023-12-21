@@ -71,3 +71,14 @@ WHERE T2.libelle LIKE "%o%";
 SELECT * FROM Taguer T1
 JOIN Publication P ON T1.idPublication = P.idPublication
 WHERE idTag IN (SELECT idTag FROM Tag WHERE libelle LIKE '%o%');
+
+-- 22. Suivre un artiste 
+INSERT INTO SuivreArtiste(idUtilisateur, idUtilisateur_1)
+
+-- 23. Ne plus suivre un artiste
+DELETE FROM SuivreArtiste
+WHERE idUtilisateur = 1 AND idUtilisateur_1 = 3;
+
+-- 24. Suppression d'un message
+DELETE FROM Discuter
+WHERE idMessage = 1;
