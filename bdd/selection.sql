@@ -61,6 +61,10 @@ WHERE D.idUtilisateur = 6 AND
 	pseudo LIKE '%sa%'
 ORDER BY dateEnvoi DESC;
 
+-- 23. Ne plus suivre un artiste
+DELETE FROM SuivreArtiste
+WHERE idUtilisateur = 1 AND idUtilisateur_1 = 3;
+
 -- 24. Suppression d'un message
 DELETE FROM Discuter
 WHERE idMessage = 1;
