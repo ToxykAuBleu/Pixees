@@ -38,3 +38,9 @@ FROM AimerPub
 WHERE dateAime >= NOW() - INTERVAL 24 HOUR
 GROUP BY idPublication
 ORDER BY TotalLikes DESC;
+
+-- 11. Afficher la liste des utilisateurs ayant le plus d'adeptes
+SELECT idUtilisateur_1 AS Artiste, COUNT(idUtilisateur) AS NombreAdeptes
+FROM SuivreArtiste
+GROUP BY idUtilisateur_1
+ORDER BY NombreAdeptes DESC;
