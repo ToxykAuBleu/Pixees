@@ -44,3 +44,12 @@ SELECT idUtilisateur_1 AS Artiste, COUNT(idUtilisateur) AS NombreAdeptes
 FROM SuivreArtiste
 GROUP BY idUtilisateur_1
 ORDER BY NombreAdeptes DESC;
+
+-- 12. Afficher les projets modifiés le plus récemment.​
+SELECT *
+FROM Projet
+ORDER BY dateModification DESC;
+
+-- 13. Afficher tous les messages envoyés, du plus récent au plus ancien. 
+SELECT message FROM Discuter
+ORDER BY dateEnvoi DESC;
