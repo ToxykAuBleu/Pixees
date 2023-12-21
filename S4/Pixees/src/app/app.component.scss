@@ -2,61 +2,64 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Pixelify+Sans&display=swap');
 
 
-header{
-    height: 70px ;
-    display: flex ;
-    flex-direction: row ;
-    justify-content: flex-start ;
-    align-items: center ;
+header {
+    height: 70px;
     font-family: 'PT Sans', sans-serif;
 
     h1 {
-        font-size: 30px ;
-        cursor: pointer ;
+        font-size: 30px;
+        cursor: pointer;
         font-family: 'Pixelify Sans', sans-serif;
     }
 
-    ul{
+    ul {
+        padding: 0 2rem;
         list-style: none;
         list-style-type: none;
-        height: 100% ;
-        display: flex ;
-        flex-direction: row ;
-        justify-content: center ;
-        align-items: center ;
-        gap: 60px ;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 60px;
 
-        li{
-            cursor: pointer ;
+        li {
+            cursor: pointer;
+        }
+
+        div {
+            display: inherit;
+            align-items: inherit;
+            gap: 60px;
         }
     }
 }
 
 #couleurAccueil {
-    background-color: #7CEB60 ;
+    background-color: #7CEB60;
 }
 
 #couleurUtilisateur {
-    background-color: #4D4C46 ;
+    background-color: #4D4C46;
     color: #FFFFFF;
 }
 
 #couleurProfil {
-    background-color: #EA8080 ;
+    background-color: #EA8080;
 }
 
 #couleurAdmin {
-    background-color: #EBBC60 ;
+    background-color: #EBBC60;
 }
 
 #couleurDiscussion {
-    background-color: #80D7EA ;
+    background-color: #80D7EA;
 }
 
 #couleurAdmin {
-    background-color: #EBBC60 ;
+    background-color: #EBBC60;
 }
 
 #couleurCreation {
-    background-color: #AF80EA ;
+    background-color: #AF80EA;
 }

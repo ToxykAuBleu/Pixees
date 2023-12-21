@@ -1,16 +1,20 @@
 <header id ={{couleur}}>
   <ul>
-    <li (click)="goToHome()"><h1>{{title}}</h1></li>
-    <li (click)="goToHome()">Home</li>
+    <div>
+      <li (click)="goToHome()"><h1>{{title}}</h1></li>
+      <li (click)="goToHome()"><fa-icon [icon]="faHouse" size="2xl"></fa-icon></li>
+    </div>
     <li><form> 
       <input type="text" name="text" class="search" placeholder="Recherchez non spécifiée...">
       <input type="submit" name="submit" class="submit" value="Search">
     </form>
     </li>
-    <li (click)="goToProjet()" id="right">Projet</li>
-    <li (click)="goToDiscussion()" id="right">Discussion</li>
-    <li (click)="goToNotification()" id="right">Notifications</li>
-    <li (click)="goToConnexion()" id="right">Connexion</li>
+    <div>
+      <li (click)="goToProjet()" id="right"><fa-icon [icon]="faPencil" size="2xl"></fa-icon></li>
+      <li (click)="goToDiscussion()" id="right"><fa-icon [icon]="faPaperPlane" size="2xl"></fa-icon></li>
+      <li (click)="goToNotification()" id="right"><fa-icon [icon]="faBell" size="2xl"></fa-icon></li>
+      <li (click)="goToConnexion()" id="right"><fa-icon [icon]="faCircleUser" size="2xl"></fa-icon></li>
+    </div>
   </ul>
 </header>
 
