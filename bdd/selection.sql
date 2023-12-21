@@ -39,6 +39,20 @@ WHERE dateAime >= NOW() - INTERVAL 24 HOUR
 GROUP BY idPublication
 ORDER BY TotalLikes DESC;
 
+-- 11. Afficher la liste des utilisateurs ayant le plus d'adeptes
+SELECT idUtilisateur_1 AS Artiste, COUNT(idUtilisateur) AS NombreAdeptes
+FROM SuivreArtiste
+GROUP BY idUtilisateur_1
+ORDER BY NombreAdeptes DESC;
+
+-- 12. Afficher les projets modifiés le plus récemment.​
+SELECT * FROM Editer
+ORDER BY dateModif DESC;
+
+-- 13. Afficher tous les messages envoyés, du plus récent au plus ancien. 
+SELECT message FROM Discuter
+ORDER BY dateEnvoi DESC;
+
 -- 14. Rechercher une conversation (en tapant le pseudo de l'utilisateur)
 SELECT DISTINCT D.idUtilisateur Auteur, D.idUtilisateur_1 Destinataire
 FROM Discuter D
