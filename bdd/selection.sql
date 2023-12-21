@@ -38,3 +38,11 @@ FROM AimerPub
 WHERE dateAime >= NOW() - INTERVAL 24 HOUR
 GROUP BY idPublication
 ORDER BY TotalLikes DESC;
+
+-- 14. Rechercher une conversation (en tapant le pseudo de l'utilisateur)
+SELECT DISTINCT D.idUtilisateur Auteur, D.idUtilisateur_1 Destinataire
+FROM Discuter D
+JOIN Utilisateur U ON U.idUtilisateur = D.idUtilisateur_1
+WHERE D.idUtilisateur = 6 AND 
+	pseudo LIKE '%sa%'
+ORDER BY dateEnvoi DESC;
