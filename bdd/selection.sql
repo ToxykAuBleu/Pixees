@@ -61,8 +61,11 @@ WHERE D.idUtilisateur = 6 AND
 	pseudo LIKE '%sa%'
 ORDER BY dateEnvoi DESC;
 
+-- 21. Ajouter un commentaire à une publication​
+INSERT INTO Commentaire(contenu, dateComment, estMasque, estSupprime, idPublication, idUtilisateur) VALUES ('Ceci est un commentaire', NOW(), 0, 0, 1, 1)
+
 -- 22. Suivre un artiste 
-INSERT INTO SuivreArtiste(idUtilisateur, idUtilisateur_1)
+INSERT INTO SuivreArtiste(idUtilisateur, idUtilisateur_1) VALUES (1, 3);
 
 -- 23. Ne plus suivre un artiste
 DELETE FROM SuivreArtiste
