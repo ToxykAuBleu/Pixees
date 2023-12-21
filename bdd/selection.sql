@@ -60,3 +60,7 @@ JOIN Utilisateur U ON U.idUtilisateur = D.idUtilisateur_1
 WHERE D.idUtilisateur = 6 AND 
 	pseudo LIKE '%sa%'
 ORDER BY dateEnvoi DESC;
+
+-- 24. Suppression d'un message
+DELETE FROM Discuter
+WHERE idMessage = 1;
