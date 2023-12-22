@@ -67,9 +67,11 @@ header {
             padding: 0.5em;
             background-color: #000000;
 
-            fa-icon {
+            fa-icon svg {
                 color: white;
                 mix-blend-mode: difference;
+                width: 1em;
+                height: 1em;
             }
         }
 
@@ -79,12 +81,13 @@ header {
             padding: 0.5em;
             background-color: #FFFFFF;
 
-            fa-icon {
+            fa-icon svg {
                 color: white;
                 mix-blend-mode: difference;
+                width: 1em;
+                height: 1em;
             }
         }
-
 
         div {
             display: inherit;
