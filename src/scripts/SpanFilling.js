@@ -15,7 +15,7 @@ function baguetteMagique(coords, tolerance, grille) {
     if (grille instanceof Calque) {
         grille = new Grille(grille.getHauteur(), grille.getLargeur());
     }
-    
+    grille.deselectAll();
     // coords, tolerance, grille >> Rechercher les pixels à sélectionner >> grille
 
     // coords, grille >> Initlisation de la recherche >> coordX, coordY, pixelOrigine, fileTraitement
@@ -32,7 +32,7 @@ function baguetteMagique(coords, tolerance, grille) {
     fileTraitement.push(coords);
 
     // coordX, coordY, tolerance, grille, pixelOrigine, fileTraitement >> Effectuer la recherche >> grille
-    spanFilling(tolerance, grille, fileTraitement, pixelOrigine);
+    return spanFilling(tolerance, grille, fileTraitement, pixelOrigine);
 }
 
 /**
@@ -43,6 +43,7 @@ function baguetteMagique(coords, tolerance, grille) {
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
  */
 function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
+    const debut = Date.now();
     while (true) {
         // Vérification conditions d'arrêt.
         if (fileTraitement.length === 0) {
@@ -57,6 +58,7 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
         let yFixe = coordsTraitement.getY();
         let partieGaucheX = coordsTraitement.getX();
         let partieDroiteX = coordsTraitement.getX();
+        if (grille.getPixelAt(partieGaucheX, yFixe).isSelected()) continue;
 
         // Traitement de la partie gauche du pixel courant. >> partieGaucheX, calque
         while (checkIfInside(grille, partieGaucheX - 1, yFixe)) {
@@ -77,28 +79,30 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
         }
 
         setTimeout(() => {}, 1000);
-        console.log(coordsTraitement);
         // partieGaucheX, partieDroiteX, yFixe, fileTraitement >> Scan dans les lignes du dessus et du dessous >> fileTraitement
-        scanLine(grille, pixelOrigine, partieGaucheX, partieDroiteX - 1, yFixe + 1, fileTraitement)
-        scanLine(grille, pixelOrigine, partieGaucheX, partieDroiteX - 1, yFixe - 1, fileTraitement)
+        scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe + 1, fileTraitement)
+        scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe - 1, fileTraitement)
     }
-    console.log("TERMINE !!!!");
+    const fin = Date.now();
+    const tempsExecution = fin - debut;
+    console.log("TERMINE !!!! Temps d'exécution : " + tempsExecution + "ms");
     return grille;
 }
 
 /**
  * Permet de trouver des nouveaux points à traiter pour l'algo de SpanFilling.
  * @param {Grille} grille Représente la grille sur lequel on travaille.
+ * @param {Float32Array} tolerance Représente la tolérance de remplissage.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
  * @param {Number} partieGaucheX Représente la coordonnée en x du pixel le plus à gauche de la ligne.
  * @param {Number} partieDroiteX Représente la coordonnée en x du pixel le plus à droite de la ligne.
  * @param {Number} y Représente la coordonnée en y de la ligne.
  * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
  */
-function scanLine(grille, pixelOrigine, partieGaucheX, partieDroiteX, y, fileTraitement) {
+function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX, y, fileTraitement) {
     let x = partieGaucheX;
     while (x <= partieDroiteX) {
-        if (checkIfInside(grille, x, y) && checkTolerance(grille, tolerance, x, y, pixelOrigine)) {
+        if (checkIfInside(grille, x, y) && !grille.getPixelAt(x, y).isSelected() && checkTolerance(grille, tolerance, x, y, pixelOrigine)) {
             fileTraitement.push(new Coordonnees(x, y));
             break;
         }
@@ -115,16 +119,8 @@ function scanLine(grille, pixelOrigine, partieGaucheX, partieDroiteX, y, fileTra
  */
 function checkIfInside(grille, x, y) {
     let largeur = grille.getLargeur();
-    if ((0 <= x) && (x < largeur)) {
-        let hauteur = grille.getHauteur();
-        if ((0 <= y) && (y < hauteur)) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
+    let hauteur = grille.getHauteur();
+    return (0 <= x && x < largeur) && (0 <= y && y < hauteur);
 }
 
 /**
@@ -142,8 +138,7 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     let couleurRGB = new RGB(pixelComp.getColor().getComp(1), pixelComp.getColor().getComp(2), pixelComp.getColor().getComp(3));
     let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
     
-    let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());    
-    console.log("checkTolerance: ", x, y, deltaE);
+    let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
     if (deltaE <= tolerance) {
         return true;
     } else {
