@@ -104,7 +104,7 @@ function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX,
     while (x <= partieDroiteX) {
         if (checkIfInside(grille, x, y) && !grille.getPixelAt(x, y).isSelected() && checkTolerance(grille, tolerance, x, y, pixelOrigine)) {
             fileTraitement.push(new Coordonnees(x, y));
-            break;
+            // break;
         }
         x++;
     }
