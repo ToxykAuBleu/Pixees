@@ -156,9 +156,9 @@ function getImageData() {
 // Récuperer la position du curseur
 function getMousePosition(event) {
     // On calcule le ratio pour récupérer le pixel selon la taille du Canvas et la taille de l'image
-    let rect = canvas.getBoundingClientRect();
-    let scaleX = canvas.width / rect.width;
-    let scaleY = canvas.height / rect.height
+    let rect = selectionCanvas.getBoundingClientRect();
+    let scaleX = selectionCanvas.width / rect.width;
+    let scaleY = selectionCanvas.height / rect.height
 
     // On récupère la position exacte du Pixel
     let x = Math.floor((event.clientX - rect.left) * scaleX);
@@ -170,7 +170,7 @@ function getMousePosition(event) {
 
 
 // On écoute les mouvements de souris
-canvas.addEventListener("mousemove", function (e) {
+selectionCanvas.addEventListener("mousemove", function (e) {
     // Si une image est chargée
     if (isImageLoaded) {
         // On récupère les coordonnées du curseur
@@ -186,12 +186,13 @@ canvas.addEventListener("mousemove", function (e) {
 });
 
 // On écoute les clics de souris
-canvas.addEventListener("click", function (e) {
+selectionCanvas.addEventListener("click", function (e) {
     // Si une image est chargée
     if (isImageLoaded) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
-        baguetteMagique(coordClick, slider.value, grilleMain);
+        grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
+        showSelection();
     }
 });
 
