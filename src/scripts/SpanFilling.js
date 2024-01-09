@@ -12,9 +12,6 @@ import { Grille } from "./Grille.js";
  * @returns {Calque} Le calque avec les pixels sélectionnés.
  */
 function baguetteMagique(coords, tolerance, grille) {
-    if (grille instanceof Calque) {
-        grille = new Grille(grille.getHauteur(), grille.getLargeur());
-    }
     grille.deselectAll();
     // coords, tolerance, grille >> Rechercher les pixels à sélectionner >> grille
 
@@ -61,24 +58,21 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
         if (grille.getPixelAt(partieGaucheX, yFixe).isSelected()) continue;
 
         // Traitement de la partie gauche du pixel courant. >> partieGaucheX, calque
-        while (checkIfInside(grille, partieGaucheX - 1, yFixe)) {
-            if (!checkTolerance(grille, tolerance, partieGaucheX - 1, yFixe, pixelOrigine)) break;
-        
+        while (checkIfInside(grille, partieGaucheX - 1, yFixe) 
+        && checkTolerance(grille, tolerance, partieGaucheX - 1, yFixe, pixelOrigine)) {        
             // Sélection du pixel courant, puis pixel suivant.
             grille.getPixelAt(partieGaucheX - 1, yFixe).setSelected(true);
             partieGaucheX--;
         }
 
         // Traitement de la partie droite du pixel courant. >> partieDroiteX, calque
-        while (checkIfInside(grille, partieDroiteX, yFixe)) {
-            if (!checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) break;
-
+        while (checkIfInside(grille, partieDroiteX, yFixe)
+        && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
             grille.getPixelAt(partieDroiteX, yFixe).setSelected(true);
             partieDroiteX++;
         }
 
-        setTimeout(() => {}, 1000);
         // partieGaucheX, partieDroiteX, yFixe, fileTraitement >> Scan dans les lignes du dessus et du dessous >> fileTraitement
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe + 1, fileTraitement)
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe - 1, fileTraitement)
@@ -104,7 +98,6 @@ function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX,
     while (x <= partieDroiteX) {
         if (checkIfInside(grille, x, y) && !grille.getPixelAt(x, y).isSelected() && checkTolerance(grille, tolerance, x, y, pixelOrigine)) {
             fileTraitement.push(new Coordonnees(x, y));
-            // break;
         }
         x++;
     }
@@ -140,8 +133,6 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     
     let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
     let pourcentDistance = (deltaE / 375.5955) * 200;
-    console.log("DeltaE : " + deltaE);
-    console.log("Pourcentage : " + pourcentDistance);
     if (pourcentDistance <= tolerance) {
         return true;
     } else {
