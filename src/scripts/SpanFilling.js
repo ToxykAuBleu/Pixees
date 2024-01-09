@@ -139,7 +139,10 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
     
     let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
-    if (deltaE <= tolerance) {
+    let pourcentDistance = (deltaE / 375.5955) * 200;
+    console.log("DeltaE : " + deltaE);
+    console.log("Pourcentage : " + pourcentDistance);
+    if (pourcentDistance <= tolerance) {
         return true;
     } else {
         return false;
