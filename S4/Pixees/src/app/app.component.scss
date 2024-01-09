@@ -29,6 +29,7 @@ header {
             form {
                 display: flex;
                 justify-content: space-between;
+                align-items: center;
                 background-color: #7EBD6E;
                 width: 25em;
                 border-radius: 1em;
@@ -58,37 +59,53 @@ header {
                     }
                 }
             }
-
         }
 
-        .black {
-            display: inline-block;
-            border-radius: 50%;
-            padding: 0.5em;
-            background-color: #000000;
+        .buttonMenu {
+            display: flex;
+            align-items: center;
+            li {
+                height: 100%;
+                width: 100%;
+            }
 
-            fa-icon svg {
-                color: white;
-                mix-blend-mode: difference;
-                width: 1em;
-                height: 1em;
+            .userIcon {
+                height: 100%;
+                fa-icon svg {
+                    width: 100%;
+                }
+            }
+
+            .black {
+                display: inline-block;
+                border-radius: 50%;
+                padding: 0.5em;
+                background-color: #000000;
+    
+                fa-icon svg {
+                    color: white;
+                    mix-blend-mode: difference;
+                    width: 1em;
+                    height: 1em;
+                }
+            }
+
+            .white {
+                display: inline-block;
+                border-radius: 50%;
+                padding: 0.5em;
+                background-color: #FFFFFF;
+
+                fa-icon svg {
+                    color: white;
+                    mix-blend-mode: difference;
+                    width: 1em;
+                    height: 1em;
+                }
             }
         }
 
-        .white {
-            display: inline-block;
-            border-radius: 50%;
-            padding: 0.5em;
-            background-color: #FFFFFF;
-
-            fa-icon svg {
-                color: white;
-                mix-blend-mode: difference;
-                width: 1em;
-                height: 1em;
-            }
-        }
-
+        
         div {
             display: inherit;
             align-items: inherit;

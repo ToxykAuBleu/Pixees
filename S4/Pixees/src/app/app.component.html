@@ -9,11 +9,11 @@
       <button type="submit"><fa-icon [icon]="faMagnifyingGlass" size="xl"></fa-icon></button>
     </form>
     </li>
-    <div>
+    <div class="buttonMenu">
       <li (click)="goToProjet()"><div class="black" ><fa-icon [icon]="faPencil" size="2xl"></fa-icon></div></li>
       <li (click)="goToDiscussion()"><div class="white"><fa-icon [icon]="faPaperPlane" size="2xl"></fa-icon></div></li>
       <li (click)="goToNotification()"><div class="black"><fa-icon [icon]="faBell" size="2xl"></fa-icon></div></li>
-      <li (click)="goToConnexion()"><fa-icon [icon]="faCircleUser" size="2xl"></fa-icon></li>
+      <li (click)="goToConnexion()"><div class="userIcon"><fa-icon [icon]="faCircleUser" size="2xl"></fa-icon></div></li>
     </div>
   </ul>
 </header>
