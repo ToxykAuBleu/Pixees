@@ -2,6 +2,7 @@ import { Grille } from "../scripts/Grille.js";
 import { Pixel } from "../scripts/Pixel.js";
 import { RGB } from "../scripts/color/RGB.js";
 import { Coordonnees } from "../scripts/Coordonnees.js";
+import { baguetteMagique } from "../scripts/SpanFilling.js";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementById("drawingArea");
@@ -190,7 +191,8 @@ selectionCanvas.addEventListener("click", function (e) {
     if (isImageLoaded) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
-        console.log(coordClick.getX() + ", " + coordClick.getY());
+        grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
+        showSelection();
     }
 });
 

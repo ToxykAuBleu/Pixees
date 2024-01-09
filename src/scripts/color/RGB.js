@@ -70,7 +70,7 @@ export class RGB extends Couleur {
         // Conversion en XYZ
         for (let i = 1; i < 4; i++) {
             for (let j = 1; j < 4; j++) {
-                xyz.setComp(i, (this.getComp(i) * M[i-1][j-1]));
+                xyz.setComp(i, (xyz.getComp(i) + this.getComp(j) * M[i-1][j-1]));
             }
         }
 

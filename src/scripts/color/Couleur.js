@@ -61,10 +61,13 @@ export class Couleur {
         switch (indComp) {
             case 1:
                 this.#_comp1 = val;
+                break;
             case 2:
                 this.#_comp2 = val;
+                break;
             case 3:
                 this.#_comp3 = val;
+                break;
         }
     }
 }

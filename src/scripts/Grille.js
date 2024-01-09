@@ -81,4 +81,16 @@ export class Grille {
     setPixelAt(x, y, pix) {
         this.#_pixels[y][x] = pix;
     }
+
+    /**
+     * Déseléctionne tous les Pixels de la Grille.
+     */
+    deselectAll() {
+        for (let y = 0; y < this.#_hauteur; y++) {
+            for (let x = 0; x < this.#_largeur; x++) {
+                this.#_pixels[y][x].setSelected(false);
+            }
+        }
+    }
+
 }
