@@ -16,7 +16,7 @@ export class Pixel {
 
     // CONSTRUCTEUR
     /**
-     * Créé un nouveau Pixel avec (par défaut) des coordonnées,
+     * Créé un nouveau Pixel avec (par défaut)
      *  une couleur et est déselectionné.
      */
     constructor() {
