@@ -3,6 +3,7 @@ import { Pixel } from "../scripts/Pixel.js";
 import { RGB } from "../scripts/color/RGB.js";
 import { Coordonnees } from "../scripts/Coordonnees.js";
 import { baguetteMagique } from "../scripts/SpanFilling.js";
+import { Lab } from "../scripts/color/Lab.js";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementById("drawingArea");
@@ -16,11 +17,19 @@ const selectionCtx = selectionCanvas.getContext("2d", { willReadFrequently: true
 const cursorLabel = document.getElementById("cursorPos");
 const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
+const selectedPixelDeltaELabel = document.getElementById("selectedPixelDeltaE");
+const selectedPixelCoordLabel = document.getElementById("selectedPixelPos");
+const selectedPixelColorLabel = document.getElementById("selectedPixelColor");
 
 // On initialise les labels à 0
 cursorLabel.innerText = "(0, 0)";
 couleurLabel.innerText = "(0, 0, 0)";
 sizeLabel.innerText = "0 x 0";
+
+let selectedPixelCoord = new Coordonnees(0, 0);
+
+// Booléen pour savoir si la baguette magique est active (activé par défaut)
+let isMagicWandActive = true;
 
 // Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
@@ -90,6 +99,15 @@ function showSelection() {
             }
         }
     }
+}
+
+function clearSelection() {
+    for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            grilleMain.getPixelAt(x, y).setSelected(false);
+        }
+    }
+    showSelection();
 }
 
 // Affichage de l'image sur le canvas
@@ -168,6 +186,31 @@ function getMousePosition(event) {
     return new Coordonnees(x, y);
 }
 
+function setSelectedPixel(coord) {
+    let x = coord.getX();
+    let y = coord.getY();
+    let pixel = grilleMain.getPixelAt(x, y);
+    pixel.setSelected(true);
+    selectedPixelCoord = coord;
+    selectedPixelCoordLabel.innerText = "(" + x + ", " + y + ")";
+    selectedPixelColorLabel.innerText = "(" + pixel.getColor().getComp(1) + ", " + pixel.getColor().getComp(2) + ", " + pixel.getColor().getComp(3) + ")";
+}
+
+// Fonction pour récupérer le deltaE entre deux pixels
+function getDeltaE(grille, x, y, pixelOrigine) {
+    // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
+    let pixelComp = grille.getPixelAt(x, y);
+    let couleurRGB = new RGB(pixelComp.getColor().getComp(1), pixelComp.getColor().getComp(2), pixelComp.getColor().getComp(3));
+    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+
+    let pixelOrigineLab = new Pixel();
+    console.log(pixelOrigineLab.constructor.name);
+    pixelOrigineLab.setColor(pixelOrigine.getColor());
+    pixelOrigineLab = pixelOrigineLab.getColor().RGBversXYZ().XYZversLab();
+
+    let deltaE = couleurLab.calculDeltaE(pixelOrigineLab);
+    return deltaE;
+}
 
 // On écoute les mouvements de souris
 selectionCanvas.addEventListener("mousemove", function (e) {
@@ -182,6 +225,11 @@ selectionCanvas.addEventListener("mousemove", function (e) {
         cursorLabel.innerText = "(" + x + ", " + y + ")";
         let couleur = grilleMain.getPixelAt(x, y).getColor();
         couleurLabel.innerText = "(" + couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3) + ")";
+        if (!isMagicWandActive) {
+            let deltaE = getDeltaE(grilleMain, x, y, grilleMain.getPixelAt(selectedPixelCoord.getX(), selectedPixelCoord.getY()));
+            //console.log(grilleMain.getPixelAt(selectedPixelCoord.getX(), selectedPixelCoord.getY()).getColor());
+            selectedPixelDeltaELabel.innerText = deltaE;
+        }
     }
 });
 
@@ -191,8 +239,13 @@ selectionCanvas.addEventListener("click", function (e) {
     if (isImageLoaded) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
-        grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
-        showSelection();
+        if (isMagicWandActive) {
+            grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
+            showSelection();
+        } else {
+            setSelectedPixel(coordClick);
+            showSelection();
+        }
     }
 });
 
@@ -220,3 +273,15 @@ display.oninput = function () {
     }
     console.log(slider.value);
 }
+
+window.addEventListener("keyup", (event) => {
+    switch (event.key) {
+        case "c":
+            isMagicWandActive = !isMagicWandActive;
+            console.log(isMagicWandActive);
+            break;
+        case "r":
+            clearSelection();
+            break;
+    }
+})
