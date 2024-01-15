@@ -63,7 +63,8 @@ ORDER BY dateEnvoi DESC;
 
 -- 16. Afficher toutes les publications ayant un tag avec la sélection de l'utilisateur.
 -- (sans sous requête)
-SELECT * FROM Taguer T1
+SELECT T1.idPublication, T2.libelle LibelléTag
+FROM Taguer T1
 JOIN Publication P ON T1.idPublication = P.idPublication
 JOIN Tag T2 ON T1.idTag = T2.idTag
 WHERE T2.libelle LIKE "%o%";
