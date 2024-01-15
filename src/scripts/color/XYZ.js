@@ -20,6 +20,8 @@ function f(t) {
 }
 
 /**
+ * @author Mattis Pingard mattis.pingard@gmail.com
+ * @date 14/11/2023
  * Classe représentant une Couleur sous forme XYZ
  */
 export class XYZ extends Couleur {

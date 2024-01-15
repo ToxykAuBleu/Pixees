@@ -1,6 +1,8 @@
 import { Couleur } from "./color/Couleur.js";
 
 /**
+ * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
+ * @date 14/11/2023
  * Classe représentant un Pixel.
  */
 export class Pixel {

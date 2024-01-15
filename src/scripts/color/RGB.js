@@ -2,6 +2,8 @@ import { Couleur } from './Couleur.js';
 import { XYZ } from './XYZ.js';
 
 /**
+ * @author Mattis Pingard mattis.pingard@gmail.com
+ * @date 14/11/2023
  * Classe représentant une Couleur sous forme RGB
  */
 export class RGB extends Couleur {

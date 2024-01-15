@@ -1,4 +1,6 @@
 /**
+ * @author Adrien Hiribarren Touya adrien64250@yahoo.com
+ * @date 14/11/2023
  * Classe représentant des coordonnées.
  */
 export class Coordonnees {

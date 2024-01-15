@@ -5,6 +5,14 @@ import { Coordonnees } from "./Coordonnees.js";
 import { Grille } from "./Grille.js";
 
 /**
+ * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
+ * @date 09/01/2024
+ * Algorithme qui va sélectionner les pixels ayant une couleur proche (en fonction de la tolérance),
+ * de celle du pixel sélectionné par l'utilisateur.
+ */
+
+
+/**
  * Applique l'algorithme de la baguette magique sur le calque/grille.
  * @param {Coordonnees} coords Représente les coordonnées du pixel sélectionné par l'utilisateur.
  * @param {Float32Array} tolerance Représente la tolérance de remplissage.

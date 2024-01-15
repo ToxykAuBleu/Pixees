@@ -1,4 +1,6 @@
 /**
+ * @author Mattis Pingard mattis.pingard@gmail.com
+ * @date 14/11/2023
  * Classe représentant une Couleur
  */
 export class Couleur {
