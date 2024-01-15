@@ -13,7 +13,7 @@ const ctx = canvas.getContext("2d", { willReadFrequently: true });
 const selectionCanvas = document.getElementById("selectionArea");
 const selectionCtx = selectionCanvas.getContext("2d", { willReadFrequently: true });
 
-// On récupère les labels pour afficher les coordonnées
+// On récupère les différents labels
 const cursorLabel = document.getElementById("cursorPos");
 const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
@@ -26,6 +26,7 @@ cursorLabel.innerText = "(0, 0)";
 couleurLabel.innerText = "(0, 0, 0)";
 sizeLabel.innerText = "0 x 0";
 
+// Coordonnées du pixel sélectionné
 let selectedPixelCoord = new Coordonnees(0, 0);
 
 // Booléen pour savoir si la baguette magique est active (activé par défaut)
@@ -79,6 +80,7 @@ function drawMainCanvas(hauteur, largeur) {
     return grille;
 }
 
+// Création du Canvas pour la sélection
 function drawSelectionCanvas() {
     // Ajustement de la taille du Canvas
     selectionCanvas.width = grilleMain.getLargeur();
@@ -101,6 +103,7 @@ function showSelection() {
     }
 }
 
+// Fonction pour effacer la sélection
 function clearSelection() {
     for (let y = 0; y < grilleMain.getHauteur(); y++) {
         for (let x = 0; x < grilleMain.getLargeur(); x++) {
@@ -186,6 +189,7 @@ function getMousePosition(event) {
     return new Coordonnees(x, y);
 }
 
+// Fonction pour sélectionner un pixel
 function setSelectedPixel(coord) {
     let x = coord.getX();
     let y = coord.getY();
@@ -274,12 +278,15 @@ display.oninput = function () {
     console.log(slider.value);
 }
 
+// On écoute les touches du clavier
 window.addEventListener("keyup", (event) => {
     switch (event.key) {
+        // Si on appuie sur la touche "c", on active/désactive la baguette magique
         case "c":
             isMagicWandActive = !isMagicWandActive;
             console.log(isMagicWandActive);
             break;
+        // Si on appuie sur la touche "r", on efface la sélection
         case "r":
             clearSelection();
             break;
