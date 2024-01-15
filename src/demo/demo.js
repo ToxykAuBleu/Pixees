@@ -260,7 +260,7 @@ selectionCanvas.addEventListener("click", function (e) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
         if (isMagicWandActive) {
-            grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
+            grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain, maxDistance);
             showSelection();
         } else {
             setSelectedPixel(coordClick);
