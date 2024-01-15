@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>RGB - Documentation</title>
+    <title>color/RGB.js - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,658 +29,101 @@
 
 <div id="main">
     
-    <h1 class="page-title">RGB</h1>
-    
-
-    
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        RGB
-        </h2>
-        
-    
-</header>
-
-<article>
-    <div class="container-overview">
-    
-        
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="RGB"><span class="type-signature"></span>new RGB<span class="signature">(comp1, comp2, comp3, alpha)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Créer une Couleur sous la forme RGB
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Mattis Pingard mattis.pingard@gmail.com</li>
-        </ul>
-    </dd>
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_RGB.js.html">color/RGB.js</a>, <a href="color_RGB.js.html#line9">line 9</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>comp1</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 1
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>comp2</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 2
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>comp3</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 3
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>alpha</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la transparence
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-    
-    </div>
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="RGB.html">RGB</a></dt>
-            <dd></dd>
-        </dl>
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="RGBversXYZ"><span class="type-signature"></span>RGBversXYZ<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="XYZ.html">XYZ</a>}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Transformer une Couleur RGB vers XYZ
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_RGB.js.html">color/RGB.js</a>, <a href="color_RGB.js.html#line52">line 52</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code><a href="XYZ.html">XYZ</a></code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    La Couleur sous forme XYZ
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="getAlpha"><span class="type-signature"></span>getAlpha<span class="signature">()</span><span class="type-signature"> &rarr; {float}</span></h4>
-
-    
-
-
-
-<div class="description">
-    Obtient la valeur de la transparence
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_RGB.js.html">color/RGB.js</a>, <a href="color_RGB.js.html#line35">line 35</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="section-returns">
-<h5>Returns:</h5>
-
-        
-
-<dl class="param-type">
-    <dt>
-        Type:
-    </dt>
-    <dd>
-        
-<span class="param-type"><code>float</code></span>
-
-
-    </dd>
-</dl>
-
-
-<div class="param-desc">
-    La valeur de la transparence
-</div>
-
-    
-</div>
-
-
-
-</div>
-        
-            
-<div class="section-method">
-
-    
-
-    <h4 class="name" id="setAlpha"><span class="type-signature"></span>setAlpha<span class="signature">(a)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Définit la valeur de la transparence
-</div>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_RGB.js.html">color/RGB.js</a>, <a href="color_RGB.js.html#line43">line 43</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>a</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>int</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">
-                La nouvelle valeur de la transparence
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-        
-    
-
-    
-
-    
-</article>
-
-</section>
+    <h1 class="page-title">color/RGB.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Couleur } from './Couleur.js';
+import { XYZ } from './XYZ.js';
+
+/**
+ * @author Mattis Pingard mattis.pingard@gmail.com
+ * @date 15/01/2024
+ * Classe représentant une Couleur sous forme RGB
+ */
+export class RGB extends Couleur {
+
+    // ATTRIBUTS
+    /**
+     * Transparence de la couleur
+     */
+    #_transparence;
+
+    // CONSTRUCTEUR
+    /**
+     * Créer une Couleur sous la forme RGB
+     * @param {float} comp1 La valeur de la composante 1
+     * @param {float} comp2 La valeur de la composante 2
+     * @param {float} comp3 La valeur de la composante 3
+     * @param {float} alpha La valeur de la transparence
+     */
+    constructor(comp1 = 0, comp2 = 0, comp3 = 0, alpha = 0) {
+        super(comp1, comp2, comp3);
+        this.#_transparence = alpha;
+    }
+
+    // GETTERS &amp; SETTERS
+    /**
+     * Obtient la valeur de la transparence
+     * @returns {float} La valeur de la transparence
+     */
+    getAlpha() {
+        return(this.#_transparence);
+    }
+
+    /**
+     * Définit la valeur de la transparence
+     * @param {int} a La nouvelle valeur de la transparence
+     */
+    setAlpha(a) {
+        this.#_transparence = a;
+    }
+
+    // METHODES
+    /**
+     * Transformer une Couleur RGB vers XYZ
+     * @returns {XYZ} La Couleur sous forme XYZ
+     */
+    RGBversXYZ() {
+        // Matrice de transformation.
+        const M = [
+            [0.4124564, 0.3575761, 0.1804375],
+            [0.2126729, 0.7151522, 0.0721750],
+            [0.0193339, 0.1191920, 0.9503041]
+        ];
+
+        let rgb = new RGB(this.getComp(1), this.getComp(2), this.getComp(3)); // Copie de la couleur pour ne pas modifier l'originale
+
+        // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
+        for (let i = 1; i &lt; 4; i++) {
+            rgb.setComp(i, rgb.getComp(i) / 255);
+            if (rgb.getComp(i) &lt;= 0.04045) {
+                rgb.setComp(i, rgb.getComp(i) / 12.92);
+            } else {
+                rgb.setComp(i, Math.pow((rgb.getComp(i) + 0.055) / 1.055, 2.4));
+            }
+        }
+
+        let xyz = new XYZ();
+
+        // Conversion en XYZ
+        for (let i = 1; i &lt; 4; i++) {
+            for (let j = 1; j &lt; 4; j++) {
+                xyz.setComp(i, (xyz.getComp(i) + rgb.getComp(j) * M[i-1][j-1]));
+            }
+        }
+
+        return xyz;
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 
