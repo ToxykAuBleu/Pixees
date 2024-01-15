@@ -43,6 +43,9 @@ drawSelectionCanvas();
 let coordMove = new Coordonnees(0, 0);
 let coordClick = new Coordonnees(0, 0);
 
+// Distance maximale entre deux couleur
+let maxDistance = 0;
+
 // Création du pattern
 function drawPattern() {
     // Création du Canvas pour dessiner le pattern
@@ -143,6 +146,8 @@ function handleImage() {
 function getImageData() {
     let ligne = 0;
     let colonne = 0;
+    let labMax = new Lab(0, 0, 0);
+    let labMin = new Lab(100, 128, 128);
 
     // On récupère les données du Canvas
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
@@ -151,6 +156,13 @@ function getImageData() {
     for (let i = 0; i < data.length; i += 4) {
         // Création de la Couleur sous forme RGB
         let rgba = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
+        let couleur = rgba.RGBversXYZ().XYZversLab();
+        let lab = new Lab(couleur.getComp(1), couleur.getComp(2), couleur.getComp(3));
+        if (lab.isSuperiorTo(labMax)) {
+            labMax = lab;
+        } else if (lab.isInferiorTo(labMin)) {
+            labMin = lab;
+        }
 
         // Création d'un nouveau Pixel
         let pixel = new Pixel(false);
@@ -169,6 +181,10 @@ function getImageData() {
             ligne++;
         }
     }
+    maxDistance = Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2));
+    console.log("Max :" + labMax.getComp(1) + ", " + labMax.getComp(2) + ", " + labMax.getComp(3));
+    console.log("Min :" + labMin.getComp(1) + ", " + labMin.getComp(2) + ", " + labMin.getComp(3));
+    console.log("Distance max : " + maxDistance);
     // On indique qu'une image est chargée
     isImageLoaded = true;
     showSelection();
