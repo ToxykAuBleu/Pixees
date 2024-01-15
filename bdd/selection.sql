@@ -8,7 +8,7 @@ WHERE idUtilisateur = 3;
 
 -- 3. Afficher tous les signalements réalisés par un utilisateur.
 SELECT idSignalement, idUtilisateur Auteur, dateSignalement, idRaison,
- idCommentaire CommentaireSignalé, idPublication PublicationSignalé, idUtilisateur_1 ProfilSignalé
+ idCommentaire CommentaireSignalé, idPublication PublicationSignalée, idUtilisateur_1 ProfilSignalé
 FROM Signalement
 WHERE idUtilisateur = 3;
 
@@ -33,14 +33,14 @@ SELECT COUNT(idCommentaire) FROM Commentaire
 WHERE idPublication = 1;
 
 -- 10. Afficher les publications ayant eu le plus de likes dans les dernières 24 heures
-SELECT idPublication, COUNT(idUtilisateur) AS TotalLikes
+SELECT idPublication, COUNT(idUtilisateur) TotalLikes
 FROM AimerPub
 WHERE dateAime >= NOW() - INTERVAL 24 HOUR
 GROUP BY idPublication
 ORDER BY TotalLikes DESC;
 
 -- 11. Afficher la liste des utilisateurs ayant le plus d'adeptes
-SELECT idUtilisateur_1 AS Artiste, COUNT(idUtilisateur) AS NombreAdeptes
+SELECT idUtilisateur_1 Artiste, COUNT(idUtilisateur) NombreAdeptes
 FROM SuivreArtiste
 GROUP BY idUtilisateur_1
 ORDER BY NombreAdeptes DESC;
