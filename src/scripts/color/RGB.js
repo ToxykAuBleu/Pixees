@@ -3,7 +3,7 @@ import { XYZ } from './XYZ.js';
 
 /**
  * @author Mattis Pingard mattis.pingard@gmail.com
- * @date 14/11/2023
+ * @date 15/01/2024
  * Classe représentant une Couleur sous forme RGB
  */
 export class RGB extends Couleur {
@@ -57,13 +57,15 @@ export class RGB extends Couleur {
             [0.0193339, 0.1191920, 0.9503041]
         ];
 
+        let rgb = new RGB(this.getComp(1), this.getComp(2), this.getComp(3)); // Copie de la couleur pour ne pas modifier l'originale
+
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
         for (let i = 1; i < 4; i++) {
-            this.setComp(i, this.getComp(i) / 255);
-            if (this.getComp(i) <= 0.04045) {
-                this.setComp(i, this.getComp(i) / 12.92);
+            rgb.setComp(i, rgb.getComp(i) / 255);
+            if (rgb.getComp(i) <= 0.04045) {
+                rgb.setComp(i, rgb.getComp(i) / 12.92);
             } else {
-                this.setComp(i, Math.pow(((this.getComp(i) + 0.055) / 1.055), 2.4));
+                rgb.setComp(i, Math.pow((rgb.getComp(i) + 0.055) / 1.055, 2.4));
             }
         }
 
@@ -72,7 +74,7 @@ export class RGB extends Couleur {
         // Conversion en XYZ
         for (let i = 1; i < 4; i++) {
             for (let j = 1; j < 4; j++) {
-                xyz.setComp(i, (xyz.getComp(i) + this.getComp(j) * M[i-1][j-1]));
+                xyz.setComp(i, (xyz.getComp(i) + rgb.getComp(j) * M[i-1][j-1]));
             }
         }
 

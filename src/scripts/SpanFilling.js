@@ -28,8 +28,7 @@ function baguetteMagique(coords, tolerance, grille) {
     let coordY = coords.getY();
     // Conversion du pixel sélectionné en L*a*b*.
     let pixelClique = grille.getPixelAt(coordX, coordY);
-    let couleurRGB = new RGB(pixelClique.getColor().getComp(1), pixelClique.getColor().getComp(2), pixelClique.getColor().getComp(3));
-    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+    let couleurLab = pixelClique.getColor().RGBversXYZ().XYZversLab();
     let pixelOrigine = new Pixel();
     pixelOrigine.setColor(couleurLab);
 
@@ -136,8 +135,7 @@ function checkIfInside(grille, x, y) {
 function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
     let pixelComp = grille.getPixelAt(x, y);
-    let couleurRGB = new RGB(pixelComp.getColor().getComp(1), pixelComp.getColor().getComp(2), pixelComp.getColor().getComp(3));
-    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
+    let couleurLab = pixelComp.getColor().RGBversXYZ().XYZversLab();
     
     let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
     let pourcentDistance = (deltaE / 375.5955) * 200;
