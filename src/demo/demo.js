@@ -181,7 +181,7 @@ function getImageData() {
             ligne++;
         }
     }
-    maxDistance = Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2));
+    maxDistance = Math.round(Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2)), 2);
     console.log("Max :" + labMax.getComp(1) + ", " + labMax.getComp(2) + ", " + labMax.getComp(3));
     console.log("Min :" + labMin.getComp(1) + ", " + labMin.getComp(2) + ", " + labMin.getComp(3));
     console.log("Distance max : " + maxDistance);
