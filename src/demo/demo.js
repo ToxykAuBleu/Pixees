@@ -145,8 +145,8 @@ function handleImage() {
 function getImageData() {
     let ligne = 0;
     let colonne = 0;
-    let labMax = new Lab(0, 0, 0);
     let labMin = new Lab(100, 128, 128);
+    let labMax = new Lab(0, -128, -128);
 
     // On récupère les données du Canvas
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
@@ -160,10 +160,13 @@ function getImageData() {
         // On récupère les valeurs de Lab
         let lab = new Lab(couleur.getComp(1), couleur.getComp(2), couleur.getComp(3));
         // On met à jour les valeurs maximales et minimales
-        if (lab.isSuperiorTo(labMax)) {
-            labMax = lab;
-        } else if (lab.isInferiorTo(labMin)) {
-            labMin = lab;
+        for (let j = 1; j < 4; j++) {
+            if (lab.isCompInferiorTo(j, labMin)) {
+                labMin.setComp(j, lab.getComp(j));
+            }
+            if (lab.isCompSuperiorTo(j, labMax)) {
+                labMax.setComp(j, lab.getComp(j));
+            }
         }
 
         // Création d'un nouveau Pixel
@@ -184,8 +187,8 @@ function getImageData() {
         }
     }
     // On calcule la distance maximale entre deux couleurs
-    maxDistance = Math.round(Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2)), 2);
-
+    maxDistance = Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2));
+    console.log("Distance max : " + maxDistance);
     // On indique qu'une image est chargée
     isImageLoaded = true;
     showSelection();

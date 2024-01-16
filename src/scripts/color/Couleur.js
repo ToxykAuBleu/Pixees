@@ -73,15 +73,11 @@ export class Couleur {
         }
     }
 
-    isSuperiorTo(couleur) {
-        return this.#_comp1 > couleur.getComp(1) && this.#_comp2 > couleur.getComp(2) && this.#_comp3 > couleur.getComp(3);
+    isCompSuperiorTo(comp, couleur) {
+        return this.getComp(comp) > couleur.getComp(comp);
     }
 
-    isInferiorTo(couleur) {
-        return this.#_comp1 < couleur.getComp(1) && this.#_comp2 < couleur.getComp(2) && this.#_comp3 < couleur.getComp(3);
-    }
-
-    isEqualTo(couleur) {
-        return this.#_comp1 == couleur.getComp(1) && this.#_comp2 == couleur.getComp(2) && this.#_comp3 == couleur.getComp(3);
+    isCompInferiorTo(comp, couleur) {
+        return this.getComp(comp) < couleur.getComp(comp);
     }
 }
