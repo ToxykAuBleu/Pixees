@@ -188,7 +188,6 @@ function getImageData() {
     }
     // On calcule la distance maximale entre deux couleurs
     maxDistance = Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2));
-    console.log("Distance max : " + maxDistance);
     // On indique qu'une image est chargée
     isImageLoaded = true;
     showSelection();
