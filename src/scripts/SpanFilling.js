@@ -79,7 +79,6 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
         //  grille, partieDroiteX, yFixe, pixelOrigine, maxDistance >> Traitement de la partie droite du pixel courant. >> partieDroiteX, grille
         while (checkIfInside(grille, partieDroiteX, yFixe)
         && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine, maxDistance)) {
-            && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
             grille.getPixelAt(partieDroiteX, yFixe).setSelected(true);
             partieDroiteX++;
