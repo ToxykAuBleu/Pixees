@@ -8,39 +8,39 @@ WHERE idUtilisateur = 3;
 
 -- 3. Afficher tous les signalements réalisés par un utilisateur.
 SELECT idSignalement, idUtilisateur Auteur, dateSignalement, idRaison,
- idCommentaire CommentaireSignalé, idPublication PublicationSignalé, idUtilisateur_1 ProfilSignalé
+ idCommentaire CommentaireSignalé, idPublication PublicationSignalée, idUtilisateur_1 ProfilSignalé
 FROM Signalement
 WHERE idUtilisateur = 3;
 
 -- 4. Afficher le nombre total de publication
-SELECT COUNT(idProjet) FROM Editer
+SELECT COUNT(idProjet) NbProjet FROM Editer
 WHERE idUtilisateur = 1;
 
 -- 5. Afficher le nombre total de like
-SELECT SUM(idUtilisateur) FROM AimerPub
+SELECT COUNT(idUtilisateur) NbLike FROM AimerPub
 WHERE idPublication = 1;
 
 -- 6. Combien d'adeptes suit un utilisateur ?
-SELECT SUM(idUtilisateur) FROM SuivreArtiste
+SELECT SUM(idUtilisateur) SumUtilisateur FROM SuivreArtiste
 WHERE idUtilisateur_1 = 3;
 
 -- 7. Afficher le nombre de personne suivis
-SELECT SUM(idUtilisateur_1) FROM SuivreArtiste
+SELECT SUM(idUtilisateur_1) SumUtilisateur FROM SuivreArtiste
 WHERE idUtilisateur = 1;
 
 -- 8. Afficher le nombre de commentaire sur une publication
-SELECT COUNT(idCommentaire) FROM Commentaire
+SELECT COUNT(idCommentaire) NbCommentaire FROM Commentaire
 WHERE idPublication = 1;
 
 -- 10. Afficher les publications ayant eu le plus de likes dans les dernières 24 heures
-SELECT idPublication, COUNT(idUtilisateur) AS TotalLikes
+SELECT idPublication, COUNT(idUtilisateur) TotalLikes
 FROM AimerPub
 WHERE dateAime >= NOW() - INTERVAL 24 HOUR
 GROUP BY idPublication
 ORDER BY TotalLikes DESC;
 
 -- 11. Afficher la liste des utilisateurs ayant le plus d'adeptes
-SELECT idUtilisateur_1 AS Artiste, COUNT(idUtilisateur) AS NombreAdeptes
+SELECT idUtilisateur_1 Artiste, COUNT(idUtilisateur) NombreAdeptes
 FROM SuivreArtiste
 GROUP BY idUtilisateur_1
 ORDER BY NombreAdeptes DESC;
@@ -63,7 +63,8 @@ ORDER BY dateEnvoi DESC;
 
 -- 16. Afficher toutes les publications ayant un tag avec la sélection de l'utilisateur.
 -- (sans sous requête)
-SELECT * FROM Taguer T1
+SELECT T1.idPublication, T2.libelle LibelléTag
+FROM Taguer T1
 JOIN Publication P ON T1.idPublication = P.idPublication
 JOIN Tag T2 ON T1.idTag = T2.idTag
 WHERE T2.libelle LIKE "%o%";
