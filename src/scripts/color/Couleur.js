@@ -73,10 +73,22 @@ export class Couleur {
         }
     }
 
+    /**
+     * 
+     * @param {int} comp L'indice de la composante
+     * @param {Couleur} couleur Couleur à comparer
+     * @returns {bool} Vrai si la composante l'objet courant est supérieur à la composante de la couleur passée en paramètre
+     */
     isCompSuperiorTo(comp, couleur) {
         return this.getComp(comp) > couleur.getComp(comp);
     }
 
+    /**
+     * 
+     * @param {int} comp L'indice de la composante
+     * @param {Couleur} couleur Couleur à comparer
+     * @returns {bool} Vrai si la composante l'objet courant est inférieur à la composante de la couleur passée en paramètre
+     */
     isCompInferiorTo(comp, couleur) {
         return this.getComp(comp) < couleur.getComp(comp);
     }
