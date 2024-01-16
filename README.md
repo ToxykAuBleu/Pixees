@@ -44,7 +44,7 @@ Durant le semestre 3, nous nous sommes attaqué à la partie éditeur de notre a
 
 ## Démo
 
-(insérer lien de la démo ici)
+https://github.com/ToxykAuBleu/Pixees/assets/46644925/198dc7cd-de11-4e22-a8d5-e728168392fc
 
 ## Installation (bash/powershell)
 
