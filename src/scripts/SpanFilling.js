@@ -1,5 +1,4 @@
 import { Pixel } from "./Pixel.js";
-import { RGB } from "./color/RGB.js";
 import { Calque } from "./Calque.js";
 import { Coordonnees } from "./Coordonnees.js";
 import { Grille } from "./Grille.js";
@@ -17,6 +16,7 @@ import { Grille } from "./Grille.js";
  * @param {Coordonnees} coords Représente les coordonnées du pixel sélectionné par l'utilisateur.
  * @param {Float32Array} tolerance Représente la tolérance de remplissage.
  * @param {Grille} grille Représente le calque sur lequel on travaille.
+ * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
  * @returns {Calque} Le calque avec les pixels sélectionnés.
  */
 function baguetteMagique(coords, tolerance, grille, maxDistance) {
@@ -35,7 +35,7 @@ function baguetteMagique(coords, tolerance, grille, maxDistance) {
     let fileTraitement = [];
     fileTraitement.push(coords);
 
-    // coordX, coordY, tolerance, grille, pixelOrigine, fileTraitement >> Effectuer la recherche >> grille
+    // coordX, coordY, tolerance, grille, pixelOrigine, fileTraitement, maxDistance >> Effectuer la recherche >> grille
     return spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistance);
 }
 
@@ -45,6 +45,7 @@ function baguetteMagique(coords, tolerance, grille, maxDistance) {
  * @param {Grille} grille Représente la grille sur lequel on travaille.
  * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+ * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
  */
 function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistance) {
     const debut = Date.now();
@@ -80,7 +81,7 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
             partieDroiteX++;
         }
 
-        // partieGaucheX, partieDroiteX, yFixe, fileTraitement >> Scan dans les lignes du dessus et du dessous >> fileTraitement
+        // partieGaucheX, partieDroiteX, yFixe, fileTraitement, maxDistance >> Scan dans les lignes du dessus et du dessous >> fileTraitement
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe + 1, fileTraitement, maxDistance)
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe - 1, fileTraitement, maxDistance)
     }
@@ -98,6 +99,7 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
  * @param {Number} partieGaucheX Représente la coordonnée en x du pixel le plus à gauche de la ligne.
  * @param {Number} partieDroiteX Représente la coordonnée en x du pixel le plus à droite de la ligne.
  * @param {Number} y Représente la coordonnée en y de la ligne.
+ * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
  * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
  */
 function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX, y, fileTraitement, maxDistance) {
@@ -130,6 +132,7 @@ function checkIfInside(grille, x, y) {
  * @param {Number} x Représente la coordonnée en x du pixel.
  * @param {Number} y Représente la coordonnée en y du pixel.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+ * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
  * @returns {Boolean} true si le pixel doit être sélectionné, false sinon.
  */
 function checkTolerance(grille, tolerance, x, y, pixelOrigine, maxDistance) {
