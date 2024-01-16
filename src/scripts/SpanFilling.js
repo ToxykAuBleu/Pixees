@@ -64,9 +64,10 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
         let yFixe = coordsTraitement.getY();
         let partieGaucheX = coordsTraitement.getX();
         let partieDroiteX = coordsTraitement.getX();
+        // Vérification si le pixel récupéré a déjà été sélectionné.
         if (grille.getPixelAt(partieGaucheX, yFixe).isSelected()) continue;
 
-        // Traitement de la partie gauche du pixel courant. >> partieGaucheX, calque
+        // grille, partieGaucheX, yFixe, pixelOrigine >> Traitement de la partie gauche du pixel courant. >> partieGaucheX, grille
         while (checkIfInside(grille, partieGaucheX - 1, yFixe)
             && checkTolerance(grille, tolerance, partieGaucheX - 1, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
@@ -74,7 +75,7 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
             partieGaucheX--;
         }
 
-        // Traitement de la partie droite du pixel courant. >> partieDroiteX, calque
+        //  grille, partieDroiteX, yFixe, pixelOrigine >> Traitement de la partie droite du pixel courant. >> partieDroiteX, grille
         while (checkIfInside(grille, partieDroiteX, yFixe)
             && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
