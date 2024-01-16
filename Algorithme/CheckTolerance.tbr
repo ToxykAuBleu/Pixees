@@ -2,32 +2,33 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>CheckTolerance</nom>
-  <date_creation>14/11/2023 14:46</date_creation>
+  <date_creation>16/1/2024 09:42</date_creation>
   <Elements>
     <Action>
       <Position>539;105</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>calque, tolerance, &#xd;
-x, y, pixelOrigine</PreAssertion>
+      <PreAssertion>calque, tolerance, 
+x, y, pixelOrigine,
+maxDistance</PreAssertion>
       <PostAssertion>(booléen)</PostAssertion>
       <Titre>checkTolerance()</Titre>
       <DetailsVisible>1</DetailsVisible>
       <DetailsVideVisible>1</DetailsVideVisible>
       <Enfants>
         <Action>
-          <Position>232;275</Position>
+          <Position>201;275</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>x, y,&#xd;
+          <PreAssertion>x, y,&#xd;&#xd;
 calque</PreAssertion>
           <PostAssertion>couleurLab</PostAssertion>
-          <Titre>Récupération du pixel en &#xd;
-coordonnées x, y et &#xd;
+          <Titre>Récupération du pixel en &#xd;&#xd;
+coordonnées x, y et &#xd;&#xd;
 transformation en L*a*b*</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
           <Enfants>
             <Action>
-              <Position>20;461</Position>
+              <Position>45;475</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>?</PreAssertion>
               <PostAssertion>unPixel</PostAssertion>
@@ -37,53 +38,32 @@ transformation en L*a*b*</Titre>
               <Enfants/>
             </Action>
             <Action>
-              <Position>230;569</Position>
+              <Position>358;470</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
-              <Titre>couleurXYZ ← couleur.RGBversXYZ()</Titre>
-              <DetailsVisible>0</DetailsVisible>
-              <DetailsVideVisible>1</DetailsVideVisible>
-              <Enfants/>
-            </Action>
-            <Action>
-              <Position>435;452</Position>
-              <StyleLien>1</StyleLien>
-              <PreAssertion>∅</PreAssertion>
-              <PostAssertion>∅</PostAssertion>
-              <Titre>couleurLab ← couleurXYZ.XYZversLab()</Titre>
+              <Titre>couleurLab ← pixelComp.getColor().RGBversXYZ().XYZversLab()</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
             </Action>
           </Enfants>
         </Action>
-        <Action>
-          <Position>738;276</Position>
-          <StyleLien>1</StyleLien>
-          <PreAssertion>pixelOrigine,
-couleurLab</PreAssertion>
-          <PostAssertion>deltaE</PostAssertion>
-          <Titre>calculDeltaE</Titre>
-          <DetailsVisible>1</DetailsVisible>
-          <DetailsVideVisible>1</DetailsVideVisible>
-          <Enfants/>
-        </Action>
         <Condition>
-          <Position>1127.5;283</Position>
+          <Position>1257.5;257</Position>
           <StyleLien>0</StyleLien>
           <estUnique>0</estUnique>
           <operationsLogiques>
             <operation>
-              <Titre>tolerance &lt;= deltaE</Titre>
+              <Titre>pourcentDistance &lt;= tolerance</Titre>
               <Enfants>
                 <Action>
-                  <Position>1103;411</Position>
+                  <Position>1317;381</Position>
                   <StyleLien>1</StyleLien>
                   <PreAssertion>?</PreAssertion>
                   <PostAssertion>?</PostAssertion>
                   <Titre>Retourne Vraie</Titre>
-                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVisible>0</DetailsVisible>
                   <DetailsVideVisible>0</DetailsVideVisible>
                   <Enfants/>
                 </Action>
@@ -93,12 +73,12 @@ couleurLab</PreAssertion>
               <Titre>Sinon</Titre>
               <Enfants>
                 <Action>
-                  <Position>1311;417</Position>
+                  <Position>1464;380</Position>
                   <StyleLien>1</StyleLien>
                   <PreAssertion>?</PreAssertion>
                   <PostAssertion>?</PostAssertion>
                   <Titre>Retourne Faux</Titre>
-                  <DetailsVisible>1</DetailsVisible>
+                  <DetailsVisible>0</DetailsVisible>
                   <DetailsVideVisible>0</DetailsVideVisible>
                   <Enfants/>
                 </Action>
@@ -106,6 +86,28 @@ couleurLab</PreAssertion>
             </operation>
           </operationsLogiques>
         </Condition>
+        <Action>
+          <Position>850;385</Position>
+          <StyleLien>1</StyleLien>
+          <PreAssertion>deltaE,
+maxDistance</PreAssertion>
+          <PostAssertion>pourcentDistance</PostAssertion>
+          <Titre>(deltaE/maxDistance)*100</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants/>
+        </Action>
+        <Procedure>
+          <Position>644;271</Position>
+          <StyleLien>1</StyleLien>
+          <PreAssertion>pixelOrigine,
+couleurLab</PreAssertion>
+          <PostAssertion>deltaE</PostAssertion>
+          <Titre>calculDeltaE</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>1</DetailsVideVisible>
+          <Enfants/>
+        </Procedure>
       </Enfants>
     </Action>
   </Elements>
@@ -144,6 +146,11 @@ couleurLab</PreAssertion>
       <Name>couleurLab</Name>
       <Type>Lab</Type>
       <Signification>Correspond à la couleur L*a*b* du pixel pixelComp.</Signification>
+    </Entry>
+    <Entry>
+      <Name>pourcentDistance</Name>
+      <Type>Float</Type>
+      <Signification>Correspond au deltaE sous forme de pourcentage et en fonction de la distance max entre 2 couleurs</Signification>
     </Entry>
   </Dictionary>
 </Algorithme>

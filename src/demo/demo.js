@@ -17,20 +17,11 @@ const selectionCtx = selectionCanvas.getContext("2d", { willReadFrequently: true
 const cursorLabel = document.getElementById("cursorPos");
 const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
-const selectedPixelDeltaELabel = document.getElementById("selectedPixelDeltaE");
-const selectedPixelCoordLabel = document.getElementById("selectedPixelPos");
-const selectedPixelColorLabel = document.getElementById("selectedPixelColor");
 
 // On initialise les labels à 0
 cursorLabel.innerText = "(0, 0)";
 couleurLabel.innerText = "(0, 0, 0)";
 sizeLabel.innerText = "0 x 0";
-
-// Coordonnées du pixel sélectionné
-let selectedPixelCoord = new Coordonnees(0, 0);
-
-// Booléen pour savoir si la baguette magique est active (activé par défaut)
-let isMagicWandActive = true;
 
 // Booléen pour savoir si une image est chargée (aucune image par défaut)
 let isImageLoaded = false;
@@ -42,6 +33,9 @@ drawSelectionCanvas();
 // Coordonnées du curseur
 let coordMove = new Coordonnees(0, 0);
 let coordClick = new Coordonnees(0, 0);
+
+// Distance maximale entre deux couleur
+let maxDistance = 0;
 
 // Création du pattern
 function drawPattern() {
@@ -85,17 +79,22 @@ function drawSelectionCanvas() {
     // Ajustement de la taille du Canvas
     selectionCanvas.width = grilleMain.getLargeur();
     selectionCanvas.height = grilleMain.getHauteur();
-    
+
     // Clear du canvas
     selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
 }
 
 // Affichage de la sélection sur le canvas
 function showSelection() {
+    // Clear du canvas
     selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
+    // On donne la couleur du dessin (bleu transparent)
     selectionCtx.fillStyle = "rgba(0, 127, 255, 0.25)";
+    // On parcours la grille en hauteur
     for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        // On parcours la grille en largeur
         for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            // Si le pixel est sélectionné, on le dessine
             if (grilleMain.getPixelAt(x, y).isSelected()) {
                 selectionCtx.fillRect(x, y, 1, 1);
             }
@@ -105,8 +104,11 @@ function showSelection() {
 
 // Fonction pour effacer la sélection
 function clearSelection() {
+    // On parcours la grille en hauteur
     for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        // On parcours la grille en largeur
         for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            // On déselectionne le pixel courant
             grilleMain.getPixelAt(x, y).setSelected(false);
         }
     }
@@ -143,6 +145,8 @@ function handleImage() {
 function getImageData() {
     let ligne = 0;
     let colonne = 0;
+    let labMax = new Lab(0, 0, 0);
+    let labMin = new Lab(100, 128, 128);
 
     // On récupère les données du Canvas
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
@@ -151,6 +155,16 @@ function getImageData() {
     for (let i = 0; i < data.length; i += 4) {
         // Création de la Couleur sous forme RGB
         let rgba = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
+        // Conversion de la Couleur en Lab
+        let couleur = rgba.RGBversXYZ().XYZversLab();
+        // On récupère les valeurs de Lab
+        let lab = new Lab(couleur.getComp(1), couleur.getComp(2), couleur.getComp(3));
+        // On met à jour les valeurs maximales et minimales
+        if (lab.isSuperiorTo(labMax)) {
+            labMax = lab;
+        } else if (lab.isInferiorTo(labMin)) {
+            labMin = lab;
+        }
 
         // Création d'un nouveau Pixel
         let pixel = new Pixel(false);
@@ -169,6 +183,9 @@ function getImageData() {
             ligne++;
         }
     }
+    // On calcule la distance maximale entre deux couleurs
+    maxDistance = Math.round(Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2)), 2);
+
     // On indique qu'une image est chargée
     isImageLoaded = true;
     showSelection();
@@ -189,33 +206,6 @@ function getMousePosition(event) {
     return new Coordonnees(x, y);
 }
 
-// Fonction pour sélectionner un pixel
-function setSelectedPixel(coord) {
-    let x = coord.getX();
-    let y = coord.getY();
-    let pixel = grilleMain.getPixelAt(x, y);
-    pixel.setSelected(true);
-    selectedPixelCoord = coord;
-    selectedPixelCoordLabel.innerText = "(" + x + ", " + y + ")";
-    selectedPixelColorLabel.innerText = "(" + pixel.getColor().getComp(1) + ", " + pixel.getColor().getComp(2) + ", " + pixel.getColor().getComp(3) + ")";
-}
-
-// Fonction pour récupérer le deltaE entre deux pixels
-function getDeltaE(grille, x, y, pixelOrigine) {
-    // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
-    let pixelComp = grille.getPixelAt(x, y);
-    let couleurRGB = new RGB(pixelComp.getColor().getComp(1), pixelComp.getColor().getComp(2), pixelComp.getColor().getComp(3));
-    let couleurLab = couleurRGB.RGBversXYZ().XYZversLab();
-
-    let pixelOrigineLab = new Pixel();
-    console.log(pixelOrigineLab.constructor.name);
-    pixelOrigineLab.setColor(pixelOrigine.getColor());
-    pixelOrigineLab = pixelOrigineLab.getColor().RGBversXYZ().XYZversLab();
-
-    let deltaE = couleurLab.calculDeltaE(pixelOrigineLab);
-    return deltaE;
-}
-
 // On écoute les mouvements de souris
 selectionCanvas.addEventListener("mousemove", function (e) {
     // Si une image est chargée
@@ -229,11 +219,6 @@ selectionCanvas.addEventListener("mousemove", function (e) {
         cursorLabel.innerText = "(" + x + ", " + y + ")";
         let couleur = grilleMain.getPixelAt(x, y).getColor();
         couleurLabel.innerText = "(" + couleur.getComp(1) + ", " + couleur.getComp(2) + ", " + couleur.getComp(3) + ")";
-        if (!isMagicWandActive) {
-            let deltaE = getDeltaE(grilleMain, x, y, grilleMain.getPixelAt(selectedPixelCoord.getX(), selectedPixelCoord.getY()));
-            //console.log(grilleMain.getPixelAt(selectedPixelCoord.getX(), selectedPixelCoord.getY()).getColor());
-            selectedPixelDeltaELabel.innerText = deltaE;
-        }
     }
 });
 
@@ -243,13 +228,8 @@ selectionCanvas.addEventListener("click", function (e) {
     if (isImageLoaded) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
-        if (isMagicWandActive) {
-            grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain);
-            showSelection();
-        } else {
-            setSelectedPixel(coordClick);
-            showSelection();
-        }
+        grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain, maxDistance);
+        showSelection();
     }
 });
 
@@ -281,11 +261,6 @@ display.oninput = function () {
 // On écoute les touches du clavier
 window.addEventListener("keyup", (event) => {
     switch (event.key) {
-        // Si on appuie sur la touche "c", on active/désactive la baguette magique
-        case "c":
-            isMagicWandActive = !isMagicWandActive;
-            console.log(isMagicWandActive);
-            break;
         // Si on appuie sur la touche "r", on efface la sélection
         case "r":
             clearSelection();
