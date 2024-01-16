@@ -2,14 +2,14 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>ScanLine</nom>
-  <date_creation>16/1/2024 09:46</date_creation>
+  <date_creation>16/1/2024 15:34</date_creation>
   <Elements>
     <Action>
       <Position>187;67</Position>
       <StyleLien>2</StyleLien>
       <PreAssertion>grille, pixelOrigine, tolerance,
 partieGaucheX, partieDroiteX,
-y, fileTraitement</PreAssertion>
+y, fileTraitement, maxDistance</PreAssertion>
       <PostAssertion>fileTraitement</PostAssertion>
       <Titre>scanLine()</Titre>
       <DetailsVisible>1</DetailsVisible>
@@ -53,15 +53,16 @@ y, fileTraitement</PreAssertion>
             <Condition>
               <Position>412.5;346</Position>
               <StyleLien>0</StyleLien>
-              <estUnique>1</estUnique>
+              <estUnique>0</estUnique>
               <operationsLogiques>
                 <operation>
                   <Titre>checkIfInside(grille, x, y) == Vrai ET
 grille.getPixelAt(x, y).isSelected() == Faux ET
-checkTolerance(grille, tolerance, x, y, pixelOrigine) == Vrai</Titre>
+checkTolerance(grille, tolerance, x, y,
+pixelOrigine, maxDistance) == Vrai</Titre>
                   <Enfants>
                     <Action>
-                      <Position>463;463</Position>
+                      <Position>413;461</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>∅</PreAssertion>
                       <PostAssertion>∅</PostAssertion>
@@ -74,6 +75,16 @@ checkTolerance(grille, tolerance, x, y, pixelOrigine) == Vrai</Titre>
                 </operation>
               </operationsLogiques>
             </Condition>
+            <Action>
+              <Position>795;340</Position>
+              <StyleLien>1</StyleLien>
+              <PreAssertion>∅</PreAssertion>
+              <PostAssertion>∅</PostAssertion>
+              <Titre>i ← i + 1</Titre>
+              <DetailsVisible>0</DetailsVisible>
+              <DetailsVideVisible>1</DetailsVideVisible>
+              <Enfants/>
+            </Action>
           </Enfants>
         </Iteration>
       </Enfants>

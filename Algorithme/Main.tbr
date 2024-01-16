@@ -2,31 +2,33 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>Main</nom>
-  <date_creation>16/1/2024 08:55</date_creation>
+  <date_creation>16/1/2024 15:30</date_creation>
   <Elements>
     <Action>
-      <Position>543;60</Position>
+      <Position>532;59</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>tolerance, coords, grille</PreAssertion>
+      <PreAssertion>tolerance, coords, 
+grille, maxDistance</PreAssertion>
       <PostAssertion>grille</PostAssertion>
       <Titre>Baguette magique</Titre>
       <DetailsVisible>1</DetailsVisible>
       <DetailsVideVisible>1</DetailsVideVisible>
       <Enfants>
         <Action>
-          <Position>556;224</Position>
+          <Position>872;228</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>tolerance, coords, grille</PreAssertion>
+          <PreAssertion>tolerance, coords, 
+grille, maxDistance</PreAssertion>
           <PostAssertion>grille</PostAssertion>
           <Titre>Rechercher les pixels à sélectionner</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
           <Enfants>
             <Action>
-              <Position>409;419</Position>
+              <Position>413;419</Position>
               <StyleLien>2</StyleLien>
               <PreAssertion>coords, grille</PreAssertion>
-              <PostAssertion>pixelOrigine,&#xd;
+              <PostAssertion>pixelOrigine,&#xd;&#xd;
 fileTraitement</PostAssertion>
               <Titre>Initialisation de la recherche</Titre>
               <DetailsVisible>1</DetailsVisible>
@@ -55,8 +57,8 @@ fileTraitement</PostAssertion>
                 <Action>
                   <Position>474;638</Position>
                   <StyleLien>2</StyleLien>
-                  <PreAssertion>coordX, 
-coordY, 
+                  <PreAssertion>coordX, &#xd;
+coordY, &#xd;
 grille</PreAssertion>
                   <PostAssertion>pixelOrigine</PostAssertion>
                   <Titre>Conversion du pixel sélectionné en L*a*b*</Titre>
@@ -109,7 +111,7 @@ grille</PreAssertion>
                   <Position>38;640</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>coords</PreAssertion>
-                  <PostAssertion>coordX,&#xd;
+                  <PostAssertion>coordX,&#xd;&#xd;
 coordY</PostAssertion>
                   <Titre>Transformation de l'objet coords</Titre>
                   <DetailsVisible>1</DetailsVisible>
@@ -140,11 +142,11 @@ coordY</PostAssertion>
               </Enfants>
             </Action>
             <Action>
-              <Position>1413;434</Position>
+              <Position>1393;434</Position>
               <StyleLien>2</StyleLien>
-              <PreAssertion>tolerance, calque,
+              <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
+pixelOrigine, maxDistance</PreAssertion>
               <PostAssertion>grille</PostAssertion>
               <Titre>Effectuer la recherche</Titre>
               <DetailsVisible>1</DetailsVisible>
@@ -155,7 +157,7 @@ pixelOrigine</PreAssertion>
                   <StyleLien>1</StyleLien>
                   <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
+pixelOrigine, maxDistance</PreAssertion>
                   <PostAssertion>grille</PostAssertion>
                   <Titre>spanFilling()</Titre>
                   <DetailsVisible>1</DetailsVisible>
@@ -172,17 +174,17 @@ pixelOrigine</PreAssertion>
   <Dictionary>
     <Entry>
       <Name>tolerance</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la tolérance que l'utilisateur a sélectionné au préalable.</Signification>
     </Entry>
     <Entry>
       <Name>coordX</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la coordonnée x du pixel sélectionné par l'utilisateur.</Signification>
     </Entry>
     <Entry>
       <Name>coordY</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la coordonnée y du pixel sélectionné par l'utilisateur.</Signification>
     </Entry>
     <Entry>
@@ -209,6 +211,11 @@ pixelOrigine</PreAssertion>
       <Name>grille</Name>
       <Type>Grille</Type>
       <Signification>Correspond à la grille que l'utilisateur est en train d'utiliser.</Signification>
+    </Entry>
+    <Entry>
+      <Name>maxDistance</Name>
+      <Type>Float</Type>
+      <Signification>Représente la distance maximale entre deux couleurs.</Signification>
     </Entry>
   </Dictionary>
 </Algorithme>
