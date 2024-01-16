@@ -23,10 +23,12 @@ function baguetteMagique(coords, tolerance, grille) {
     grille.deselectAll();
     // coords, tolerance, grille >> Rechercher les pixels à sélectionner >> grille
 
-    // coords, grille >> Initlisation de la recherche >> coordX, coordY, pixelOrigine, fileTraitement
+    // coords, grille >> Initlisation de la recherche >> pixelOrigine, fileTraitement
+
+    // coords >> Transformation de l'objet coords >> coordX, coordY
     let coordX = coords.getX();
     let coordY = coords.getY();
-    // Conversion du pixel sélectionné en L*a*b*.
+    // coordX, coordY, grille >> Conversion du pixel sélectionné en L*a*b*. >> pixelOrigine
     let pixelClique = grille.getPixelAt(coordX, coordY);
     let couleurLab = pixelClique.getColor().RGBversXYZ().XYZversLab();
     let pixelOrigine = new Pixel();
@@ -35,7 +37,7 @@ function baguetteMagique(coords, tolerance, grille) {
     let fileTraitement = [];
     fileTraitement.push(coords);
 
-    // coordX, coordY, tolerance, grille, pixelOrigine, fileTraitement >> Effectuer la recherche >> grille
+    // tolerance, grille, fileTraitement, pixelOrigine >> Effectuer la recherche >> grille
     return spanFilling(tolerance, grille, fileTraitement, pixelOrigine);
 }
 
@@ -65,8 +67,8 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
         if (grille.getPixelAt(partieGaucheX, yFixe).isSelected()) continue;
 
         // Traitement de la partie gauche du pixel courant. >> partieGaucheX, calque
-        while (checkIfInside(grille, partieGaucheX - 1, yFixe) 
-        && checkTolerance(grille, tolerance, partieGaucheX - 1, yFixe, pixelOrigine)) {        
+        while (checkIfInside(grille, partieGaucheX - 1, yFixe)
+            && checkTolerance(grille, tolerance, partieGaucheX - 1, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
             grille.getPixelAt(partieGaucheX - 1, yFixe).setSelected(true);
             partieGaucheX--;
@@ -74,7 +76,7 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine) {
 
         // Traitement de la partie droite du pixel courant. >> partieDroiteX, calque
         while (checkIfInside(grille, partieDroiteX, yFixe)
-        && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) {
+            && checkTolerance(grille, tolerance, partieDroiteX, yFixe, pixelOrigine)) {
             // Sélection du pixel courant, puis pixel suivant.
             grille.getPixelAt(partieDroiteX, yFixe).setSelected(true);
             partieDroiteX++;
@@ -136,7 +138,7 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine) {
     // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
     let pixelComp = grille.getPixelAt(x, y);
     let couleurLab = pixelComp.getColor().RGBversXYZ().XYZversLab();
-    
+
     let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
     let pourcentDistance = (deltaE / 375.5955) * 500;
     if (pourcentDistance <= tolerance) {
