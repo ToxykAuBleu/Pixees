@@ -5,7 +5,7 @@ import { Grille } from "./Grille.js";
 
 /**
  * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
- * @date 09/01/2024
+ * @date 16/01/2024
  * Algorithme qui va sélectionner les pixels ayant une couleur proche (en fonction de la tolérance),
  * de celle du pixel sélectionné par l'utilisateur.
  */
@@ -143,6 +143,7 @@ function checkTolerance(grille, tolerance, x, y, pixelOrigine, maxDistance) {
     let pixelComp = grille.getPixelAt(x, y);
     let couleurLab = pixelComp.getColor().RGBversXYZ().XYZversLab();
 
+    // couleur, pixelOrigine >> Calcul de la distance entre pixelOrigine et couleurLab. >> deltaE
     let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
     let pourcentDistance = (deltaE / maxDistance) * 100;
     if (pourcentDistance <= tolerance) {
