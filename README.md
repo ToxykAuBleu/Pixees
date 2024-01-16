@@ -38,7 +38,7 @@ Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.git
 
 # S3 - Problème algorithmique
 ## Contextualisation
-Durant le semestre 3, nous nous sommes attaquer à la partie éditeur de notre application, et plus précisément sur une fonctionnalité: la baguette magique. Cette baguette magique permet de sélectionner des pixels en fonction de la similiarité de couleur du pixel choisi par l'utilisateur. Pour en savoir plus sur le fonctionnement de ce dernier:
+Durant le semestre 3, nous nous sommes attaqué à la partie éditeur de notre application, et plus précisément sur une fonctionnalité: la baguette magique. Cette baguette magique permet de sélectionner des pixels en fonction de la similiarité de couleur du pixel choisi par l'utilisateur. Pour en savoir plus sur le fonctionnement de ce dernier:
 - dossier [Spécification](https://github.com/ToxykAuBleu/Pixees/tree/master/Specification) pour visualiser le schéma de classe ;
 - dossier [Algorithme](https://github.com/ToxykAuBleu/Pixees/tree/master/Algorithme) pour comprendre l'exécution de la baguette magique.
 
@@ -50,7 +50,7 @@ Durant le semestre 3, nous nous sommes attaquer à la partie éditeur de notre a
 
 Pour ce faire, vous devez vous assurer d'avoir d'installé:
 - git (Optionnel, permet de télécharger tout le projet + simplement)
-- node.js
+- Node.js
 
 Exécuter les lignes suivantes dans une invite de commande:
 ```powershell
