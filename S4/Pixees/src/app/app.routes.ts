@@ -12,6 +12,7 @@ import { ProfilComponent } from './pages/profil/profil.component';
 import { EditeurComponent } from './pages/editeur/editeur.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'projet', component: ProjetComponent },
     { path: 'notifications', component: NotificationsComponent },
@@ -23,7 +24,4 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
-
-
-
 ];
