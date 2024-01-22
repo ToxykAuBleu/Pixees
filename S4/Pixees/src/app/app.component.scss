@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Pixelify+Sans&display=swap');
 
 
-header {
-    height: 70px;
+/* header {
+    height: 3rem;
     font-family: 'PT Sans', sans-serif;
 
     h1 {
@@ -32,7 +32,7 @@ header {
                 align-items: center;
                 background-color: #7EBD6E;
                 width: 25em;
-                border-radius: 1em;
+                border-radius: 1rem;
                 padding: 0.5em;
                 box-shadow: rgba($color: #000000, $alpha: 0.5) 0px 2px 5px 0px;
 
@@ -51,7 +51,7 @@ header {
 
                 input[type=text] {
                     flex-grow: 1;
-                    padding: 0.5em;
+                    //padding: 0.5em;
                     background-color: inherit;
                     border: none;
                     &::placeholder {
@@ -75,42 +75,47 @@ header {
                     width: 100%;
                 }
             }
-
-            .black {
-                display: inline-block;
-                border-radius: 50%;
-                padding: 0.5em;
-                background-color: #000000;
-    
-                fa-icon svg {
-                    color: white;
-                    mix-blend-mode: difference;
-                    width: 1em;
-                    height: 1em;
-                }
-            }
-
-            .white {
-                display: inline-block;
-                border-radius: 50%;
-                padding: 0.5em;
-                background-color: #FFFFFF;
-
-                fa-icon svg {
-                    color: white;
-                    mix-blend-mode: difference;
-                    width: 1em;
-                    height: 1em;
-                }
-            }
         }
 
-        
         div {
             display: inherit;
             align-items: inherit;
             gap: 60px;
         }
+    }
+}
+ */
+
+fa-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.white {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 0.5em;
+    background-color: #FFFFFF;
+
+    fa-icon svg {
+        color: white;
+        mix-blend-mode: difference;
+        width: 1em;
+        height: 1em;
+    }
+}
+
+.black {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 0.5em;
+    background-color: #000000;
+
+    fa-icon svg {
+        color: white;
+        mix-blend-mode: difference;
+        width: 1em;
+        height: 1em;
     }
 }
 
@@ -121,6 +126,7 @@ header {
 #couleurUtilisateur {
     background-color: #4D4C46;
     color: #FFFFFF;
+
     ul li form {
         background-color: #000000;
 
@@ -133,7 +139,6 @@ header {
         }
     }
 }
-
 
 #couleurProfil {
     background-color: #EA8080;
