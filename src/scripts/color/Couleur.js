@@ -1,4 +1,6 @@
 /**
+ * @author Mattis Pingard mattis.pingard@gmail.com
+ * @date 14/11/2023
  * Classe représentant une Couleur
  */
 export class Couleur {
@@ -61,10 +63,33 @@ export class Couleur {
         switch (indComp) {
             case 1:
                 this.#_comp1 = val;
+                break;
             case 2:
                 this.#_comp2 = val;
+                break;
             case 3:
                 this.#_comp3 = val;
+                break;
         }
+    }
+
+    /**
+     * 
+     * @param {int} comp L'indice de la composante
+     * @param {Couleur} couleur Couleur à comparer
+     * @returns {bool} Vrai si la composante l'objet courant est supérieur à la composante de la couleur passée en paramètre
+     */
+    isCompSuperiorTo(comp, couleur) {
+        return this.getComp(comp) > couleur.getComp(comp);
+    }
+
+    /**
+     * 
+     * @param {int} comp L'indice de la composante
+     * @param {Couleur} couleur Couleur à comparer
+     * @returns {bool} Vrai si la composante l'objet courant est inférieur à la composante de la couleur passée en paramètre
+     */
+    isCompInferiorTo(comp, couleur) {
+        return this.getComp(comp) < couleur.getComp(comp);
     }
 }

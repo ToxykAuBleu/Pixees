@@ -19,24 +19,26 @@
                 <canvas id="selectionArea" width="1" height="1" style="position: absolute;"></canvas>
                 <canvas id="drawingArea" width="1" height="1"></canvas>
             </div>
-            <div class="card w-25">
-                <div class="card-header bg-secondary title">
-                    Informations
-                </div>
-                <div class="card-body">
-                    <div class="list-group list-group-flush">
-                        <li class="list-group-item">Position curseur : <span id="cursorPos"></span></li>
-                        <li class="list-group-item">Taille image : <span id="imageSize"></span></li>
-                        <li class="list-group-item">Couleur : <span id="couleur"></span></li>
-                        <li class="list-group-item">
-                            <div class="input-group">
-                                <span class="input-group-text">Tolerance </span>
-                                <input type="number" class="form-control" id="toleranceValue" min="0" max="100">
-                            </div>
-                            <input type="range" class="form-range" id="tolerance" min="0" max="100">
-                        </li>
-                        <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad"
-                                id="imageToLoad" , accept="image/png, image/jpeg"></li>
+            <div class="w-25">
+                <div class="card mb-5">
+                    <div class="card-header bg-secondary title">
+                        Informations
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <li class="list-group-item">Position curseur : <span id="cursorPos"></span></li>
+                            <li class="list-group-item">Taille image : <span id="imageSize"></span></li>
+                            <li class="list-group-item">Couleur : <span id="couleur"></span></li>
+                            <li class="list-group-item">
+                                <div class="input-group">
+                                    <span class="input-group-text">Tolerance </span>
+                                    <input type="number" class="form-control" id="toleranceValue" min="0" max="100">
+                                </div>
+                                <input type="range" class="form-range" id="tolerance" min="0" max="100">
+                            </li>
+                            <li class="list-group-item"><input type="file" class="form-control" name="imageToLoad"
+                                    id="imageToLoad" , accept="image/png, image/jpeg"></li>
+                        </div>
                     </div>
                 </div>
             </div>
