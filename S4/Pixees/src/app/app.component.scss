@@ -2,61 +2,160 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Pixelify+Sans&display=swap');
 
 
-header{
-    height: 70px ;
-    display: flex ;
-    flex-direction: row ;
-    justify-content: flex-start ;
-    align-items: center ;
+/* header {
+    height: 3rem;
     font-family: 'PT Sans', sans-serif;
 
     h1 {
-        font-size: 30px ;
-        cursor: pointer ;
+        font-size: 30px;
+        cursor: pointer;
         font-family: 'Pixelify Sans', sans-serif;
     }
 
-    ul{
+    ul {
+        padding: 0 2rem;
         list-style: none;
         list-style-type: none;
-        height: 100% ;
-        display: flex ;
-        flex-direction: row ;
-        justify-content: center ;
-        align-items: center ;
-        gap: 60px ;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 60px;
 
-        li{
-            cursor: pointer ;
+        li {
+            cursor: pointer;
+
+            form {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #7EBD6E;
+                width: 25em;
+                border-radius: 1rem;
+                padding: 0.5em;
+                box-shadow: rgba($color: #000000, $alpha: 0.5) 0px 2px 5px 0px;
+
+                button[type=submit] {
+                    background-color: inherit;
+                    color: black;
+                    border: none;
+                    cursor: pointer;
+                    opacity: 0.5;
+                    transition: opacity 250ms ease-in-out;
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
+                }
+
+                input[type=text] {
+                    flex-grow: 1;
+                    //padding: 0.5em;
+                    background-color: inherit;
+                    border: none;
+                    &::placeholder {
+                        color: #444444;
+                    }
+                }
+            }
         }
+
+        .buttonMenu {
+            display: flex;
+            align-items: center;
+            li {
+                height: 100%;
+                width: 100%;
+            }
+
+            .userIcon {
+                height: 100%;
+                fa-icon svg {
+                    width: 100%;
+                }
+            }
+        }
+
+        div {
+            display: inherit;
+            align-items: inherit;
+            gap: 60px;
+        }
+    }
+}
+ */
+
+fa-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.white {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 0.5em;
+    background-color: #FFFFFF;
+
+    fa-icon svg {
+        color: white;
+        mix-blend-mode: difference;
+        width: 1em;
+        height: 1em;
+    }
+}
+
+.black {
+    display: inline-block;
+    border-radius: 50%;
+    padding: 0.5em;
+    background-color: #000000;
+
+    fa-icon svg {
+        color: white;
+        mix-blend-mode: difference;
+        width: 1em;
+        height: 1em;
     }
 }
 
 #couleurAccueil {
-    background-color: #7CEB60 ;
+    background-color: #7CEB60;
 }
 
 #couleurUtilisateur {
-    background-color: #4D4C46 ;
+    background-color: #4D4C46;
     color: #FFFFFF;
+
+    ul li form {
+        background-color: #000000;
+
+        button {
+            color: #FFFFFF;
+        }
+
+        input[type=text]::placeholder {
+            color: #999999;
+        }
+    }
 }
 
 #couleurProfil {
-    background-color: #EA8080 ;
+    background-color: #EA8080;
 }
 
 #couleurAdmin {
-    background-color: #EBBC60 ;
+    background-color: #EBBC60;
 }
 
 #couleurDiscussion {
-    background-color: #80D7EA ;
+    background-color: #80D7EA;
 }
 
 #couleurAdmin {
-    background-color: #EBBC60 ;
+    background-color: #EBBC60;
 }
 
 #couleurCreation {
-    background-color: #AF80EA ;
+    background-color: #AF80EA;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -13,15 +13,27 @@ import { InscriptionComponent } from './pages/inscription/inscription.component'
 import { ProfilComponent } from './pages/profil/profil.component';
 import { ProjetComponent } from './pages/projet/projet.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faHouse, faPencil , faPaperPlane, faBell, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faCircleUser } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HomeComponent, AdministrationComponent, CollectionComponent, CompteComponent, ConnexionComponent, DiscussionComponent, EditeurComponent, InscriptionComponent, NotificationsComponent, ProfilComponent, ProjetComponent],
+  imports: [CommonModule, RouterOutlet, HomeComponent, AdministrationComponent, CollectionComponent, CompteComponent, ConnexionComponent, DiscussionComponent, EditeurComponent, InscriptionComponent, NotificationsComponent, ProfilComponent, ProjetComponent, FontAwesomeModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
+
 export class AppComponent {
+  faHouse = faHouse;
+  faPencil = faPencil;
+  faPaperPlane = faPaperPlane;
+  faBell = faBell;
+  faCircleUser = faCircleUser;
+  faMagnifyingGlass = faMagnifyingGlass;
+
   title = 'Pixees';
   public couleur = "couleurAccueil";
   constructor(private router: Router) {};
