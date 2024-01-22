@@ -1,5 +1,7 @@
 import { Grille } from "./Grille.js";
 /**
+ * @author Adrien Hiribarren Touya adrien64250@yahoo.com
+ * @date 14/11/2023
  * Classe représentant un Calque.
  */
 export class Calque {

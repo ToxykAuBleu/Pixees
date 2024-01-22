@@ -2,7 +2,7 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>Algorithme</nom>
-  <date_creation>14/11/2023 14:30</date_creation>
+  <date_creation>16/1/2024 10:12</date_creation>
   <Elements>
     <Action>
       <Position>578;119</Position>
@@ -18,7 +18,7 @@
           <StyleLien>2</StyleLien>
           <PreAssertion>pixelXYZ</PreAssertion>
           <PostAssertion>X, Y, Z</PostAssertion>
-          <Titre>Calculer la correction
+          <Titre>Calculer la correction&#xd;
 de gamma du pixel</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
@@ -58,10 +58,10 @@ de gamma du pixel</Titre>
         <Action>
           <Position>463;261</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>X, Y, Z
+          <PreAssertion>X, Y, Z&#xd;
 Xn, Yn, Zn</PreAssertion>
           <PostAssertion>xr, yr, zr</PostAssertion>
-          <Titre>Calculer les composantes
+          <Titre>Calculer les composantes&#xd;
 de blanc de référence</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
@@ -99,11 +99,11 @@ de blanc de référence</Titre>
           </Enfants>
         </Action>
         <Action>
-          <Position>948;260</Position>
+          <Position>865;257</Position>
           <StyleLien>2</StyleLien>
           <PreAssertion>pixelLAB, xr, yr, zr</PreAssertion>
           <PostAssertion>pixelLAB</PostAssertion>
-          <Titre>Convertir le pixel 
+          <Titre>Convertir le pixel &#xd;
 XYZ vers LAB</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
@@ -113,33 +113,43 @@ XYZ vers LAB</Titre>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
-              <Titre>pixelLAB.setComp(1, 116*f(yr) - 16)</Titre>
+              <Titre>L ← 116*f(yr) - 16)</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
             </Action>
             <Action>
-              <Position>940;527</Position>
+              <Position>948;399</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
-              <Titre>pixelLAB.setComp(2, 500*(f(xr) - f(yr)))</Titre>
+              <Titre>a ← 500*(f(xr) - f(yr)))</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
             </Action>
             <Action>
-              <Position>1135;401</Position>
+              <Position>1128;398</Position>
               <StyleLien>1</StyleLien>
               <PreAssertion>∅</PreAssertion>
               <PostAssertion>∅</PostAssertion>
-              <Titre>pixelLAB.setComp(3, 200*(f(yr) - f(zr)))</Titre>
+              <Titre>b ← 200*(f(yr) - f(zr)))</Titre>
               <DetailsVisible>0</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants/>
             </Action>
           </Enfants>
         </Action>
+        <Procedure>
+          <Position>1136;513</Position>
+          <StyleLien>1</StyleLien>
+          <PreAssertion>L, a, b</PreAssertion>
+          <PostAssertion>?</PostAssertion>
+          <Titre>Retourne new Lab(L, a, b)</Titre>
+          <DetailsVisible>1</DetailsVisible>
+          <DetailsVideVisible>0</DetailsVideVisible>
+          <Enfants/>
+        </Procedure>
       </Enfants>
     </Action>
   </Elements>

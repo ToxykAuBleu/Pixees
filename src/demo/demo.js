@@ -2,6 +2,8 @@ import { Grille } from "../scripts/Grille.js";
 import { Pixel } from "../scripts/Pixel.js";
 import { RGB } from "../scripts/color/RGB.js";
 import { Coordonnees } from "../scripts/Coordonnees.js";
+import { baguetteMagique } from "../scripts/SpanFilling.js";
+import { Lab } from "../scripts/color/Lab.js";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementById("drawingArea");
@@ -11,7 +13,7 @@ const ctx = canvas.getContext("2d", { willReadFrequently: true });
 const selectionCanvas = document.getElementById("selectionArea");
 const selectionCtx = selectionCanvas.getContext("2d", { willReadFrequently: true });
 
-// On récupère les labels pour afficher les coordonnées
+// On récupère les différents labels
 const cursorLabel = document.getElementById("cursorPos");
 const sizeLabel = document.getElementById("imageSize");
 const couleurLabel = document.getElementById("couleur");
@@ -31,6 +33,9 @@ drawSelectionCanvas();
 // Coordonnées du curseur
 let coordMove = new Coordonnees(0, 0);
 let coordClick = new Coordonnees(0, 0);
+
+// Distance maximale entre deux couleur
+let maxDistance = 0;
 
 // Création du pattern
 function drawPattern() {
@@ -69,26 +74,45 @@ function drawMainCanvas(hauteur, largeur) {
     return grille;
 }
 
+// Création du Canvas pour la sélection
 function drawSelectionCanvas() {
     // Ajustement de la taille du Canvas
     selectionCanvas.width = grilleMain.getLargeur();
     selectionCanvas.height = grilleMain.getHauteur();
-    
+
     // Clear du canvas
     selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
 }
 
 // Affichage de la sélection sur le canvas
 function showSelection() {
+    // Clear du canvas
     selectionCtx.clearRect(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur());
+    // On donne la couleur du dessin (bleu transparent)
     selectionCtx.fillStyle = "rgba(0, 127, 255, 0.25)";
+    // On parcours la grille en hauteur
     for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        // On parcours la grille en largeur
         for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            // Si le pixel est sélectionné, on le dessine
             if (grilleMain.getPixelAt(x, y).isSelected()) {
                 selectionCtx.fillRect(x, y, 1, 1);
             }
         }
     }
+}
+
+// Fonction pour effacer la sélection
+function clearSelection() {
+    // On parcours la grille en hauteur
+    for (let y = 0; y < grilleMain.getHauteur(); y++) {
+        // On parcours la grille en largeur
+        for (let x = 0; x < grilleMain.getLargeur(); x++) {
+            // On déselectionne le pixel courant
+            grilleMain.getPixelAt(x, y).setSelected(false);
+        }
+    }
+    showSelection();
 }
 
 // Affichage de l'image sur le canvas
@@ -121,6 +145,8 @@ function handleImage() {
 function getImageData() {
     let ligne = 0;
     let colonne = 0;
+    let labMin = new Lab(100, 128, 128);
+    let labMax = new Lab(0, -128, -128);
 
     // On récupère les données du Canvas
     let data = ctx.getImageData(0, 0, grilleMain.getLargeur(), grilleMain.getHauteur()).data;
@@ -129,6 +155,19 @@ function getImageData() {
     for (let i = 0; i < data.length; i += 4) {
         // Création de la Couleur sous forme RGB
         let rgba = new RGB(data[i], data[i + 1], data[i + 2], data[i + 3]);
+        // Conversion de la Couleur en Lab
+        let couleur = rgba.RGBversXYZ().XYZversLab();
+        // On récupère les valeurs de Lab
+        let lab = new Lab(couleur.getComp(1), couleur.getComp(2), couleur.getComp(3));
+        // On met à jour les valeurs maximales et minimales
+        for (let j = 1; j < 4; j++) {
+            if (lab.isCompInferiorTo(j, labMin)) {
+                labMin.setComp(j, lab.getComp(j));
+            }
+            if (lab.isCompSuperiorTo(j, labMax)) {
+                labMax.setComp(j, lab.getComp(j));
+            }
+        }
 
         // Création d'un nouveau Pixel
         let pixel = new Pixel(false);
@@ -147,6 +186,8 @@ function getImageData() {
             ligne++;
         }
     }
+    // On calcule la distance maximale entre deux couleurs
+    maxDistance = Math.sqrt(Math.pow(labMax.getComp(1) - labMin.getComp(1), 2) + Math.pow(labMax.getComp(2) - labMin.getComp(2), 2) + Math.pow(labMax.getComp(3) - labMin.getComp(3), 2));
     // On indique qu'une image est chargée
     isImageLoaded = true;
     showSelection();
@@ -155,9 +196,9 @@ function getImageData() {
 // Récuperer la position du curseur
 function getMousePosition(event) {
     // On calcule le ratio pour récupérer le pixel selon la taille du Canvas et la taille de l'image
-    let rect = canvas.getBoundingClientRect();
-    let scaleX = canvas.width / rect.width;
-    let scaleY = canvas.height / rect.height
+    let rect = selectionCanvas.getBoundingClientRect();
+    let scaleX = selectionCanvas.width / rect.width;
+    let scaleY = selectionCanvas.height / rect.height
 
     // On récupère la position exacte du Pixel
     let x = Math.floor((event.clientX - rect.left) * scaleX);
@@ -167,9 +208,8 @@ function getMousePosition(event) {
     return new Coordonnees(x, y);
 }
 
-
 // On écoute les mouvements de souris
-canvas.addEventListener("mousemove", function (e) {
+selectionCanvas.addEventListener("mousemove", function (e) {
     // Si une image est chargée
     if (isImageLoaded) {
         // On récupère les coordonnées du curseur
@@ -185,12 +225,13 @@ canvas.addEventListener("mousemove", function (e) {
 });
 
 // On écoute les clics de souris
-canvas.addEventListener("click", function (e) {
+selectionCanvas.addEventListener("click", function (e) {
     // Si une image est chargée
     if (isImageLoaded) {
         // On récupère les coordonnées du clic
         coordClick = getMousePosition(e);
-        console.log(coordClick.getX() + ", " + coordClick.getY());
+        grilleMain = baguetteMagique(coordClick, Number(slider.value), grilleMain, maxDistance);
+        showSelection();
     }
 });
 
@@ -218,3 +259,13 @@ display.oninput = function () {
     }
     console.log(slider.value);
 }
+
+// On écoute les touches du clavier
+window.addEventListener("keyup", (event) => {
+    switch (event.key) {
+        // Si on appuie sur la touche "r", on efface la sélection
+        case "r":
+            clearSelection();
+            break;
+    }
+})

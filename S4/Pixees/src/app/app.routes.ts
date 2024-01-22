@@ -13,6 +13,7 @@ import { EditeurComponent } from './pages/editeur/editeur.component';
 import { CarouselComponent } from './pages/home/carousel/carousel.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'projet', component: ProjetComponent },
     { path: 'notifications', component: NotificationsComponent },
@@ -24,5 +25,4 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
-    { path: '', component: CarouselComponent, pathMatch: 'full' },
 ];

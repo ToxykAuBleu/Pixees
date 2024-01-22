@@ -2,16 +2,15 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>SpanFilling</nom>
-  <date_creation>14/11/2023 11:58</date_creation>
+  <date_creation>16/1/2024 15:32</date_creation>
   <Elements>
     <Action>
-      <Position>445;93</Position>
+      <Position>455;93</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>tolerance, calque,
-coordX, coordY,
+      <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
-      <PostAssertion>calque</PostAssertion>
+pixelOrigine, maxDistance</PreAssertion>
+      <PostAssertion>grille</PostAssertion>
       <Titre>spanFilling()</Titre>
       <DetailsVisible>1</DetailsVisible>
       <DetailsVideVisible>1</DetailsVideVisible>
@@ -55,52 +54,53 @@ pixelOrigine</PreAssertion>
             <Action>
               <Position>726;370</Position>
               <StyleLien>2</StyleLien>
-              <PreAssertion>tolerance, calque,
-coordX, coordY,
+              <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
-              <PostAssertion>calque</PostAssertion>
+pixelOrigine, maxDistance</PreAssertion>
+              <PostAssertion>grille</PostAssertion>
               <Titre>Traitement d'une ligne de pixel</Titre>
               <DetailsVisible>1</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
               <Enfants>
                 <Action>
-                  <Position>1216;541</Position>
+                  <Position>1374;541</Position>
                   <StyleLien>2</StyleLien>
-                  <PreAssertion>∅</PreAssertion>
-                  <PostAssertion>partieGaucheX,
-calque</PostAssertion>
+                  <PreAssertion>grille, partieGaucheX, 
+yFixe, pixelOrigine,
+maxDistance</PreAssertion>
+                  <PostAssertion>partieGaucheX,&#xd;
+grille</PostAssertion>
                   <Titre>Traitement de la partie gauche du pixel courant</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Iteration>
-                      <Position>1399.5;691.5</Position>
+                      <Position>1676.5;690.5</Position>
                       <StyleLien>1</StyleLien>
                       <Titre>?</Titre>
                       <IterationFixe>0</IterationFixe>
                       <Enfants>
                         <Condition>
-                          <Position>999.5;786</Position>
+                          <Position>1276.5;785</Position>
                           <StyleLien>0</StyleLien>
                           <estUnique>0</estUnique>
                           <operationsLogiques>
                             <operation>
-                              <Titre>checkIfInside(calque,
+                              <Titre>checkIfInside(grille,&#xd;
 partieGaucheX - 1, yFixe) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1013;965</Position>
+                                  <Position>1284;957</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
                             <operation>
                               <Titre>checkTolerance
-(calque, tolerance, partieGaucheX - 1, 
-yFixe, pixelOrigine) == Faux</Titre>
+(grille, tolerance, partieGaucheX - 1, 
+yFixe, pixelOrigine, maxDistance) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1105;965</Position>
+                                  <Position>1376;957</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -108,28 +108,28 @@ yFixe, pixelOrigine) == Faux</Titre>
                               <Titre>Sinon</Titre>
                               <Enfants>
                                 <Action>
-                                  <Position>1199;931</Position>
+                                  <Position>1476;930</Position>
                                   <StyleLien>2</StyleLien>
-                                  <PreAssertion>calque, yFixe
+                                  <PreAssertion>grille, yFixe&#xd;
 partieGaucheX</PreAssertion>
-                                  <PostAssertion>partieGaucheX,
-calque</PostAssertion>
+                                  <PostAssertion>partieGaucheX,&#xd;
+grille</PostAssertion>
                                   <Titre>Sélection du pixel courant, puis pixel suivant</Titre>
                                   <DetailsVisible>1</DetailsVisible>
                                   <DetailsVideVisible>1</DetailsVideVisible>
                                   <Enfants>
                                     <Action>
-                                      <Position>1149;1086</Position>
+                                      <Position>1426;1085</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
-                                      <Titre>calque.getPixelAt(partieGaucheX -1, yFixe).setSelected(Vrai)</Titre>
+                                      <Titre>grille.getPixelAt(partieGaucheX -1, yFixe).setSelected(Vrai)</Titre>
                                       <DetailsVisible>0</DetailsVisible>
                                       <DetailsVideVisible>1</DetailsVideVisible>
                                       <Enfants/>
                                     </Action>
                                     <Action>
-                                      <Position>1537;1082</Position>
+                                      <Position>1840;1087</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -149,42 +149,44 @@ calque</PostAssertion>
                   </Enfants>
                 </Action>
                 <Action>
-                  <Position>1900;542</Position>
+                  <Position>2092;543</Position>
                   <StyleLien>2</StyleLien>
-                  <PreAssertion>∅</PreAssertion>
-                  <PostAssertion>partieDroiteX,
-calque</PostAssertion>
+                  <PreAssertion>grille, partieDroiteX, 
+yFixe, pixelOrigine,
+maxDistance</PreAssertion>
+                  <PostAssertion>partieDroiteX,&#xd;
+grille</PostAssertion>
                   <Titre>Traitement de la partie droite du pixel courant</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Iteration>
-                      <Position>2076.5;708.5</Position>
+                      <Position>2379.5;713.5</Position>
                       <StyleLien>1</StyleLien>
                       <Titre>?</Titre>
                       <IterationFixe>0</IterationFixe>
                       <Enfants>
                         <Condition>
-                          <Position>1817.5;800</Position>
+                          <Position>2120.5;805</Position>
                           <StyleLien>0</StyleLien>
                           <estUnique>0</estUnique>
                           <operationsLogiques>
                             <operation>
-                              <Titre>checkIfInside(calque,
+                              <Titre>checkIfInside(grille,&#xd;
 partieDroiteX, yFixe) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1868;987</Position>
+                                  <Position>2074;959</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
                             <operation>
                               <Titre>checkTolerance
-(calque, tolerance, partieDroiteX, 
-yFixe, pixelOrigine) == Faux</Titre>
+(grille, tolerance, partieDroiteX, 
+yFixe, pixelOrigine, maxDistance) == Faux</Titre>
                               <Enfants>
                                 <Sortie>
-                                  <Position>1946;989</Position>
+                                  <Position>2152;961</Position>
                                 </Sortie>
                               </Enfants>
                             </operation>
@@ -192,28 +194,28 @@ yFixe, pixelOrigine) == Faux</Titre>
                               <Titre>Sinon</Titre>
                               <Enfants>
                                 <Action>
-                                  <Position>2061;954</Position>
+                                  <Position>2329;936</Position>
                                   <StyleLien>2</StyleLien>
-                                  <PreAssertion>calque, yFixe
+                                  <PreAssertion>grille, yFixe&#xd;
 partieDroiteX</PreAssertion>
-                                  <PostAssertion>partieDroiteX,
-calque</PostAssertion>
+                                  <PostAssertion>partieDroiteX,&#xd;
+grille</PostAssertion>
                                   <Titre>Sélection du pixel courant, puis pixel suivant</Titre>
                                   <DetailsVisible>1</DetailsVisible>
                                   <DetailsVideVisible>1</DetailsVideVisible>
                                   <Enfants>
                                     <Action>
-                                      <Position>2011;1109</Position>
+                                      <Position>2217;1081</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
-                                      <Titre>calque.getPixelAt(partieDroite, yFixe).setSelected(Vrai)</Titre>
+                                      <Titre>grille.getPixelAt(partieDroite, yFixe).setSelected(Vrai)</Titre>
                                       <DetailsVisible>0</DetailsVisible>
                                       <DetailsVideVisible>1</DetailsVideVisible>
                                       <Enfants/>
                                     </Action>
                                     <Action>
-                                      <Position>2388;1107</Position>
+                                      <Position>2594;1079</Position>
                                       <StyleLien>1</StyleLien>
                                       <PreAssertion>∅</PreAssertion>
                                       <PostAssertion>∅</PostAssertion>
@@ -233,20 +235,21 @@ calque</PostAssertion>
                   </Enfants>
                 </Action>
                 <Action>
-                  <Position>2568;545</Position>
+                  <Position>2798;544</Position>
                   <StyleLien>2</StyleLien>
-                  <PreAssertion>partieGaucheX, partieDroiteX,
-yFixe, fileTraitement</PreAssertion>
+                  <PreAssertion>grille, partieGaucheX, partieDroiteX,
+yFixe, fileTraitement, maxDistance</PreAssertion>
                   <PostAssertion>fileTraitement</PostAssertion>
                   <Titre>Scan dans les lignes du dessus et d'en dessous</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Procedure>
-                      <Position>2354;793</Position>
+                      <Position>2718;795</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>partieGaucheX, partieDroiteX - 1,
-yFixe + 1, fileTraitement</PreAssertion>
+yFixe + 1, fileTraitement, 
+grille, maxDistance</PreAssertion>
                       <PostAssertion>fileTraitement</PostAssertion>
                       <Titre>scanLine()</Titre>
                       <DetailsVisible>1</DetailsVisible>
@@ -254,10 +257,11 @@ yFixe + 1, fileTraitement</PreAssertion>
                       <Enfants/>
                     </Procedure>
                     <Procedure>
-                      <Position>2841;792</Position>
+                      <Position>3205;795</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>partieGaucheX, partieDroiteX - 1,
-yFixe - 1, fileTraitement</PreAssertion>
+yFixe - 1, fileTraitement, 
+grille, maxDistance</PreAssertion>
                       <PostAssertion>fileTraitement</PostAssertion>
                       <Titre>scanLine()</Titre>
                       <DetailsVisible>1</DetailsVisible>
@@ -270,9 +274,8 @@ yFixe - 1, fileTraitement</PreAssertion>
                   <Position>291;537</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>fileTraitement</PreAssertion>
-                  <PostAssertion>coordsTraitement,
-partieGaucheX,
-yFixe</PostAssertion>
+                  <PostAssertion>coordsTraitement, yFixe&#xd;
+partieGaucheX, partieDroiteX</PostAssertion>
                   <Titre>Récupération du pixel à traiter</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
@@ -302,7 +305,7 @@ yFixe</PostAssertion>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>partieDroiteX</PreAssertion>
                       <PostAssertion>partieGaucheX</PostAssertion>
-                      <Titre>partieGaucheX ←
+                      <Titre>partieGaucheX ←&#xd;&#xd;
  coordsTraitement.getX()</Titre>
                       <DetailsVisible>0</DetailsVisible>
                       <DetailsVideVisible>1</DetailsVideVisible>
@@ -313,12 +316,49 @@ yFixe</PostAssertion>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>∅</PreAssertion>
                       <PostAssertion>∅</PostAssertion>
-                      <Titre>partieDroiteX ←
+                      <Titre>partieDroiteX ←&#xd;&#xd;
 coordsTraitement.getX()</Titre>
                       <DetailsVisible>0</DetailsVisible>
                       <DetailsVideVisible>1</DetailsVideVisible>
                       <Enfants/>
                     </Action>
+                  </Enfants>
+                </Action>
+                <Action>
+                  <Position>906;537</Position>
+                  <StyleLien>2</StyleLien>
+                  <PreAssertion>∅</PreAssertion>
+                  <PostAssertion>∅</PostAssertion>
+                  <Titre>Vérification si le pixel récupéré a déjà été sélectionné</Titre>
+                  <DetailsVisible>0</DetailsVisible>
+                  <DetailsVideVisible>1</DetailsVideVisible>
+                  <Enfants>
+                    <Condition>
+                      <Position>877.5;676</Position>
+                      <StyleLien>1</StyleLien>
+                      <estUnique>1</estUnique>
+                      <operationsLogiques>
+                        <operation>
+                          <Titre>grille.getPixelAt(partieGaucheX, yFixe).isSelected() == Vrai</Titre>
+                          <Enfants>
+                            <Action>
+                              <Position>977;785</Position>
+                              <StyleLien>1</StyleLien>
+                              <PreAssertion>∅</PreAssertion>
+                              <PostAssertion>∅</PostAssertion>
+                              <Titre>Prochaine itération de boucle</Titre>
+                              <DetailsVisible>0</DetailsVisible>
+                              <DetailsVideVisible>1</DetailsVideVisible>
+                              <Enfants/>
+                            </Action>
+                          </Enfants>
+                        </operation>
+                        <operation>
+                          <Titre>Sinon</Titre>
+                          <Enfants/>
+                        </operation>
+                      </operationsLogiques>
+                    </Condition>
                   </Enfants>
                 </Action>
               </Enfants>

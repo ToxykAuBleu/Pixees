@@ -1,6 +1,8 @@
 import { Couleur } from "./color/Couleur.js";
 
 /**
+ * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
+ * @date 14/11/2023
  * Classe représentant un Pixel.
  */
 export class Pixel {
@@ -16,7 +18,7 @@ export class Pixel {
 
     // CONSTRUCTEUR
     /**
-     * Créé un nouveau Pixel avec (par défaut) des coordonnées,
+     * Créé un nouveau Pixel avec (par défaut)
      *  une couleur et est déselectionné.
      */
     constructor() {

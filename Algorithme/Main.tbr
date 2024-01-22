@@ -2,31 +2,33 @@
 <!DOCTYPE Tabula_Rasa>
 <Algorithme>
   <nom>Main</nom>
-  <date_creation>13/11/2023 09:35</date_creation>
+  <date_creation>16/1/2024 15:30</date_creation>
   <Elements>
     <Action>
-      <Position>543;60</Position>
+      <Position>532;59</Position>
       <StyleLien>2</StyleLien>
-      <PreAssertion>tolerance, coords, calque</PreAssertion>
-      <PostAssertion>calque</PostAssertion>
+      <PreAssertion>tolerance, coords, 
+grille, maxDistance</PreAssertion>
+      <PostAssertion>grille</PostAssertion>
       <Titre>Baguette magique</Titre>
       <DetailsVisible>1</DetailsVisible>
       <DetailsVideVisible>1</DetailsVideVisible>
       <Enfants>
         <Action>
-          <Position>556;224</Position>
+          <Position>872;228</Position>
           <StyleLien>2</StyleLien>
-          <PreAssertion>tolerance, calque, coords</PreAssertion>
-          <PostAssertion>calque</PostAssertion>
+          <PreAssertion>tolerance, coords, 
+grille, maxDistance</PreAssertion>
+          <PostAssertion>grille</PostAssertion>
           <Titre>Rechercher les pixels à sélectionner</Titre>
           <DetailsVisible>1</DetailsVisible>
           <DetailsVideVisible>1</DetailsVideVisible>
           <Enfants>
             <Action>
-              <Position>409;419</Position>
+              <Position>413;419</Position>
               <StyleLien>2</StyleLien>
-              <PreAssertion>coords, calque</PreAssertion>
-              <PostAssertion>pixelOrigine,
+              <PreAssertion>coords, grille</PreAssertion>
+              <PostAssertion>pixelOrigine,&#xd;&#xd;
 fileTraitement</PostAssertion>
               <Titre>Initialisation de la recherche</Titre>
               <DetailsVisible>1</DetailsVisible>
@@ -55,60 +57,50 @@ fileTraitement</PostAssertion>
                 <Action>
                   <Position>474;638</Position>
                   <StyleLien>2</StyleLien>
-                  <PreAssertion>coordX, 
-coordY, 
-calque</PreAssertion>
+                  <PreAssertion>coordX, &#xd;
+coordY, &#xd;
+grille</PreAssertion>
                   <PostAssertion>pixelOrigine</PostAssertion>
                   <Titre>Conversion du pixel sélectionné en L*a*b*</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
                   <Enfants>
                     <Action>
-                      <Position>377;814</Position>
-                      <StyleLien>1</StyleLien>
-                      <PreAssertion>?</PreAssertion>
-                      <PostAssertion>unPixel</PostAssertion>
-                      <Titre>pixelOrigine ← calque.getPixelAt(coordX, coordY)</Titre>
-                      <DetailsVisible>0</DetailsVisible>
-                      <DetailsVideVisible>1</DetailsVideVisible>
-                      <Enfants/>
-                    </Action>
-                    <Action>
-                      <Position>685;813</Position>
+                      <Position>695;812</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>∅</PreAssertion>
                       <PostAssertion>∅</PostAssertion>
-                      <Titre>couleurRGB ← pixelOrigine.getColor()</Titre>
+                      <Titre>couleurLab ← pixelClique.getColor().RGBversXYZ().XYZversLab()</Titre>
                       <DetailsVisible>0</DetailsVisible>
                       <DetailsVideVisible>1</DetailsVideVisible>
                       <Enfants/>
                     </Action>
                     <Action>
-                      <Position>915;813</Position>
-                      <StyleLien>1</StyleLien>
-                      <PreAssertion>∅</PreAssertion>
-                      <PostAssertion>∅</PostAssertion>
-                      <Titre>couleurXYZ ← couleur.RGBversXYZ()</Titre>
-                      <DetailsVisible>0</DetailsVisible>
-                      <DetailsVideVisible>1</DetailsVideVisible>
-                      <Enfants/>
-                    </Action>
-                    <Action>
-                      <Position>1145;813</Position>
-                      <StyleLien>1</StyleLien>
-                      <PreAssertion>∅</PreAssertion>
-                      <PostAssertion>∅</PostAssertion>
-                      <Titre>couleurLab ← couleurXYZ.XYZversLab()</Titre>
-                      <DetailsVisible>0</DetailsVisible>
-                      <DetailsVideVisible>1</DetailsVideVisible>
-                      <Enfants/>
-                    </Action>
-                    <Action>
-                      <Position>1402;814</Position>
+                      <Position>1287;812</Position>
                       <StyleLien>1</StyleLien>
                       <PreAssertion>∅</PreAssertion>
                       <PostAssertion>∅</PostAssertion>
                       <Titre>pixelOrigine.setColor(couleurLab)</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>1098;811</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>∅</PreAssertion>
+                      <PostAssertion>∅</PostAssertion>
+                      <Titre>pixelOrigine ← new Pixel()</Titre>
+                      <DetailsVisible>0</DetailsVisible>
+                      <DetailsVideVisible>1</DetailsVideVisible>
+                      <Enfants/>
+                    </Action>
+                    <Action>
+                      <Position>399;811</Position>
+                      <StyleLien>1</StyleLien>
+                      <PreAssertion>∅</PreAssertion>
+                      <PostAssertion>∅</PostAssertion>
+                      <Titre>pixelClique ← grille.getPixelAt(coordX, coordY)</Titre>
                       <DetailsVisible>0</DetailsVisible>
                       <DetailsVideVisible>1</DetailsVideVisible>
                       <Enfants/>
@@ -119,7 +111,7 @@ calque</PreAssertion>
                   <Position>38;640</Position>
                   <StyleLien>2</StyleLien>
                   <PreAssertion>coords</PreAssertion>
-                  <PostAssertion>coordX,
+                  <PostAssertion>coordX,&#xd;&#xd;
 coordY</PostAssertion>
                   <Titre>Transformation de l'objet coords</Titre>
                   <DetailsVisible>1</DetailsVisible>
@@ -150,13 +142,12 @@ coordY</PostAssertion>
               </Enfants>
             </Action>
             <Action>
-              <Position>1413;434</Position>
+              <Position>1393;434</Position>
               <StyleLien>2</StyleLien>
-              <PreAssertion>tolerance, calque,
-coordX, coordY,
+              <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
-              <PostAssertion>calque</PostAssertion>
+pixelOrigine, maxDistance</PreAssertion>
+              <PostAssertion>grille</PostAssertion>
               <Titre>Effectuer la recherche</Titre>
               <DetailsVisible>1</DetailsVisible>
               <DetailsVideVisible>1</DetailsVideVisible>
@@ -164,11 +155,10 @@ pixelOrigine</PreAssertion>
                 <Procedure>
                   <Position>1465;628</Position>
                   <StyleLien>1</StyleLien>
-                  <PreAssertion>tolerance, calque,
-coordX, coordY,
+                  <PreAssertion>tolerance, grille,
 fileTraitement,
-pixelOrigine</PreAssertion>
-                  <PostAssertion>calque</PostAssertion>
+pixelOrigine, maxDistance</PreAssertion>
+                  <PostAssertion>grille</PostAssertion>
                   <Titre>spanFilling()</Titre>
                   <DetailsVisible>1</DetailsVisible>
                   <DetailsVideVisible>1</DetailsVideVisible>
@@ -184,17 +174,17 @@ pixelOrigine</PreAssertion>
   <Dictionary>
     <Entry>
       <Name>tolerance</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la tolérance que l'utilisateur a sélectionné au préalable.</Signification>
     </Entry>
     <Entry>
       <Name>coordX</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la coordonnée x du pixel sélectionné par l'utilisateur.</Signification>
     </Entry>
     <Entry>
       <Name>coordY</Name>
-      <Type>integer</Type>
+      <Type>Integer</Type>
       <Signification>Correspond à la coordonnée y du pixel sélectionné par l'utilisateur.</Signification>
     </Entry>
     <Entry>
@@ -208,16 +198,6 @@ pixelOrigine</PreAssertion>
       <Signification>Coorespond aux coordonnées du pixel sélectionné par l'utilisateur.</Signification>
     </Entry>
     <Entry>
-      <Name>couleurRGB</Name>
-      <Type>RGB</Type>
-      <Signification>Correspond à la couleur RGB du pixel unPixel.</Signification>
-    </Entry>
-    <Entry>
-      <Name>couleurXYZ</Name>
-      <Type>XYZ</Type>
-      <Signification>Correspond à la couleur XYZ du pixel unPixel.</Signification>
-    </Entry>
-    <Entry>
       <Name>couleurLab</Name>
       <Type>Lab</Type>
       <Signification>Correspond à la couleur L*a*b* du pixel unPixel.</Signification>
@@ -228,9 +208,14 @@ pixelOrigine</PreAssertion>
       <Signification>Représente le pixel sélectionné par l'utilisateur mais sous forme L*a*b*.</Signification>
     </Entry>
     <Entry>
-      <Name>calque</Name>
-      <Type>Calque</Type>
-      <Signification>Correspond au calque que l'utilisateur est en train d'utiliser.</Signification>
+      <Name>grille</Name>
+      <Type>Grille</Type>
+      <Signification>Correspond à la grille que l'utilisateur est en train d'utiliser.</Signification>
+    </Entry>
+    <Entry>
+      <Name>maxDistance</Name>
+      <Type>Float</Type>
+      <Signification>Représente la distance maximale entre deux couleurs.</Signification>
     </Entry>
   </Dictionary>
 </Algorithme>

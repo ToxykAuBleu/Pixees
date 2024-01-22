@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Couleur - Documentation</title>
+    <title>Global - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -29,7 +29,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Couleur</h1>
+    <h1 class="page-title">Global</h1>
     
 
     
@@ -42,7 +42,7 @@
 <header>
     
         <h2>
-        Couleur
+        
         </h2>
         
     
@@ -52,22 +52,8 @@
     <div class="container-overview">
     
         
-<div class="section-method">
 
-    
-
-    <h4 class="name" id="Couleur"><span class="type-signature"></span>new Couleur<span class="signature">(comp1, comp2, comp3)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Créer une nouvelle Couleur avec (par défault du blanc) les composantesrespectives (RGB, XYZ, Lab)
-</div>
-
-
-
+        
 
 
 <dl class="details">
@@ -89,13 +75,6 @@
     
 
     
-    <dt class="tag-author">Author:</dt>
-    <dd class="tag-author">
-        <ul>
-            <li>Mattis Pingard mattis.pingard@gmail.com</li>
-        </ul>
-    </dd>
-    
 
     
 
@@ -103,11 +82,6 @@
 
     
 
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_Couleur.js.html">color/Couleur.js</a>, <a href="color_Couleur.js.html#line6">line 6</a>
-    </li></ul></dd>
     
 
     
@@ -118,152 +92,7 @@
 </dl>
 
 
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
         
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-        <th>Default</th>
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>comp1</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 1
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>comp2</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 2
-                
-            </td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>comp3</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type"><code>float</code></span>
-
-
-            
-            </td>
-
-            
-
-            
-                <td class="default">
-                
-                    0
-                
-                </td>
-            
-
-            <td class="description last">
-                La valeur de la composante 3
-                
-            </td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
     
     </div>
 
@@ -271,13 +100,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Classes</h3>
-
-        <dl>
-            <dt><a href="Couleur.html">Couleur</a></dt>
-            <dd></dd>
-        </dl>
     
 
      
@@ -295,11 +117,15 @@
 
     
 
-    <h4 class="name" id="getComp"><span class="type-signature"></span>getComp<span class="signature">(indComp)</span><span class="type-signature"> &rarr; {float}</span></h4>
+    <h4 class="name" id="baguetteMagique"><span class="type-signature"></span>baguetteMagique<span class="signature">(coords, tolerance, grille, maxDistance)</span><span class="type-signature"> &rarr; {<a href="Calque.html">Calque</a>}</span></h4>
 
     
 
 
+
+<div class="description">
+    Applique l'algorithme de la baguette magique sur le calque/grille.
+</div>
 
 
 
@@ -334,7 +160,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_Couleur.js.html">color/Couleur.js</a>, <a href="color_Couleur.js.html#line46">line 46</a>
+        <a href="SpanFilling.js.html">SpanFilling.js</a>, <a href="SpanFilling.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -378,13 +204,13 @@
 
         <tr>
             
-                <td class="name"><code>indComp</code></td>
+                <td class="name"><code>coords</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>int</code></span>
+<span class="param-type"><code><a href="Coordonnees.html">Coordonnees</a></code></span>
 
 
             
@@ -395,7 +221,85 @@
             
 
             <td class="description last">
-                L'indice de la composante
+                Représente les coordonnées du pixel sélectionné par l'utilisateur.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>tolerance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Float32Array</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la tolérance de remplissage.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>grille</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Grille.html">Grille</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente le calque sur lequel on travaille.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxDistance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la distance maximum entre deux couleurs.
                 
             </td>
         </tr>
@@ -428,7 +332,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>float</code></span>
+<span class="param-type"><code><a href="Calque.html">Calque</a></code></span>
 
 
     </dd>
@@ -436,7 +340,7 @@
 
 
 <div class="param-desc">
-    La valeur de la composante
+    Le calque avec les pixels sélectionnés.
 </div>
 
     
@@ -451,11 +355,15 @@
 
     
 
-    <h4 class="name" id="isCompInferiorTo"><span class="type-signature"></span>isCompInferiorTo<span class="signature">(comp, couleur)</span><span class="type-signature"> &rarr; {bool}</span></h4>
+    <h4 class="name" id="checkIfInside"><span class="type-signature"></span>checkIfInside<span class="signature">(grille, x, y)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
 
+
+<div class="description">
+    Permet de vérifier si le pixel au coordonnées (x, y) est dans les limites du calque.
+</div>
 
 
 
@@ -490,7 +398,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_Couleur.js.html">color/Couleur.js</a>, <a href="color_Couleur.js.html#line92">line 92</a>
+        <a href="SpanFilling.js.html">SpanFilling.js</a>, <a href="SpanFilling.js.html#line125">line 125</a>
     </li></ul></dd>
     
 
@@ -534,13 +442,13 @@
 
         <tr>
             
-                <td class="name"><code>comp</code></td>
+                <td class="name"><code>grille</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>int</code></span>
+<span class="param-type"><code><a href="Grille.html">Grille</a></code></span>
 
 
             
@@ -551,7 +459,7 @@
             
 
             <td class="description last">
-                L'indice de la composante
+                Représente la grille sur lequel on travaille.
                 
             </td>
         </tr>
@@ -560,13 +468,13 @@
 
         <tr>
             
-                <td class="name"><code>couleur</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
+<span class="param-type"><code>Number</code></span>
 
 
             
@@ -577,7 +485,33 @@
             
 
             <td class="description last">
-                Couleur à comparer
+                Représente la coordonnée en x du pixel.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en y du pixel.
                 
             </td>
         </tr>
@@ -610,7 +544,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>bool</code></span>
+<span class="param-type"><code>Boolean</code></span>
 
 
     </dd>
@@ -618,7 +552,7 @@
 
 
 <div class="param-desc">
-    Vrai si la composante l'objet courant est inférieur à la composante de la couleur passée en paramètre
+    true si le pixel est dans les limites du calque, false sinon.
 </div>
 
     
@@ -633,11 +567,15 @@
 
     
 
-    <h4 class="name" id="isCompSuperiorTo"><span class="type-signature"></span>isCompSuperiorTo<span class="signature">(comp, couleur)</span><span class="type-signature"> &rarr; {bool}</span></h4>
+    <h4 class="name" id="checkTolerance"><span class="type-signature"></span>checkTolerance<span class="signature">(grille, tolerance, x, y, pixelOrigine, maxDistance)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
 
     
 
 
+
+<div class="description">
+    Permet de vérifier si le pixel au coordonnées (x, y) doit être sélectionné.
+</div>
 
 
 
@@ -672,7 +610,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_Couleur.js.html">color/Couleur.js</a>, <a href="color_Couleur.js.html#line82">line 82</a>
+        <a href="SpanFilling.js.html">SpanFilling.js</a>, <a href="SpanFilling.js.html#line141">line 141</a>
     </li></ul></dd>
     
 
@@ -716,13 +654,13 @@
 
         <tr>
             
-                <td class="name"><code>comp</code></td>
+                <td class="name"><code>grille</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>int</code></span>
+<span class="param-type"><code><a href="Grille.html">Grille</a></code></span>
 
 
             
@@ -733,7 +671,7 @@
             
 
             <td class="description last">
-                L'indice de la composante
+                Représente la grille sur lequel on travaille.
                 
             </td>
         </tr>
@@ -742,13 +680,13 @@
 
         <tr>
             
-                <td class="name"><code>couleur</code></td>
+                <td class="name"><code>tolerance</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code><a href="Couleur.html">Couleur</a></code></span>
+<span class="param-type"><code>Float32Array</code></span>
 
 
             
@@ -759,7 +697,111 @@
             
 
             <td class="description last">
-                Couleur à comparer
+                Représente la tolérance.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en x du pixel.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en y du pixel.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pixelOrigine</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxDistance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la distance maximum entre deux couleurs.
                 
             </td>
         </tr>
@@ -792,7 +834,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><code>bool</code></span>
+<span class="param-type"><code>Boolean</code></span>
 
 
     </dd>
@@ -800,7 +842,7 @@
 
 
 <div class="param-desc">
-    Vrai si la composante l'objet courant est supérieur à la composante de la couleur passée en paramètre
+    true si le pixel doit être sélectionné, false sinon.
 </div>
 
     
@@ -815,11 +857,15 @@
 
     
 
-    <h4 class="name" id="setComp"><span class="type-signature"></span>setComp<span class="signature">(indComp, val)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="scanLine"><span class="type-signature"></span>scanLine<span class="signature">(grille, tolerance, pixelOrigine, partieGaucheX, partieDroiteX, y, maxDistance, fileTraitement)</span><span class="type-signature"></span></h4>
 
     
 
 
+
+<div class="description">
+    Permet de trouver des nouveaux points à traiter pour l'algo de SpanFilling.
+</div>
 
 
 
@@ -854,7 +900,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="color_Couleur.js.html">color/Couleur.js</a>, <a href="color_Couleur.js.html#line62">line 62</a>
+        <a href="SpanFilling.js.html">SpanFilling.js</a>, <a href="SpanFilling.js.html#line108">line 108</a>
     </li></ul></dd>
     
 
@@ -898,13 +944,13 @@
 
         <tr>
             
-                <td class="name"><code>indComp</code></td>
+                <td class="name"><code>grille</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>int</code></span>
+<span class="param-type"><code><a href="Grille.html">Grille</a></code></span>
 
 
             
@@ -915,7 +961,7 @@
             
 
             <td class="description last">
-                L'indice de la composante
+                Représente la grille sur lequel on travaille.
                 
             </td>
         </tr>
@@ -924,13 +970,13 @@
 
         <tr>
             
-                <td class="name"><code>val</code></td>
+                <td class="name"><code>tolerance</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type"><code>float</code></span>
+<span class="param-type"><code>Float32Array</code></span>
 
 
             
@@ -941,7 +987,402 @@
             
 
             <td class="description last">
-                La nouvelle valeur de la composante
+                Représente la tolérance de remplissage.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pixelOrigine</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>partieGaucheX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en x du pixel le plus à gauche de la ligne.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>partieDroiteX</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en x du pixel le plus à droite de la ligne.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la coordonnée en y de la ligne.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxDistance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la distance maximum entre deux couleurs.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fileTraitement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array.&lt;<a href="Coordonnees.html">Coordonnees</a>></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la file de traitement contenant des Coordonnées des Pixels.
+                
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+        
+            
+<div class="section-method">
+
+    
+
+    <h4 class="name" id="spanFilling"><span class="type-signature"></span>spanFilling<span class="signature">(tolerance, grille, fileTraitement, pixelOrigine, maxDistance)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+<div class="description">
+    Applique l'algorithme de SpanFilling sur le calque/grille.
+</div>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="SpanFilling.js.html">SpanFilling.js</a>, <a href="SpanFilling.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>tolerance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Float32Array</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la tolérance de remplissage.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>grille</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Grille.html">Grille</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la grille sur lequel on travaille.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fileTraitement</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Array.&lt;<a href="Coordonnees.html">Coordonnees</a>></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la file de traitement contenant des Coordonnées des Pixels.
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pixelOrigine</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code><a href="Pixel.html">Pixel</a></code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
+                
+            </td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>maxDistance</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><code>Number</code></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                Représente la distance maximum entre deux couleurs.
                 
             </td>
         </tr>
