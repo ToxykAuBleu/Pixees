@@ -24,5 +24,5 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
-    { path: '', component: CarouselComponent, pathMatch: 'full' },
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
