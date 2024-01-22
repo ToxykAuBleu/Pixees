@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+.slick-prev:before, .slick-next:before {
+  color: #000 !important;
+}
+
+.img-style{
+    margin-left: auto;
+    margin-right: auto;
+    height: 250px;
+    width: 250px;
+}

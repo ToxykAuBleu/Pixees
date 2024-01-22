@@ -10,6 +10,7 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { CollectionComponent } from './pages/collection/collection.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { EditeurComponent } from './pages/editeur/editeur.component';
+import { CarouselComponent } from './pages/home/carousel/carousel.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
