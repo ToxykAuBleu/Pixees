@@ -21,20 +21,15 @@ export abstract class Couleur {
 
     // CONSTRUCTEUR
     /**
-     * Créer une nouvelle Couleur avec (par défault du blanc) les composantes
-     * respectives (RGB, XYZ, Lab)
+     * Créer une nouvelle Couleur (avec par défault du blanc)
      * @param {number} comp1 La valeur de la composante 1
      * @param {number} comp2 La valeur de la composante 2
      * @param {number} comp3 La valeur de la composante 3
      */
     constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
-        if (this.constructor == Couleur) {
-            throw new Error("Classe abstraite ne peux pas être initialisé")
-        } else {
-            this._comp1 = comp1;
-            this._comp2 = comp2;
-            this._comp3 = comp3;
-        }
+        this._comp1 = comp1;
+        this._comp2 = comp2;
+        this._comp3 = comp3;
     }
 
     // GETTERS & SETTERS
@@ -91,7 +86,7 @@ export abstract class Couleur {
      * @param {Couleur} couleur Couleur à comparer
      * @returns {bool} Vrai si la composante l'objet courant est inférieur à la composante de la couleur passée en paramètre
      */
-    isCompInferiorTo(comp: number, couleur: Couleur) {
+    isCompInferiorTo(comp: number, couleur: Couleur): boolean {
         return (this.getComp(comp) ?? 0) < (couleur.getComp(comp) ?? 0);
     }
 }

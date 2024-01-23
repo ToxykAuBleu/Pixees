@@ -2,10 +2,13 @@ import { Pixel } from "./Pixel";
 import { Calque } from "./Calque";
 import { Coordonnees } from "./Coordonnees";
 import { Grille } from "./Grille";
+import { RGB } from "./color/RGB";
+import { Lab } from "./color/Lab";
+import { Couleur } from "./color/Couleur";
 
 /**
  * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
- * @date 16/01/2024
+ * @date 23/01/2024
  * Algorithme qui va sélectionner les pixels ayant une couleur proche (en fonction de la tolérance),
  * de celle du pixel sélectionné par l'utilisateur.
  */
@@ -14,12 +17,12 @@ import { Grille } from "./Grille";
 /**
  * Applique l'algorithme de la baguette magique sur le calque/grille.
  * @param {Coordonnees} coords Représente les coordonnées du pixel sélectionné par l'utilisateur.
- * @param {Float32Array} tolerance Représente la tolérance de remplissage.
+ * @param {number} tolerance Représente la tolérance de remplissage.
  * @param {Grille} grille Représente le calque sur lequel on travaille.
- * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
- * @returns {Calque} Le calque avec les pixels sélectionnés.
+ * @param {number} maxDistance Représente la distance maximum entre deux couleurs.
+ * @returns {Grille} Le calque avec les pixels sélectionnés.
  */
-function baguetteMagique(coords, tolerance, grille, maxDistance) {
+function baguetteMagique(coords: Coordonnees, tolerance: number, grille: Grille, maxDistance: number): Grille {
     grille.deselectAll();
     // coords, tolerance, grille >> Rechercher les pixels à sélectionner >> grille
 
@@ -30,7 +33,8 @@ function baguetteMagique(coords, tolerance, grille, maxDistance) {
     let coordY = coords.getY();
     // coordX, coordY, grille >> Conversion du pixel sélectionné en L*a*b*. >> pixelOrigine
     let pixelClique = grille.getPixelAt(coordX, coordY);
-    let couleurLab = pixelClique.getColor().RGBversXYZ().XYZversLab();
+    let c = pixelClique.getColor();
+    let couleurLab: Lab | Couleur = c instanceof RGB ? c.RGBversXYZ().XYZversLab() : c;
     let pixelOrigine = new Pixel();
     pixelOrigine.setColor(couleurLab);
 
@@ -43,13 +47,13 @@ function baguetteMagique(coords, tolerance, grille, maxDistance) {
 
 /**
  * Applique l'algorithme de SpanFilling sur le calque/grille.
- * @param {Float32Array} tolerance Représente la tolérance de remplissage.
+ * @param {number} tolerance Représente la tolérance de remplissage.
  * @param {Grille} grille Représente la grille sur lequel on travaille.
- * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
+ * @param {Coordonnees[]} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
- * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
+ * @param {number} maxDistance Représente la distance maximum entre deux couleurs.
  */
-function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistance) {
+function spanFilling(tolerance: number, grille: Grille, fileTraitement: Coordonnees[], pixelOrigine: Pixel, maxDistance: number) {
     const debut = Date.now();
     while (true) {
         // Vérification conditions d'arrêt.
@@ -61,10 +65,11 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
         // >> Traitement d'une ligne de pixels. >> calque
 
         // fileTraitement >> Récupération du pixel à traiter >> coordsTraitement, partieGaucheX, partieDroiteX, yFixe
-        let coordsTraitement = fileTraitement.shift();
-        let yFixe = coordsTraitement.getY();
-        let partieGaucheX = coordsTraitement.getX();
-        let partieDroiteX = coordsTraitement.getX();
+        let coordsTraitement: Coordonnees | undefined = fileTraitement.shift();
+        if (coordsTraitement === undefined) break;
+        let yFixe: number = coordsTraitement.getY();
+        let partieGaucheX: number = coordsTraitement.getX();
+        let partieDroiteX: number = coordsTraitement.getX();
         // Vérification si le pixel récupéré a déjà été sélectionné.
         if (grille.getPixelAt(partieGaucheX, yFixe).isSelected()) continue;
 
@@ -88,8 +93,8 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe + 1, fileTraitement, maxDistance)
         scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX - 1, yFixe - 1, fileTraitement, maxDistance)
     }
-    const fin = Date.now();
-    const tempsExecution = fin - debut;
+    const fin: number = Date.now();
+    const tempsExecution: number = fin - debut;
     console.log("TERMINE !!!! Temps d'exécution : " + tempsExecution + "ms");
     return grille;
 }
@@ -97,16 +102,16 @@ function spanFilling(tolerance, grille, fileTraitement, pixelOrigine, maxDistanc
 /**
  * Permet de trouver des nouveaux points à traiter pour l'algo de SpanFilling.
  * @param {Grille} grille Représente la grille sur lequel on travaille.
- * @param {Float32Array} tolerance Représente la tolérance de remplissage.
+ * @param {number} tolerance Représente la tolérance de remplissage.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
- * @param {Number} partieGaucheX Représente la coordonnée en x du pixel le plus à gauche de la ligne.
- * @param {Number} partieDroiteX Représente la coordonnée en x du pixel le plus à droite de la ligne.
- * @param {Number} y Représente la coordonnée en y de la ligne.
- * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
- * @param {Array<Coordonnees>} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
+ * @param {number} partieGaucheX Représente la coordonnée en x du pixel le plus à gauche de la ligne.
+ * @param {number} partieDroiteX Représente la coordonnée en x du pixel le plus à droite de la ligne.
+ * @param {number} y Représente la coordonnée en y de la ligne.
+ * @param {number} maxDistance Représente la distance maximum entre deux couleurs.
+ * @param {Coordonnees[]} fileTraitement Représente la file de traitement contenant des Coordonnées des Pixels.
  */
-function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX, y, fileTraitement, maxDistance) {
-    let x = partieGaucheX;
+function scanLine(grille: Grille, pixelOrigine: Pixel, tolerance: number, partieGaucheX: number, partieDroiteX: number, y: number, fileTraitement: Coordonnees[], maxDistance: number) {
+    let x: number = partieGaucheX;
     while (x <= partieDroiteX) {
         if (checkIfInside(grille, x, y) && !grille.getPixelAt(x, y).isSelected() && checkTolerance(grille, tolerance, x, y, pixelOrigine, maxDistance)) {
             fileTraitement.push(new Coordonnees(x, y));
@@ -118,33 +123,34 @@ function scanLine(grille, pixelOrigine, tolerance, partieGaucheX, partieDroiteX,
 /**
  * Permet de vérifier si le pixel au coordonnées (x, y) est dans les limites du calque.
  * @param {Grille} grille Représente la grille sur lequel on travaille.
- * @param {Number} x Représente la coordonnée en x du pixel.
- * @param {Number} y Représente la coordonnée en y du pixel.
- * @returns {Boolean} true si le pixel est dans les limites du calque, false sinon.
+ * @param {number} x Représente la coordonnée en x du pixel.
+ * @param {number} y Représente la coordonnée en y du pixel.
+ * @returns {boolean} true si le pixel est dans les limites du calque, false sinon.
  */
-function checkIfInside(grille, x, y) {
-    let largeur = grille.getLargeur();
-    let hauteur = grille.getHauteur();
+function checkIfInside(grille: Grille, x: number, y: number) {
+    const largeur: number = grille.getLargeur();
+    const hauteur: number = grille.getHauteur();
     return (0 <= x && x < largeur) && (0 <= y && y < hauteur);
 }
 
 /**
  * Permet de vérifier si le pixel au coordonnées (x, y) doit être sélectionné.
  * @param {Grille} grille Représente la grille sur lequel on travaille.
- * @param {Float32Array} tolerance Représente la tolérance.
- * @param {Number} x Représente la coordonnée en x du pixel.
- * @param {Number} y Représente la coordonnée en y du pixel.
+ * @param {number} tolerance Représente la tolérance.
+ * @param {number} x Représente la coordonnée en x du pixel.
+ * @param {number} y Représente la coordonnée en y du pixel.
  * @param {Pixel} pixelOrigine Représente le Pixel d'origine (pixel sélectionné par l'utilisateur).
- * @param {Number} maxDistance Représente la distance maximum entre deux couleurs.
- * @returns {Boolean} true si le pixel doit être sélectionné, false sinon.
+ * @param {number} maxDistance Représente la distance maximum entre deux couleurs.
+ * @returns {boolean} true si le pixel doit être sélectionné, false sinon.
  */
-function checkTolerance(grille, tolerance, x, y, pixelOrigine, maxDistance) {
+function checkTolerance(grille: Grille, tolerance: number, x: number, y: number, pixelOrigine: Pixel, maxDistance: number) {
     // calque, x, y >> Récupération du pixel en coordonnées x, y et transformation en L*a*b*. >> couleurLab
     let pixelComp = grille.getPixelAt(x, y);
-    let couleurLab = pixelComp.getColor().RGBversXYZ().XYZversLab();
+    let c = pixelComp.getColor();
+    let couleurLab: Lab | Couleur = c instanceof RGB ? c.RGBversXYZ().XYZversLab() : c;
 
     // couleur, pixelOrigine >> Calcul de la distance entre pixelOrigine et couleurLab. >> deltaE
-    let deltaE = couleurLab.calculDeltaE(pixelOrigine.getColor());
+    let deltaE = couleurLab instanceof Lab ? couleurLab.calculDeltaE(pixelOrigine.getColor()) : maxDistance;
     let pourcentDistance = (deltaE / maxDistance) * 100;
     if (pourcentDistance <= tolerance) {
         return true;

@@ -1,4 +1,6 @@
 import { Couleur } from "./color/Couleur";
+import { Lab } from "./color/Lab";
+import { XYZ } from "./color/XYZ";
 import { RGB } from "./color/RGB";
 
 /**
@@ -32,12 +34,12 @@ export class Pixel {
      * Obtient la couleur du Pixel.
      * @returns {Couleur} La couleur du Pixel.
      */
-    getColor() { return this._couleur; }
+    getColor(): Couleur { return this._couleur; }
     /**
      * Indique si le Pixel est sélectionné ou non.
      * @returns {boolean} true si sélectionné, false sinon.
      */
-    isSelected() { return this._estSelectionne; }
+    isSelected(): boolean { return this._estSelectionne; }
 
     /**
      * Définit la couleur du Pixel.
