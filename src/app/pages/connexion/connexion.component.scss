@@ -2,6 +2,38 @@
     height: 100%;
 }
 
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .img-left {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_1 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_2 {
+        left: 45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_3 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
 .center {
     display: flex;
     flex-direction: column;
@@ -13,7 +45,8 @@
 }
 
 .retour {
-display: inline-block;
+    display: inline-block;
+    position: relative;
     border-radius: 50%;
     padding: 1em;
     background: #EBAFAF7A;
@@ -37,9 +70,11 @@ display: inline-block;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
     p {
         align-items: flex-start;
     }
+
     input {
         align-items: flex-end;
     }
@@ -48,17 +83,13 @@ display: inline-block;
 .connexion {
     text-align: left;
     font-size: 1em;
-    margin-top: 0; 
+    margin-top: 0;
     margin-bottom: 0;
-    
-    #mdp {
-        display: none;
-    }
 }
 
 .input-label-container {
     display: inline-flex;
-    width:100%;
+    width: 100%;
     float: right;
     justify-content: space-between;
 }
@@ -92,3 +123,43 @@ display: inline-block;
     margin-left: auto;
     display: block;
 }
+
+.right {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .img-right {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_4 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_5 {
+        left: -45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_6 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
