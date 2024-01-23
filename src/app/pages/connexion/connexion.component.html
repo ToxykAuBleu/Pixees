@@ -1,10 +1,26 @@
-<button class="retour"><fa-icon [icon]="faArrowLeft" size="2xl"></fa-icon></button>
-
-<h1>S'identifier</h1>
-
-<p>Email</p>
-<p>Mot de passe</p>
-
-<p>Mot de passe oublié ?</p>
-<p (click)="goToInscription()">Créer un nouveau compte</p>
-<button>Connexion</button>
+<div class="flex flex-row justify-around items-center h-full">
+    <div class="left">
+        <button class="retour"><fa-icon [icon]="faArrowLeft" size="2xl"></fa-icon></button>
+    </div>
+    <div class="center">
+        <h1 class="title">S'identifier</h1>
+        <div class="zone-connexion">
+            <div class="input-zone">
+                <div class="input-label-container">
+                    <p class="connexion">Email </p>
+                    <input type="text" class="input-box">
+                </div>
+                <div class="input-label-container">
+                    <p class="connexion" id="mdp">Mot de passe </p>
+                    <input type="text" class="input-box">
+                </div>
+            </div>
+            <p class="link">Mot de passe oublié ?</p>
+            <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
+            <button class="btn-connexion">Connexion</button>
+        </div>
+    </div>
+    <div class="right">
+        aa
+    </div>
+</div>
