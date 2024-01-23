@@ -1,6 +1,6 @@
 /**
  * @author Adrien Hiribarren Touya adrien64250@yahoo.com
- * @date 14/11/2023
+ * @date 23/01/2023
  * Classe représentant des coordonnées.
  */
 export class Coordonnees {
@@ -8,43 +8,43 @@ export class Coordonnees {
     /**
      * Coordonnée X.
      */
-    #_xCoord;
+    private _xCoord: number;
     /**
      * Coordonnée Y.
      */
-    #_yCoord;
+    private _yCoord: number;
 
     // CONSTRUCTEUR
     /**
      * Crée de nouvelles coordonnées avec (par défaut) une coordonnée X et une coordonnée Y.
-     * @param {int} x La coordonnée X.
-     * @param {int} y La coordonnée Y.
+     * @param {number} x La coordonnée X.
+     * @param {number} y La coordonnée Y.
      */
     constructor(x = 0, y = 0) {
-        this.#_xCoord = x;
-        this.#_yCoord = y;
+        this._xCoord = x;
+        this._yCoord = y;
     }
 
     // GETTERS & SETTERS
     /**
      * Retourne la coordonnée X.
-     * @returns {int} La coordonnée X.
+     * @returns {number} La coordonnée X.
      */
-    getX() { return this.#_xCoord; }
+    getX(): number { return this._xCoord; }
     /**
      * Retourne la coordonnée Y.
-     * @returns {int} La coordonnée Y.
+     * @returns {number} La coordonnée Y.
      */
-    getY() { return this.#_yCoord; }
+    getY(): number { return this._yCoord; }
 
     /**
      * Définit la coordonnée X.
-     * @param {int} x La nouvelle coordonnée X.
+     * @param {number} x La nouvelle coordonnée X.
      */
-    setX(x) { this.#_xCoord = x; }
+    setX(x: number) { this._xCoord = x; }
     /**
      * Définit la coordonnée Y.
-     * @param {int} y La nouvelle coordonnée Y.
+     * @param {number} y La nouvelle coordonnée Y.
      */
-    setY(y) { this.#_yCoord = y; }
+    setY(y: number) { this._yCoord = y; }
 }

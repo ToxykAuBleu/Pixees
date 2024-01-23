@@ -28,13 +28,9 @@ export abstract class Couleur {
      * @param {number} comp3 La valeur de la composante 3
      */
     constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
-        if (this.constructor == Couleur) {
-            throw new Error("Classe abstraite ne peux pas être initialisé")
-        } else {
-            this._comp1 = comp1;
-            this._comp2 = comp2;
-            this._comp3 = comp3;
-        }
+        this._comp1 = comp1;
+        this._comp2 = comp2;
+        this._comp3 = comp3;
     }
 
     // GETTERS & SETTERS
