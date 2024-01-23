@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projet',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './projet.component.scss'
 })
 export class ProjetComponent {
-
+  constructor(private router: Router) {};
+  goToEditeur() {
+    this.router.navigate(['/', 'editeur']);
+  }
 }
