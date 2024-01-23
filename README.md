@@ -26,6 +26,16 @@ Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.git
 ``[-]`` → suppression de contenu (code ou fichier)  
 ``[~]`` → fix au niveau du code  
 
+# Branches & PR
+
+*   master
+\_  editeur
+\_  social
+
+Chaque PR devra suivre le formalisme suivant:
+- ``feature/<nom>`` si la PR implémente une nouvelle fonctionnalité
+- ``fix/<nom>`` si la PR corrige des problèmes
+
 # Membres 
 
 |Etudiant|Pseudo Github|
@@ -36,28 +46,18 @@ Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.git
 |DUBOS Lucie| [@DubosLucie](https://github.com/DubosLucie)|
 |HIRIBARREN TOUYA Adrien| [@Alakamar](https://github.com/Alakamar)|
 
-# S3 - Problème algorithmique
-## Contextualisation
-Durant le semestre 3, nous nous sommes attaqué à la partie éditeur de notre application, et plus précisément sur une fonctionnalité: la baguette magique. Cette baguette magique permet de sélectionner des pixels en fonction de la similiarité de couleur du pixel choisi par l'utilisateur. Pour en savoir plus sur le fonctionnement de ce dernier:
-- dossier [Spécification](https://github.com/ToxykAuBleu/Pixees/tree/master/Specification) pour visualiser le schéma de classe ;
-- dossier [Algorithme](https://github.com/ToxykAuBleu/Pixees/tree/master/Algorithme) pour comprendre l'exécution de la baguette magique.
+# S4 - Réalisation de l'application
 
-## Démo
-
-https://github.com/ToxykAuBleu/Pixees/assets/46644925/198dc7cd-de11-4e22-a8d5-e728168392fc
-
-## Installation (bash/powershell)
+## Développement (bash/powershell)
 
 Pour ce faire, vous devez vous assurer d'avoir d'installé:
 - git (Optionnel, permet de télécharger tout le projet + simplement)
-- Node.js
+- Node.js (>= 20.9.0)
 
 Exécuter les lignes suivantes dans une invite de commande:
 ```powershell
 git clone https://github.com/ToxykAuBleu/Pixees.git
 cd Pixees/
-npm install
+npm ci
+npm run start
 ```
-
-A la fin de l'installation de tous les modules, pour exécuter la démo, il suffit de faire `node .`  
-Enfin, dès que votre navigateur s'est lancé, déplacez vous dans le dossier `src`, puis `demo`.
