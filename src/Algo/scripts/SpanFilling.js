@@ -1,7 +1,7 @@
-import { Pixel } from "./Pixel.js";
-import { Calque } from "./Calque.js";
-import { Coordonnees } from "./Coordonnees.js";
-import { Grille } from "./Grille.js";
+import { Pixel } from "./Pixel";
+import { Calque } from "./Calque";
+import { Coordonnees } from "./Coordonnees";
+import { Grille } from "./Grille";
 
 /**
  * @author Mathieu Foissac mfoissac002@iutbayonne.univ-pau.fr
