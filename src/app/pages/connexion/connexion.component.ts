@@ -16,4 +16,7 @@ export class ConnexionComponent {
   goToInscription() {
     this.router.navigate(['/', 'inscription']);
   }
+  goToHome() {
+    this.router.navigate(['/', 'home']);
+  }
 }

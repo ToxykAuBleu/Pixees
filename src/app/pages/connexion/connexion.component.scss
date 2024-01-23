@@ -45,8 +45,10 @@
 }
 
 .retour {
+    top: 12%;
+    left: 1%;
     display: inline-block;
-    position: relative;
+    position: absolute;
     border-radius: 50%;
     padding: 1em;
     background: #EBAFAF7A;
