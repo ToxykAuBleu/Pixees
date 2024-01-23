@@ -21,8 +21,7 @@ export abstract class Couleur {
 
     // CONSTRUCTEUR
     /**
-     * Créer une nouvelle Couleur avec (par défault du blanc) les composantes
-     * respectives (RGB, XYZ, Lab)
+     * Créer une nouvelle Couleur (avec par défault du blanc)
      * @param {number} comp1 La valeur de la composante 1
      * @param {number} comp2 La valeur de la composante 2
      * @param {number} comp3 La valeur de la composante 3
@@ -87,7 +86,7 @@ export abstract class Couleur {
      * @param {Couleur} couleur Couleur à comparer
      * @returns {bool} Vrai si la composante l'objet courant est inférieur à la composante de la couleur passée en paramètre
      */
-    isCompInferiorTo(comp: number, couleur: Couleur) {
+    isCompInferiorTo(comp: number, couleur: Couleur): boolean {
         return (this.getComp(comp) ?? 0) < (couleur.getComp(comp) ?? 0);
     }
 }
