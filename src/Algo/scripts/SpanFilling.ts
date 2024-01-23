@@ -150,7 +150,7 @@ function checkTolerance(grille: Grille, tolerance: number, x: number, y: number,
     let couleurLab: Lab | Couleur = c instanceof RGB ? c.RGBversXYZ().XYZversLab() : c;
 
     // couleur, pixelOrigine >> Calcul de la distance entre pixelOrigine et couleurLab. >> deltaE
-    let deltaE = couleurLab instanceof Lab ? couleurLab.calculDeltaE(pixelOrigine.getColor()) : 0;
+    let deltaE = couleurLab instanceof Lab ? couleurLab.calculDeltaE(pixelOrigine.getColor()) : maxDistance;
     let pourcentDistance = (deltaE / maxDistance) * 100;
     if (pourcentDistance <= tolerance) {
         return true;
