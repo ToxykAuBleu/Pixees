@@ -28,9 +28,11 @@ Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.git
 
 # Branches & PR
 
-*   master
-\_  editeur
-\_  social
+```
+*   master  
+\_  editeur  
+\_  social  
+```
 
 Chaque PR devra suivre le formalisme suivant:
 - ``feature/<nom>`` si la PR implémente une nouvelle fonctionnalité
