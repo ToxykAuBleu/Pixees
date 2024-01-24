@@ -1,0 +1,167 @@
+:host {
+    height: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .img-left {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_1 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_2 {
+        left: 45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_3 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding-top: auto;
+    padding-bottom: auto;
+}
+
+.retour {
+    top: 12%;
+    left: 1%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    padding: 1em;
+    background: #EBAFAF7A;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.zone-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.input-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    p {
+        align-items: flex-start;
+    }
+
+    input {
+        align-items: flex-end;
+    }
+}
+
+.connexion {
+    text-align: left;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.input-label-container {
+    display: inline-flex;
+    width: 100%;
+    float: right;
+    justify-content: space-between;
+}
+
+
+.input-box {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.link {
+    text-decoration: underline !important;
+    color: blue;
+    cursor: pointer;
+    font-size: 0.8em;
+}
+
+.btn-connexion {
+    margin-top: 1em;
+    border-radius: 15px;
+    border: 1px solid #B76969;
+    background-color: #B76969;
+    font-weight: bold;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    cursor: pointer;
+    // décaler un petit peu sur la droite le bouton
+    margin-left: auto;
+    display: block;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .img-right {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_4 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_5 {
+        left: -45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_6 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
