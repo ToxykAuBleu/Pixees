@@ -18,4 +18,32 @@ export class OutilComponent {
   faWandMagic = faWandMagic;
   faShapes = faShapes;
   constructor() { }
+
+  crayon() {
+    console.log('crayon');
+  }
+
+  gomme() {
+    console.log('gomme');
+  }
+
+  selection() {
+    console.log('selection');
+  }
+
+  remplissage() {
+    console.log('remplissage');
+  }
+
+  pipette() {
+    console.log('pipette');
+  }
+
+  baguette() {
+    console.log('baguette');
+  }
+
+  formes() {
+    console.log('formes');
+  }
 }

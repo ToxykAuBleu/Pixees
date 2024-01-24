@@ -2,13 +2,13 @@
     <div class="flex flex-col">
         <h1>Outils</h1>
         <div class="grid grid-cols-3 grid-rows-3 fr place-items-center bg-[#C6B6DA] py-2 px-8 gap-2">
-            <fa-icon [icon]="faPencil" size="2xl"></fa-icon>
-            <fa-icon [icon]="faEraser" size="2xl"></fa-icon>
-            <fa-icon [icon]="faVectorSquare" size="2xl"></fa-icon>
-            <fa-icon [icon]="faFillDrip" size="2xl"></fa-icon>
-            <fa-icon [icon]="faEyeDropper" size="2xl"></fa-icon>
-            <fa-icon [icon]="faWandMagic" size="2xl"></fa-icon>
-            <fa-icon class="col-span-3" [icon]="faShapes" size="2xl"></fa-icon>
+            <fa-icon (click)="crayon()" [icon]="faPencil" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="gomme()" [icon]="faEraser" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="selection()" [icon]="faVectorSquare" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="remplissage()" [icon]="faFillDrip" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="pipette()" [icon]="faEyeDropper" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="baguette()" [icon]="faWandMagic" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="formes()" class="col-span-3 cursor-pointer" [icon]="faShapes" size="2xl"></fa-icon>
         </div>
     </div>
     <div>
