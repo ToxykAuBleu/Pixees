@@ -39,9 +39,19 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
-    padding-top: auto;
-    padding-bottom: auto;
+
+    background-color: #EFEDEE;
+    border: 1px solid hsla(0, 0%, 65%, 0.158);
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    padding: 2rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
 }
 
 .retour {
@@ -82,6 +92,10 @@
     }
 }
 
+.link-zone {
+    text-align: center;
+}
+
 .connexion {
     text-align: left;
     font-size: 1em;
@@ -112,7 +126,6 @@
 }
 
 .btn-connexion {
-    margin-top: 1em;
     border-radius: 15px;
     border: 1px solid #B76969;
     background-color: #B76969;
@@ -121,9 +134,8 @@
     padding-left: 1em;
     padding-right: 1em;
     cursor: pointer;
-    // décaler un petit peu sur la droite le bouton
-    margin-left: auto;
     display: block;
+    width: 60%;
 }
 
 .right {

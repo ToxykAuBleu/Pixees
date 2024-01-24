@@ -5,19 +5,21 @@
     </div>
     <div class="center">
         <h1 class="title">S'identifier</h1>
-        <div class="zone-connexion">
+        <div class="zone-connexion gap-4">
             <div class="input-zone">
-                <div class="input-label-container">
+                <div class="input-label-container gap-4">
                     <p class="connexion">Email</p>
-                    <input type="text" class="input-box">
+                    <input type="email" class="input-box">
                 </div>
-                <div class="input-label-container">
+                <div class="input-label-container gap-4">
                     <p class="connexion">Mot de passe</p>
-                    <input type="text" class="input-box">
+                    <input type="password" class="input-box">
                 </div>
             </div>
-            <p class="link">Mot de passe oublié ?</p>
-            <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
+            <div class="link-zone">
+                <p class="link">Mot de passe oublié ?</p>
+                <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
+            </div>
             <button class="btn-connexion">Connexion</button>
         </div>
     </div>
