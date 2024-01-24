@@ -27,14 +27,13 @@ export class GrilleComponent implements AfterViewInit {
       console.log("Canvas : " + this.canvas?.nativeElement);
       this.ctx = this.canvas?.nativeElement.getContext('2d');
       console.log("Context : " + this.ctx);
-      this.drawGrid(16, 16);
+      this.drawGrid(128, 128);
     }
   }
 
   // Création du pattern
   drawPattern(): HTMLCanvasElement | undefined {
     console.log("drawPattern");
-    console.log("isBrowser : " + this.isBrowser);
     // Création du Canvas pour dessiner le pattern
     if (this.isBrowser) {
       const patternCanvas = document.createElement("canvas");
@@ -76,7 +75,7 @@ export class GrilleComponent implements AfterViewInit {
 
     // Application du pattern
     this.ctx.fillStyle = pattern as CanvasPattern;
-    this.ctx.fillRect(0, 0, 16, 16);
+    this.ctx.fillRect(0, 0, hauteur, largeur);
 
     return grille
   }
