@@ -4,6 +4,16 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faEraser, faVectorSquare, faFillDrip, faEyeDropper, faWandMagic, faShapes } from '@fortawesome/free-solid-svg-icons';
 import { RGB } from '../../../../Algo/scripts/color/RGB';
 
+enum Outil {
+  Crayon,
+  Gomme,
+  Selection,
+  Remplissage,
+  Pipette,
+  Baguette,
+  Formes
+}
+
 @Component({
   selector: 'app-outil',
   standalone: true,
@@ -11,6 +21,7 @@ import { RGB } from '../../../../Algo/scripts/color/RGB';
   templateUrl: './outil.component.html',
   styleUrl: './outil.component.scss'
 })
+
 export class OutilComponent implements AfterViewInit{
   @ViewChild('hueCanvas', { static: false }) canvasHue: ElementRef<HTMLCanvasElement> | undefined;
   hueCtx: CanvasRenderingContext2D | null | undefined;
@@ -28,6 +39,23 @@ export class OutilComponent implements AfterViewInit{
   faEyeDropper = faEyeDropper;
   faWandMagic = faWandMagic;
   faShapes = faShapes;
+
+  outilActuel: Outil = Outil.Crayon;
+
+  actionsParOutil = {
+    [Outil.Crayon]: () => this.actionCrayon(),
+    [Outil.Gomme]: () => this.actionGomme(),
+    [Outil.Selection]: () => this.actionSelection(),
+    [Outil.Remplissage]: () => this.actionRemplissage(),
+    [Outil.Pipette]: () => this.actionPipette(),
+    [Outil.Baguette]: () => this.actionBaguette(),
+    [Outil.Formes]: () => this.actionFormes(),
+  };
+
+  action() {
+    console.log("action");
+    this.actionsParOutil[this.outilActuel]();
+  }
 
   constructor() { }
 
@@ -84,30 +112,65 @@ export class OutilComponent implements AfterViewInit{
   }
 
   crayon() {
-    console.log('crayon');
+    this.outilActuel = Outil.Crayon;
+    console.log("Crayon selected");
   }
 
   gomme() {
-    console.log('gomme');
+    this.outilActuel = Outil.Gomme;
+    console.log("Gomme selected");
   }
 
   selection() {
-    console.log('selection');
+    this.outilActuel = Outil.Selection;
+    console.log("Selection selected");
   }
 
   remplissage() {
-    console.log('remplissage');
+    this.outilActuel = Outil.Remplissage;
+    console.log("Remplissage selected");
   }
 
   pipette() {
-    console.log('pipette');
+    this.outilActuel = Outil.Pipette;
+    console.log("Pipette selected");
   }
 
   baguette() {
-    console.log('baguette');
+    this.outilActuel = Outil.Baguette;
+    console.log("Baguette selected");
   }
 
   formes() {
-    console.log('formes');
+    this.outilActuel = Outil.Formes;
+    console.log("Formes selected");
+  }
+
+  actionCrayon() {
+    console.log("actionCrayon");
+  }
+
+  actionGomme() {
+    console.log("actionGomme");
+  }
+
+  actionSelection() {
+    console.log("actionSelection");
+  }
+
+  actionRemplissage() {
+    console.log("actionRemplissage");
+  }
+
+  actionPipette() {
+    console.log("actionPipette");
+  }
+
+  actionBaguette() {
+    console.log("actionBaguette");
+  }
+
+  actionFormes() {
+    console.log("actionFormes");
   }
 }

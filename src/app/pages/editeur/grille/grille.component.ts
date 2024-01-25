@@ -1,5 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 
@@ -10,7 +9,15 @@ import { Grille } from '../../../../Algo/scripts/Grille';
   templateUrl: './grille.component.html',
   styleUrl: './grille.component.scss'
 })
+
 export class GrilleComponent implements AfterViewInit {
+  @Output() grilleClicked = new EventEmitter<void>();
+
+  onGrilleClick() {
+    console.log("Grille clicked à émettre");
+    this.grilleClicked.emit();
+  }
+
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
   public isBrowser: boolean;
@@ -77,6 +84,6 @@ export class GrilleComponent implements AfterViewInit {
     this.ctx.fillStyle = pattern as CanvasPattern;
     this.ctx.fillRect(0, 0, hauteur, largeur);
 
-    return grille
+    return grille;
   }
 }
