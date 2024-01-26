@@ -30,6 +30,10 @@ export class ProjetComponent {
     document.getElementById(view)!.classList.remove('hidden');
   }
 
+  projectHome() {
+    this.switchView(View.Accueil);
+  }
+
   newProject() {
     this.switchView(View.Nouveau);
   }

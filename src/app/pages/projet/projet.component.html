@@ -23,7 +23,7 @@
             <h1 class="text-left font-bold">Nouveau projet</h1>
         </div>
         
-        <fa-icon [icon]="faXmark" size="xl"></fa-icon>
+        <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
 
         <form id="formNewProject" method="post">
             <label>Nom du projet</label><input name="name" type="text">
