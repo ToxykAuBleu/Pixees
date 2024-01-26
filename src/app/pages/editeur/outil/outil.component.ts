@@ -3,6 +3,8 @@ import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faEraser, faVectorSquare, faFillDrip, faEyeDropper, faWandMagic, faShapes } from '@fortawesome/free-solid-svg-icons';
 import { RGB } from '../../../../Algo/scripts/color/RGB';
+import { GrilleComponent } from '../grille/grille.component';
+import { Grille } from '../../../../Algo/scripts/Grille';
 
 enum Outil {
   Crayon,
@@ -43,18 +45,18 @@ export class OutilComponent implements AfterViewInit{
   outilActuel: Outil = Outil.Crayon;
 
   actionsParOutil = {
-    [Outil.Crayon]: () => this.actionCrayon(),
-    [Outil.Gomme]: () => this.actionGomme(),
-    [Outil.Selection]: () => this.actionSelection(),
-    [Outil.Remplissage]: () => this.actionRemplissage(),
-    [Outil.Pipette]: () => this.actionPipette(),
-    [Outil.Baguette]: () => this.actionBaguette(),
-    [Outil.Formes]: () => this.actionFormes(),
+    [Outil.Crayon]: (grille: GrilleComponent) => this.actionCrayon(grille),
+    [Outil.Gomme]: (grille: GrilleComponent) => this.actionGomme(grille),
+    [Outil.Selection]: (grille: GrilleComponent) => this.actionSelection(grille),
+    [Outil.Remplissage]: (grille: GrilleComponent) => this.actionRemplissage(grille),
+    [Outil.Pipette]: (grille: GrilleComponent) => this.actionPipette(grille),
+    [Outil.Baguette]: (grille: GrilleComponent) => this.actionBaguette(grille),
+    [Outil.Formes]: (grille: GrilleComponent) => this.actionFormes(grille),
   };
 
-  action() {
+  action(grille: GrilleComponent | undefined) {
     console.log("action");
-    this.actionsParOutil[this.outilActuel]();
+    this.actionsParOutil[this.outilActuel](grille!);
   }
 
   constructor() { }
@@ -146,31 +148,31 @@ export class OutilComponent implements AfterViewInit{
     console.log("Formes selected");
   }
 
-  actionCrayon() {
+  actionCrayon(grille: GrilleComponent) {
     console.log("actionCrayon");
   }
 
-  actionGomme() {
+  actionGomme(grille: GrilleComponent) {
     console.log("actionGomme");
   }
 
-  actionSelection() {
+  actionSelection(grille: GrilleComponent) {
     console.log("actionSelection");
   }
 
-  actionRemplissage() {
+  actionRemplissage(grille: GrilleComponent) {
     console.log("actionRemplissage");
   }
 
-  actionPipette() {
+  actionPipette(grille: GrilleComponent) {
     console.log("actionPipette");
   }
 
-  actionBaguette() {
+  actionBaguette(grille: GrilleComponent) {
     console.log("actionBaguette");
   }
 
-  actionFormes() {
+  actionFormes(grille: GrilleComponent) {
     console.log("actionFormes");
   }
 }

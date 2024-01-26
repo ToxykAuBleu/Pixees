@@ -23,7 +23,7 @@ export class EditeurComponent implements OnInit {
 
   onGrilleClicked() {
     // Effectuez l'action de l'outil actuel
-    this.outil?.action();
     console.log("Grille clicked reçu");
+    this.outil?.action(this.grille);
   }
 }
