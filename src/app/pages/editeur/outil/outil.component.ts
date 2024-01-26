@@ -32,7 +32,7 @@ export class OutilComponent implements AfterViewInit{
   saturationCtx: CanvasRenderingContext2D | null | undefined;
 
   hue: RGB = new RGB(0, 0, 0);
-  couleur: RGB = new RGB(0, 0, 0);
+  couleur: RGB = new RGB(0, 255, 0);
 
   faPencil = faPencil;
   faEraser = faEraser;
@@ -45,72 +45,24 @@ export class OutilComponent implements AfterViewInit{
   outilActuel: Outil = Outil.Crayon;
 
   actionsParOutil = {
-    [Outil.Crayon]: (grille: GrilleComponent) => this.actionCrayon(grille),
-    [Outil.Gomme]: (grille: GrilleComponent) => this.actionGomme(grille),
-    [Outil.Selection]: (grille: GrilleComponent) => this.actionSelection(grille),
-    [Outil.Remplissage]: (grille: GrilleComponent) => this.actionRemplissage(grille),
-    [Outil.Pipette]: (grille: GrilleComponent) => this.actionPipette(grille),
-    [Outil.Baguette]: (grille: GrilleComponent) => this.actionBaguette(grille),
-    [Outil.Formes]: (grille: GrilleComponent) => this.actionFormes(grille),
+    [Outil.Crayon]: (grille: GrilleComponent, x: number , y: number) => this.actionCrayon(grille, x, y),
+    [Outil.Gomme]: (grille: GrilleComponent, x: number , y: number) => this.actionGomme(grille, x, y),
+    [Outil.Selection]: (grille: GrilleComponent, x: number , y: number) => this.actionSelection(grille, x, y),
+    [Outil.Remplissage]: (grille: GrilleComponent, x: number , y: number) => this.actionRemplissage(grille, x, y),
+    [Outil.Pipette]: (grille: GrilleComponent, x: number , y: number) => this.actionPipette(grille, x, y),
+    [Outil.Baguette]: (grille: GrilleComponent, x: number , y: number) => this.actionBaguette(grille, x, y),
+    [Outil.Formes]: (grille: GrilleComponent, x: number , y: number) => this.actionFormes(grille, x, y),
   };
 
-  action(grille: GrilleComponent | undefined) {
+  action(grille: GrilleComponent | undefined, x: number, y: number) {
     console.log("action");
-    this.actionsParOutil[this.outilActuel](grille!);
+    this.actionsParOutil[this.outilActuel](grille!, x, y);
   }
 
   constructor() { }
 
   ngAfterViewInit(): void {
     console.log("Canvas : " + this.canvasHue?.nativeElement);
-    this.drawHue();
-    this.canvasHue?.nativeElement.addEventListener('mousedown', (e) => { this.pickHue(e); });
-  }
-
-  drawSaturation() {
-    console.log("drawSaturation");
-  }
-
-  drawHue(): void {
-    console.log("drawHue");
-    if (this.canvasHue) {
-      this.hueCtx = this.canvasHue.nativeElement.getContext('2d', { willReadFrequently: true });
-      console.log("hueCtx : " + this.hueCtx);
-      if (this.hueCtx) {
-        const gradient = this.hueCtx.createLinearGradient(0, 0, 0, this.canvasHue.nativeElement.height);
-        gradient.addColorStop(0, 'rgb(255, 0, 0)');
-        gradient.addColorStop(0.15, 'rgb(255, 0, 255)');
-        gradient.addColorStop(0.33, 'rgb(0, 0, 255)');
-        gradient.addColorStop(0.49, 'rgb(0, 255, 255)');
-        gradient.addColorStop(0.67, 'rgb(0, 255, 0)');
-        gradient.addColorStop(0.84, 'rgb(255, 255, 0)');
-        gradient.addColorStop(1, 'rgb(255, 0, 0)');
-        this.hueCtx.fillStyle = gradient;
-        this.hueCtx.fillRect(0, 0, this.canvasHue.nativeElement.width, this.canvasHue.nativeElement.height);
-
-      }
-    }
-  }
-
-  pickHue(e: MouseEvent): void {
-    const mousePos = this.getMousePos(this.canvasHue?.nativeElement, e);
-    console.log("mousePos : " + mousePos.x + " " + mousePos.y);
-    const imageData = this.hueCtx?.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    if (imageData) {
-      console.log("ImageData : " + imageData);
-      this.hue = new RGB(imageData[0], imageData[1], imageData[2]);
-    }
-  }
-
-  getMousePos(canvas: HTMLCanvasElement | undefined, e: MouseEvent): {x: number, y: number} {
-    if (canvas) {
-      const rect = canvas.getBoundingClientRect();
-      return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
-    }
-    return {x: 0, y: 0};
   }
 
   crayon() {
@@ -148,31 +100,31 @@ export class OutilComponent implements AfterViewInit{
     console.log("Formes selected");
   }
 
-  actionCrayon(grille: GrilleComponent) {
-    console.log("actionCrayon");
+  actionCrayon(grille: GrilleComponent, x: number, y: number) {
+    grille.drawRect(x, y, 10, 10, this.couleur);
   }
 
-  actionGomme(grille: GrilleComponent) {
+  actionGomme(grille: GrilleComponent, x: number, y: number) {
     console.log("actionGomme");
   }
 
-  actionSelection(grille: GrilleComponent) {
+  actionSelection(grille: GrilleComponent, x: number, y: number) {
     console.log("actionSelection");
   }
 
-  actionRemplissage(grille: GrilleComponent) {
+  actionRemplissage(grille: GrilleComponent, x: number, y: number) {
     console.log("actionRemplissage");
   }
 
-  actionPipette(grille: GrilleComponent) {
+  actionPipette(grille: GrilleComponent, x: number, y: number) {
     console.log("actionPipette");
   }
 
-  actionBaguette(grille: GrilleComponent) {
+  actionBaguette(grille: GrilleComponent, x: number, y: number) {
     console.log("actionBaguette");
   }
 
-  actionFormes(grille: GrilleComponent) {
+  actionFormes(grille: GrilleComponent, x: number, y: number) {
     console.log("actionFormes");
   }
 }
