@@ -3,6 +3,12 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 
+enum View {
+  Accueil = "projectHome",
+  Nouveau = "newProject", 
+  Import = "importProject"
+};
+
 @Component({
   selector: 'app-projet',
   standalone: true,
@@ -16,11 +22,19 @@ export class ProjetComponent {
   faXmark = faXmark;
 
   constructor(private router: Router) {};
+
+  switchView(view: string) {
+    for (const v of Object.values(View)) {
+      document.getElementById(v)?.classList.add('hidden');
+    }
+    document.getElementById(view)!.classList.remove('hidden');
+  }
+
   newProject() {
-    this.router.navigate(['/', 'editeur']);
+    this.switchView(View.Nouveau);
   }
 
   importProject() {
-    console.log("Import projet");
+    this.switchView(View.Import);
   }
 }
