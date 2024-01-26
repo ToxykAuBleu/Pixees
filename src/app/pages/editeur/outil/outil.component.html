@@ -14,7 +14,7 @@
     <div class="inline-flex flex-col h-full">
         <div>Couleurs</div>
         <div class="inline-flex flex-row gap-2 h-full">
-            <div class="inline-flex flex-col gap-1 w-1/4">
+            <div class="inline-flex flex-col gap-1">
                 <div>Hexa<br><input class="w-full text-center placeholder:text-center" type="text" name="" id=""
                         placeholder="#------"></div>
                 <div class="flex">R<input class="w-full ml-1 text-center placeholder:text-center" type="text" name=""
@@ -26,17 +26,16 @@
                 <div>Alpha<br><input class="w-full text-center placeholder:text-center" type="text" name="" id=""
                         placeholder="---%"></div>
             </div>
-            <div class="inline-flex flex-col flex-1 h-full">
-                <div class="inline-flex flex-row gap-1">
-                    <canvas #saturationCanvas class="border-black border-solid border-2 h-full flex-1"></canvas>
-                    <canvas #hueCanvas class="border-black border-solid border-2 h-full w-1/12"></canvas>
-                </div>
-                <div class="inline-grid grid-cols-5 place-items-center" dir="rtl">
+            <div class="inline-flex flex-col w-full">
+                <p-colorPicker #colorPicker [(ngModel)]="color" [inline]="true"></p-colorPicker>
+                <div class="inline-grid grid-cols-8 place-items-center" dir="rtl">
                     <div *ngFor="let color of colorBuffer">
-                        <div class="" [style.background-color]="color?.getComp(1)">1</div>
+                        <div class="" [style.background-color]="color">1</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- <canvas #saturationCanvas class="border-black border-solid border-2 w-1 h-1 aspect-square"></canvas>
+<canvas #hueCanvas class="border-black border-solid border-2"></canvas> -->
