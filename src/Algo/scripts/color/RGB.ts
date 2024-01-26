@@ -80,4 +80,33 @@ export class RGB extends Couleur {
 
         return xyz;
     }
+
+    /**
+     * Transformer une Couleur RGB vers Hexadecimal
+     * @returns {string} La Couleur sous forme Hexadecimal
+     */
+    RGBversHexa(): string {
+        let hexa = '#';
+
+        for (let i = 1; i < 4; i++) {
+            let comp = this.getComp(i) ?? 0;
+            if (comp < 16) {
+                hexa += '0';
+            }
+            hexa += comp.toString(16);
+        }
+
+        return hexa;
+    }
+
+    /**
+     * Transformer une Couleur Hexadecimal vers RGB
+     * @param {string} hexa La Couleur sous forme Hexadecimal
+     * @returns {RGB} La Couleur sous forme RGB
+     */
+    HexaversRGB(hexa: string): void {
+        for (let i = 1; i < 4; i++) {
+            this.setComp(i, parseInt(hexa.slice(2 * i - 2, 2 * i), 16));
+        }
+    }
 }
