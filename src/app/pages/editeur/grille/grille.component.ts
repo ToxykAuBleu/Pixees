@@ -38,6 +38,8 @@ export class GrilleComponent implements AfterViewInit {
       const rect = this.canvas!.nativeElement.getBoundingClientRect();
       let x = e.clientX - rect.left;
       let y = e.clientY - rect.top;
+      x = Math.floor(this.canvas!.nativeElement.width * x / rect.width);
+      y = Math.floor(this.canvas!.nativeElement.height * y / rect.height);
       this.onGrilleClick(x, y);
     });
   }
