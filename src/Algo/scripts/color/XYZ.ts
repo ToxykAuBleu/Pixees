@@ -1,5 +1,5 @@
-import { Couleur } from './Couleur.js';
-import { Lab } from './Lab.js';
+import { Couleur } from './Couleur';
+import { Lab } from './Lab';
 
 // Définition des constantes
 
@@ -11,7 +11,7 @@ const kappa = 24389.00000000000000 / 27.00000000000000;
 
 // Fonction f utilisée dans la conversion XYZ vers Lab
 
-function f(t) {
+function f(t: number): number {
     if (t > epsilon) {
         return Math.cbrt(t);
     } else {
@@ -28,9 +28,9 @@ export class XYZ extends Couleur {
     // CONSTRUCTEUR
     /**
      * Créer une Couleur sous la forme XYZ
-     * @param {float} comp1 La valeur de la composante 1
-     * @param {float} comp2 La valeur de la composante 2
-     * @param {float} comp3 La valeur de la composante 3
+     * @param {number} comp1 La valeur de la composante 1
+     * @param {number} comp2 La valeur de la composante 2
+     * @param {number} comp3 La valeur de la composante 3
      */
     constructor(comp1 = 0, comp2 = 0, comp3 = 0) {
         super(comp1, comp2, comp3);
@@ -41,10 +41,10 @@ export class XYZ extends Couleur {
      * Transformer une Couleur XYZ vers Lab
      * @returns {Lab} La Couleur sous forme Lab
      */
-    XYZversLab() {
-        const X = this.getComp(1) * 100;
-        const Y = this.getComp(2) * 100;
-        const Z = this.getComp(3) * 100;
+    XYZversLab(): Lab {
+        const X = (this.getComp(1) ?? 0) * 100;
+        const Y = (this.getComp(2) ?? 0) * 100;
+        const Z = (this.getComp(3) ?? 0) * 100;
     
         const xr = X / Xn;
         const yr = Y / Yn;

@@ -1,9 +1,9 @@
-import { Grille } from "../scripts/Grille.js";
-import { Pixel } from "../scripts/Pixel.js";
-import { RGB } from "../scripts/color/RGB.js";
-import { Coordonnees } from "../scripts/Coordonnees.js";
-import { baguetteMagique } from "../scripts/SpanFilling.js";
-import { Lab } from "../scripts/color/Lab.js";
+import { Grille } from "../scripts/Grille";
+import { Pixel } from "../scripts/Pixel";
+import { RGB } from "../scripts/color/RGB";
+import { Coordonnees } from "../scripts/Coordonnees";
+import { baguetteMagique } from "../scripts/SpanFilling";
+import { Lab } from "../scripts/color/Lab";
 
 // On récupère le canvas et son contexte
 const canvas = document.getElementById("drawingArea");

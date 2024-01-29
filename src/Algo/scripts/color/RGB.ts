@@ -1,5 +1,5 @@
-import { Couleur } from './Couleur.js';
-import { XYZ } from './XYZ.js';
+import { Couleur } from './Couleur';
+import { XYZ } from './XYZ';
 
 /**
  * @author Mattis Pingard mattis.pingard@gmail.com
@@ -12,36 +12,36 @@ export class RGB extends Couleur {
     /**
      * Transparence de la couleur
      */
-    #_transparence;
+    private _transparence: number;
 
     // CONSTRUCTEUR
     /**
      * Créer une Couleur sous la forme RGB
-     * @param {float} comp1 La valeur de la composante 1
-     * @param {float} comp2 La valeur de la composante 2
-     * @param {float} comp3 La valeur de la composante 3
-     * @param {float} alpha La valeur de la transparence
+     * @param {number} comp1 La valeur de la composante 1
+     * @param {number} comp2 La valeur de la composante 2
+     * @param {number} comp3 La valeur de la composante 3
+     * @param {number} alpha La valeur de la transparence
      */
     constructor(comp1 = 0, comp2 = 0, comp3 = 0, alpha = 0) {
         super(comp1, comp2, comp3);
-        this.#_transparence = alpha;
+        this._transparence = alpha;
     }
 
     // GETTERS & SETTERS
     /**
      * Obtient la valeur de la transparence
-     * @returns {float} La valeur de la transparence
+     * @returns {number} La valeur de la transparence
      */
-    getAlpha() {
-        return(this.#_transparence);
+    getAlpha(): number {
+        return(this._transparence);
     }
 
     /**
      * Définit la valeur de la transparence
-     * @param {int} a La nouvelle valeur de la transparence
+     * @param {number} a La nouvelle valeur de la transparence
      */
-    setAlpha(a) {
-        this.#_transparence = a;
+    setAlpha(a: number) {
+        this._transparence = a;
     }
 
     // METHODES
@@ -49,7 +49,7 @@ export class RGB extends Couleur {
      * Transformer une Couleur RGB vers XYZ
      * @returns {XYZ} La Couleur sous forme XYZ
      */
-    RGBversXYZ() {
+    RGBversXYZ(): XYZ {
         // Matrice de transformation.
         const M = [
             [0.4124564, 0.3575761, 0.1804375],
@@ -61,11 +61,11 @@ export class RGB extends Couleur {
 
         // Normalisation et linearisation du RGB (obligatoire pour convertir en XYZ)
         for (let i = 1; i < 4; i++) {
-            rgb.setComp(i, rgb.getComp(i) / 255);
-            if (rgb.getComp(i) <= 0.04045) {
-                rgb.setComp(i, rgb.getComp(i) / 12.92);
+            rgb.setComp(i, (rgb.getComp(i) ?? 0) / 255);
+            if ((rgb.getComp(i) ?? 0) <= 0.04045) {
+                rgb.setComp(i, (rgb.getComp(i) ?? 0) / 12.92);
             } else {
-                rgb.setComp(i, Math.pow((rgb.getComp(i) + 0.055) / 1.055, 2.4));
+                rgb.setComp(i, Math.pow(((rgb.getComp(i) ?? 0) + 0.055) / 1.055, 2.4));
             }
         }
 
@@ -74,7 +74,7 @@ export class RGB extends Couleur {
         // Conversion en XYZ
         for (let i = 1; i < 4; i++) {
             for (let j = 1; j < 4; j++) {
-                xyz.setComp(i, (xyz.getComp(i) + rgb.getComp(j) * M[i-1][j-1]));
+                xyz.setComp(i, ((xyz.getComp(i) ?? 0) + (rgb.getComp(j) ?? 0) * M[i-1][j-1]));
             }
         }
 
