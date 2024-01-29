@@ -27,8 +27,6 @@ enum Outil {
 })
 
 export class OutilComponent implements AfterViewInit {
-  private contentPlaceholder: ElementRef | undefined; 
-
   @ViewChild('sizeInput', { static: false }) sizeInput: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('sizeSlider', { static: false }) sizeSlider: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('toleranceInput', { static: false }) toleranceInput: ElementRef<HTMLInputElement> | undefined;
@@ -60,13 +58,13 @@ export class OutilComponent implements AfterViewInit {
   tolerance: number = 0;
 
   actionsParOutil = {
-    [Outil.Crayon]: (grille: GrilleComponent, x: number , y: number) => this.actionCrayon(grille, x, y),
-    [Outil.Gomme]: (grille: GrilleComponent, x: number , y: number) => this.actionGomme(grille, x, y),
-    [Outil.Selection]: (grille: GrilleComponent, x: number , y: number) => this.actionSelection(grille, x, y),
-    [Outil.Remplissage]: (grille: GrilleComponent, x: number , y: number) => this.actionRemplissage(grille, x, y),
-    [Outil.Pipette]: (grille: GrilleComponent, x: number , y: number) => this.actionPipette(grille, x, y),
-    [Outil.Baguette]: (grille: GrilleComponent, x: number , y: number) => this.actionBaguette(grille, x, y),
-    [Outil.Formes]: (grille: GrilleComponent, x: number , y: number) => this.actionFormes(grille, x, y),
+    [Outil.Crayon]: (grille: GrilleComponent, x: number, y: number) => this.actionCrayon(grille, x, y),
+    [Outil.Gomme]: (grille: GrilleComponent, x: number, y: number) => this.actionGomme(grille, x, y),
+    [Outil.Selection]: (grille: GrilleComponent, x: number, y: number) => this.actionSelection(grille, x, y),
+    [Outil.Remplissage]: (grille: GrilleComponent, x: number, y: number) => this.actionRemplissage(grille, x, y),
+    [Outil.Pipette]: (grille: GrilleComponent, x: number, y: number) => this.actionPipette(grille, x, y),
+    [Outil.Baguette]: (grille: GrilleComponent, x: number, y: number) => this.actionBaguette(grille, x, y),
+    [Outil.Formes]: (grille: GrilleComponent, x: number, y: number) => this.actionFormes(grille, x, y),
   };
 
   action(grille: GrilleComponent | undefined, x: number, y: number) {
@@ -75,7 +73,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   constructor(private changeDetectorRef: ChangeDetectorRef) { }
-  
+
   ngAfterViewInit() {
     this.sizeInput!.nativeElement.value = this.taille.toString();
     this.sizeSlider!.nativeElement.value = this.taille.toString();
@@ -155,26 +153,8 @@ export class OutilComponent implements AfterViewInit {
       this.transparency = parseInt(this.alphaSlider!.nativeElement.value, 10);
       this.finalColor = this.toColorRGB(this.hexaColor);
     });
-    // Listener sur le changement de la taille (Input)
-    this.sizeInput?.nativeElement.addEventListener('input', () => {
-      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
-      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
-    });
-    // Listener sur le changement de la taille (Slider)
-    this.sizeSlider?.nativeElement.addEventListener('input', () => {
-      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
-      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
-    });
-    // Listener sur le changement de la tolérance (Input)
-    this.toleranceInput?.nativeElement.addEventListener('input', () => {
-      this.toleranceSlider!.nativeElement.value = this.toleranceInput!.nativeElement.value;
-      this.tolerance = parseInt(this.toleranceInput!.nativeElement.value, 10);
-    });
-    // Listener sur le changement de la tolérance (Slider)
-    this.toleranceSlider?.nativeElement.addEventListener('input', () => {
-      this.toleranceInput!.nativeElement.value = this.toleranceSlider!.nativeElement.value;
-      this.tolerance = parseInt(this.toleranceSlider!.nativeElement.value, 10);
-    });
+    this.isTolerance = false;
+    this.changeDetectorRef.detectChanges();
   }
 
   colorChange() {
@@ -205,6 +185,16 @@ export class OutilComponent implements AfterViewInit {
     this.isResizable = true;
     this.isTolerance = false;
     this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
     this.sizeInput!.nativeElement.value = this.taille.toString();
     this.sizeSlider!.nativeElement.value = this.taille.toString();
   }
@@ -214,6 +204,16 @@ export class OutilComponent implements AfterViewInit {
     this.isResizable = true;
     this.isTolerance = false;
     this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
     this.sizeInput!.nativeElement.value = this.taille.toString();
     this.sizeSlider!.nativeElement.value = this.taille.toString();
   }
@@ -230,6 +230,16 @@ export class OutilComponent implements AfterViewInit {
     this.isResizable = false;
     this.isTolerance = true;
     this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la tolérance (Input)
+    this.toleranceInput?.nativeElement.addEventListener('input', () => {
+      this.toleranceSlider!.nativeElement.value = this.toleranceInput!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la tolérance (Slider)
+    this.toleranceSlider?.nativeElement.addEventListener('input', () => {
+      this.toleranceInput!.nativeElement.value = this.toleranceSlider!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceSlider!.nativeElement.value, 10);
+    });
     this.toleranceInput!.nativeElement.value = this.tolerance.toString();
     this.toleranceSlider!.nativeElement.value = this.tolerance.toString();
   }
@@ -246,6 +256,16 @@ export class OutilComponent implements AfterViewInit {
     this.isResizable = false;
     this.isTolerance = true;
     this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la tolérance (Input)
+    this.toleranceInput?.nativeElement.addEventListener('input', () => {
+      this.toleranceSlider!.nativeElement.value = this.toleranceInput!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la tolérance (Slider)
+    this.toleranceSlider?.nativeElement.addEventListener('input', () => {
+      this.toleranceInput!.nativeElement.value = this.toleranceSlider!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceSlider!.nativeElement.value, 10);
+    });
     this.toleranceInput!.nativeElement.value = this.tolerance.toString();
     this.toleranceSlider!.nativeElement.value = this.tolerance.toString();
   }
