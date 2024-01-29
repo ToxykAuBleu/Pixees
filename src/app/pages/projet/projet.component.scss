@@ -37,6 +37,63 @@
         top: 10px;
         right: 10px;
     }
+
+    #formNewProject{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
+        margin-top: 6vh;
+        margin-bottom: 6vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: row;
+
+        fa-icon {
+            width: 1.5em;
+        }
+
+        h1 {
+            margin-left: 1vw;
+        }
+
+        margin-bottom: 2vh;
+    }
+
+    .category-type {
+        margin-bottom: 3vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        label {
+            margin-right: 1vw;
+        }
+
+        .color-selector {
+            width:2vw;
+            height:2vw;
+        }
+    }
+
+    .button {
+        border-radius: 15px;
+        border: 1px solid #FFFFFF;
+        background-color: #924DE9;
+        font-weight: bold;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: auto;
+        cursor: pointer;
+        display: block;
+        width: 10vw;
+        color: white;
+    }
 }
 
 .card {
@@ -47,6 +104,7 @@
     padding: 3vw 1vw; 
     cursor: pointer;
     height: 30vh;
+    width: 12vw;
     display: flex;
     flex-direction: column;
     justify-content: center; /* Centrer verticalement */

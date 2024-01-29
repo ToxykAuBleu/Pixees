@@ -37,4 +37,8 @@ export class ProjetComponent {
   importProject() {
     this.switchView(View.Import);
   }
+
+  projectHome() {
+    this.switchView(View.Accueil);
+  }
 }

@@ -16,31 +16,37 @@
     </div>
 </div>
 
-<div id="newProject" class="hidden">
+<div id="newProject" class="grid grid-cols-1 grid-rows-1 place-items-center h-full hidden">
     <div class="center">
-        <div>
+        <div class="title">
             <fa-icon [icon]="faFileCirclePlus" size="xl"></fa-icon>
             <h1 class="text-left font-bold">Nouveau projet</h1>
         </div>
         
-        <fa-icon [icon]="faXmark" size="xl"></fa-icon>
+        <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
 
         <form id="formNewProject" method="post">
-            <label>Nom du projet</label><input name="name" type="text">
+            <div class="category-type">
+                <label>Nom du projet</label><input name="name" type="text">
+            </div>
+
+            <div class="category-type">
+                <label>Taille</label>
+                <select name="taille">
+                    <option value="5x5">5x5</option>
+                    <option value="10x10">10x10</option>
+                    <option value="20x20">20x20</option>
+                    <option value="50x50">50x50</option>
+                    <option value="128x128">128x128</option>
+                </select>
+            </div>
             
-            <label>Taille</label>
-            <select name="taille">
-                <option value="5x5">5x5</option>
-                <option value="10x10">10x10</option>
-                <option value="20x20">20x20</option>
-                <option value="50x50">50x50</option>
-                <option value="128x128">128x128</option>
-            </select>
+            <div class="category-type">
+                <label>Couleur de fond</label>
+                <input name="bgcolor" type="color" class="color-selector">
+            </div>
 
-            <label>Couleur de fond</label>
-            <input name="bgcolor" type="color">
-
-            <input type="submit" value="Créer">
+            <input type="submit" value="Créer" class="button">
         </form>
     </div>
 </div>
