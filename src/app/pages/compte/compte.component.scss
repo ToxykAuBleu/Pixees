@@ -1,0 +1,103 @@
+:host {
+    height: 100%;
+}
+
+.retour {
+    top: 12%;
+    left: 1%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    padding: 1em;
+    background: #EBAFAF7A;
+}
+
+.title {
+    text-align: left;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 40%;
+    height: 50%;
+    background-color:#EBAFAF;
+    border: 1px solid hsla(0, 0%, 65%, 0.158);
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    padding: 2rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+    margin-left: 5em;
+
+    .text-zone {
+        margin-top: 1.5em;
+        margin-left: 2em;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    .btn-modification {
+        border-radius: 15px;
+        border: 1px solid #B76969;
+        background-color: #B76969;
+        font-weight: bold;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        cursor: pointer;
+        display: block;
+        width: 30%;
+        // mettre le bouton à droite
+        margin-left: auto;
+        margin-top: 1.5em;
+    }
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 40%;
+    height: 50%;
+    background-color: #EBAFAF;
+    border: 1px solid hsla(0, 0%, 65%, 0.158);
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    padding: 2rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    
+    margin-right: 5em;
+    
+    .info {
+        margin-top: 1.5em;
+        margin-left: 2em;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        font-size: 1.1em;
+        font-weight: bold;
+        
+        .user-info {
+            cursor: pointer;
+        }
+    }
+}
+
+
