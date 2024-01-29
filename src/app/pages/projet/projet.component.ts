@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,8 +21,15 @@ export class ProjetComponent {
   faFileImport = faFileImport;
   faXmark = faXmark;
 
-  constructor(private router: Router) {};
-
+  
+  constructor(private router: ActivatedRoute) {};
+  
+  ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      console.log(params);
+      
+    });
+  }
   switchView(view: string) {
     for (const v of Object.values(View)) {
       document.getElementById(v)?.classList.add('hidden');
