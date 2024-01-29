@@ -13,8 +13,13 @@ import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 
 export class GrilleComponent implements AfterViewInit {
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
+
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
+
+  @ViewChild('gridCanvas', { static: false }) gridCanvas: ElementRef<HTMLCanvasElement> | undefined;
+  gridCtx: CanvasRenderingContext2D | null | undefined;
+
   public isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
@@ -28,6 +33,7 @@ export class GrilleComponent implements AfterViewInit {
     if (this.isBrowser) {
       console.log("Canvas : " + this.canvas?.nativeElement);
       this.ctx = this.canvas?.nativeElement.getContext('2d');
+      this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
       console.log("Context : " + this.ctx);
       // Récupération de la hauteur et de la largeur du canvas
       this.drawGrid(128, 128);
@@ -81,19 +87,28 @@ export class GrilleComponent implements AfterViewInit {
     console.log("drawGrid");
     const grille = new Grille(hauteur, largeur);
 
+    if (!this.gridCtx || !this.gridCanvas) {
+      return;
+    }
+
     if (!this.ctx || !this.canvas) {
       return;
     }
 
+    // Ajustement de la taille du Canvas
     this.canvas.nativeElement.width = largeur;
     this.canvas.nativeElement.height = hauteur;
 
+    // Ajustement de la taille du Canvas de la grille
+    this.gridCanvas.nativeElement.width = largeur;
+    this.gridCanvas.nativeElement.height = hauteur;
+
     // Création du pattern
-    const pattern = this.ctx.createPattern(this.drawPattern()!, "repeat");
+    const pattern = this.gridCtx.createPattern(this.drawPattern()!, "repeat");
 
     // Application du pattern
-    this.ctx.fillStyle = pattern as CanvasPattern;
-    this.ctx.fillRect(0, 0, largeur, hauteur);
+    this.gridCtx.fillStyle = pattern as CanvasPattern;
+    this.gridCtx.fillRect(0, 0, largeur, hauteur);
 
     return grille;
   }
@@ -106,5 +121,14 @@ export class GrilleComponent implements AfterViewInit {
     this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
     this.ctx.fillRect(x, y, largeur, hauteur);
     console.log("drawRect");
+  }
+
+  // Effacer un rectangle
+  clearRect(x: number, y: number, largeur: number, hauteur: number): void {
+    if (!this.ctx) {
+      return;
+    }
+    this.ctx.clearRect(x, y, largeur, hauteur);
+    console.log("clearRect");
   }
 }

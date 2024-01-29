@@ -206,6 +206,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   actionGomme(grille: GrilleComponent, x: number, y: number) {
+    grille.clearRect(x, y, 10, 10);
     console.log("actionGomme");
   }
 
