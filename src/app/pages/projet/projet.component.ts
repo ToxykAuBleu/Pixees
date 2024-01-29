@@ -42,7 +42,7 @@ export class ProjetComponent {
     const submitButton: HTMLElement = document.getElementById('createButton')!;
     submitButton.setAttribute('disabled', 'true');
 
-    this.http.post('http://localhost:3000/api/project/create', this.createForm.value).subscribe( 
+    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value).subscribe( 
       (res) => {
         console.log("Répondu: ", res);
         submitButton.removeAttribute('disabled');
