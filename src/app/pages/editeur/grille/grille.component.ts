@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { Component, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 
