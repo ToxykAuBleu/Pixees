@@ -20,24 +20,15 @@ export class GrilleComponent implements AfterViewInit {
   @ViewChild('gridCanvas', { static: false }) gridCanvas: ElementRef<HTMLCanvasElement> | undefined;
   gridCtx: CanvasRenderingContext2D | null | undefined;
 
-  public isBrowser: boolean;
-
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    //this.isBrowser = isPlatformBrowser(platformId);
-    this.isBrowser = true;
-    console.log("platformId : " + platformId);
-    console.log("isBrowser : " + this.isBrowser);
-  }
+  constructor() { }
 
   ngAfterViewInit(): void {
-    if (this.isBrowser) {
-      console.log("Canvas : " + this.canvas?.nativeElement);
-      this.ctx = this.canvas?.nativeElement.getContext('2d');
-      this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
-      console.log("Context : " + this.ctx);
-      // Récupération de la hauteur et de la largeur du canvas
-      this.drawGrid(128, 128);
-    }
+    console.log("Canvas : " + this.canvas?.nativeElement);
+    this.ctx = this.canvas?.nativeElement.getContext('2d');
+    this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
+    console.log("Context : " + this.ctx);
+    // Récupération de la hauteur et de la largeur du canvas
+    this.drawGrid(128, 128);
 
     this.canvas?.nativeElement.addEventListener('click', (e) => {
       console.log("Grille clicked");
@@ -59,27 +50,24 @@ export class GrilleComponent implements AfterViewInit {
   drawPattern(): HTMLCanvasElement | undefined {
     console.log("drawPattern");
     // Création du Canvas pour dessiner le pattern
-    if (this.isBrowser) {
-      const patternCanvas = document.createElement("canvas");
-      const patternContext = patternCanvas.getContext("2d");
-      // Ajustement de la taille du Canvas
-      patternCanvas.width = 2;
-      patternCanvas.height = 2;
-  
-      if (!patternContext) {
-        return;
-      }
-      // Dessin du pattern : 2x2 pixels, 1 noir, 1 blanc
-      patternContext.fillStyle = "#ddd";
-      patternContext.fillRect(0, 0, 1, 1);
-      patternContext.fillRect(1, 1, 1, 1);
-  
-      // Dessin de la bordure
-      patternContext.stroke();
-  
-      return patternCanvas;
+    const patternCanvas = document.createElement("canvas");
+    const patternContext = patternCanvas.getContext("2d");
+    // Ajustement de la taille du Canvas
+    patternCanvas.width = 2;
+    patternCanvas.height = 2;
+
+    if (!patternContext) {
+      return;
     }
-    return;
+    // Dessin du pattern : 2x2 pixels, 1 noir, 1 blanc
+    patternContext.fillStyle = "#ddd";
+    patternContext.fillRect(0, 0, 1, 1);
+    patternContext.fillRect(1, 1, 1, 1);
+
+    // Dessin de la bordure
+    patternContext.stroke();
+
+    return patternCanvas;
   }
 
   // Dessin de la grille
