@@ -16,7 +16,7 @@
         <div class="inline-flex flex-row gap-2 h-full">
             <div class="inline-flex flex-col gap-1 w-16">
                 <div>Hexa<br>
-                    <input #hexInput class="w-full text-center placeholder:text-center" type="text" maxlength="6" placeholder="#000000">
+                    <input #hexInput class="w-full text-center placeholder:text-center" type="text" maxlength="6" placeholder="000000">
                 </div>
                 <div class="flex">R
                     <input #redInput class="w-full ml-1 text-center placeholder:text-center" type="number" min="0" max="255" placeholder="0">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="inline-flex flex-col">
-                <p-colorPicker #colorPicker [(ngModel)]="color" [inline]="true" (onChange)="colorChange()"></p-colorPicker>
+                <p-colorPicker #colorPicker [(ngModel)]="hexaColor" [inline]="true" (onChange)="colorChange()"></p-colorPicker>
                 <input #alphaSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
             </div>
         </div>
