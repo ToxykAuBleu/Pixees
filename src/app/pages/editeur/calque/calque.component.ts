@@ -1,6 +1,6 @@
 import { Inject, Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { GrilleComponent } from '../grille/grille.component';
 import { InjectionToken } from '@angular/core';
 
@@ -21,6 +21,7 @@ export class CalqueComponent extends GrilleComponent {
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
   faCopy = faCopy;
+  faEye = faEye;
 
   private _position: number;
   private _nom: string;
