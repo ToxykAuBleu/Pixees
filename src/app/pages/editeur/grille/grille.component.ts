@@ -106,17 +106,17 @@ export class GrilleComponent implements AfterViewInit {
   }
 
   // Dessiner un rectangle
-  drawRect(x: number, y: number, taille: number, couleur: Couleur): void {
+  draw(x: number, y: number, rayon: number, couleur: Couleur): void {
     if (!this.ctx) {
       return;
     }
     this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
-    if (taille == 1) {
-      this.ctx.fillRect(x, y, taille, taille);
+    if (rayon == 1) {
+      this.ctx.fillRect(x, y, rayon, rayon);
     } else {
       this.ctx.beginPath();
-      this.ctx.arc(x, y, taille, 0, 2 * Math.PI);
-      this.ctx.arc(x, y, taille, 0, 2 * Math.PI);
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
       this.ctx.fill();
     }
     this.grille?.canvasToGrid(this.ctx);

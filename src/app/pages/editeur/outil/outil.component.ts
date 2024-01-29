@@ -290,7 +290,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   actionCrayon(grille: GrilleComponent, x: number, y: number) {
-    grille.drawRect(x, y, this.taille, this.finalColor);
+    grille.draw(x, y, this.taille, this.finalColor);
   }
 
   actionGomme(grille: GrilleComponent, x: number, y: number) {
