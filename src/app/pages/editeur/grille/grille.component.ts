@@ -20,6 +20,8 @@ export class GrilleComponent implements AfterViewInit {
   @ViewChild('gridCanvas', { static: false }) gridCanvas: ElementRef<HTMLCanvasElement> | undefined;
   gridCtx: CanvasRenderingContext2D | null | undefined;
 
+  grille: Grille | undefined;
+
   public isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
@@ -36,7 +38,7 @@ export class GrilleComponent implements AfterViewInit {
       this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
       console.log("Context : " + this.ctx);
       // Récupération de la hauteur et de la largeur du canvas
-      this.drawGrid(128, 128);
+      this.grille = this.drawGrid(128, 128);
     }
 
     this.canvas?.nativeElement.addEventListener('click', (e) => {
@@ -86,6 +88,8 @@ export class GrilleComponent implements AfterViewInit {
   drawGrid(hauteur: number, largeur: number): Grille | undefined {
     console.log("drawGrid");
     const grille = new Grille(hauteur, largeur);
+    console.log(grille);
+    
 
     if (!this.gridCtx || !this.gridCanvas) {
       return;
@@ -114,13 +118,21 @@ export class GrilleComponent implements AfterViewInit {
   }
 
   // Dessiner un rectangle
-  drawRect(x: number, y: number, largeur: number, hauteur: number, couleur: Couleur): void {
+  drawRect(x: number, y: number, taille: number, couleur: Couleur): void {
     if (!this.ctx) {
       return;
     }
     this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
-    this.ctx.fillRect(x, y, largeur, hauteur);
-    console.log("drawRect");
+    if (taille == 1) {
+      this.ctx.fillRect(x, y, taille, taille);
+    } else {
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, taille, 0, 2 * Math.PI);
+      this.ctx.arc(x, y, taille, 0, 2 * Math.PI);
+      this.ctx.fill();
+    }
+    this.grille?.canvasToGrid(this.ctx);
+    console.log(this.grille);
   }
 
   // Effacer un rectangle

@@ -1,4 +1,5 @@
 import { Pixel } from "./Pixel";
+import { RGB } from "./color/RGB";
 /**
  * @author Adrien Hiribarren Touya adrien64250@yahoo.com
  * @date 14/11/2023
@@ -95,4 +96,15 @@ export class Grille {
         }
     }
 
+    canvasToGrid(layerCtx: CanvasRenderingContext2D) {
+        for (let y = 0; y < this._hauteur; y++) {
+            for (let x = 0; x < this._largeur; x++) {
+                let data = layerCtx.getImageData(x, y, 1, 1).data;
+                let rgb = new RGB(data[0], data[1], data[2], data[3]/255);
+                let pixel = new Pixel();
+                pixel.setColor(rgb);
+                this.setPixelAt(x, y, pixel);
+            }
+        }
+    }
 }
