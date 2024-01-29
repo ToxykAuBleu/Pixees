@@ -37,7 +37,7 @@
                 <button value="20x20">20x20</button>
                 <button value="50x50">50x50</button>
                 <button value="128x128">128x128</button>
-                <button value="Personnalisé">Personnalisée</button>
+                <button value="Personnalisé" (click)="personalisationProject()">Personnalisée</button>
             </div>
             
             <div class="category-type">
@@ -104,3 +104,18 @@
             </form>
         </div>
     </div>
+</div>
+
+<div id="personalisationProject" class="grid grid-cols-1 grid-rows-1 place-items-center h-full hidden">
+    <div class="center">
+        <fa-icon (click)="newProject()" [icon]="faXmark" size="xl"></fa-icon>
+        <h1 class="text-left font-bold">Personnalisation</h1>
+        <div class="Personalisation">
+            <label>Entrez la taille de la grille souhaitée</label>
+            <div class="Personalisation-box">
+                <input type="number">X<input type="number">
+            </div>
+            <button>Valider</button>
+        </div>
+    </div>
+</div>

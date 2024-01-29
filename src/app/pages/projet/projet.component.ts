@@ -7,7 +7,8 @@ import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid
 enum View {
   Accueil = "projectHome",
   Nouveau = "newProject", 
-  Import = "importProject"
+  Import = "importProject",
+  Personalisation = "personalisationProject"
 };
 
 @Component({
@@ -69,6 +70,10 @@ export class ProjetComponent {
 
   importProject() {
     this.switchView(View.Import);
+  }
+
+  personalisationProject() {
+    this.switchView(View.Personalisation);
   }
 
 }

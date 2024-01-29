@@ -162,6 +162,62 @@
         width: 100px;
         height: 100px;
     }
+
+    .projet:hover {
+        transform: scale(1.1);
+    }
+
+    .Personalisation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        font-weight: bold;
+
+        label {
+            margin-top: 2vh;
+            margin-bottom: 1vh;
+        }
+
+        input {
+            margin-right: 1vw;
+            margin-left: 1vw;
+        }
+        
+        button {
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            border-radius: 15px;
+            border: 1px solid #FFFFFF;
+            background-color: #924DE9;
+            font-weight: bold;
+            padding: 0.5em;
+            padding-left: 1em;
+            padding-right: 1em;
+            margin-left: auto;
+            cursor: pointer;
+            display: block;
+            width: 10vw;
+            color: white;
+        }
+    }
+
+    .Personalisation-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2vh;
+
+        .title {
+            margin-bottom: 0;
+        }
+
+        .button {
+            margin-left: 0;
+        }
+    }
 }
 
 .card {
