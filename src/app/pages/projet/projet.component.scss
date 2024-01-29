@@ -113,19 +113,19 @@
           }
           .color-selector::-webkit-color-swatch {
             border-radius: 5px;
-            border: none;
+            border: solid 2px black;
           }
           .color-selector::-moz-color-swatch {
             border-radius: 5px;
-            border: none;
+            border: solid 2px black;
           }
 
         button {
             margin-left: 0.2vw;
             margin-right: 0.2vw;
             border-radius: 5px;
-            border: 1px solid #FFFFFF;
-            background-color: #924DE9;
+            border: 1px solid #000000;
+            background-color: #FFFFFF;
             font-weight: bold;
             font-size: 0.75em;
             padding-top: 0.3em;
@@ -134,7 +134,7 @@
             padding-right: 0.3em;
             cursor: pointer;
             width: auto;
-            color: white;
+            color: black;
             text-align: center;
         }
     }
