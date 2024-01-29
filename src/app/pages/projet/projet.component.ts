@@ -1,5 +1,5 @@
-import { Component, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Component, Injectable } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,19 +16,17 @@ enum View {
   templateUrl: './projet.component.html',
   styleUrl: './projet.component.scss'
 })
+
+@Injectable()
 export class ProjetComponent {
   faFileCirclePlus = faFileCirclePlus;
   faFileImport = faFileImport;
   faXmark = faXmark;
 
   
-  constructor(private router: ActivatedRoute) {};
+  constructor(private http: HttpClient) {};
   
   ngOnInit() {
-    this.router.queryParams.subscribe(params => {
-      console.log(params);
-      
-    });
   }
   switchView(view: string) {
     for (const v of Object.values(View)) {
