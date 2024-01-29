@@ -219,7 +219,8 @@ export class OutilComponent implements AfterViewInit {
   }
 
   actionPipette(grille: GrilleComponent, x: number, y: number) {
-    console.log("actionPipette");
+    this.finalColor = grille.pickColor(x, y) as RGB;
+    this.hexaColor = this.finalColor.RGBversHexa();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {
