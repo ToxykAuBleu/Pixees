@@ -2,6 +2,32 @@
     height: 100%;
 }
 
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: white grey;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 20px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+    border: 3px solid grey;
+  }
+
+.content {
+    overflow: auto;
+}
+
 .center {
     background-color: #AF80EA;
     text-align: left;
@@ -29,7 +55,7 @@
         justify-content: center;
         align-items: center;
         margin-top: 6vh;
-        margin-bottom: 6vh;
+        margin-bottom: 5vh;
     }
 
     > fa-icon {
@@ -93,6 +119,15 @@
         display: block;
         width: 10vw;
         color: white;
+    }
+
+    .projet-type {
+        text-align: center;
+    }
+
+    .projet {
+        width: 100px;
+        height: 100px;
     }
 }
 

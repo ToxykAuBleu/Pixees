@@ -57,17 +57,51 @@
             <fa-icon [icon]="faFileImport" size="xl"></fa-icon>
             <h1 class="text-left font-bold">Importer projet</h1>
         </div>
-        
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
-
-        <form id="formImportProject" method="post">
-            <div class="category-type">
-                <label>Projet</label>
-                <select name="project">
-                    <option *ngFor="let project of projects" value="{{project.id}}">{{project.name}}</option>
-                </select>
-            </div>
-
-            <input type="submit" value="Charger" class="button">
-        </form>
+        <div class="content">
+            <form id="formImportProject" method="post">
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>A</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>B</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>C</label>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>D</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>E</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>F</label>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>G</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>H</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>I</label>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
