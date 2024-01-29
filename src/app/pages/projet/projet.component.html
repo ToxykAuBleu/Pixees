@@ -25,9 +25,9 @@
         
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
 
-        <form id="formNewProject" method="post">
+        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit()">
             <div class="category-type">
-                <label>Nom du projet</label><input name="name" type="text">
+                <label>Nom du projet</label><input name="name" formControlName="name" type="text">
             </div>
 
             <div class="category-type">
@@ -43,7 +43,7 @@
             
             <div class="category-type">
                 <label>Couleur de fond</label>
-                <input name="bgcolor" type="color" class="color-selector">
+                <input name="bgcolor" formControlName="bgcolor" type="color" class="color-selector">
             </div>
 
             <input type="submit" value="Créer" class="button">

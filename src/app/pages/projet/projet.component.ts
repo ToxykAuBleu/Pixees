@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,7 +13,7 @@ enum View {
 @Component({
   selector: 'app-projet',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, ReactiveFormsModule],
   templateUrl: './projet.component.html',
   styleUrl: './projet.component.scss'
 })
@@ -23,11 +24,22 @@ export class ProjetComponent {
   faFileImport = faFileImport;
   faXmark = faXmark;
 
+  createForm: FormGroup = this.formBuilder.group({
+    name: '',
+    taille: '',
+    bgcolor: '',
+  });
   
-  constructor(private http: HttpClient) {};
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient) 
+  { };
   
-  ngOnInit() {
+  
+  onSubmit(): void {
+    console.log(this.createForm.value);
   }
+
   switchView(view: string) {
     for (const v of Object.values(View)) {
       document.getElementById(v)?.classList.add('hidden');
