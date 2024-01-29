@@ -1,0 +1,20 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+    volumes:
+      - ./dist/pixees:/app
+    ports:
+      - 4000:4000
+  proxy:
+    build:
+      context: .
+      dockerfile: proxy.Dockerfile
+    volumes:
+      - ./backend:/var/www/Pixees
+    ports:
+      - 8080:80
+    depends_on:
+      - app
