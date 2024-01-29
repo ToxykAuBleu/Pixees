@@ -153,6 +153,18 @@ export class OutilComponent implements AfterViewInit {
       this.transparency = parseInt(this.alphaSlider!.nativeElement.value, 10);
       this.finalColor = this.toColorRGB(this.hexaColor);
     });
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
+    this.sizeInput!.nativeElement.value = this.taille.toString();
+    this.sizeSlider!.nativeElement.value = this.taille.toString();
     this.isTolerance = false;
     this.changeDetectorRef.detectChanges();
   }
