@@ -38,6 +38,18 @@ export class ProjetComponent {
   
   onSubmit(): void {
     console.log(this.createForm.value);
+    const submitButton: HTMLElement = document.getElementById('createButton')!;
+    submitButton.setAttribute('disabled', 'true');
+
+    this.http.post('http://localhost:3000/api/project/create', this.createForm.value).subscribe( 
+      (res) => {
+        console.log("Répondu: ", res);
+        submitButton.removeAttribute('disabled');
+      },
+      (err) => {
+        console.log("Erreur: ", err);
+        submitButton.removeAttribute('disabled');
+      });
   }
 
   switchView(view: string) {
