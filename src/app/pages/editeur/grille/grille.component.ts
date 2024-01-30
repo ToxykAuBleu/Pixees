@@ -1,8 +1,10 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, Output, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
+import { RGB } from '../../../../Algo/scripts/color/RGB'
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
-import { RGB } from '../../../../Algo/scripts/color/RGB';
+import { GrilleService } from '../../../grille-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-grille',
@@ -12,11 +14,12 @@ import { RGB } from '../../../../Algo/scripts/color/RGB';
   styleUrl: './grille.component.scss'
 })
 
-export class GrilleComponent implements AfterViewInit {
+export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
+
 
   @ViewChild('gridCanvas', { static: false }) gridCanvas: ElementRef<HTMLCanvasElement> | undefined;
   gridCtx: CanvasRenderingContext2D | null | undefined;
@@ -24,7 +27,26 @@ export class GrilleComponent implements AfterViewInit {
   grille: Grille | undefined;
   mouseDown: boolean = false;
 
-  constructor() { }
+  private subscription: Subscription | undefined;
+
+  public isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService) {
+    //this.isBrowser = isPlatformBrowser(platformId);
+    this.isBrowser = true;
+    console.log("platformId : " + platformId);
+    console.log("isBrowser : " + this.isBrowser);
+  }
+
+  ngOnInit(): void {
+    this.subscription = this.grilleService.grille$.subscribe(() => {
+      this.exportAsPNG();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
 
   ngAfterViewInit(): void {
     this.ctx = this.canvas?.nativeElement.getContext('2d');
@@ -167,5 +189,16 @@ export class GrilleComponent implements AfterViewInit {
     }
     const data = this.ctx.getImageData(x, y, 1, 1).data;
     return new RGB(data[0], data[1], data[2], data[3]/255);
+  }
+
+  exportAsPNG(): void {
+    if (!this.canvas) {
+      return;
+    }
+    const dataURL = this.canvas.nativeElement.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.href = dataURL;
+    link.click();
   }
 }

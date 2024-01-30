@@ -1,0 +1,188 @@
+:host {
+    height: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    .img-left {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_1 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_2 {
+        left: 45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_3 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
+.center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #EFEDEE;
+    border: 1px solid hsla(0, 0%, 65%, 0.158);
+    box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(20px);
+    z-index: 99;
+    padding: 2rem;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+}
+
+.retour {
+    top: 12%;
+    left: 1%;
+    display: inline-block;
+    position: absolute;
+    border-radius: 50%;
+    padding: 1em;
+    background: #EBAFAF7A;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.zone-connexion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.input-zone {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    p {
+        align-items: flex-start;
+    }
+
+    input {
+        align-items: flex-end;
+    }
+}
+
+.link-zone {
+    text-align: center;
+    .checkbox {
+        // écarter le <a> de la checkbox
+        margin-right: 5px;
+    }
+    a {
+        font-size : 0.9em;
+    }
+    p {
+        display: inline-block;
+    }
+}
+
+.connexion {
+    text-align: left;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.input-label-container {
+    display: inline-flex;
+    width: 100%;
+    float: right;
+    justify-content: space-between;
+}
+
+
+.input-box {
+    border-radius: 5px;
+    border: 1px solid white;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.link {
+    text-decoration: underline !important;
+    color: blue;
+    cursor: pointer;
+}
+
+.btn-inscription {
+    border-radius: 15px;
+    border: 1px solid #B76969;
+    background-color: #B76969;
+    font-weight: bold;
+    padding: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    cursor: pointer;
+    display: block;
+    width: 60%;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .img-right {
+        width: 150px;
+        height: 150px;
+        position: relative;
+    }
+
+    #img_4 {
+        top: 20%;
+        left: 0;
+        width: 100%;
+        z-index: 1;
+    }
+    
+    #img_5 {
+        left: -45%;
+        top: -40%;
+        width: 100%;
+        z-index: 2;
+    }
+    
+    #img_6 {
+        left: 0;
+        top: -100%;
+        width: 100%;
+        z-index: 3;
+    }
+}
+
+.img {
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
