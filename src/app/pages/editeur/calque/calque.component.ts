@@ -1,8 +1,9 @@
-import { Inject, Component } from '@angular/core';
+import { Inject, Component, PLATFORM_ID } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { GrilleComponent } from '../grille/grille.component';
 import { InjectionToken } from '@angular/core';
+import { GrilleService } from '../../../grille-service.service';
 
 export const POSITION = new InjectionToken<number>('Position');
 export const NOM = new InjectionToken<string>('Nom');
@@ -26,8 +27,8 @@ export class CalqueComponent extends GrilleComponent {
   private _position: number;
   private _nom: string;
 
-  constructor(@Inject(POSITION) private position: number, @Inject(NOM) private nom: string) {
-    super();
+  constructor(@Inject(POSITION) private position: number, @Inject(NOM) private nom: string, @Inject(PLATFORM_ID) platformId: Object, grilleService: GrilleService) {
+    super(platformId, grilleService);
     this._position = position;
     this._nom = nom;
   }

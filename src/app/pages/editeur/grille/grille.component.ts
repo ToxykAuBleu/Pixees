@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Inject, Output, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 import { RGB } from '../../../../Algo/scripts/color/RGB'
@@ -32,8 +32,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   public isBrowser: boolean;
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService) {
-    //this.isBrowser = isPlatformBrowser(platformId);
-    this.isBrowser = true;
+    this.isBrowser = isPlatformBrowser(platformId);
+    // this.isBrowser = true;
     console.log("platformId : " + platformId);
     console.log("isBrowser : " + this.isBrowser);
   }
