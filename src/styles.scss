@@ -2,15 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "primeng/resources/primeng.css";
+
 @layer base {
   html {
     @apply font-body;
   }
+
+}
+
+link {
+  text-decoration: underline;
 }
 
 .slick-prev:before,
 .slick-next:before {
   color: #000 !important;
+}
+
+.p-colorpicker-panel {
+  background-color: transparent !important;
+}
+
+.p-colorpicker-color-handle {
+  mix-blend-mode: difference !important;
+  border: 2px solid #fff !important;
+}
+
+.p-colorpicker-hue-handle {
+  border: 2px solid #000 !important;
 }
 
 .img-style {

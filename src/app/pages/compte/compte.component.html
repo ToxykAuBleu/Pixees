@@ -1,1 +1,25 @@
-<p>compte works!</p>
+<div class="flex flex-row justify-around items-center h-full">
+    <button (click)="goToHome()" class="retour"><fa-icon [icon]="faArrowLeft" size="2xl"></fa-icon></button>
+    <div class="left">
+        <h1 class="title">Mes informations compte</h1>
+        <div class="text-zone">
+            <div class="pseudo">
+                <p>Pseudo</p>
+                <p><!-- Pseudo a récupérer et mettre ici---></p>
+            </div>
+            <div class="email">
+                <p>Email</p>
+                <p><!-- Email a récupérer et mettre ici---></p>
+            </div>
+        </div>
+        <button class="btn-modification">Modifier</button>
+    </div>
+    <div class="right">
+        <h1 class="title">Mes informations utilisateur</h1>
+        <div class="info">
+            <p (click)="goToHome()" class="user-info">Mes signalements</p>
+            <p (click)="goToHome()" class="user-info">Mes j'aimes</p>
+            <p (click)="goToHome()" class="user-info">Mes adeptes / suivis</p>
+        </div>
+    </div>
+</div>
