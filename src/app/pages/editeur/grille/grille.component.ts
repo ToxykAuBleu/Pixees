@@ -148,11 +148,11 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   // Dessiner
-  draw(x: number, y: number, rayon: number, couleur: Couleur): void {
+  draw(x: number, y: number, rayon: number, couleur: RGB): void {
     if (!this.ctx) {
       return;
     }
-    this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
+    this.ctx.fillStyle = `rgba(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)}, ${couleur.getAlpha()})`;
     if (rayon == 1) {
       this.ctx.fillRect(x, y, rayon, rayon);
     } else {
