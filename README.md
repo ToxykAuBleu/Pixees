@@ -55,11 +55,24 @@ Chaque PR devra suivre le formalisme suivant:
 Pour ce faire, vous devez vous assurer d'avoir d'installé:
 - git (Optionnel, permet de télécharger tout le projet + simplement)
 - Node.js (>= 20.9.0)
+- Docker Desktop
 
 Exécuter les lignes suivantes dans une invite de commande:
 ```powershell
 git clone https://github.com/ToxykAuBleu/Pixees.git
 cd Pixees/
 npm ci
-npm run start
+```
+
+Afin de lancer Docker, vous devez vous assurer que l'application a été build: 
+- soit avec ``npm run build`` (ne se reconstruira pas s'il y a des changements)
+- [RECOMMANDE] soit avec ``npm run watch`` (actualisation à chaque changement du code)
+
+Enfin, lancer Docker avec ``docker compose up -d``, puis rendez vous à l'adresse http://localhost:4000.
+Pour arrêter l'application, simplement ``docker compose down``.
+
+En cas de gros soucis avec Docker et les images créées/en cache, faites les commandes suivantes:
+```
+docker builer prune -a
+docker image prune -a
 ```
