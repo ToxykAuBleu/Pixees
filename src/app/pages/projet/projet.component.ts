@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Injectable, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -22,9 +22,6 @@ enum View {
 
 @Injectable()
 export class ProjetComponent {
-  // @ViewChild('customTailleL', { static: false }) customTailleL: ElementRef | undefined;
-  // @ViewChild('customTailleH', { static: false }) customTailleH: ElementRef | undefined;
-
   faFileCirclePlus = faFileCirclePlus;
   faFileImport = faFileImport;
   faXmark = faXmark;
@@ -46,7 +43,14 @@ export class ProjetComponent {
     const submitButton: HTMLElement = document.getElementById('createButton')!;
     submitButton.setAttribute('disabled', 'true');
 
-    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value).subscribe( 
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      }),
+      withCredentials: true
+    };
+    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value, httpOptions).subscribe( 
       (res) => {
         console.log("Répondu: ", res);
         submitButton.removeAttribute('disabled');
@@ -57,30 +61,30 @@ export class ProjetComponent {
       });
   }
 
-  switchView(view: string) {
+  switchView(view: string): void {
     for (const v of Object.values(View)) {
       document.getElementById(v)?.classList.add('hidden');
     }
     document.getElementById(view)!.classList.remove('hidden');
   }
 
-  redirectHome() {
+  redirectHome(): void {
     this.router.navigate(['/', 'home']);
   }
 
-  projectHome() {
+  projectHome(): void {
     this.switchView(View.Accueil);
   }
 
-  newProject() {
+  newProject(): void {
     this.switchView(View.Nouveau);
   }
 
-  importProject() {
+  importProject(): void {
     this.switchView(View.Import);
   }
 
-  personalisationProject() {
+  personalisationProject(): void {
     this.switchView(View.Personalisation);
   }
 
