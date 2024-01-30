@@ -6,6 +6,7 @@ import { ColorPickerModule } from 'primeng/colorpicker';
 import { RGB } from '../../../../Algo/scripts/color/RGB';
 import { GrilleComponent } from '../grille/grille.component';
 import { FormsModule } from '@angular/forms';
+import { ChangeDetectorRef } from '@angular/core';
 
 enum Outil {
   Crayon,
@@ -26,6 +27,10 @@ enum Outil {
 })
 
 export class OutilComponent implements AfterViewInit {
+  @ViewChild('sizeInput', { static: false }) sizeInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('sizeSlider', { static: false }) sizeSlider: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('toleranceInput', { static: false }) toleranceInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('toleranceSlider', { static: false }) toleranceSlider: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('hexInput', { static: false }) hexInput: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('redInput', { static: false }) redInput: ElementRef<HTMLInputElement> | undefined;
   @ViewChild('greenInput', { static: false }) greenInput: ElementRef<HTMLInputElement> | undefined;
@@ -46,25 +51,31 @@ export class OutilComponent implements AfterViewInit {
   faShapes = faShapes;
 
   outilActuel: Outil = Outil.Crayon;
+  isResizable: boolean = true;
+  isTolerance: boolean = true;
+
+  taille: number = 1;
+  tolerance: number = 0;
 
   actionsParOutil = {
-    [Outil.Crayon]: (grille: GrilleComponent, x: number , y: number) => this.actionCrayon(grille, x, y),
-    [Outil.Gomme]: (grille: GrilleComponent, x: number , y: number) => this.actionGomme(grille, x, y),
-    [Outil.Selection]: (grille: GrilleComponent, x: number , y: number) => this.actionSelection(grille, x, y),
-    [Outil.Remplissage]: (grille: GrilleComponent, x: number , y: number) => this.actionRemplissage(grille, x, y),
-    [Outil.Pipette]: (grille: GrilleComponent, x: number , y: number) => this.actionPipette(grille, x, y),
-    [Outil.Baguette]: (grille: GrilleComponent, x: number , y: number) => this.actionBaguette(grille, x, y),
-    [Outil.Formes]: (grille: GrilleComponent, x: number , y: number) => this.actionFormes(grille, x, y),
+    [Outil.Crayon]: (grille: GrilleComponent, x: number, y: number) => this.actionCrayon(grille, x, y),
+    [Outil.Gomme]: (grille: GrilleComponent, x: number, y: number) => this.actionGomme(grille, x, y),
+    [Outil.Selection]: (grille: GrilleComponent, x: number, y: number) => this.actionSelection(grille, x, y),
+    [Outil.Remplissage]: (grille: GrilleComponent, x: number, y: number) => this.actionRemplissage(grille, x, y),
+    [Outil.Pipette]: (grille: GrilleComponent, x: number, y: number) => this.actionPipette(grille, x, y),
+    [Outil.Baguette]: (grille: GrilleComponent, x: number, y: number) => this.actionBaguette(grille, x, y),
+    [Outil.Formes]: (grille: GrilleComponent, x: number, y: number) => this.actionFormes(grille, x, y),
   };
 
   action(grille: GrilleComponent | undefined, x: number, y: number) {
-    console.log("action");
     this.actionsParOutil[this.outilActuel](grille!, x, y);
   }
 
-  constructor() { }
-  
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+
   ngAfterViewInit() {
+    this.sizeInput!.nativeElement.value = this.taille.toString();
+    this.sizeSlider!.nativeElement.value = this.taille.toString();
     // Listener sur le changement de la couleur Héxadécimale
     this.hexInput?.nativeElement.addEventListener('input', () => {
       let value = this.hexInput?.nativeElement.value!;
@@ -141,6 +152,20 @@ export class OutilComponent implements AfterViewInit {
       this.transparency = parseInt(this.alphaSlider!.nativeElement.value, 10);
       this.finalColor = this.toColorRGB(this.hexaColor);
     });
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
+    this.sizeInput!.nativeElement.value = this.taille.toString();
+    this.sizeSlider!.nativeElement.value = this.taille.toString();
+    this.isTolerance = false;
+    this.changeDetectorRef.detectChanges();
   }
 
   colorChange() {
@@ -168,45 +193,105 @@ export class OutilComponent implements AfterViewInit {
 
   crayon() {
     this.outilActuel = Outil.Crayon;
-    console.log("Crayon selected");
+    this.isResizable = true;
+    this.isTolerance = false;
+    this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
+    this.sizeInput!.nativeElement.value = this.taille.toString();
+    this.sizeSlider!.nativeElement.value = this.taille.toString();
   }
 
   gomme() {
     this.outilActuel = Outil.Gomme;
-    console.log("Gomme selected");
+    this.isResizable = true;
+    this.isTolerance = false;
+    this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la taille (Input)
+    this.sizeInput?.nativeElement.addEventListener('input', () => {
+      this.sizeSlider!.nativeElement.value = this.sizeInput!.nativeElement.value;
+      this.taille = parseInt(this.sizeInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la taille (Slider)
+    this.sizeSlider?.nativeElement.addEventListener('input', () => {
+      this.sizeInput!.nativeElement.value = this.sizeSlider!.nativeElement.value;
+      this.taille = parseInt(this.sizeSlider!.nativeElement.value, 10);
+    });
+    this.sizeInput!.nativeElement.value = this.taille.toString();
+    this.sizeSlider!.nativeElement.value = this.taille.toString();
   }
 
   selection() {
     this.outilActuel = Outil.Selection;
-    console.log("Selection selected");
+    this.isResizable = false;
+    this.isTolerance = false;
   }
 
   remplissage() {
     this.outilActuel = Outil.Remplissage;
-    console.log("Remplissage selected");
+    this.isResizable = false;
+    this.isTolerance = true;
+    this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la tolérance (Input)
+    this.toleranceInput?.nativeElement.addEventListener('input', () => {
+      this.toleranceSlider!.nativeElement.value = this.toleranceInput!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la tolérance (Slider)
+    this.toleranceSlider?.nativeElement.addEventListener('input', () => {
+      this.toleranceInput!.nativeElement.value = this.toleranceSlider!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceSlider!.nativeElement.value, 10);
+    });
+    this.toleranceInput!.nativeElement.value = this.tolerance.toString();
+    this.toleranceSlider!.nativeElement.value = this.tolerance.toString();
   }
 
   pipette() {
     this.outilActuel = Outil.Pipette;
-    console.log("Pipette selected");
+    this.isResizable = false;
+    this.isTolerance = false;
   }
 
   baguette() {
     this.outilActuel = Outil.Baguette;
-    console.log("Baguette selected");
+    this.isResizable = false;
+    this.isTolerance = true;
+    this.changeDetectorRef.detectChanges();
+    // Listener sur le changement de la tolérance (Input)
+    this.toleranceInput?.nativeElement.addEventListener('input', () => {
+      this.toleranceSlider!.nativeElement.value = this.toleranceInput!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceInput!.nativeElement.value, 10);
+    });
+    // Listener sur le changement de la tolérance (Slider)
+    this.toleranceSlider?.nativeElement.addEventListener('input', () => {
+      this.toleranceInput!.nativeElement.value = this.toleranceSlider!.nativeElement.value;
+      this.tolerance = parseInt(this.toleranceSlider!.nativeElement.value, 10);
+    });
+    this.toleranceInput!.nativeElement.value = this.tolerance.toString();
+    this.toleranceSlider!.nativeElement.value = this.tolerance.toString();
   }
 
   formes() {
     this.outilActuel = Outil.Formes;
     console.log("Formes selected");
+    this.isResizable = false;
+    this.isTolerance = false;
   }
 
   actionCrayon(grille: GrilleComponent, x: number, y: number) {
-    grille.drawRect(x, y, 10, 10, this.finalColor);
+    grille.draw(x, y, this.taille, this.finalColor);
   }
 
   actionGomme(grille: GrilleComponent, x: number, y: number) {
-    console.log("actionGomme");
+    grille.clear(x, y, this.taille);
   }
 
   actionSelection(grille: GrilleComponent, x: number, y: number) {
@@ -218,7 +303,8 @@ export class OutilComponent implements AfterViewInit {
   }
 
   actionPipette(grille: GrilleComponent, x: number, y: number) {
-    console.log("actionPipette");
+    this.finalColor = grille.pickColor(x, y) as RGB;
+    this.hexaColor = this.finalColor.RGBversHexa();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {

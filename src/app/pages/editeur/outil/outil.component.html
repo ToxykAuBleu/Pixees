@@ -1,5 +1,5 @@
 <div class="inline-flex flex-col divide-black divide-y-2 gap-2 bg-[#D9D9D9] p-4 rounded-lg shadow-lg">
-    <div class="inline-flex flex-col">
+    <div class="inline-flex flex-col gap-2">
         <h1>Outils</h1>
         <div class="grid grid-cols-3 grid-rows-3 fr place-items-center bg-[#C6B6DA] py-2 px-8 gap-2 rounded-md">
             <fa-icon (click)="crayon()" [icon]="faPencil" size="2xl" class="cursor-pointer "></fa-icon>
@@ -9,6 +9,20 @@
             <fa-icon (click)="pipette()" [icon]="faEyeDropper" size="2xl" class="cursor-pointer"></fa-icon>
             <fa-icon (click)="baguette()" [icon]="faWandMagic" size="2xl" class="cursor-pointer"></fa-icon>
             <fa-icon (click)="formes()" class="col-span-3 cursor-pointer" [icon]="faShapes" size="2xl"></fa-icon>
+        </div>
+        <div *ngIf="isResizable" class="inline-flex flex-col gap-2">
+            <div class="inline-flex flex-row w-full">
+                <p class="w-full">Taille</p>
+                <input #sizeInput class="text-center placeholder:text-center" type="number" min="0" max="128" placeholder="---">
+            </div>
+            <input #sizeSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full rounded-lg appearance-none cursor-pointer bg-gray-700">
+        </div>
+        <div *ngIf="isTolerance" class="inline-flex flex-col gap-2">
+            <div class="inline-flex flex-row w-full">
+                <p class="w-full">Tolérance</p>
+                <input #toleranceInput class="text-center placeholder:text-center" type="number" min="0" max="100" placeholder="---">
+            </div>
+            <input #toleranceSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full rounded-lg appearance-none cursor-pointer bg-gray-700">
         </div>
     </div>
     <div class="inline-flex flex-col h-full">
