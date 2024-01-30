@@ -1,0 +1,244 @@
+:host {
+    height: 100%;
+}
+
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: white grey;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: grey;
+    border-radius: 20px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 20px;
+    border: 3px solid grey;
+  }
+
+.content {
+    overflow: auto;
+}
+
+.center {
+    background-color: #AF80EA;
+    text-align: left;
+    padding: 2vw;
+    position: relative;
+    display: flex;
+    border-radius: 10px;
+    border: 2px solid #fff;
+    backdrop-filter: blur(2vw);
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 60vh;
+    width: 40vw;
+    max-width: 80%;
+    margin: 0 auto;
+
+    h1 {
+        height: 1.5em;
+        text-align: left;
+    }
+
+    #cards {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6vh;
+        margin-bottom: 5vh;
+    }
+
+    > fa-icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
+
+    #formNewProject{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: left;
+        margin-top: 6vh;
+        margin-bottom: 6vh;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: row;
+
+        fa-icon {
+            width: 1.5em;
+        }
+
+        h1 {
+            margin-left: 1vw;
+        }
+
+        margin-bottom: 2vh;
+    }
+
+    .category-type {
+        margin-bottom: 3vh;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+        label {
+            margin-right: 0.7vw;
+        }
+
+        .color-selector {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            width: 1.8vw;
+            height: 5vh;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+          }
+          .color-selector::-webkit-color-swatch {
+            border-radius: 5px;
+            border: solid 2px black;
+          }
+          .color-selector::-moz-color-swatch {
+            border-radius: 5px;
+            border: solid 2px black;
+          }
+
+        button {
+            margin-left: 0.2vw;
+            margin-right: 0.2vw;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            background-color: #FFFFFF;
+            font-weight: bold;
+            font-size: 0.75em;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            padding-left: 0.3em;
+            padding-right: 0.3em;
+            cursor: pointer;
+            width: auto;
+            color: black;
+            text-align: center;
+        }
+    }
+
+    .button {
+        border-radius: 15px;
+        border: 1px solid #FFFFFF;
+        background-color: #924DE9;
+        font-weight: bold;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        margin-left: auto;
+        cursor: pointer;
+        display: block;
+        width: 10vw;
+        color: white;
+    }
+
+    .projet-type {
+        text-align: center;
+    }
+
+    .projet {
+        width: 100px;
+        height: 100px;
+    }
+
+    .projet:hover {
+        transform: scale(1.1);
+    }
+
+    .Personalisation {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        font-weight: bold;
+
+        label {
+            margin-top: 2vh;
+            margin-bottom: 1vh;
+        }
+
+        input {
+            margin-right: 1vw;
+            margin-left: 1vw;
+        }
+        
+        button {
+            margin-top: 2vh;
+            margin-bottom: 2vh;
+            border-radius: 15px;
+            border: 1px solid #FFFFFF;
+            background-color: #924DE9;
+            font-weight: bold;
+            padding: 0.5em;
+            padding-left: 1em;
+            padding-right: 1em;
+            margin-left: auto;
+            cursor: pointer;
+            display: block;
+            width: 10vw;
+            color: white;
+        }
+    }
+
+    .Personalisation-box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2vh;
+
+        .title {
+            margin-bottom: 0;
+        }
+
+        .button {
+            margin-left: 0;
+        }
+    }
+}
+
+.card {
+    margin: 1vw auto;
+    background-color: #fff;
+    border-radius: 20px;
+    border: 0.3vw solid #000;
+    padding: 3vw 1vw; 
+    cursor: pointer;
+    height: 30vh;
+    width: 12vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrer verticalement */
+    align-items: center; /* Centrer horizontalement */
+
+    position: relative;
+
+    fa-icon {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+    }
+}

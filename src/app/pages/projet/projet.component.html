@@ -1,5 +1,121 @@
-<p>projet works!</p>
+<div id="projectHome" class="grid grid-cols-1 grid-rows-1 place-items-center h-full">
+    <div class="center">
+        <h1 class="text-left font-bold">Choisis ton projet</h1>
+        <fa-icon [icon]="faXmark" size="xl"></fa-icon>
 
-<button (click)="goToEditeur()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-    goToEditeur
-</button>
+        <div id="cards" class="grid grid-cols-2 grid-rows-1 gap-4">
+            <div (click)="newProject()" class="card min-h-2">
+                <p>Nouveau projet</p>
+                <fa-icon [icon]="faFileCirclePlus" size="xl"></fa-icon>
+            </div>
+            <div (click)="importProject()" class="card min-h-2">
+                <p>Charger projet</p>
+                <fa-icon [icon]="faFileImport" size="xl"></fa-icon>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newProject" class="grid grid-cols-1 grid-rows-1 place-items-center h-full hidden">
+    <div class="center">
+        <div class="title">
+            <fa-icon [icon]="faFileCirclePlus" size="xl"></fa-icon>
+            <h1 class="text-left font-bold">Nouveau projet</h1>
+        </div>
+        
+        <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
+
+        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit()">
+            <div class="category-type">
+                <label>Nom du projet</label><input name="name" formControlName="name" type="text">
+            </div>
+
+            <div class="category-type">
+                <label>Taille</label>
+                <button type="button" value="5x5">5x5</button>
+                <button type="button" value="10x10">10x10</button>
+                <button type="button" value="20x20">20x20</button>
+                <button type="button" value="50x50">50x50</button>
+                <button type="button" value="128x128">128x128</button>
+                <button type="button" value="Personnalisé" (click)="personalisationProject()">Personnalisée</button>
+            </div>
+            
+            <div class="category-type">
+                <label>Couleur de fond</label>
+                <input name="bgcolor" formControlName="bgcolor" type="color" class="color-selector">
+            </div>
+
+            <input id="createButton" type="submit" value="Créer" class="button">
+        </form>
+    </div>
+</div>
+
+<div id="importProject" class="grid grid-cols-1 grid-rows-1 place-items-center h-full hidden">
+    <div class="center">
+        <div class="title">
+            <fa-icon [icon]="faFileImport" size="xl"></fa-icon>
+            <h1 class="text-left font-bold">Importer projet</h1>
+        </div>
+        <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
+        <div class="content">
+            <form id="formImportProject" method="post">
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>A</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>B</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>C</label>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>D</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>E</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>F</label>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-around items-center">
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>G</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>H</label>
+                    </div>
+                    <div class="projet-type">
+                        <img src="../../../assets/img/1.jpg" class="projet">
+                        <label>I</label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="personalisationProject" class="grid grid-cols-1 grid-rows-1 place-items-center h-full hidden">
+    <div class="center">
+        <fa-icon (click)="newProject()" [icon]="faXmark" size="xl"></fa-icon>
+        <h1 class="text-left font-bold">Personnalisation</h1>
+        <div class="Personalisation">
+            <label>Entrez la taille de la grille souhaitée</label>
+            <div class="Personalisation-box">
+                <input type="number">X<input type="number">
+            </div>
+            <button>Valider</button>
+        </div>
+    </div>
+</div>
