@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,7 +34,8 @@ export class ProjetComponent {
   
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient) 
+    private http: HttpClient,
+    private router: Router) 
   { };
   
   
@@ -58,6 +60,10 @@ export class ProjetComponent {
       document.getElementById(v)?.classList.add('hidden');
     }
     document.getElementById(view)!.classList.remove('hidden');
+  }
+
+  redirectHome() {
+    this.router.navigate(['/', 'home']);
   }
 
   projectHome() {
