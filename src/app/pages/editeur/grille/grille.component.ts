@@ -14,7 +14,6 @@ import { RGB } from '../../../../Algo/scripts/color/RGB';
 
 export class GrilleComponent implements AfterViewInit {
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
-  @Output() grilleUp = new EventEmitter<{ x: number, y: number }>();
 
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
@@ -28,10 +27,8 @@ export class GrilleComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    console.log("Canvas : " + this.canvas?.nativeElement);
     this.ctx = this.canvas?.nativeElement.getContext('2d');
     this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
-    console.log("Context : " + this.ctx);
     // Récupération de la hauteur et de la largeur du canvas
     this.grille = this.drawGrid(128, 128);
 
@@ -42,17 +39,22 @@ export class GrilleComponent implements AfterViewInit {
     this.canvas?.nativeElement.addEventListener('mousemove', (e) => {
       if(this.mouseDown) {
         let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
-        console.log("x : " + x + " y : " + y);
         this.onGrilleClick(x, y);
       }
     });
     
     this.canvas?.nativeElement.addEventListener('mouseup', (e) => {
       this.mouseDown = !this.mouseDown;
+      if (this.ctx){
+        this.grille?.canvasToGrid(this.ctx);
+      }
     });
 
     this.canvas?.nativeElement.addEventListener('mouseleave', (e) => {
       this.mouseDown = false;
+      if (this.ctx){
+        this.grille?.canvasToGrid(this.ctx);
+      }
     });
   }
 
@@ -65,13 +67,11 @@ export class GrilleComponent implements AfterViewInit {
   }
 
   onGrilleClick(x: number, y: number) {
-    console.log("Grille clicked à émettre");
     this.grilleClicked.emit({ x, y })
   }
 
   // Création du pattern
   drawPattern(): HTMLCanvasElement | undefined {
-    console.log("drawPattern");
     // Création du Canvas pour dessiner le pattern
     const patternCanvas = document.createElement("canvas");
     const patternContext = patternCanvas.getContext("2d");
@@ -95,10 +95,7 @@ export class GrilleComponent implements AfterViewInit {
 
   // Dessin de la grille
   drawGrid(hauteur: number, largeur: number): Grille | undefined {
-    console.log("drawGrid");
     const grille = new Grille(hauteur, largeur);
-    console.log(grille);
-    
 
     if (!this.gridCtx || !this.gridCanvas) {
       return;
@@ -128,7 +125,6 @@ export class GrilleComponent implements AfterViewInit {
 
   // Dessiner un rectangle
   draw(x: number, y: number, rayon: number, couleur: Couleur): void {
-    console.log("draw");
     if (!this.ctx) {
       return;
     }
@@ -141,7 +137,7 @@ export class GrilleComponent implements AfterViewInit {
       this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
       this.ctx.fill();
     }
-    this.grille?.canvasToGrid(this.ctx);
+    // this.grille?.canvasToGrid(this.ctx);
   }
 
   // Effacer un rectangle
@@ -150,7 +146,6 @@ export class GrilleComponent implements AfterViewInit {
       return;
     }
     this.ctx.clearRect(x, y, largeur, hauteur);
-    console.log("clearRect");
   }
 
   pickColor(x: number, y: number): Couleur {

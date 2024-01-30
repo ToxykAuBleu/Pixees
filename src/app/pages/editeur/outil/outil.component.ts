@@ -68,7 +68,6 @@ export class OutilComponent implements AfterViewInit {
   };
 
   action(grille: GrilleComponent | undefined, x: number, y: number) {
-    console.log("action");
     this.actionsParOutil[this.outilActuel](grille!, x, y);
   }
 
@@ -232,7 +231,6 @@ export class OutilComponent implements AfterViewInit {
 
   selection() {
     this.outilActuel = Outil.Selection;
-    console.log("Selection selected");
     this.isResizable = false;
     this.isTolerance = false;
   }
@@ -258,7 +256,6 @@ export class OutilComponent implements AfterViewInit {
 
   pipette() {
     this.outilActuel = Outil.Pipette;
-    console.log("Pipette selected");
     this.isResizable = false;
     this.isTolerance = false;
   }
