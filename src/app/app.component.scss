@@ -121,13 +121,18 @@ fa-icon svg {
 
 #couleurAccueil {
     background-color: #7CEB60;
+
+    form {
+        background-color: #7EBD6E;
+    }
 }
 
 #couleurUtilisateur {
     background-color: #4D4C46;
     color: #FFFFFF;
 
-    ul li form {
+
+    form {
         background-color: #000000;
 
         button {
