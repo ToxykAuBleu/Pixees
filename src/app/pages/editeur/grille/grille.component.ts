@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, Output, EventEmitter }
 import { CommonModule } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
+import { RGB } from '../../../../Algo/scripts/color/RGB';
 
 @Component({
   selector: 'app-grille',
@@ -147,5 +148,13 @@ export class GrilleComponent implements AfterViewInit {
     }
     this.ctx.clearRect(x, y, largeur, hauteur);
     console.log("clearRect");
+  }
+
+  pickColor(x: number, y: number): Couleur {
+    if (!this.ctx) {
+      return new RGB(0, 0, 0, 0);
+    }
+    const data = this.ctx.getImageData(x, y, 1, 1).data;
+    return new RGB(data[0], data[1], data[2], data[3]/255);
   }
 }
