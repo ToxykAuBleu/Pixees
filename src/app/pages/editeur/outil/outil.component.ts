@@ -304,7 +304,15 @@ export class OutilComponent implements AfterViewInit {
 
   actionPipette(grille: GrilleComponent, x: number, y: number) {
     this.finalColor = grille.pickColor(x, y) as RGB;
+    console.log(this.finalColor);
     this.hexaColor = this.finalColor.RGBversHexa();
+    this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+    console.log(this.hexaColor);
+    this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
+    this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
+    this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
+    this.alphaInput!.nativeElement.value = (this.finalColor.getComp(4)! * 100).toString();
+    this.alphaSlider!.nativeElement.value = (this.finalColor.getComp(4)! * 100).toString();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {
