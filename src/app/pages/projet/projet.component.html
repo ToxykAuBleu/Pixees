@@ -32,11 +32,12 @@
 
             <div class="category-type">
                 <label>Taille</label>
-                <button type="button" value="5x5">5x5</button>
-                <button type="button" value="10x10">10x10</button>
-                <button type="button" value="20x20">20x20</button>
-                <button type="button" value="50x50">50x50</button>
-                <button type="button" value="128x128">128x128</button>
+                <input formControlName="taille" [hidden]="true">
+                <button type="button" (click)="changeTaille(5, 5)" value="5x5">5x5</button>
+                <button type="button" (click)="changeTaille(10, 10)" value="10x10">10x10</button>
+                <button type="button" (click)="changeTaille(20, 20)" value="20x20">20x20</button>
+                <button type="button" (click)="changeTaille(50, 50)" value="50x50">50x50</button>
+                <button type="button" (click)="changeTaille(128, 128)" value="128x128">128x128</button>
                 <button type="button" value="Personnalisé" (click)="personalisationProject()">Personnalisée</button>
             </div>
             
@@ -113,9 +114,9 @@
         <div class="Personalisation">
             <label>Entrez la taille de la grille souhaitée</label>
             <div class="Personalisation-box">
-                <input type="number">X<input type="number">
+                <input #customTailleH type="number">X<input #customTailleL type="number">
             </div>
-            <button>Valider</button>
+            <button (click)="changeTaille(customTailleH, customTailleL); newProject();">Valider</button>
         </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -22,6 +22,9 @@ enum View {
 
 @Injectable()
 export class ProjetComponent {
+  // @ViewChild('customTailleL', { static: false }) customTailleL: ElementRef | undefined;
+  // @ViewChild('customTailleH', { static: false }) customTailleH: ElementRef | undefined;
+
   faFileCirclePlus = faFileCirclePlus;
   faFileImport = faFileImport;
   faXmark = faXmark;
@@ -37,7 +40,6 @@ export class ProjetComponent {
     private http: HttpClient,
     private router: Router) 
   { };
-  
   
   onSubmit(): void {
     console.log(this.createForm.value);
@@ -82,4 +84,11 @@ export class ProjetComponent {
     this.switchView(View.Personalisation);
   }
 
+  changeTaille(hauteur: number | HTMLInputElement, largeur: number | HTMLInputElement) {
+    if (hauteur instanceof HTMLInputElement && largeur instanceof HTMLInputElement) {
+      this.createForm.controls['taille'].setValue(`${hauteur.value}x${largeur.value}`);
+    } else {
+      this.createForm.controls['taille'].setValue(`${hauteur}x${largeur}`);
+    }
+  }
 }
