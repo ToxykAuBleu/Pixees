@@ -13,6 +13,7 @@ import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 
 export class GrilleComponent implements AfterViewInit {
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
+  @Output() grilleUp = new EventEmitter<{ x: number, y: number }>();
 
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
@@ -21,6 +22,7 @@ export class GrilleComponent implements AfterViewInit {
   gridCtx: CanvasRenderingContext2D | null | undefined;
 
   grille: Grille | undefined;
+  mouseDown: boolean = false;
 
   constructor() { }
 
@@ -32,15 +34,29 @@ export class GrilleComponent implements AfterViewInit {
     // Récupération de la hauteur et de la largeur du canvas
     this.grille = this.drawGrid(128, 128);
 
-    this.canvas?.nativeElement.addEventListener('click', (e) => {
-      console.log("Grille clicked");
-      const rect = this.canvas!.nativeElement.getBoundingClientRect();
-      let x = e.clientX - rect.left;
-      let y = e.clientY - rect.top;
-      x = Math.floor(this.canvas!.nativeElement.width * x / rect.width);
-      y = Math.floor(this.canvas!.nativeElement.height * y / rect.height);
-      this.onGrilleClick(x, y);
+    this.canvas?.nativeElement.addEventListener('mousedown', (e) => {
+      this.mouseDown = !this.mouseDown;
     });
+
+    this.canvas?.nativeElement.addEventListener('mousemove', (e) => {
+      if(this.mouseDown) {
+        let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
+        console.log("x : " + x + " y : " + y);
+        this.onGrilleClick(x, y);
+      }
+    });
+    
+    this.canvas?.nativeElement.addEventListener('mouseup', (e) => {
+      this.mouseDown = !this.mouseDown;
+    });
+  }
+
+  getMousePos(canvas: HTMLCanvasElement, evt: MouseEvent) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: Math.floor(canvas.width * (evt.clientX - rect.left) / rect.width),
+      y: Math.floor(canvas.height * (evt.clientY - rect.top) / rect.height)
+    };
   }
 
   onGrilleClick(x: number, y: number) {
@@ -107,20 +123,21 @@ export class GrilleComponent implements AfterViewInit {
 
   // Dessiner un rectangle
   draw(x: number, y: number, rayon: number, couleur: Couleur): void {
+    console.log("draw");
     if (!this.ctx) {
       return;
     }
-    this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
-    if (rayon == 1) {
-      this.ctx.fillRect(x, y, rayon, rayon);
-    } else {
-      this.ctx.beginPath();
-      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
-      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
-      this.ctx.fill();
-    }
-    this.grille?.canvasToGrid(this.ctx);
-    console.log(this.grille);
+    this.ctx.fillRect(x, y, rayon, rayon);
+    // this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
+    // if (rayon == 1) {
+    //   this.ctx.fillRect(x, y, rayon, rayon);
+    // } else {
+    //   this.ctx.beginPath();
+    //   this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+    //   this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+    //   this.ctx.fill();
+    // }
+    // this.grille?.canvasToGrid(this.ctx);
   }
 
   // Effacer un rectangle
