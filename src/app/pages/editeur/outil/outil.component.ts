@@ -317,8 +317,9 @@ export class OutilComponent implements AfterViewInit {
     this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
     this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
     this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
-    this.alphaInput!.nativeElement.value = (this.finalColor.getComp(4)! * 100).toString();
-    this.alphaSlider!.nativeElement.value = (this.finalColor.getComp(4)! * 100).toString();
+    this.tolerance = Math.round(this.finalColor.getAlpha()! * 100) * 100;
+    this.alphaInput!.nativeElement.value = this.tolerance.toString();
+    this.alphaSlider!.nativeElement.value = this.tolerance.toString();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {
