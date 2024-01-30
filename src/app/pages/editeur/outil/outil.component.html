@@ -1,0 +1,56 @@
+<div class="inline-flex flex-col divide-black divide-y-2 gap-2 bg-[#D9D9D9] p-4 rounded-lg shadow-lg">
+    <div class="inline-flex flex-col gap-2">
+        <h1>Outils</h1>
+        <div class="grid grid-cols-3 grid-rows-3 fr place-items-center bg-[#C6B6DA] py-2 px-8 gap-2 rounded-md">
+            <fa-icon (click)="crayon()" [icon]="faPencil" size="2xl" class="cursor-pointer "></fa-icon>
+            <fa-icon (click)="gomme()" [icon]="faEraser" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="selection()" [icon]="faVectorSquare" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="remplissage()" [icon]="faFillDrip" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="pipette()" [icon]="faEyeDropper" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="baguette()" [icon]="faWandMagic" size="2xl" class="cursor-pointer"></fa-icon>
+            <fa-icon (click)="formes()" class="col-span-3 cursor-pointer" [icon]="faShapes" size="2xl"></fa-icon>
+        </div>
+        <div *ngIf="isResizable" class="inline-flex flex-col gap-2">
+            <div class="inline-flex flex-row w-full">
+                <p class="w-full">Taille</p>
+                <input #sizeInput class="text-center placeholder:text-center" type="number" min="0" max="128" placeholder="---">
+            </div>
+            <input #sizeSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full rounded-lg appearance-none cursor-pointer bg-gray-700">
+        </div>
+        <div *ngIf="isTolerance" class="inline-flex flex-col gap-2">
+            <div class="inline-flex flex-row w-full">
+                <p class="w-full">Tolérance</p>
+                <input #toleranceInput class="text-center placeholder:text-center" type="number" min="0" max="100" placeholder="---">
+            </div>
+            <input #toleranceSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full rounded-lg appearance-none cursor-pointer bg-gray-700">
+        </div>
+    </div>
+    <div class="inline-flex flex-col h-full">
+        <div>Couleurs</div>
+        <div class="inline-flex flex-row gap-2 h-full">
+            <div class="inline-flex flex-col gap-1 w-16">
+                <div>Hexa<br>
+                    <input #hexInput class="w-full text-center placeholder:text-center" type="text" maxlength="6" placeholder="000000">
+                </div>
+                <div class="flex">R
+                    <input #redInput class="w-full ml-1 text-center placeholder:text-center" type="number" min="0" max="255" placeholder="0">
+                </div>
+                <div class="flex">G
+                    <input #greenInput class="w-full ml-1 text-center placeholder:text-center" type="number" min="0" max="255" placeholder="0">
+                </div>
+                <div class="flex">B
+                    <input #blueInput class="w-full ml-1 text-center placeholder:text-center" type="number" min="0" max="255" placeholder="0">
+                </div>
+                <div>Alpha<br>
+                    <input #alphaInput class="w-full text-center placeholder:text-center" type="number" min="0" max="100" placeholder="100%">
+                </div>
+            </div>
+            <div class="inline-flex flex-col">
+                <p-colorPicker #colorPicker [(ngModel)]="hexaColor" [inline]="true" (onChange)="colorChange()"></p-colorPicker>
+                <input #alphaSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <canvas #saturationCanvas class="border-black border-solid border-2 w-1 h-1 aspect-square"></canvas>
+<canvas #hueCanvas class="border-black border-solid border-2"></canvas> -->
