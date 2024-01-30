@@ -1,7 +1,9 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
+import { GrilleService } from '../../../grille-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-grille',
@@ -11,17 +13,31 @@ import { Couleur } from '../../../../Algo/scripts/color/Couleur';
   styleUrl: './grille.component.scss'
 })
 
-export class GrilleComponent implements AfterViewInit {
+export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
+
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
+
+  private subscription: Subscription | undefined;
+
   public isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService) {
     //this.isBrowser = isPlatformBrowser(platformId);
     this.isBrowser = true;
     console.log("platformId : " + platformId);
     console.log("isBrowser : " + this.isBrowser);
+  }
+
+  ngOnInit(): void {
+    this.subscription = this.grilleService.grille$.subscribe(() => {
+      this.exportAsPNG();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -106,5 +122,16 @@ export class GrilleComponent implements AfterViewInit {
     this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
     this.ctx.fillRect(x, y, largeur, hauteur);
     console.log("drawRect");
+  }
+
+  exportAsPNG(): void {
+    if (!this.canvas) {
+      return;
+    }
+    const dataURL = this.canvas.nativeElement.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.href = dataURL;
+    link.click();
   }
 }
