@@ -125,7 +125,7 @@ export class GrilleComponent implements AfterViewInit {
     return grille;
   }
 
-  // Dessiner un rectangle
+  // Dessiner
   draw(x: number, y: number, rayon: number, couleur: Couleur): void {
     if (!this.ctx) {
       return;
@@ -142,12 +142,23 @@ export class GrilleComponent implements AfterViewInit {
     // this.grille?.canvasToGrid(this.ctx);
   }
 
-  // Effacer un rectangle
-  clearRect(x: number, y: number, largeur: number, hauteur: number): void {
+  // Effacer
+  clear(x: number, y: number, rayon: number): void {
     if (!this.ctx) {
       return;
     }
-    this.ctx.clearRect(x, y, largeur, hauteur);
+    this.ctx.fillStyle = `rgb(0,0,0,0)`;
+    if (rayon == 1) {
+      this.ctx.fillRect(x, y, rayon, rayon);
+    } else {
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+      this.ctx.save();
+      this.ctx.clip();
+      this.ctx.clearRect(x - rayon, y - rayon, rayon * 2, rayon * 2);
+      this.ctx.restore();
+    }
   }
 
   pickColor(x: number, y: number): Couleur {
