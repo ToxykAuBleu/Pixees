@@ -50,6 +50,10 @@ export class GrilleComponent implements AfterViewInit {
     this.canvas?.nativeElement.addEventListener('mouseup', (e) => {
       this.mouseDown = !this.mouseDown;
     });
+
+    this.canvas?.nativeElement.addEventListener('mouseleave', (e) => {
+      this.mouseDown = false;
+    });
   }
 
   getMousePos(canvas: HTMLCanvasElement, evt: MouseEvent) {
@@ -128,17 +132,16 @@ export class GrilleComponent implements AfterViewInit {
     if (!this.ctx) {
       return;
     }
-    this.ctx.fillRect(x, y, rayon, rayon);
-    // this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
-    // if (rayon == 1) {
-    //   this.ctx.fillRect(x, y, rayon, rayon);
-    // } else {
-    //   this.ctx.beginPath();
-    //   this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
-    //   this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
-    //   this.ctx.fill();
-    // }
-    // this.grille?.canvasToGrid(this.ctx);
+    this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
+    if (rayon == 1) {
+      this.ctx.fillRect(x, y, rayon, rayon);
+    } else {
+      this.ctx.beginPath();
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
+      this.ctx.fill();
+    }
+    this.grille?.canvasToGrid(this.ctx);
   }
 
   // Effacer un rectangle
