@@ -33,6 +33,8 @@ export class GrilleComponent implements AfterViewInit {
     this.grille = this.drawGrid(128, 128);
 
     this.canvas?.nativeElement.addEventListener('mousedown', (e) => {
+      let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
+      this.onGrilleClick(x, y);
       this.mouseDown = !this.mouseDown;
     });
 
@@ -44,7 +46,7 @@ export class GrilleComponent implements AfterViewInit {
     });
     
     this.canvas?.nativeElement.addEventListener('mouseup', (e) => {
-      this.mouseDown = !this.mouseDown;
+      this.mouseDown = false;
       if (this.ctx){
         this.grille?.canvasToGrid(this.ctx);
       }
