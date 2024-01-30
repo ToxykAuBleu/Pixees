@@ -5,7 +5,7 @@
 </div> -->
 
 <div class="grid grid-cols-3 h-full place-items-center">
-    <app-outil></app-outil>
-    <app-grille class="w-full"></app-grille>
-    <app-calque></app-calque>
+    <app-outil #outil></app-outil>
+    <app-grille #grille class="w-full" (grilleClicked)="onGrilleClicked($event)"></app-grille>
+    <app-calque #calque></app-calque>
 </div> 

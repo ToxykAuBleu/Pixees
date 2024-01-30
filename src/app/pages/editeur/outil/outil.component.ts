@@ -1,25 +1,41 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faEraser, faVectorSquare, faFillDrip, faEyeDropper, faWandMagic, faShapes } from '@fortawesome/free-solid-svg-icons';
+import { ColorPickerModule } from 'primeng/colorpicker';
 import { RGB } from '../../../../Algo/scripts/color/RGB';
+import { GrilleComponent } from '../grille/grille.component';
+import { FormsModule } from '@angular/forms';
+
+enum Outil {
+  Crayon,
+  Gomme,
+  Selection,
+  Remplissage,
+  Pipette,
+  Baguette,
+  Formes
+}
 
 @Component({
   selector: 'app-outil',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, ColorPickerModule, FormsModule],
   templateUrl: './outil.component.html',
   styleUrl: './outil.component.scss'
 })
-export class OutilComponent implements AfterViewInit{
-  @ViewChild('hueCanvas', { static: false }) canvasHue: ElementRef<HTMLCanvasElement> | undefined;
-  hueCtx: CanvasRenderingContext2D | null | undefined;
 
-  @ViewChild('saturationCanvas', { static: false }) canvasSaturation: ElementRef<HTMLCanvasElement> | undefined;
-  saturationCtx: CanvasRenderingContext2D | null | undefined;
+export class OutilComponent implements AfterViewInit {
+  @ViewChild('hexInput', { static: false }) hexInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('redInput', { static: false }) redInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('greenInput', { static: false }) greenInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('blueInput', { static: false }) blueInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('alphaInput', { static: false }) alphaInput: ElementRef<HTMLInputElement> | undefined;
+  @ViewChild('alphaSlider', { static: false }) alphaSlider: ElementRef<HTMLInputElement> | undefined;
 
-  hue: RGB = new RGB(0, 0, 0);
-  couleur: RGB = new RGB(0, 0, 0);
+  hexaColor: any = '#000000';
+  transparency: number = 100;
+  finalColor: RGB = new RGB(0, 0, 0, 1);
 
   faPencil = faPencil;
   faEraser = faEraser;
@@ -29,85 +45,187 @@ export class OutilComponent implements AfterViewInit{
   faWandMagic = faWandMagic;
   faShapes = faShapes;
 
+  outilActuel: Outil = Outil.Crayon;
+
+  actionsParOutil = {
+    [Outil.Crayon]: (grille: GrilleComponent, x: number , y: number) => this.actionCrayon(grille, x, y),
+    [Outil.Gomme]: (grille: GrilleComponent, x: number , y: number) => this.actionGomme(grille, x, y),
+    [Outil.Selection]: (grille: GrilleComponent, x: number , y: number) => this.actionSelection(grille, x, y),
+    [Outil.Remplissage]: (grille: GrilleComponent, x: number , y: number) => this.actionRemplissage(grille, x, y),
+    [Outil.Pipette]: (grille: GrilleComponent, x: number , y: number) => this.actionPipette(grille, x, y),
+    [Outil.Baguette]: (grille: GrilleComponent, x: number , y: number) => this.actionBaguette(grille, x, y),
+    [Outil.Formes]: (grille: GrilleComponent, x: number , y: number) => this.actionFormes(grille, x, y),
+  };
+
+  action(grille: GrilleComponent | undefined, x: number, y: number) {
+    console.log("action");
+    this.actionsParOutil[this.outilActuel](grille!, x, y);
+  }
+
   constructor() { }
-
-  ngAfterViewInit(): void {
-    console.log("Canvas : " + this.canvasHue?.nativeElement);
-    this.drawHue();
-    this.canvasHue?.nativeElement.addEventListener('mousedown', (e) => { this.pickHue(e); });
-  }
-
-  drawSaturation() {
-    console.log("drawSaturation");
-  }
-
-  drawHue(): void {
-    console.log("drawHue");
-    if (this.canvasHue) {
-      this.hueCtx = this.canvasHue.nativeElement.getContext('2d', { willReadFrequently: true });
-      console.log("hueCtx : " + this.hueCtx);
-      if (this.hueCtx) {
-        const gradient = this.hueCtx.createLinearGradient(0, 0, 0, this.canvasHue.nativeElement.height);
-        gradient.addColorStop(0, 'rgb(255, 0, 0)');
-        gradient.addColorStop(0.15, 'rgb(255, 0, 255)');
-        gradient.addColorStop(0.33, 'rgb(0, 0, 255)');
-        gradient.addColorStop(0.49, 'rgb(0, 255, 255)');
-        gradient.addColorStop(0.67, 'rgb(0, 255, 0)');
-        gradient.addColorStop(0.84, 'rgb(255, 255, 0)');
-        gradient.addColorStop(1, 'rgb(255, 0, 0)');
-        this.hueCtx.fillStyle = gradient;
-        this.hueCtx.fillRect(0, 0, this.canvasHue.nativeElement.width, this.canvasHue.nativeElement.height);
-
+  
+  ngAfterViewInit() {
+    // Listener sur le changement de la couleur Héxadécimale
+    this.hexInput?.nativeElement.addEventListener('input', () => {
+      let value = this.hexInput?.nativeElement.value!;
+      if (value.length > 6) {
+        value = value.slice(0, 6);
+        this.hexInput!.nativeElement.value = value;
       }
-    }
+      if (value.length === 6) {
+        const isValidRGB = /^([0-9A-Fa-f]{2}){3}$/.test(value);
+        if (!isValidRGB) {
+          value = '000000';
+          this.hexInput!.nativeElement.value = "";
+        }
+      }
+      this.hexaColor = '#' + value;
+      this.finalColor = this.toColorRGB(this.hexaColor);
+    });
+    // Listener sur le changement de la couleur Rouge
+    this.redInput?.nativeElement.addEventListener('input', () => {
+      let value = parseInt(this.redInput?.nativeElement.value!, 10);
+      if (value < 0) {
+        value = 0;
+        this.redInput!.nativeElement.value = value.toString();
+      }
+      if (value > 255) {
+        value = 255;
+        this.redInput!.nativeElement.value = value.toString();
+      }
+      let newString = this.replaceAt(1, value.toString(16), this.hexaColor);
+      this.hexaColor = newString;
+      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+      this.finalColor = this.toColorRGB(this.hexaColor);
+    });
+    // Listener sur le changement de la couleur Verte
+    this.greenInput?.nativeElement.addEventListener('input', () => {
+      let value = parseInt(this.greenInput?.nativeElement.value!, 10);
+      if (value < 0) {
+        value = 0;
+        this.greenInput!.nativeElement.value = value.toString();
+      }
+      if (value > 255) {
+        value = 255;
+        this.greenInput!.nativeElement.value = value.toString();
+      }
+      let newString = this.replaceAt(3, value.toString(16), this.hexaColor);
+      this.hexaColor = newString;
+      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+      this.finalColor = this.toColorRGB(this.hexaColor);
+    });
+    // Listener sur le changement de la couleur Bleue
+    this.blueInput?.nativeElement.addEventListener('input', () => {
+      let value = parseInt(this.blueInput?.nativeElement.value!, 10);
+      if (value < 0) {
+        value = 0;
+        this.blueInput!.nativeElement.value = value.toString();
+      }
+      if (value > 255) {
+        value = 255;
+        this.blueInput!.nativeElement.value = value.toString();
+      }
+      let newString = this.replaceAt(5, value.toString(16), this.hexaColor);
+      this.hexaColor = newString;
+      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+    });
+    // Listener sur le changement de la couleur Alpha (Input)
+    this.alphaInput?.nativeElement.addEventListener('input', () => {
+      this.alphaSlider!.nativeElement.value = this.alphaInput!.nativeElement.value;
+      this.transparency = parseInt(this.alphaInput!.nativeElement.value, 10);
+      this.finalColor = this.toColorRGB(this.hexaColor);
+    });
+    // Listener sur le changement de la couleur Alpha (Slider)
+    this.alphaSlider?.nativeElement.addEventListener('input', () => {
+      this.alphaInput!.nativeElement.value = this.alphaSlider!.nativeElement.value;
+      this.transparency = parseInt(this.alphaSlider!.nativeElement.value, 10);
+      this.finalColor = this.toColorRGB(this.hexaColor);
+    });
   }
 
-  pickHue(e: MouseEvent): void {
-    const mousePos = this.getMousePos(this.canvasHue?.nativeElement, e);
-    console.log("mousePos : " + mousePos.x + " " + mousePos.y);
-    const imageData = this.hueCtx?.getImageData(mousePos.x, mousePos.y, 1, 1).data;
-    if (imageData) {
-      console.log("ImageData : " + imageData);
-      this.hue = new RGB(imageData[0], imageData[1], imageData[2]);
-    }
+  colorChange() {
+    this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+    this.finalColor.HexaversRGB(this.hexaColor.slice(1));
+    this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
+    this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
+    this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
   }
 
-  getMousePos(canvas: HTMLCanvasElement | undefined, e: MouseEvent): {x: number, y: number} {
-    if (canvas) {
-      const rect = canvas.getBoundingClientRect();
-      return {
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      };
+  replaceAt(index: number, replacement: string, original: string): string {
+    if (replacement.length <= 1) {
+      replacement = '0' + replacement;
     }
-    return {x: 0, y: 0};
+    return original.slice(0, index) + replacement + original.slice(index + replacement.length);
+  }
+
+  toColorRGB(color: string): RGB {
+    let red = parseInt(color.slice(1, 3), 16);
+    let green = parseInt(color.slice(3, 5), 16);
+    let blue = parseInt(color.slice(5, 7), 16);
+    let alpha = parseInt(this.alphaInput!.nativeElement.value, 10) / 100;
+    return new RGB(red, green, blue, alpha);
   }
 
   crayon() {
-    console.log('crayon');
+    this.outilActuel = Outil.Crayon;
+    console.log("Crayon selected");
   }
 
   gomme() {
-    console.log('gomme');
+    this.outilActuel = Outil.Gomme;
+    console.log("Gomme selected");
   }
 
   selection() {
-    console.log('selection');
+    this.outilActuel = Outil.Selection;
+    console.log("Selection selected");
   }
 
   remplissage() {
-    console.log('remplissage');
+    this.outilActuel = Outil.Remplissage;
+    console.log("Remplissage selected");
   }
 
   pipette() {
-    console.log('pipette');
+    this.outilActuel = Outil.Pipette;
+    console.log("Pipette selected");
   }
 
   baguette() {
-    console.log('baguette');
+    this.outilActuel = Outil.Baguette;
+    console.log("Baguette selected");
   }
 
   formes() {
-    console.log('formes');
+    this.outilActuel = Outil.Formes;
+    console.log("Formes selected");
+  }
+
+  actionCrayon(grille: GrilleComponent, x: number, y: number) {
+    grille.drawRect(x, y, 10, 10, this.finalColor);
+  }
+
+  actionGomme(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionGomme");
+  }
+
+  actionSelection(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionSelection");
+  }
+
+  actionRemplissage(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionRemplissage");
+  }
+
+  actionPipette(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionPipette");
+  }
+
+  actionBaguette(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionBaguette");
+  }
+
+  actionFormes(grille: GrilleComponent, x: number, y: number) {
+    console.log("actionFormes");
   }
 }

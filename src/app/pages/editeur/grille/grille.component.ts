@@ -1,7 +1,7 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
+import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 
 @Component({
   selector: 'app-grille',
@@ -10,7 +10,9 @@ import { Grille } from '../../../../Algo/scripts/Grille';
   templateUrl: './grille.component.html',
   styleUrl: './grille.component.scss'
 })
+
 export class GrilleComponent implements AfterViewInit {
+  @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
   ctx: CanvasRenderingContext2D | null | undefined;
   public isBrowser: boolean;
@@ -27,8 +29,24 @@ export class GrilleComponent implements AfterViewInit {
       console.log("Canvas : " + this.canvas?.nativeElement);
       this.ctx = this.canvas?.nativeElement.getContext('2d');
       console.log("Context : " + this.ctx);
+      // Récupération de la hauteur et de la largeur du canvas
       this.drawGrid(128, 128);
     }
+
+    this.canvas?.nativeElement.addEventListener('click', (e) => {
+      console.log("Grille clicked");
+      const rect = this.canvas!.nativeElement.getBoundingClientRect();
+      let x = e.clientX - rect.left;
+      let y = e.clientY - rect.top;
+      x = Math.floor(this.canvas!.nativeElement.width * x / rect.width);
+      y = Math.floor(this.canvas!.nativeElement.height * y / rect.height);
+      this.onGrilleClick(x, y);
+    });
+  }
+
+  onGrilleClick(x: number, y: number) {
+    console.log("Grille clicked à émettre");
+    this.grilleClicked.emit({ x, y })
   }
 
   // Création du pattern
@@ -59,7 +77,7 @@ export class GrilleComponent implements AfterViewInit {
   }
 
   // Dessin de la grille
-  drawGrid(hauteur: number, largeur: number): Grille | undefined{
+  drawGrid(hauteur: number, largeur: number): Grille | undefined {
     console.log("drawGrid");
     const grille = new Grille(hauteur, largeur);
 
@@ -75,8 +93,18 @@ export class GrilleComponent implements AfterViewInit {
 
     // Application du pattern
     this.ctx.fillStyle = pattern as CanvasPattern;
-    this.ctx.fillRect(0, 0, hauteur, largeur);
+    this.ctx.fillRect(0, 0, largeur, hauteur);
 
-    return grille
+    return grille;
+  }
+
+  // Dessiner un rectangle
+  drawRect(x: number, y: number, largeur: number, hauteur: number, couleur: Couleur): void {
+    if (!this.ctx) {
+      return;
+    }
+    this.ctx.fillStyle = `rgb(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)})`;
+    this.ctx.fillRect(x, y, largeur, hauteur);
+    console.log("drawRect");
   }
 }
