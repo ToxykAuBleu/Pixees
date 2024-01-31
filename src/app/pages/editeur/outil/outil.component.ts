@@ -76,6 +76,10 @@ export class OutilComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.sizeInput!.nativeElement.value = this.taille.toString();
     this.sizeSlider!.nativeElement.value = this.taille.toString();
+
+    this.alphaInput!.nativeElement.value = this.transparency.toString();
+    this.alphaSlider!.nativeElement.value = this.transparency.toString();
+
     // Listener sur le changement de la couleur Héxadécimale
     this.hexInput?.nativeElement.addEventListener('input', () => {
       let value = this.hexInput?.nativeElement.value!;
@@ -316,9 +320,8 @@ export class OutilComponent implements AfterViewInit {
     this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
     this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
     this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
-    this.tolerance = Math.round(this.finalColor.getAlpha()! * 100) * 100;
-    this.alphaInput!.nativeElement.value = this.tolerance.toString();
-    this.alphaSlider!.nativeElement.value = this.tolerance.toString();
+    this.alphaInput!.nativeElement.value = Math.round((this.finalColor.getAlpha() * 100)).toString();
+    this.alphaSlider!.nativeElement.value = Math.round((this.finalColor.getAlpha() * 100)).toString();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {

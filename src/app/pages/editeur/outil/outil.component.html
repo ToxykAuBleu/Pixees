@@ -47,7 +47,7 @@
             </div>
             <div class="inline-flex flex-col">
                 <p-colorPicker #colorPicker [(ngModel)]="hexaColor" [inline]="true" (onChange)="colorChange()"></p-colorPicker>
-                <input #alphaSlider id="steps-range" type="range" min="0" max="100" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
+                <input #alphaSlider id="steps-range" type="range" value="100" min="0" max="100" step="1" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
             </div>
         </div>
     </div>
