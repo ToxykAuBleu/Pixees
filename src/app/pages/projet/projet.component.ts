@@ -39,7 +39,6 @@ export class ProjetComponent {
   { };
   
   onSubmit(): void {
-    console.log(this.createForm.value);
     const submitButton: HTMLElement = document.getElementById('createButton')!;
     submitButton.setAttribute('disabled', 'true');
 
