@@ -45,11 +45,12 @@ export class ProjetComponent {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
       }),
       withCredentials: true
     };
-    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value, httpOptions)
+    this.http.post('http://api.pixees.art/project/create.php', this.createForm.value, httpOptions)
       .subscribe({
         next: (res) => {
           if (res.valueOf().hasOwnProperty('error')) {

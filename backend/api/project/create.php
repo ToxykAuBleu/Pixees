@@ -1,6 +1,10 @@
 <?php
     session_start();
-    header("Content-Type: application/json; Access-Control-Allow-Origin: *; Access-Control-Allow-Credentials: true; Access-Control-Allow-Methods: *;");
+    header("Content-Type: application/json");
+    header("Access-Control-Allow-Origin: http://pixees.art");
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Methods: *");
+    header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers");
 
     if ( isset($_SESSION["project"]) ) {
         echo json_encode(array("error" => "Projet en cours de création"));
