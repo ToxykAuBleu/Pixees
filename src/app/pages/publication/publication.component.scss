@@ -1,0 +1,98 @@
+:host {
+    height: 100%;
+}
+
+.center {
+    background-color: #B8DCAF;
+    text-align: left;
+    position: relative;
+    display: flex;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    backdrop-filter: blur(2vw);
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 70vh;
+    width: 55vw;
+    max-width: 80%;
+    margin: 0 auto;
+    z-index: 1;
+
+    hr {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 2px solid white;
+        border-radius: 10px;
+    }
+
+    .option-button {
+        position: relative;
+        top: -2vw;
+        right: -2vw;
+        margin-left: auto;
+        padding: 1vw;
+        cursor: pointer;
+    }
+
+    h1 {
+        font-size: 2vw;
+        font-weight: bold;
+        margin-bottom: 1vw;
+        margin-left: 1vw;
+    }
+    
+    .image-publication {
+        height:100%;
+        width:100%;
+        padding: 2vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        img {
+            height: 300px;
+            width: 300px;
+            border: 2px solid black;
+            border-radius: 3px;
+            box-shadow: 3px 3px 3px black;
+            aspect-ratio: 1/1;
+        }
+    }
+
+    .contenu-publication {
+        display: flex;
+        flex-direction: column;
+        margin-top: 2vw;
+        margin-bottom: 2vw;
+        padding: 2vw;
+        border-radius: 3px;
+        height:100%;
+        width:100%;
+        
+        .info-publication {
+            // faire en sorte que la div prennent la largeur de la div parent
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 1vw;
+            margin-bottom: 1vw;
+        }
+
+        .commentaire-publication {
+            // mettre la div en dessous de l'autre
+            display: flex;
+            flex-direction: column;
+            margin-right: auto;
+            height: 100%;
+            width: 100%;
+            margin-top: 1vw; 
+            margin-bottom: 2vw; 
+
+            .user-comment {
+                margin-bottom: 1vw;
+            }
+        }
+    }
+}
