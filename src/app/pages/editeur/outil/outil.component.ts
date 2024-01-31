@@ -97,56 +97,28 @@ export class OutilComponent implements AfterViewInit {
       this.hexaColor = '#' + value;
       this.finalColor = this.toColorRGB(this.hexaColor);
     });
-    // Listener sur le changement de la couleur Rouge
-    this.redInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.redInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.redInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.redInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(1, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-      this.finalColor = this.toColorRGB(this.hexaColor);
-      this.finalColor.setAlpha(this.transparency / 100);
-    });
-    // Listener sur le changement de la couleur Verte
-    this.greenInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.greenInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.greenInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.greenInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(3, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-      this.finalColor = this.toColorRGB(this.hexaColor);
-      this.finalColor.setAlpha(this.transparency / 100);
-    });
-    // Listener sur le changement de la couleur Bleue
-    this.blueInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.blueInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.blueInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.blueInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(5, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-      this.finalColor = this.toColorRGB(this.hexaColor);
-    });
+
+    const colorsInput: (ElementRef<HTMLInputElement> | undefined)[] = [this.redInput, this.greenInput, this.blueInput];
+    for (const color of colorsInput) {
+      // Listener sur le changement des couleurs Rouge, Vert et Bleu
+      color?.nativeElement.addEventListener('input', () => {
+        let value = parseInt(color?.nativeElement.value!, 10);
+        if (value < 0) {
+          value = 0;
+          color!.nativeElement.value = value.toString();
+        }
+        if (value > 255) {
+          value = 255;
+          color!.nativeElement.value = value.toString();
+        }
+        let newString = this.replaceAt(1, value.toString(16), this.hexaColor);
+        this.hexaColor = newString;
+        this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+        this.finalColor = this.toColorRGB(this.hexaColor);
+        this.finalColor.setAlpha(this.transparency / 100);  
+      });
+    }
+    
     // Listener sur le changement de la couleur Alpha (Input)
     this.alphaInput?.nativeElement.addEventListener('input', () => {
       this.alphaSlider!.nativeElement.value = this.alphaInput!.nativeElement.value;
