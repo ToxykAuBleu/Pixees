@@ -45,19 +45,26 @@ export class ProjetComponent {
 
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
       }),
       withCredentials: true
     };
-    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value, httpOptions).subscribe( 
-      (res) => {
-        console.log("Répondu: ", res);
-        submitButton.removeAttribute('disabled');
-      },
-      (err) => {
-        console.log("Erreur: ", err);
-        submitButton.removeAttribute('disabled');
+    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value, httpOptions)
+      .subscribe({
+        next: (res) => {
+          if (res.valueOf().hasOwnProperty('error')) {
+            console.error(res);
+          } else {
+            console.log(res);
+            this.router.navigate(['/', 'editeur']);
+          }
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          submitButton.removeAttribute('disabled');
+        }
       });
   }
 

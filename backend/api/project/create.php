@@ -1,6 +1,6 @@
 <?php
     session_start();
-    header("Content-Type: application/json; Access-Control-Allow-Origin: *; Access-Control-Allow-Credentials: true; Access-Control-Allow-Methods: POST;");
+    header("Content-Type: application/json; Access-Control-Allow-Origin: *; Access-Control-Allow-Credentials: true; Access-Control-Allow-Methods: *;");
 
     if ( isset($_SESSION["project"]) ) {
         echo json_encode(array("error" => "Projet en cours de création"));
