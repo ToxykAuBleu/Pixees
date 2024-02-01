@@ -27,6 +27,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   grille: Grille | undefined;
   mouseDown: boolean = false;
 
+  x_init: number = 0;
+  y_init: number = 0;
+
   private subscription: Subscription | undefined;
 
   public isBrowser: boolean;
@@ -56,6 +59,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.canvas?.nativeElement.addEventListener('mousedown', (e) => {
       let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
+      this.x_init = x;
+      this.y_init = y;
       this.onGrilleClick(x, y);
       this.mouseDown = !this.mouseDown;
     });
@@ -64,6 +69,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       if(this.mouseDown) {
         let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
         this.onGrilleClick(x, y);
+        this.x_init = x;
+        this.y_init = y;
       }
     });
     
@@ -72,6 +79,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       if (this.ctx){
         this.grille?.canvasToGrid(this.ctx);
       }
+      this.x_init = 0;
+      this.y_init = 0;
     });
 
     this.canvas?.nativeElement.addEventListener('mouseleave', (e) => {
@@ -79,6 +88,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       if (this.ctx){
         this.grille?.canvasToGrid(this.ctx);
       }
+      this.x_init = 0;
+      this.y_init = 0;
     });
   }
 
@@ -153,13 +164,21 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
     this.ctx.fillStyle = `rgba(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)}, ${couleur.getAlpha()})`;
+    this.ctx.strokeStyle = `rgba(${couleur.getComp(1)}, ${couleur.getComp(2)} ,${couleur.getComp(3)}, ${couleur.getAlpha()})`;
     if (rayon == 1) {
+      this.ctx.beginPath();
+      this.ctx.lineWidth = 1;
       this.ctx.fillRect(x, y, rayon, rayon);
+      this.ctx.moveTo(this.x_init, this.y_init);
+      this.ctx.lineTo(x, y);
+      this.ctx.stroke();
+      this.ctx.fill();
+      this.ctx.closePath();
     } else {
       this.ctx.beginPath();
       this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
-      this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
       this.ctx.fill();
+      this.ctx.closePath();
     }
     // this.grille?.canvasToGrid(this.ctx);
   }
