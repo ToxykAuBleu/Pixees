@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Injectable, ViewChild } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { environment } from '../../../../environment';
 
 enum View {
   Accueil = "projectHome",
@@ -49,7 +50,7 @@ export class ProjetComponent {
       }),
       withCredentials: true
     };
-    this.http.post('http://api.pixees.art/project/create.php', this.createForm.value, httpOptions)
+    this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, httpOptions)
       .subscribe({
         next: (res) => {
           if (res.valueOf().hasOwnProperty('error')) {
