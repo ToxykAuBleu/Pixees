@@ -188,9 +188,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     if (!this.ctx) {
       return;
     }
-    this.ctx.fillStyle = `rgb(0,0,0,0)`;
     if (rayon == 1) {
-      this.ctx.fillRect(x, y, rayon, rayon);
+      this.ctx.clearRect(x, y, rayon, rayon);
     } else {
       this.ctx.beginPath();
       this.ctx.arc(x, y, rayon, 0, 2 * Math.PI);
