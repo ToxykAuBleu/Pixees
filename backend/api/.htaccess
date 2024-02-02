@@ -1,0 +1,5 @@
+<IfModule mod_headers.c>
+    SetEnvIf Origin "http(s)?://(www\.)?(pixees.art|api.pixees.art|toxykaubleu.pixees.art|mattis.pixees.art|alakamar.pixees.art|metriuum.pixees.art)$" AccessControlAllowOrigin=$0
+    Header add Access-Control-Allow-Origin %{AccessControlAllowOrigin}e env=AccessControlAllowOrigin
+    Header merge Vary Origin
+</IfModule>

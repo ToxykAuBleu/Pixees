@@ -76,6 +76,10 @@ export class OutilComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.sizeInput!.nativeElement.value = this.taille.toString();
     this.sizeSlider!.nativeElement.value = this.taille.toString();
+
+    this.alphaInput!.nativeElement.value = this.transparency.toString();
+    this.alphaSlider!.nativeElement.value = this.transparency.toString();
+
     // Listener sur le changement de la couleur Héxadécimale
     this.hexInput?.nativeElement.addEventListener('input', () => {
       let value = this.hexInput?.nativeElement.value!;
@@ -93,64 +97,41 @@ export class OutilComponent implements AfterViewInit {
       this.hexaColor = '#' + value;
       this.finalColor = this.toColorRGB(this.hexaColor);
     });
-    // Listener sur le changement de la couleur Rouge
-    this.redInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.redInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.redInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.redInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(1, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-      this.finalColor = this.toColorRGB(this.hexaColor);
-    });
-    // Listener sur le changement de la couleur Verte
-    this.greenInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.greenInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.greenInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.greenInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(3, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-      this.finalColor = this.toColorRGB(this.hexaColor);
-    });
-    // Listener sur le changement de la couleur Bleue
-    this.blueInput?.nativeElement.addEventListener('input', () => {
-      let value = parseInt(this.blueInput?.nativeElement.value!, 10);
-      if (value < 0) {
-        value = 0;
-        this.blueInput!.nativeElement.value = value.toString();
-      }
-      if (value > 255) {
-        value = 255;
-        this.blueInput!.nativeElement.value = value.toString();
-      }
-      let newString = this.replaceAt(5, value.toString(16), this.hexaColor);
-      this.hexaColor = newString;
-      this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
-    });
+
+    const colorsInput: (ElementRef<HTMLInputElement> | undefined)[] = [this.redInput, this.greenInput, this.blueInput];
+    for (const color of colorsInput) {
+      // Listener sur le changement des couleurs Rouge, Vert et Bleu
+      color?.nativeElement.addEventListener('input', () => {
+        let value = parseInt(color?.nativeElement.value!, 10);
+        if (value < 0) {
+          value = 0;
+          color!.nativeElement.value = value.toString();
+        }
+        if (value > 255) {
+          value = 255;
+          color!.nativeElement.value = value.toString();
+        }
+        let newString = this.replaceAt(1, value.toString(16), this.hexaColor);
+        this.hexaColor = newString;
+        this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+        this.finalColor = this.toColorRGB(this.hexaColor);
+        this.finalColor.setAlpha(this.transparency / 100);  
+      });
+    }
+    
     // Listener sur le changement de la couleur Alpha (Input)
     this.alphaInput?.nativeElement.addEventListener('input', () => {
       this.alphaSlider!.nativeElement.value = this.alphaInput!.nativeElement.value;
       this.transparency = parseInt(this.alphaInput!.nativeElement.value, 10);
       this.finalColor = this.toColorRGB(this.hexaColor);
+      this.finalColor.setAlpha(this.transparency / 100);
     });
     // Listener sur le changement de la couleur Alpha (Slider)
     this.alphaSlider?.nativeElement.addEventListener('input', () => {
       this.alphaInput!.nativeElement.value = this.alphaSlider!.nativeElement.value;
       this.transparency = parseInt(this.alphaSlider!.nativeElement.value, 10);
       this.finalColor = this.toColorRGB(this.hexaColor);
+      this.finalColor.setAlpha(this.transparency / 100);
     });
     // Listener sur le changement de la taille (Input)
     this.sizeInput?.nativeElement.addEventListener('input', () => {
@@ -174,6 +155,7 @@ export class OutilComponent implements AfterViewInit {
     this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
     this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
     this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
+    this.alphaInput!.nativeElement.value = (this.finalColor.getAlpha() * 100).toString();
   }
 
   replaceAt(index: number, replacement: string, original: string): string {
@@ -305,6 +287,13 @@ export class OutilComponent implements AfterViewInit {
   actionPipette(grille: GrilleComponent, x: number, y: number) {
     this.finalColor = grille.pickColor(x, y) as RGB;
     this.hexaColor = this.finalColor.RGBversHexa();
+    this.hexInput!.nativeElement.value = this.hexaColor.slice(1);
+    console.log(this.hexaColor);
+    this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
+    this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
+    this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
+    this.alphaInput!.nativeElement.value = Math.round((this.finalColor.getAlpha() * 100)).toString();
+    this.alphaSlider!.nativeElement.value = Math.round((this.finalColor.getAlpha() * 100)).toString();
   }
 
   actionBaguette(grille: GrilleComponent, x: number, y: number) {
