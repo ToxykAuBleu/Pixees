@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, PLATFORM_ID, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -28,6 +28,8 @@ import { GrilleService } from './grille-service.service';
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
+
   // Icone de la barre de navigation côté réseau social
   faHouse = faHouse;
   faPencil = faPencil;
@@ -46,7 +48,8 @@ export class AppComponent implements OnInit {
 
   title = 'Pixees';
   public couleur = "couleurAccueil";
-  public isInEditor: boolean = false;     
+  public isNavbarEditor: boolean = false;
+  public isInEditor: boolean = false;
   
   constructor(private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
   
@@ -61,36 +64,43 @@ export class AppComponent implements OnInit {
   goToHome() {
     this.router.navigate(['/', 'home']);
     this.couleur = "couleurAccueil";
+    this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
+    this.askToSave?.nativeElement.classList.add('hidden');
   }
   goToProjet() {
     this.router.navigate(['/', 'projet']);
     this.couleur = "couleurCreation";
-    this.isInEditor = true;
+    this.isNavbarEditor = true;
+    this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
   goToNotification() {
     this.router.navigate(['/', 'notifications']);
     this.couleur = "couleurProfil";
+    this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
   goToAccount() {
     this.router.navigate(['/', 'compte']);
     this.couleur = "couleurProfil";
+    this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
   goToDiscussion() {
     this.router.navigate(['/', 'discussion']);
     this.couleur = "couleurDiscussion";
+    this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
   goToConnexion() {
     this.router.navigate(['/', 'connexion']);
     this.couleur = "couleurProfil";
+    this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
@@ -100,9 +110,27 @@ export class AppComponent implements OnInit {
     localStorage.setItem('isInEditor', JSON.stringify(isInEditor));
   }
 
+  showSave() {
+    console.log(this.isInEditor);  
+    if (this.isInEditor) {
+      this.askToSave?.nativeElement.classList.remove('hidden');
+    } else {
+      this.goToHome();
+    }
+      console.log("Pas dans l'éditeur");
+  }
+
+  triggerSave() {
+    this.grilleService.triggerSave();
+    this.askToSave?.nativeElement.classList.add('hidden');
+    this.goToHome();
+  }
+
   triggerGrille() {
     this.grilleService.triggerGrille();
   }
+
+
 }
 
 

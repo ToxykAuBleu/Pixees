@@ -1,5 +1,17 @@
-<div class="non-selectionnable flex-col cursor-default h-dvh">
-  <div *ngIf="isInEditor; then editorNavbar else socialNavbar"></div>
+<div #askToSave class="h-full w-full absolute top-0 left-0 z-50 hidden">
+  <div class="h-full w-full bg-zinc-700/75 grid place-items-center backdrop-blur">
+      <div class="flex flex-col bg-[#AF80EA] gap-4 p-4 rounded-lg">
+          <h1 class="font-black text-lg">Voulez-vous sauvegarder avant de quitter ?</h1>
+          <div class="inline-flex flex-row justify-end gap-2">
+              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" (click)="triggerSave()">Sauvegarder</button>
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="goToHome()">Quitter</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div class="flex flex-col cursor-default h-dvh">
+  <div *ngIf="isNavbarEditor; then editorNavbar else socialNavbar"></div>
   <ng-template #socialNavbar>
     <header id={{couleur}} class="flex flex-row justify-between py-2 px-4">
       <div class="flex flex-row gap-4 items-center content-center">
@@ -33,9 +45,10 @@
       </div>
       <h1 class="flex-1 text-center">ProjectName</h1>
       <button class="border-solid border-white border-[1px] px-4 py-1 rounded-md bg-[#381663] text-white">Publier</button>
-      <fa-icon class="cursor-pointer" [icon]="faXmarkCircle" size="2xl" (click)="goToHome()"></fa-icon>
+      <fa-icon class="cursor-pointer" [icon]="faXmarkCircle" size="2xl" (click)="showSave()"></fa-icon>
     </header>
   </ng-template>
+
 
   <router-outlet></router-outlet>
 </div>

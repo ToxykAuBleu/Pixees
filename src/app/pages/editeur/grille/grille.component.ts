@@ -42,6 +42,10 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscription = this.grilleService.grille$.subscribe(() => {
       this.exportAsPNG();
     });
+
+    this.grilleService.save$.subscribe(() => {
+      this.saveAsJSON();
+    });
   }
 
   ngOnDestroy(): void {
@@ -200,5 +204,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     link.download = "image.png";
     link.href = dataURL;
     link.click();
+  }
+
+  saveAsJSON(): void {
+    console.log("saveAsJSON");
   }
 }
