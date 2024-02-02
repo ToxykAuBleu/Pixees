@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -17,6 +17,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHouse, faPencil , faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { faCircleUser, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { GrilleService } from './grille-service.service';
+import { Subscription } from 'rxjs';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +29,7 @@ import { GrilleService } from './grille-service.service';
   encapsulation: ViewEncapsulation.None
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
 
   // Icone de la barre de navigation côté réseau social
@@ -47,11 +49,14 @@ export class AppComponent implements OnInit {
   faXmarkCircle = faXmarkCircle;
 
   title = 'Pixees';
+
+  private subscription: Subscription | undefined;
+
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
   
-  constructor(private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
+  constructor(private appService: AppService,private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
   
   ngOnInit() {
     console.log(this.platformId);
@@ -59,6 +64,13 @@ export class AppComponent implements OnInit {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
     }
+    this.subscription = this.appService.isInEditor.subscribe(isInEditor => {
+      this.isInEditor = isInEditor;
+    });
+  };
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   };
   
   goToHome() {

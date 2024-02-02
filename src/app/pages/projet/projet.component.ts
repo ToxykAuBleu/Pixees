@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../../environment';
+import { AppService } from '../../app.service';
 
 enum View {
   Accueil = "projectHome",
@@ -36,7 +37,8 @@ export class ProjetComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router) 
+    private router: Router,
+    private appService: AppService)
   { };
   
   onSubmit(): void {
@@ -57,7 +59,8 @@ export class ProjetComponent {
             console.error(res);
           } else {
             console.log(res);
-            this.router.navigate(['/', 'editeur']);
+            this.router.navigate(['/', 'editeur'])
+            this.appService.setIsInEditor(true);
           }
         },
         error: (err) => {
@@ -78,6 +81,7 @@ export class ProjetComponent {
 
   redirectHome(): void {
     this.router.navigate(['/', 'home']);
+
   }
 
   projectHome(): void {
