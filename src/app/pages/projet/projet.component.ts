@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { environment } from '../../../../environment';
 
 enum View {
   Accueil = "projectHome",
@@ -33,47 +35,72 @@ export class ProjetComponent {
   
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient) 
+    private http: HttpClient,
+    private router: Router) 
   { };
   
-  
   onSubmit(): void {
-    console.log(this.createForm.value);
     const submitButton: HTMLElement = document.getElementById('createButton')!;
     submitButton.setAttribute('disabled', 'true');
 
-    this.http.post('http://localhost:8080/api/project/create.php', this.createForm.value).subscribe( 
-      (res) => {
-        console.log("Répondu: ", res);
-        submitButton.removeAttribute('disabled');
-      },
-      (err) => {
-        console.log("Erreur: ", err);
-        submitButton.removeAttribute('disabled');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+    this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, httpOptions)
+      .subscribe({
+        next: (res) => {
+          if (res.valueOf().hasOwnProperty('error')) {
+            console.error(res);
+          } else {
+            console.log(res);
+            this.router.navigate(['/', 'editeur']);
+          }
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          submitButton.removeAttribute('disabled');
+        }
       });
   }
 
-  switchView(view: string) {
+  switchView(view: string): void {
     for (const v of Object.values(View)) {
       document.getElementById(v)?.classList.add('hidden');
     }
     document.getElementById(view)!.classList.remove('hidden');
   }
 
-  projectHome() {
+  redirectHome(): void {
+    this.router.navigate(['/', 'home']);
+  }
+
+  projectHome(): void {
     this.switchView(View.Accueil);
   }
 
-  newProject() {
+  newProject(): void {
     this.switchView(View.Nouveau);
   }
 
-  importProject() {
+  importProject(): void {
     this.switchView(View.Import);
   }
 
-  personalisationProject() {
+  personalisationProject(): void {
     this.switchView(View.Personalisation);
   }
 
+  changeTaille(hauteur: number | HTMLInputElement, largeur: number | HTMLInputElement) {
+    if (hauteur instanceof HTMLInputElement && largeur instanceof HTMLInputElement) {
+      this.createForm.controls['taille'].setValue(`${hauteur.value}x${largeur.value}`);
+    } else {
+      this.createForm.controls['taille'].setValue(`${hauteur}x${largeur}`);
+    }
+  }
 }
