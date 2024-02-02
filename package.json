@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "node git-version.ts && ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "doc": "jsdoc src -c jsdoc-conf.json --verbose",
@@ -29,6 +29,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "bootstrap": "^5.3.2",
     "express": "^4.18.2",
+    "git-commit-info": "^2.0.2",
     "jquery": "^3.7.1",
     "jsdoc": "^4.0.2",
     "minami": "^1.2.3",

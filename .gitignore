@@ -10,6 +10,7 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+git-version.json
 
 # IDEs and editors
 .idea/
