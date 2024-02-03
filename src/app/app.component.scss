@@ -164,3 +164,15 @@ fa-icon svg {
 #couleurCreation {
     background-color: #AF80EA;
 }
+
+#git-info {
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 0;
+}
+  
+#git-info:not(.show) {
+    transform: scale(1);
+    opacity: 1;
+}

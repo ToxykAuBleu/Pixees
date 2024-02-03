@@ -53,6 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
   faGithub = faGithub;
   gitRepoInfo = gitRepoInfo;
   gitLastModifDate = new Date(gitRepoInfo.date).toLocaleString();
+  showGitInfo = false;
 
   title = 'Pixees';
 
@@ -77,12 +78,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   };
-  
-  toggleGitInfo() {
-    if (this.gitInfo) {
-      this.gitInfo.nativeElement.classList.toggle('hidden');
-    }
-  }
 
   goToHome() {
     this.router.navigate(['/', 'home']);
