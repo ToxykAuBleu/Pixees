@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../../environment';
@@ -18,10 +18,10 @@ export class InscriptionComponent {
   faArrowLeft = faArrowLeft;
 
   signUpForm: FormGroup = this.formBuilder.group({
-    pseudo: '',
-    email: '',
-    mdp: '',
-    confirmation: ''
+    pseudo: ['', [Validators.required, Validators.min(3), Validators.max(50)]],
+    email: ['', [Validators.required, Validators.email, Validators.max(50)]],
+    mdp: ['', [Validators.required, Validators.min(8), Validators.max(50)]],
+    confirmation: ['', [Validators.required, Validators.min(8), Validators.max(50)]]
   });
 
   constructor(private formBuilder: FormBuilder,
