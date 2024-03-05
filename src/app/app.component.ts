@@ -15,7 +15,9 @@ import { ProjetComponent } from './pages/projet/projet.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHouse, faPencil , faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleUser, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
+import { gitRepoInfo } from '../version-info';
 import { GrilleService } from './grille-service.service';
 import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
@@ -31,6 +33,7 @@ import { AppService } from './app.service';
 
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
+  @ViewChild('gitInfo', { static: true}) gitInfo: ElementRef<HTMLElement> | undefined;
 
   // Icone de la barre de navigation côté réseau social
   faHouse = faHouse;
@@ -47,6 +50,10 @@ export class AppComponent implements OnInit, OnDestroy {
   faRotateLeft = faRotateLeft;
   faRotateRight = faRotateRight;
   faXmarkCircle = faXmarkCircle;
+  faGithub = faGithub;
+  gitRepoInfo = gitRepoInfo;
+  gitLastModifDate = new Date(gitRepoInfo.date).toLocaleString();
+  showGitInfo = false;
 
   title = 'Pixees';
 
@@ -59,7 +66,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private appService: AppService,private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
   
   ngOnInit() {
-    console.log(this.platformId);
     if (isPlatformBrowser(this.platformId)) {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
@@ -72,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription?.unsubscribe();
   };
-  
+
   goToHome() {
     this.router.navigate(['/', 'home']);
     this.couleur = "couleurAccueil";

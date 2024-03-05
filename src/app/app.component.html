@@ -52,3 +52,30 @@
 
   <router-outlet></router-outlet>
 </div>
+
+<fa-icon *ngIf="!showGitInfo" 
+  (mouseover)="showGitInfo = true" 
+  [icon]="faGithub" size="2xl" 
+  class="fixed left-4 bottom-4 rounded-full m-2 shadow-md shadow-black">
+</fa-icon>
+
+<div #gitInfo id="git-info" class="fixed left-4 bottom-4 z-50" (mouseleave)="showGitInfo = false" [ngClass]="{'show': !showGitInfo}">
+  <div class="flex flex-col bg-[#a7d8ff] gap-4 p-4 rounded-lg">
+    <h1 class="font-title text-4xl text-center">{{title}}</h1>
+    <div class="inline-flex flex-row justify-end gap-2">
+      <div class="flex flex-col gap-2">
+        <div class="flex flex-row gap-1">
+          <h1 class="font-bold">Modifié le:</h1><h1>{{gitLastModifDate}}</h1>
+        </div>
+        <div class="flex flex-row gap-1">
+          <h1 class="font-bold">Par:</h1><a href="https://github.com/{{gitRepoInfo.author}}" target="_blank"><h1>{{gitRepoInfo.author}}</h1></a>
+        </div>
+        <div class="flex flex-row gap-1">
+          <h1 class="font-bold">Commit:</h1><a href="https://github.com/ToxykAuBleu/Pixees/commit/{{gitRepoInfo.commit}}" target="_blank"><h1>#{{gitRepoInfo.shortCommit}}</h1></a>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://github.com/ToxykAuBleu/Pixees"><h2 class="text-center">[code source]</h2></a>
+  </div>
+</div>
