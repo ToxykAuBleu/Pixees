@@ -30,7 +30,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   x_init: number = 0;
   y_init: number = 0;
 
-  private subscription: Subscription | undefined;
+  private subscriptions: Subscription[] = [];
 
   public isBrowser: boolean;
 
@@ -42,17 +42,20 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.grilleService.grille$.subscribe(() => {
+    this.subscriptions.push(this.grilleService.grille$.subscribe(() => {
       this.exportAsPNG();
-    });
+    }));
 
-    this.grilleService.save$.subscribe(() => {
+    this.subscriptions.push(this.grilleService.save$.subscribe(() => {
       this.saveAsJSON();
-    });
+    }));
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    for (const sub of this.subscriptions) {
+      console.log(sub);
+      sub.unsubscribe();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -222,6 +225,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     link.download = "image.png";
     link.href = dataURL;
     link.click();
+    console.log("exported !");
   }
 
   saveAsJSON(): void {

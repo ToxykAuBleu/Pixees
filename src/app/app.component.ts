@@ -141,7 +141,6 @@ export class AppComponent implements OnInit, OnDestroy {
   triggerSave() {
     this.grilleService.triggerSave();
     this.askToSave?.nativeElement.classList.add('hidden');
-    this.goToHome();
   }
 
   triggerGrille() {
