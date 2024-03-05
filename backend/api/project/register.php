@@ -9,7 +9,6 @@
     // Tentative de connexion à la base de données.
 	try {
 		$link = mysqli_connect($ini["INSCRIPTION"]["Adresse"], $ini["INSCRIPTION"]["Utilisateur"], $ini["INSCRIPTION"]["MotPasse"], $ini["INSCRIPTION"]["Database"]);
-		echo json_encode(array("success" => "Connexion à la base de données réussie"));
 	} catch (Exception $e) {
         echo json_encode(array("error" => "Erreur de connexion à la base de données"));
 	}
@@ -36,9 +35,14 @@
         exit;
     }
 
-    // Validité mot de passe (entre 8 et 32 caractères)
+    // Validité mot de passe (entre 8 et 32 caractères) + confirmation
     if (strlen($data->mdp) < 8 || strlen($data->mdp) > 32) {
         echo json_encode(array("error" => "Mot de passe invalide, veuillez entrer un mot de passe entre 8 et 32 caractères"));
+        exit;
+    }
+
+    if ($data->mdp !== $data->confirmation) {
+        echo json_encode(array("error" => "Les mots de passe ne correspondent pas"));
         exit;
     }
 

@@ -21,6 +21,7 @@ export class InscriptionComponent {
     pseudo: '',
     email: '',
     mdp: '',
+    confirmation: ''
   });
 
   constructor(private formBuilder: FormBuilder,
