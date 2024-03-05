@@ -7,3 +7,12 @@ input[type=number]::-webkit-outer-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.active {
+  background-color: #77b6fe90;
+  z-index: 1;
+}
+
+.outil:hover {
+  background-color: #77b6fe56;
+}
