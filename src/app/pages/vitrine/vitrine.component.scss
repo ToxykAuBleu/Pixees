@@ -1,0 +1,36 @@
+.administration-utilisateur {
+    background-color: #ea8080;
+}
+
+.editeur {
+    background-color: #af80ea;
+}
+
+.accueil {
+    background-color: #7Ceb60;
+}
+
+.discussion {
+    background-color: #80d7ea;
+}
+
+.administration-admin {
+    background-color: #ebbc60;
+}
+
+.profil {
+    background-color: #000000;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+    .r {
+        margin-top: 20px;
+        border: 3px solid black;
+    }
+}
