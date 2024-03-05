@@ -17,10 +17,10 @@ import { AppService } from '../../app.service';
 export class InscriptionComponent {
   faArrowLeft = faArrowLeft;
 
-  createForm: FormGroup = this.formBuilder.group({
-    name: '',
-    taille: '',
-    bgcolor: '',
+  signUpForm: FormGroup = this.formBuilder.group({
+    pseudo: '',
+    email: '',
+    mdp: '',
   });
 
   constructor(private formBuilder: FormBuilder,
@@ -42,7 +42,7 @@ export class InscriptionComponent {
       withCredentials: true
     };
 
-    this.http.post(`${environment.apiLink}/project/register.php`, this.createForm.value, httpOptions)
+    this.http.post(`${environment.apiLink}/project/register.php`, this.signUpForm.value, httpOptions)
       .subscribe({
         next: (res) => {
           if (res.valueOf().hasOwnProperty('error')) {
