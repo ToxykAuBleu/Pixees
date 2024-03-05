@@ -3,6 +3,7 @@ import { CalqueComponent } from './calque/calque.component';
 import { GrilleComponent } from './grille/grille.component';
 import { OutilComponent } from './outil/outil.component';
 import { PopupComponent } from '../popup/popup.component';
+import { PopupService } from '../popup/popup.service';
 
 @Component({
   selector: 'app-editeur',
@@ -21,9 +22,20 @@ export class EditeurComponent implements OnInit {
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
 
-  constructor() { }
+  constructor(private popupService: PopupService) { }
 
   ngOnInit(): void {
+    this.popupService.popupChange$.subscribe((popup) => {
+      this.changePopup(popup.titre, popup.desc, popup.listeBoutons);
+    });
+
+    this.popupService.popupActive$.subscribe(() => {
+      this.activePopup();
+    });
+
+    this.popupService.popupClose$.subscribe(() => {
+      this.closePopup();
+    });
   }
 
   onGrilleClicked($event: { x: number; y: number; }) {
@@ -35,5 +47,13 @@ export class EditeurComponent implements OnInit {
     this.popupTitre = titre;
     this.popupDesc = desc;
     this.popupListeBoutons = listeBoutons;
+  }
+
+  activePopup() {
+    document.getElementById('popup')?.classList.remove('hidden');
+  }
+
+  closePopup() {
+    document.getElementById('popup')?.classList.add('hidden');
   }
 }

@@ -4,6 +4,7 @@ import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from 
 import { GrilleComponent } from '../grille/grille.component';
 import { InjectionToken } from '@angular/core';
 import { GrilleService } from '../../../grille-service.service';
+import { PopupService } from '../../popup/popup.service';
 
 export const POSITION = new InjectionToken<number>('Position');
 export const NOM = new InjectionToken<string>('Nom');
@@ -27,8 +28,14 @@ export class CalqueComponent extends GrilleComponent {
   private _position: number;
   private _nom: string;
 
-  constructor(@Inject(POSITION) private position: number, @Inject(NOM) private nom: string, @Inject(PLATFORM_ID) platformId: Object, grilleService: GrilleService) {
-    super(platformId, grilleService);
+  constructor(
+    @Inject(POSITION) private position: number,
+    @Inject(NOM) private nom: string,
+    @Inject(PLATFORM_ID) platformId: Object,
+    grilleService: GrilleService,
+    popupService: PopupService)
+  {
+    super(platformId, grilleService, popupService);
     this._position = position;
     this._nom = nom;
   }
