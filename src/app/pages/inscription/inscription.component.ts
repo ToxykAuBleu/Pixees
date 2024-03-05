@@ -31,7 +31,7 @@ export class InscriptionComponent {
   { };
 
   onSubmit(): void {
-    console.log('test');
+    console.log('submitted');
     const submitButton: HTMLElement = document.getElementById('registerButton')!;
     submitButton.setAttribute('disabled', 'true');
 
