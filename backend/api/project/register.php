@@ -54,7 +54,7 @@
 
     // Vérification de l'unicité de l'email
     try {
-        $query = "SELECT * FROM Utilisateur WHERE email ='".$data->email."';";
+        $query = "SELECT * FROM ".$ini["INSCRIPTION"]["Table"]." WHERE email ='".$data->email."';";
         $result = mysqli_query($link, $query);
         if (mysqli_num_rows($result) > 0) {
             echo json_encode(array("error" => "Email déjà utilisé"));
@@ -72,7 +72,7 @@
 
     // Insertion de l'utilisateur dans la base de données
     try {
-        $query = "INSERT INTO Utilisateur (email, pseudo, passwd) VALUES ('".$data->email."', '".$data->pseudo."', '".$hashed_mdp."')";
+        $query = "INSERT INTO ".$ini["INSCRIPTION"]["Table"]." (email, pseudo, passwd) VALUES ('".$data->email."', '".$data->pseudo."', '".$hashed_mdp."')";
         $result = mysqli_query($link, $query);
         if ($result) {
             echo json_encode(array("success" => "Inscription réussie"));
@@ -85,4 +85,3 @@
 
     mysqli_close($link);
     exit;
-?>
