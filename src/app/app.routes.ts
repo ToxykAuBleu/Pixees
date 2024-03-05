@@ -10,7 +10,7 @@ import { AdministrationComponent } from './pages/administration/administration.c
 import { CollectionComponent } from './pages/collection/collection.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { EditeurComponent } from './pages/editeur/editeur.component';
-import { CarouselComponent } from './pages/home/carousel/carousel.component';
+import { VitrineComponent } from './pages/vitrine/vitrine.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -25,5 +25,6 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
+    { path: 'vitrine', component: VitrineComponent },
     {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
