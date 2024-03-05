@@ -229,6 +229,39 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   saveAsJSON(): void {
+    if (!this.canvas) {
+      return;
+    }
     console.log("saveAsJSON");
+    let data: DataProject = {
+      name: "projet",
+      taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
+      grille: {}
+    };
+
+    const largeur = this.grille?.getLargeur();
+    const hauteur = this.grille?.getHauteur();
+    for (let x = 0; x < largeur!; x++) {
+      data.grille[x] = [];
+      for (let y = 0; y < hauteur!; y++) {
+        const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
+        const c = pixel?.RGBversHexa().slice(1);
+        data.grille[x].push(c);
+      }
+    }
+
+    const link = document.createElement("a");
+    link.download = "grille.json";
+    link.href = "data:text/json," + JSON.stringify(data);
+    link.click();
+    console.log("save !");
   }
+}
+
+interface DataProject {
+  name: string;
+  taille: [number, number];
+  grille: {
+    [y: number]: string[]
+  };
 }
