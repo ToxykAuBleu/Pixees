@@ -21,6 +21,8 @@ import { gitRepoInfo } from '../version-info';
 import { GrilleService } from './grille-service.service';
 import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-root',
@@ -63,7 +65,13 @@ export class AppComponent implements OnInit, OnDestroy {
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
   
-  constructor(private appService: AppService,private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
+  constructor(
+    private appService: AppService,
+    private router: Router,
+    private grilleService: GrilleService, 
+    @Inject(PLATFORM_ID) private platformId: any,
+    private http: HttpClient
+  ) {};
   
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -136,6 +144,22 @@ export class AppComponent implements OnInit, OnDestroy {
       this.goToHome();
     }
       console.log("Pas dans l'éditeur");
+  }
+
+  closeProject() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+    this.http.get(`${environment.apiLink}/project/close.php`, httpOptions)
+      .subscribe({
+        complete: () => {
+          this.goToHome();
+        }
+      });
   }
 
   triggerSave() {
