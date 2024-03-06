@@ -1,0 +1,48 @@
+<div class="flex flex-row justify-around items-center h-full w-full z-10 absolute backdrop-blur-[2px] bg-zinc-600/50">
+    <div class="center">
+        <div class="flex flex-row justify-around items-center h-full">
+            <div class="image-publication">
+                <img src="../../../assets/img/1.jpg" alt="image de publication">
+            </div>
+            <div class="contenu-publication">
+                <div class="flex flex-row">
+                    <fa-icon [icon]="FaProfile" size="2xl"></fa-icon>
+                    <h1>NOM COMPTE</h1>
+                    <fa-icon [icon]="FaPlus" size="xl" class="option-button"></fa-icon>
+                </div>
+                <p>Description</p>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                <div class="">
+                    <div class="info-publication">
+                        <div class="flex flex-row justify-around items-center">
+                            <fa-icon [icon]="FaHeart" size="xl"></fa-icon>
+                            <p>0</p>
+                        </div>
+                        <div class="flex flex-row justify-around items-center">
+                            <fa-icon [icon]="FaShare" size="xl"></fa-icon>
+                            <p>0</p>
+                        </div>
+                        <div class="flex flex-row justify-around items-center">
+                            <fa-icon [icon]="FaBookmark" size="xl"></fa-icon>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="commentaire-publication">
+                        <div class="flex flex-column user-comment">
+                            <fa-icon [icon]="FaProfile" size="2xl"></fa-icon><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="flex flex-column user-comment">
+                            <fa-icon [icon]="FaProfile" size="2xl"></fa-icon><p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                        </div>
+                        <div class="flex flex-row justify-around items-center commentaire-publication-input">
+                            <form class="flex items-center content-center bg-[#FFFFFF] border-s-black rounded-xl p-2 gap-2 w-full">
+                                <input type="text" name="comment" class="bg-inherit placeholder:text-black flex-1" placeholder="Commenter...">
+                                <button type="submit"><fa-icon [icon]="FaSend" size="xl"></fa-icon></button>
+                              </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
