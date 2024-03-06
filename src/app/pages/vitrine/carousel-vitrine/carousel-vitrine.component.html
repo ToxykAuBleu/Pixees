@@ -4,9 +4,7 @@
     [config]="slideConfig">
         <div ngxSlickItem *ngFor="let slide of slides" class="slide">
             <img src="{{ slide.img }}" alt="" class="img-style-vitrine">
+            <p class="description">{{slide.caption}}</p>
         </div>
     </ngx-slick-carousel>
-    <div class="description">
-        <p>{{description}}</p>
-    </div>
 </div>
