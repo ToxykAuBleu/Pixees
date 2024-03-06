@@ -65,4 +65,39 @@ export class CarouselVitrineComponent {
       }
     ]
   };
+  public description:String = "placeholder description";
+  public i:number = 0;
+
+  changeDescription(i:number){
+    switch(i){
+      case 0:
+        this.description = "Editeur de contenu";
+        break;
+      case 1:
+        this.description = "Gestion des utilisateurs";
+        break;
+      case 2:
+        this.description = "Accueil";
+        break;
+      case 3:
+        this.description = "Gestion des administrateurs";
+        break;
+      case 4:
+        this.description = "Profil";
+        break;
+      case 5:
+        this.description = "Discussion";
+        break;
+      default:
+        this.description = "placeholder description";
+        break;
+    };
+    if (i <= 5) {
+      i++;
+    }
+    else {
+      i = 0;
+    }
+    setTimeout('changeDescription',8000)
+  }
 }
