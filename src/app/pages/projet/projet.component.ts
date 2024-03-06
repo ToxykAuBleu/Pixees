@@ -82,7 +82,6 @@ export class ProjetComponent {
 
   redirectHome(): void {
     this.router.navigate(['/', 'home']);
-
   }
 
   projectHome(): void {

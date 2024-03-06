@@ -174,6 +174,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   crayon() {
+    this.changeActive("crayon");
     this.outilActuel = Outil.Crayon;
     this.isResizable = true;
     this.isTolerance = false;
@@ -193,6 +194,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   gomme() {
+    this.changeActive('gomme');
     this.outilActuel = Outil.Gomme;
     this.isResizable = true;
     this.isTolerance = false;
@@ -212,12 +214,14 @@ export class OutilComponent implements AfterViewInit {
   }
 
   selection() {
+    this.changeActive("selection");
     this.outilActuel = Outil.Selection;
     this.isResizable = false;
     this.isTolerance = false;
   }
 
   remplissage() {
+    this.changeActive("remplissage");
     this.outilActuel = Outil.Remplissage;
     this.isResizable = false;
     this.isTolerance = true;
@@ -237,12 +241,14 @@ export class OutilComponent implements AfterViewInit {
   }
 
   pipette() {
+    this.changeActive("pipette");
     this.outilActuel = Outil.Pipette;
     this.isResizable = false;
     this.isTolerance = false;
   }
 
   baguette() {
+    this.changeActive("baguette");
     this.outilActuel = Outil.Baguette;
     this.isResizable = false;
     this.isTolerance = true;
@@ -262,6 +268,7 @@ export class OutilComponent implements AfterViewInit {
   }
 
   formes() {
+    this.changeActive("formes");
     this.outilActuel = Outil.Formes;
     console.log("Formes selected");
     this.isResizable = false;
@@ -302,5 +309,13 @@ export class OutilComponent implements AfterViewInit {
 
   actionFormes(grille: GrilleComponent, x: number, y: number) {
     console.log("actionFormes");
+  }
+
+  changeActive(nomOutil: string) {
+    let body = document.getElementsByTagName('body')[0];
+    body.getElementsByClassName('active')[0].classList.add('outil');
+    body.getElementsByClassName('active')[0].classList.remove('active');
+    body.getElementsByClassName(nomOutil)[0].classList.add('active');
+    body.getElementsByClassName(nomOutil)[0].classList.remove('outil');
   }
 }
