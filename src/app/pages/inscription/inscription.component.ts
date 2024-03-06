@@ -22,7 +22,7 @@ export class InscriptionComponent {
     pseudo: ['', [Validators.required, Validators.maxLength(50)]],
     email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
     mdp: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
-    confirmation: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]]
+    confirmation: ['', [Validators.required]]
   });
 
   get pseudo(): FormControl { return this.signUpForm.get('pseudo') as FormControl; }
