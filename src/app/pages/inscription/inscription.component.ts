@@ -28,6 +28,7 @@ export class InscriptionComponent {
   get pseudo(): FormControl { return this.signUpForm.get('pseudo') as FormControl; }
   get email(): FormControl { return this.signUpForm.get('email') as FormControl; }
   get mdp(): FormControl { return this.signUpForm.get('mdp') as FormControl; }
+  get confirmation(): FormControl { return this.signUpForm.get('confirmation') as FormControl; }
 
   constructor(private formBuilder: FormBuilder,
     private http: HttpClient,
