@@ -14,7 +14,7 @@ import { ProfilComponent } from './pages/profil/profil.component';
 import { ProjetComponent } from './pages/projet/projet.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHouse, faPencil , faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPencil, faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleUser, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { gitRepoInfo } from '../version-info';
@@ -34,8 +34,8 @@ import { environment } from '../../environment';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
-  @ViewChild('gitInfo', { static: true}) gitInfo: ElementRef<HTMLElement> | undefined;
+  @ViewChild('askToSave', { static: true }) askToSave: ElementRef | undefined;
+  @ViewChild('gitInfo', { static: true }) gitInfo: ElementRef<HTMLElement> | undefined;
 
   // Icone de la barre de navigation côté réseau social
   faHouse = faHouse;
@@ -64,15 +64,15 @@ export class AppComponent implements OnInit, OnDestroy {
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
-  
+
   constructor(
     private appService: AppService,
     private router: Router,
-    private grilleService: GrilleService, 
+    private grilleService: GrilleService,
     @Inject(PLATFORM_ID) private platformId: any,
     private http: HttpClient
-  ) {};
-  
+  ) { };
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
@@ -143,13 +143,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showSave() {
-    console.log(this.isInEditor);  
+    console.log(this.isInEditor);
     if (this.isInEditor) {
       this.askToSave?.nativeElement.classList.remove('hidden');
     } else {
       this.goToHome();
     }
-      console.log("Pas dans l'éditeur");
+    console.log("Pas dans l'éditeur");
   }
 
   closeProject() {
@@ -162,6 +162,23 @@ export class AppComponent implements OnInit, OnDestroy {
       withCredentials: true
     };
     this.http.get(`${environment.apiLink}/project/close.php`, httpOptions)
+      .subscribe({
+        complete: () => {
+          this.goToHome();
+        }
+      });
+  }
+
+  logOut() {
+    console.log("Sign out");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+    this.http.get(`${environment.apiLink}/user/logout.php`, httpOptions)
       .subscribe({
         complete: () => {
           this.goToHome();
