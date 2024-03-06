@@ -32,6 +32,37 @@ export class ConnexionComponent {
     private appService: AppService)
   { };
 
+  onSubmit(): void {
+    console.log('submitted');
+    const submitButton: HTMLElement = document.getElementById('connectButton')!;
+    submitButton.setAttribute('disabled', 'true');
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+
+    this.http.post(`${environment.apiLink}/user/connect.php`, this.signInForm.value, httpOptions)
+      .subscribe({
+        next: (res) => {
+          if (res.valueOf().hasOwnProperty('error')) {
+            console.error(res);
+          } else {
+            console.log(res);
+          }
+        },
+        error: (err) => {
+          console.error(err);
+        },
+        complete: () => {
+          submitButton.removeAttribute('disabled');
+        }
+      });
+  }
+
   goToInscription() {
     this.router.navigate(['/', 'inscription']);
   }
