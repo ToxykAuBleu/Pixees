@@ -16,21 +16,25 @@
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
                             <p class="connexion">Email</p>
-                            <input type="email" class="input-box" formControlName="email" required>
-                        </div>
-                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
-                            <div *ngIf="email.errors?.['required']">Email requis.</div>
-                            <div *ngIf="email.errors?.['email']">Email invalide.</div>
+                            <div>
+                                <input type="email" class="input-box" formControlName="email" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="email.errors?.['required']">Email requis.</div>
+                                    <div *ngIf="email.errors?.['email']">Email invalide.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
                             <p class="connexion">Mot de passe</p>
-                            <input type="password" class="input-box" formControlName="mdp" required>
-                        </div>
-                        <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger">
-                            <div *ngIf="mdp.errors?.['required']">Mot de passe requis.</div>
+                            <div>
+                                <input type="password" class="input-box" formControlName="mdp" required>
+                                <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="mdp.errors?.['required']">Mot de passe requis.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
