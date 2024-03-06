@@ -1,0 +1,10 @@
+<div style="margin-left: 10%; margin-right:10%; margin: top 50px;">
+    <ngx-slick-carousel class="carousel" 
+    #slickModal="slick-carousel" 
+    [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+            <img src="{{ slide.img }}" alt="" class="img-style-vitrine">
+            <p class="description">{{slide.caption}}</p>
+        </div>
+    </ngx-slick-carousel>
+</div>

@@ -142,6 +142,13 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
+  goToVitrine() {
+    this.router.navigate(['/', 'vitrine']);
+    this.couleur = "couleurAccueil";
+    this.isNavbarEditor = false;
+    this.isInEditor = false;
+    this.setInLocalStorage(this.couleur, this.isInEditor);
+  }
 
   setInLocalStorage(couleur: string, isInEditor: boolean) {
     localStorage.setItem('couleur', couleur);

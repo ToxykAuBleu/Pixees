@@ -1,0 +1,84 @@
+.administration-utilisateur {
+    background-color: #ea8080;
+}
+
+.editeur {
+    background-color: #af80ea;
+}
+
+.accueil {
+    background-color: #7Ceb60;
+}
+
+.discussion {
+    background-color: #80d7ea;
+}
+
+.administration-admin {
+    background-color: #ebbc60;
+}
+
+.profil {
+    background-color: #000000;
+}
+
+.left {
+    width: 33.3%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    
+    img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 2em;
+    }
+
+    h2 {
+        text-align: center;
+        margin: 1em;
+    }
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 66.7%;
+
+    .r {
+        border: 3px solid black;
+    }
+
+    .couleur {
+        display: flex;
+        flex-direction: row;
+        margin-top: 28px;
+    }
+
+    p {
+        margin-left: 0.4em;
+        display: block;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+    button {
+        border-radius: 15px;
+        border: 2px solid #000000;
+        background-color: #7CEB60;
+        font-weight: bold;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        cursor: pointer;
+        width: 15vw;
+        margin-top: 1.5em;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
