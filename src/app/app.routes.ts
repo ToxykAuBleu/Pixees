@@ -26,5 +26,7 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
+    { path: 'vitrine', component: VitrineComponent },
+    { path: 'publication', component: PublicationComponent },
     {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
