@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment';
+import { After } from 'v8';
 
 @Component({
   selector: 'app-root',
@@ -64,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
+  public estConnecte: boolean = false;
 
   constructor(
     private appService: AppService,
@@ -71,7 +73,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private grilleService: GrilleService,
     @Inject(PLATFORM_ID) private platformId: any,
     private http: HttpClient
-  ) { };
+  ) {
+    const navigation = this.router.getCurrentNavigation()?.extras.state;
+    if (navigation) {
+      const data = JSON.parse(navigation['data']);
+      this.estConnecte = data;
+    }
+  };
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -131,6 +139,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   goToConnexion() {
     this.router.navigate(['/', 'connexion']);
+    this.couleur = "couleurProfil";
+    this.isNavbarEditor = false;
+    this.isInEditor = false;
+    this.setInLocalStorage(this.couleur, this.isInEditor);
+  }
+  goToProfil() {
+    this.router.navigate(['/', 'profil']);
     this.couleur = "couleurProfil";
     this.isNavbarEditor = false;
     this.isInEditor = false;

@@ -52,6 +52,7 @@ export class ConnexionComponent {
             console.error(res);
           } else {
             console.log(res);
+            this.router.navigate(['/home'], { state: { data: Boolean(res) }})
           }
         },
         error: (err) => {
