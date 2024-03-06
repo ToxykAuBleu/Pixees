@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -34,6 +34,7 @@ import { environment } from '../../environment';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
+  @Input() projectNameNav: string | undefined = "Pixees";
   @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
   @ViewChild('gitInfo', { static: true}) gitInfo: ElementRef<HTMLElement> | undefined;
 
@@ -84,6 +85,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.appService.closeEditor$.subscribe(() => {
       this.closeProject();
+    }));
+
+    this.subscriptions.push(this.appService.projectName.subscribe(projectName => {
+      this.projectNameNav = projectName;
+      console.log(projectName);
     }));
   };
 
@@ -177,8 +183,4 @@ export class AppComponent implements OnInit, OnDestroy {
   triggerGrille() {
     this.grilleService.triggerGrille();
   }
-
-
 }
-
-
