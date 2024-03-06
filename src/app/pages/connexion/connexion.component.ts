@@ -19,11 +19,10 @@ export class ConnexionComponent {
   faArrowLeft = faArrowLeft;
 
   signInForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(50)]],
-    mdp: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(50)]],
+    email: ['', [Validators.required]],
+    mdp: ['', [Validators.required]],
   });
 
-  get pseudo(): FormControl { return this.signInForm.get('pseudo') as FormControl; }
   get email(): FormControl { return this.signInForm.get('email') as FormControl; }
   get mdp(): FormControl { return this.signInForm.get('mdp') as FormControl; }
 

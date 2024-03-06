@@ -51,7 +51,7 @@
                             <p class="connexion">Confirmation</p>
                             <input type="password" class="input-box" formControlName="confirmation" required>
                         </div>
-                        <div *ngIf="confirmation.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger">
+                        <div *ngIf="confirmation.invalid && (confirmation.dirty || confirmation.touched)" class="alert alert-danger">
                             <div *ngIf="confirmation.errors?.['required']">Confirmation requise.</div>
                         </div>
                     </div>
