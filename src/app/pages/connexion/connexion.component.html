@@ -2,32 +2,56 @@
     <div class="left">
         <button (click)="goToHome()" class="retour"><fa-icon [icon]="faArrowLeft" size="2xl"></fa-icon></button>
         <div class="image-container">
-            <img src="../../../assets/img/1.jpg" alt="1" class="img-left" id="img_1"><img src="../../../assets/img/2.jpg" alt="2" class="img-left" id="img_2"><img src="../../../assets/img/3.jpg" alt="3" class="img-left" id="img_3">
+            <img src="../../../assets/img/1.jpg" alt="1" class="img-left" id="img_1"><img
+                src="../../../assets/img/2.jpg" alt="2" class="img-left" id="img_2"><img src="../../../assets/img/3.jpg"
+                alt="3" class="img-left" id="img_3">
         </div>
     </div>
     <div class="center">
         <h1 class="title">S'identifier</h1>
-        <div class="zone-connexion gap-4">
-            <div class="input-zone gap-4">
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Email</p>
-                    <input type="email" class="input-box">
+        <form [formGroup]="signInForm" id="formConnect" (ngSubmit)="onSubmit()" class="gap-4 flex flex-col">
+            <div class="zone-connexion gap-4">
+                <div class="input-zone gap-4">
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Email</p>
+                            <div>
+                                <input type="email" class="input-box" formControlName="email" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="email.errors?.['required']">Email requis.</div>
+                                    <div *ngIf="email.errors?.['email']">Email invalide.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Mot de passe</p>
+                            <div>
+                                <input type="password" class="input-box" formControlName="mdp" required>
+                                <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="mdp.errors?.['required']">Mot de passe requis.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Mot de passe</p>
-                    <input type="password" class="input-box">
+                <div class="link-zone">
+                    <p class="link">Mot de passe oublié ?</p>
+                    <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
                 </div>
+                <button class="btn-connexion" id="connectButton">Connexion</button>
             </div>
-            <div class="link-zone">
-                <p class="link">Mot de passe oublié ?</p>
-                <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
-            </div>
-            <button class="btn-connexion">Connexion</button>
-        </div>
+        </form>
     </div>
     <div class="right">
         <div class="image-container">
-            <img src="../../../assets/img/4.jpg" alt="4" class="img-right" id="img_4"><img src="../../../assets/img/5.jpg" alt="5" class="img-right" id="img_5"><img src="../../../assets/img/6.jpg" alt="6" class="img-right" id="img_6">
+            <img src="../../../assets/img/4.jpg" alt="4" class="img-right" id="img_4"><img
+                src="../../../assets/img/5.jpg" alt="5" class="img-right" id="img_5"><img
+                src="../../../assets/img/6.jpg" alt="6" class="img-right" id="img_6">
         </div>
     </div>
 </div>

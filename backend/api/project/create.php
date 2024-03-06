@@ -27,8 +27,11 @@
 
     $name = $_POST["name"];
     $taille = $_POST["taille"];
+    $taille = explode("x", $taille);
+    $hauteur = $taille[0];
+    $largeur = $taille[1];
     $bgcolor = $_POST["bgcolor"];
-    $_SESSION["project"] = array("name" => $name, "taille" => $taille, "bgcolor" => $bgcolor);
+    $_SESSION["project"] = array("name" => $name, "taille" => array("hauteur" => intval($hauteur), "largeur" => intval($largeur)), "bgcolor" => $bgcolor);
 
     echo json_encode(array("project" => $_SESSION["project"], "success" => "Projet créé avec succès"));
     exit();

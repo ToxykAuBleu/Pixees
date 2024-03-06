@@ -11,6 +11,7 @@ import { CollectionComponent } from './pages/collection/collection.component';
 import { ProfilComponent } from './pages/profil/profil.component';
 import { EditeurComponent } from './pages/editeur/editeur.component';
 import { VitrineComponent } from './pages/vitrine/vitrine.component';
+import { PublicationComponent } from './pages/publication/publication.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -25,6 +26,5 @@ export const routes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'profil', component: ProfilComponent },
     { path: 'editeur', component: EditeurComponent },
-    { path: 'vitrine', component: VitrineComponent },
     {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];

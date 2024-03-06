@@ -38,7 +38,8 @@ export class ProjetComponent {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private appService: AppService)
+    private appService: AppService,
+    )
   { };
   
   onSubmit(): void {
@@ -59,7 +60,7 @@ export class ProjetComponent {
             console.error(res);
           } else {
             console.log(res);
-            this.router.navigate(['/', 'editeur'])
+            this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
             this.appService.setIsInEditor(true);
           }
         },
@@ -81,7 +82,6 @@ export class ProjetComponent {
 
   redirectHome(): void {
     this.router.navigate(['/', 'home']);
-
   }
 
   projectHome(): void {

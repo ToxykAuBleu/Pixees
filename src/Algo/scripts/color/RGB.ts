@@ -95,7 +95,8 @@ export class RGB extends Couleur {
             }
             hexa += comp.toString(16);
         }
-
+        let alpha = Math.round(this._transparence * 255);
+        hexa += alpha < 16 ? `0${alpha.toString(16)}` : `${alpha.toString(16)}`;
         return hexa;
     }
 

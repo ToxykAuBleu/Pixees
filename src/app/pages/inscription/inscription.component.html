@@ -1,36 +1,81 @@
 <div class="flex flex-row justify-around items-center h-full">
     <div class="left">
         <button (click)="goToConnexion()" class="retour"><fa-icon [icon]="faArrowLeft" size="2xl"></fa-icon></button>
-        <img src="../../../assets/img/1.jpg" alt="1" class="img-left" id="img_1"><img src="../../../assets/img/1.jpg" alt="2" class="img-left" id="img_2"><img src="../../../assets/img/1.jpg" alt="3" class="img-left" id="img_3">
+        <img src="../../../assets/img/1.jpg" alt="1" class="img-left" id="img_1"><img src="../../../assets/img/1.jpg"
+            alt="2" class="img-left" id="img_2"><img src="../../../assets/img/1.jpg" alt="3" class="img-left"
+            id="img_3">
     </div>
     <div class="center">
         <h1 class="title">S'inscrire</h1>
         <div class="zone-connexion gap-4">
-            <div class="input-zone gap-4">
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Pseudo</p>
-                    <input type="pseudo" class="input-box">
+            <form [formGroup]="signUpForm" id="formRegister" (ngSubmit)="onSubmit()" class="gap-4 flex flex-col">
+                <div class="input-zone gap-4">
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Pseudo</p>
+                            <div>
+                                <input type="text" class="input-box" formControlName="pseudo" required>
+                                <div *ngIf="pseudo.invalid && (pseudo.dirty || pseudo.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="pseudo.errors?.['required']">Pseudo requis.</div>
+                                    <div *ngIf="pseudo.errors?.['maxlength']">Pseudo trop long.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Email</p>
+                            <div>
+                                <input type="email" class="input-box" formControlName="email" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="email.errors?.['required']">Email requis.</div>
+                                    <div *ngIf="email.errors?.['email']">Email invalide.</div>
+                                    <div *ngIf="email.errors?.['maxlength']">Email trop long.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Mot de passe</p>
+                            <div>
+                                <input type="password" class="input-box" formControlName="mdp" required>
+                                <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="mdp.errors?.['required']">Mot de passe requis.</div>
+                                    <div *ngIf="mdp.errors?.['minlength']">Mot de passe trop court.</div>
+                                    <div *ngIf="mdp.errors?.['maxlength']">Mot de passe trop long.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between gap-4 flex flex-row">
+                            <p class="connexion">Confirmation</p>
+                            <div>
+                                <input type="password" class="input-box" formControlName="confirmation" required>
+                                <div *ngIf="confirmation.invalid && (confirmation.dirty || confirmation.touched)" class="alert alert-danger text-red-500">
+                                    <div *ngIf="confirmation.errors?.['required']">Confirmation requise.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Email</p>
-                    <input type="email" class="input-box">
+                <div class="link-zone">
+                    <input type="checkbox" class="checkbox"><a> J'accepte les <p class="link">conditions d'utilisation
+                        </p></a>
                 </div>
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Mot de passe</p>
-                    <input type="password" class="input-box">
-                </div>
-                <div class="input-label-container gap-4">
-                    <p class="connexion">Confirmation</p>
-                    <input type="password" class="input-box">
-                </div>
-            </div>
-            <div class="link-zone">
-                <input type="checkbox" class="checkbox"><a> J'accepte les <p class="link">conditions d'utilisation</p></a>
-            </div>
-            <button class="btn-inscription">Inscription</button>
+                <button class="btn-inscription self-center" type="submit" id="registerButton">Inscription</button>
+            </form>
         </div>
     </div>
     <div class="right">
-        <img src="../../../assets/img/1.jpg" alt="4" class="img-right" id="img_4"><img src="../../../assets/img/1.jpg" alt="5" class="img-right" id="img_5"><img src="../../../assets/img/1.jpg" alt="6" class="img-right" id="img_6">
+        <img src="../../../assets/img/1.jpg" alt="4" class="img-right" id="img_4"><img src="../../../assets/img/1.jpg"
+            alt="5" class="img-right" id="img_5"><img src="../../../assets/img/1.jpg" alt="6" class="img-right"
+            id="img_6">
     </div>
 </div>
