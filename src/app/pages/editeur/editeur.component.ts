@@ -6,6 +6,7 @@ import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
+import { LayerComponent } from './calque/layer/layer.component';
 
 @Component({
   selector: 'app-editeur',
@@ -22,6 +23,7 @@ export class EditeurComponent implements OnInit {
 
   hauteur: number = 0;
   largeur: number = 0;
+  layerList: LayerComponent[] = [];
   
   public popupTitre: string = "";
   public popupDesc: string = "";
@@ -54,6 +56,10 @@ export class EditeurComponent implements OnInit {
   onGrilleClicked($event: { x: number; y: number; }) {
     // Effectuez l'action de l'outil actuel
     this.outil?.action(this.grille, $event.x, $event.y);
+  }
+
+  addLayer() {
+    this.layerList.push(new LayerComponent());
   }
 
   changePopup(titre: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {

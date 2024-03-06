@@ -1,4 +1,4 @@
-import { Inject, Component, PLATFORM_ID } from '@angular/core';
+import { Inject, Component, PLATFORM_ID, Input, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { GrilleComponent } from '../grille/grille.component';
@@ -23,6 +23,9 @@ export const NOM = new InjectionToken<string>('Nom');
   providers: [{ provide: POSITION, useValue: 1 }, { provide: NOM, useValue: 'Calque' }]
 })
 export class CalqueComponent extends GrilleComponent {
+  @Input() layerList: LayerComponent[] = [];
+  @Output() addLayer = new EventEmitter<void>();
+
   faCirclePlus = faCirclePlus;
   faTrashCan = faTrashCan;
   faArrowUp = faArrowUp;
@@ -30,7 +33,6 @@ export class CalqueComponent extends GrilleComponent {
   faCopy = faCopy;
   faEye = faEye;
 
-  layerList: LayerComponent[] = [];
 
   private _position: number;
   private _nom: string;
@@ -50,9 +52,9 @@ export class CalqueComponent extends GrilleComponent {
     this._nom = nom;
   }
 
-  addLayer() {
+  newLayer() {
     console.log("New Layer Added");
-    this.layerList.push(new LayerComponent());
+    this.addLayer.emit();
   }
 
   deleteLayer(index: number) {

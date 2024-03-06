@@ -2,5 +2,5 @@
 <div class="grid grid-cols-3 h-full place-items-center">
     <app-outil #outil></app-outil>
     <app-grille #grille class="aspect-square w-full" (grilleClicked)="onGrilleClicked($event)" [hauteur]="hauteur" [largeur]="largeur"></app-grille>
-    <app-calque #calque></app-calque>
+    <app-calque #calque (addLayer)="addLayer()" [layerList]="layerList"></app-calque>
 </div> 
