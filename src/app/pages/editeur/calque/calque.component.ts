@@ -8,6 +8,8 @@ import { PopupService } from '../../popup/popup.service';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../../../app.service';
 import { Router } from '@angular/router';
+import { LayerComponent } from './layer/layer.component';
+import { CommonModule } from '@angular/common';
 
 export const POSITION = new InjectionToken<number>('Position');
 export const NOM = new InjectionToken<string>('Nom');
@@ -15,7 +17,7 @@ export const NOM = new InjectionToken<string>('Nom');
 @Component({
   selector: 'app-calque',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, LayerComponent, CommonModule],
   templateUrl: './calque.component.html',
   styleUrl: './calque.component.scss',
   providers: [{ provide: POSITION, useValue: 1 }, { provide: NOM, useValue: 'Calque' }]
@@ -27,6 +29,8 @@ export class CalqueComponent extends GrilleComponent {
   faArrowDown = faArrowDown;
   faCopy = faCopy;
   faEye = faEye;
+
+  layerList: LayerComponent[] = [];
 
   private _position: number;
   private _nom: string;
@@ -44,6 +48,16 @@ export class CalqueComponent extends GrilleComponent {
     super(platformId, grilleService, popupService, appService, http, router);
     this._position = position;
     this._nom = nom;
+  }
+
+  addLayer() {
+    console.log("New Layer Added");
+    this.layerList.push(new LayerComponent());
+  }
+
+  deleteLayer(index: number) {
+    console.log("Layer Deleted");
+    this.layerList.splice(index, 1);
   }
 
   getPosition(): number {
