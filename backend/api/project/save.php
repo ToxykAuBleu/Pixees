@@ -35,6 +35,7 @@
         }
     }
     $name = $_SESSION["project"]["name"];
+    $_POST["name"] = $name;
 
     // Sauvegarder les métadonnées du projet dans la bdd.
     $ini = parse_ini_file("../config.ini", true);
@@ -51,30 +52,18 @@
     try {
         if ( !isset($_POST["id"]) ) {
             $query = "INSERT INTO ".$ini["PROJET"]["Table_Project"]." (nom, hauteurToile, largeurToile) VALUES ('".$name."', ".$hauteur.", ".$largeur.");";
-            echo $query;
             $result = mysqli_query($link, $query);
-            if ( !$result ) {
-                echo json_encode(array("error" => "Erreur lors de la création du projet"));
-                mysqli_close($link);
-                exit;
-            }
+            if ( !$result ) { throw new Exception(); }
     
             // Récupération de l'id généré
             $query = "SELECT * FROM ".$ini["PROJET"]["Table_Project"]." ORDER BY idProjet DESC LIMIT 1;";
-            echo $query;
             $id = mysqli_query($link, $query)->fetch_row()[0];
             $isNew = true;
-            echo $id;
         } else {
-            echo "Coucou 5";
             $id = $_POST["id"];
             $query = "UPDATE ".$ini["PROJET"]["Table_Project"]." SET nom='".$name."', hauteurToile=".$hauteur.", largeurToile=".$largeur." WHERE id=".$id.";";
             $result = mysqli_query($link, $query);
-            if ( !$result ) {
-                echo json_encode(array("error" => "Erreur lors de la mise à jour du projet"));
-                mysqli_close($link);
-                exit;
-            }
+            if ( !$result ) { throw new Exception(); }
         }
     } catch (Exception $e) {
         echo json_encode(array("error" => "Erreur lors des requêtes en bdd."));
@@ -82,18 +71,23 @@
         exit;
     }
 
-    echo "Coucou 6";
     // Mise à jour de la relation entre le projet et l'utilisateur
-    $query = "INSERT INTO ".$ini["PROJET"]["Table_RelationEdit"]." (idUtilisateur, idProjet) VALUES (".$_SESSION["id"].", ".$id.");";
+    try {
+        $query = "INSERT INTO ".$ini["PROJET"]["Table_RelationEdit"]." (idUtilisateur, idProjet) VALUES (".$_SESSION["id"].", ".$id.");";
+        $result = mysqli_query($link, $query);
+        if ( !$result ) { throw new Exception(); }
+    } catch (Exception $e) {
+        echo json_encode(array("error" => "Erreur lors de la création de la relation entre le projet et l'utilisateur"));
+        mysqli_close($link);
+        exit;
+    }
 
-    echo "Coucou 7";
     // Vérification du dossier de sauvegarde.
-    $dir = "../data/";
-    if ( !file_exists($dir) ) {
-        mkdir($dir);
+    $dir = "../data/projects/";
+    if ( !is_dir($dir) ) {
+        mkdir($dir, 0777, true);
     }
     
-    echo "Coucou 8";
     // Ecriture du projet en json.
     $filename = $id . ".json";
     $file = fopen("$dir/$filename", "w");
@@ -104,6 +98,5 @@
     } else {
         echo json_encode(array("success" => "Projet sauvegardé avec succès", "id" => $id));
     }
-    echo "Coucou 9";
     exit();
 ?>
