@@ -49,8 +49,6 @@ export class EditeurComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
-
   onGrilleClicked($event: { x: number; y: number; }) {
     // Effectuez l'action de l'outil actuel
     this.outil?.action(this.grille, $event.x, $event.y);
