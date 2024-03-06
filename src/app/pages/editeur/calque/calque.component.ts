@@ -7,6 +7,7 @@ import { GrilleService } from '../../../grille-service.service';
 import { PopupService } from '../../popup/popup.service';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from '../../../app.service';
+import { Router } from '@angular/router';
 
 export const POSITION = new InjectionToken<number>('Position');
 export const NOM = new InjectionToken<string>('Nom');
@@ -37,9 +38,10 @@ export class CalqueComponent extends GrilleComponent {
     grilleService: GrilleService,
     popupService: PopupService,
     http: HttpClient,
-    appService: AppService)
+    appService: AppService,
+    router: Router)
   {
-    super(platformId, grilleService, popupService, appService, http);
+    super(platformId, grilleService, popupService, appService, http, router);
     this._position = position;
     this._nom = nom;
   }

@@ -37,6 +37,7 @@ git-version.json
 /libpeerconnection.log
 testem.log
 /typings
+/backend/api/config.ini
 
 # System files
 .DS_Store

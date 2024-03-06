@@ -4,6 +4,7 @@ import { GrilleComponent } from './grille/grille.component';
 import { OutilComponent } from './outil/outil.component';
 import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../popup/popup.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-editeur',
@@ -18,11 +19,21 @@ export class EditeurComponent implements OnInit {
   @ViewChild('grille', { static: true }) grille: GrilleComponent | undefined;
   @ViewChild('outil', { static: true }) outil: OutilComponent | undefined;
 
+  hauteur: number = 0;
+  largeur: number = 0;
+  
   public popupTitre: string = "";
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
 
-  constructor(private popupService: PopupService) { }
+  constructor(private popupService: PopupService, private router: Router) {
+    const navigation = this.router.getCurrentNavigation()?.extras.state;
+    if (navigation) {
+      const data = JSON.parse(navigation['data']).project;
+      this.hauteur = data.taille.hauteur;
+      this.largeur = data.taille.largeur;
+    }
+  }
 
   ngOnInit(): void {
     this.popupService.popupChange$.subscribe((popup) => {
@@ -37,6 +48,8 @@ export class EditeurComponent implements OnInit {
       this.closePopup();
     });
   }
+
+  ngOnInit(): void { }
 
   onGrilleClicked($event: { x: number; y: number; }) {
     // Effectuez l'action de l'outil actuel
