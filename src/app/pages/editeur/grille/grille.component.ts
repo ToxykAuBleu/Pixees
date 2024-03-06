@@ -1,10 +1,14 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy, Input } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { Grille } from '../../../../Algo/scripts/Grille';
 import { RGB } from '../../../../Algo/scripts/color/RGB'
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 import { GrilleService } from '../../../grille-service.service';
 import { Subscription } from 'rxjs';
+import { log } from 'node:console';
+import { json } from 'stream/consumers';
+import { ActivatedRoute, Router } from '@angular/router';
+import { clearScreenDown } from 'node:readline';
 
 @Component({
   selector: 'app-grille',
@@ -15,6 +19,9 @@ import { Subscription } from 'rxjs';
 })
 
 export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
+  @Input() hauteur!: number;
+  @Input() largeur!: number;
+
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 
   @ViewChild('mainCanvas', { static: false }) canvas: ElementRef<HTMLCanvasElement> | undefined;
@@ -34,7 +41,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService, private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
     // this.isBrowser = true;
     console.log("platformId : " + platformId);
@@ -49,20 +56,21 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscriptions.push(this.grilleService.save$.subscribe(() => {
       this.saveAsJSON();
     }));
+    console.log(this.hauteur);
   }
-
+  
   ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
       console.log(sub);
       sub.unsubscribe();
     }
   }
-
+  
   ngAfterViewInit(): void {
     this.ctx = this.canvas?.nativeElement.getContext('2d');
     this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
     // Récupération de la hauteur et de la largeur du canvas
-    this.grille = this.drawGrid(128, 128);
+    this.grille = this.drawGrid(this.hauteur, this.largeur);
 
     this.canvas?.nativeElement.addEventListener('mousedown', (e) => {
       let { x, y } = this.getMousePos(this.canvas!.nativeElement, e);
@@ -231,4 +239,10 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   saveAsJSON(): void {
     console.log("saveAsJSON");
   }
+}
+
+interface ProjectData {
+  nom: string;
+  taille: {hauteur: number, largeur: number};
+  couleur: RGB;
 }

@@ -6,7 +6,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AppService {
   private isInEditorSource = new BehaviorSubject<boolean>(false);
-
   isInEditor = this.isInEditorSource.asObservable();
 
   setIsInEditor(isInEditor: boolean): void {
