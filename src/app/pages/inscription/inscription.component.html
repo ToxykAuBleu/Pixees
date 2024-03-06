@@ -10,21 +10,27 @@
         <div class="zone-connexion gap-4">
             <form [formGroup]="signUpForm" id="formNewProject" (ngSubmit)="onSubmit()">
                 <div class="input-zone gap-4">
-                    <div class="input-label-container gap-4">
-                        <p class="connexion">Pseudo</p>
-                        <input type="pseudo" class="input-box" formControlName="pseudo">
+                    <div class="input-label-container flex flex-col">
+                        <div class="justify-between flex flex-row">
+                            <p class="connexion">Pseudo</p>
+                            <input type="text" class="input-box" formControlName="pseudo" required>
+                        </div>
+                        <div *ngIf="pseudo.invalid && (pseudo.dirty || pseudo.touched)" class="alert alert-danger">
+                            <div *ngIf="pseudo.errors?.['required']">Pseudo requis.</div>
+                            <div *ngIf="pseudo.errors?.['maxlength']">Pseudo trop long.</div>
+                        </div>
                     </div>
                     <div class="input-label-container gap-4">
                         <p class="connexion">Email</p>
-                        <input type="email" class="input-box" formControlName="email">
+                        <input type="email" class="input-box" formControlName="email" required>
                     </div>
                     <div class="input-label-container gap-4">
                         <p class="connexion">Mot de passe</p>
-                        <input type="password" class="input-box" formControlName="mdp">
+                        <input type="password" class="input-box" formControlName="mdp" required>
                     </div>
                     <div class="input-label-container gap-4">
                         <p class="connexion">Confirmation</p>
-                        <input type="password" class="input-box" formControlName="confirmation">
+                        <input type="password" class="input-box" formControlName="confirmation" required>
                     </div>
                 </div>
                 <div class="link-zone">
