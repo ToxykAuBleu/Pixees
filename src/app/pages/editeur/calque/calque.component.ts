@@ -5,6 +5,7 @@ import { GrilleComponent } from '../grille/grille.component';
 import { InjectionToken } from '@angular/core';
 import { GrilleService } from '../../../grille-service.service';
 import { PopupService } from '../../popup/popup.service';
+import { HttpClient } from '@angular/common/http';
 
 export const POSITION = new InjectionToken<number>('Position');
 export const NOM = new InjectionToken<string>('Nom');
@@ -33,9 +34,10 @@ export class CalqueComponent extends GrilleComponent {
     @Inject(NOM) private nom: string,
     @Inject(PLATFORM_ID) platformId: Object,
     grilleService: GrilleService,
-    popupService: PopupService)
+    popupService: PopupService,
+    http: HttpClient)
   {
-    super(platformId, grilleService, popupService);
+    super(platformId, grilleService, popupService, http);
     this._position = position;
     this._nom = nom;
   }

@@ -7,6 +7,8 @@ import { GrilleService } from '../../../grille-service.service';
 import { PopupService } from '../../popup/popup.service';
 import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../../environment';
 
 @Component({
   selector: 'app-grille',
@@ -39,7 +41,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   constructor(
     @Inject(PLATFORM_ID) platformId: Object,
     private grilleService: GrilleService,
-    private popupService: PopupService) 
+    private popupService: PopupService,
+    private http: HttpClient) 
   {
     this.isBrowser = isPlatformBrowser(platformId);
   }
@@ -235,6 +238,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       return;
     }
 
+    // NOTE: Il faudra vérifier en amont que l'utilisateur soit bien connecté.
     const abortController = new AbortController();
     const saveFunction = new Promise<string | void>(async (resolve, reject) => {
       // Création de l'objet projet à sauvegarder.
@@ -275,7 +279,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
 
     this.popupService.activePopup();
     const result = await saveFunction;
-    this.popupService.closePopup();
 
     if (result) {
       // Envoi des données sauvegardées au serveur.
@@ -286,6 +289,31 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
        *  puis on fait une requête pour sauvegarder les données.
        */
       console.log(result);
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+        }),
+        withCredentials: true
+      };
+      this.http.post(`${environment.apiLink}/project/save.php`, result, httpOptions)
+        .subscribe({
+          next: (res) => {
+            if (res.valueOf().hasOwnProperty('error')) {
+              console.error(res);
+            } else {
+              
+            }
+          },
+          error: (err) => {
+            console.error(err);
+          },
+          complete: () => {
+            console.log("Terminado !");
+            this.popupService.closePopup();
+          }
+        });
     }
   }
 }
