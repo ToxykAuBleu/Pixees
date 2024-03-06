@@ -4,6 +4,7 @@ import { Grille } from '../../../../Algo/scripts/Grille';
 import { RGB } from '../../../../Algo/scripts/color/RGB'
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 import { GrilleService } from '../../../grille-service.service';
+import { AppService } from '../../../app.service';
 import { PopupService } from '../../popup/popup.service';
 import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
@@ -42,6 +43,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     @Inject(PLATFORM_ID) platformId: Object,
     private grilleService: GrilleService,
     private popupService: PopupService,
+    private appService: AppService,
     private http: HttpClient) 
   {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -52,8 +54,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       this.exportAsPNG();
     }));
 
-    this.subscriptions.push(this.grilleService.save$.subscribe(() => {
-      this.saveAsJSON();
+    this.subscriptions.push(this.grilleService.save$.subscribe((close: boolean) => {
+      this.saveAsJSON(close);
     }));
   }
 
@@ -233,7 +235,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     console.log("exported !");
   }
 
-  async saveAsJSON(): Promise<string | void> {
+  async saveAsJSON(close: boolean = false): Promise<string | void> {
     if (!this.canvas) {
       return;
     }
@@ -303,7 +305,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
             if (res.valueOf().hasOwnProperty('error')) {
               console.error(res);
             } else {
-              
+              // TODO: Ajouter une popup pour indiquer que la sauvegarde a réussi.
             }
           },
           error: (err) => {
@@ -312,6 +314,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
           complete: () => {
             console.log("Terminado !");
             this.popupService.closePopup();
+            if (close) {
+              this.appService.triggerCloseEditor();
+            }
           }
         });
     }

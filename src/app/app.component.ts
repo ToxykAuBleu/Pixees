@@ -59,7 +59,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Pixees';
 
-  private subscription: Subscription | undefined;
+  private subscriptions: Subscription[] = [];
 
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
@@ -78,13 +78,19 @@ export class AppComponent implements OnInit, OnDestroy {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
     }
-    this.subscription = this.appService.isInEditor.subscribe(isInEditor => {
+    this.subscriptions.push(this.appService.isInEditor.subscribe(isInEditor => {
       this.isInEditor = isInEditor;
-    });
+    }));
+
+    this.subscriptions.push(this.appService.closeEditor$.subscribe(() => {
+      this.closeProject();
+    }));
   };
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe();
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   };
 
   goToHome() {
@@ -147,6 +153,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   closeProject() {
+    console.log("Close ça mère");
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -162,8 +169,8 @@ export class AppComponent implements OnInit, OnDestroy {
       });
   }
 
-  triggerSave() {
-    this.grilleService.triggerSave();
+  triggerSave(close: boolean = false) {
+    this.grilleService.triggerSave(close);
     this.askToSave?.nativeElement.classList.add('hidden');
   }
 
