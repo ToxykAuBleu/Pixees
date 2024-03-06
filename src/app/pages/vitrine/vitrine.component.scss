@@ -42,38 +42,13 @@
     }
 }
 
-.center {
-    width: 33.4%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-        border: 3px solid black;
-    }
-
-    button {
-        border-radius: 15px;
-        border: 2px solid #000000;
-        background-color: #7CEB60;
-        font-weight: bold;
-        padding: 0.5em;
-        padding-left: 1em;
-        padding-right: 1em;
-        cursor: pointer;
-        width: 15vw;
-        margin-top: 4em;
-    }
-}
-
 .right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-top: auto;
     margin-bottom: auto;
-    width: 33.3%;
+    width: 66.7%;
 
     .r {
         border: 3px solid black;
@@ -92,4 +67,18 @@
         margin-bottom: auto;
     }
 
+    button {
+        border-radius: 15px;
+        border: 2px solid #000000;
+        background-color: #7CEB60;
+        font-weight: bold;
+        padding: 0.5em;
+        padding-left: 1em;
+        padding-right: 1em;
+        cursor: pointer;
+        width: 15vw;
+        margin-top: 4em;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
