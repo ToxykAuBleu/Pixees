@@ -20,6 +20,7 @@
                         </div>
                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
                             <div *ngIf="email.errors?.['required']">Email requis.</div>
+                            <div *ngIf="email.errors?.['email']">Email invalide.</div>
                         </div>
                     </div>
 

@@ -19,7 +19,7 @@ export class ConnexionComponent {
   faArrowLeft = faArrowLeft;
 
   signInForm: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
     mdp: ['', [Validators.required]],
   });
 

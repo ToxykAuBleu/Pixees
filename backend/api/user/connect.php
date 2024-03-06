@@ -25,9 +25,16 @@ if (!isset($data->email) || !isset($data->mdp)) {
     exit;
 }
 
-// Validité email dans la base de données
+// Validité email
+if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
+    echo json_encode(array("error" => "Email invalide"));
+    mysqli_close($link);
+    exit;
+}
+
+// Présence email dans la base de données
 try {
-    $query = "SELECT * FROM " . $ini["INSCRIPTION"]["Table"] . " WHERE email ='" . $data->email . "';";
+    $query = "SELECT * FROM ".$ini["INSCRIPTION"]["Table"]." WHERE email ='".$data->email."';";
     $result = mysqli_query($link, $query);
     if (mysqli_num_rows($result) === 0) {
         echo json_encode(array("error" => "Email non trouvé"));
@@ -41,11 +48,13 @@ try {
 }
 
 // Vérification du mot de passe
+$hashed_mdp = hash("sha256", $data->mdp);
+
 try {
-    $query = "SELECT * FROM " . $ini["INSCRIPTION"]["Table"] . " WHERE email ='" . $data->email . "';";
+    $query = "SELECT * FROM ".$ini["INSCRIPTION"]["Table"]." WHERE email ='".$data->email."';";
     $result = mysqli_query($link, $query);
     $row = mysqli_fetch_assoc($result);
-    if (!password_verify($data->mdp, $row["mdp"])) {
+    if ($hashed_mdp !== $row["passwd"]) {
         echo json_encode(array("error" => "Mot de passe incorrect"));
         mysqli_close($link);
         exit;
@@ -60,10 +69,8 @@ try {
 
 session_start();
 
-$_SESSION["id"] = $row["id"];
+$_SESSION["id"] = $row["idUtilisateur"];
 $_SESSION["pseudo"] = $row["pseudo"];
-$_SESSION["email"] = $row["email"];
-$_SESSION["role"] = $row["role"];
 
 echo json_encode(array("success" => "Connexion réussie"));
 
