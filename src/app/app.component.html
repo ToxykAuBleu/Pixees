@@ -3,8 +3,8 @@
       <div class="flex flex-col bg-[#AF80EA] gap-4 p-4 rounded-lg">
           <h1 class="font-black text-lg">Voulez-vous sauvegarder avant de quitter ?</h1>
           <div class="inline-flex flex-row justify-end gap-2">
-              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" (click)="triggerSave()">Sauvegarder</button>
-              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="goToHome()">Quitter</button>
+              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" (click)="triggerSave(true)">Sauvegarder</button>
+              <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" (click)="closeProject()">Quitter</button>
           </div>
       </div>
   </div>

@@ -21,6 +21,8 @@ import { gitRepoInfo } from '../version-info';
 import { GrilleService } from './grille-service.service';
 import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environment';
 
 @Component({
   selector: 'app-root',
@@ -57,26 +59,38 @@ export class AppComponent implements OnInit, OnDestroy {
 
   title = 'Pixees';
 
-  private subscription: Subscription | undefined;
+  private subscriptions: Subscription[] = [];
 
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
   
-  constructor(private appService: AppService,private router: Router, private grilleService: GrilleService, @Inject(PLATFORM_ID) private platformId: any) {};
+  constructor(
+    private appService: AppService,
+    private router: Router,
+    private grilleService: GrilleService, 
+    @Inject(PLATFORM_ID) private platformId: any,
+    private http: HttpClient
+  ) {};
   
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
     }
-    this.subscription = this.appService.isInEditor.subscribe(isInEditor => {
+    this.subscriptions.push(this.appService.isInEditor.subscribe(isInEditor => {
       this.isInEditor = isInEditor;
-    });
+    }));
+
+    this.subscriptions.push(this.appService.closeEditor$.subscribe(() => {
+      this.closeProject();
+    }));
   };
 
   ngOnDestroy() {
-    this.subscription?.unsubscribe();
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   };
 
   goToHome() {
@@ -138,8 +152,25 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log("Pas dans l'éditeur");
   }
 
-  triggerSave() {
-    this.grilleService.triggerSave();
+  closeProject() {
+    console.log("Close ça mère");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+    this.http.get(`${environment.apiLink}/project/close.php`, httpOptions)
+      .subscribe({
+        complete: () => {
+          this.goToHome();
+        }
+      });
+  }
+
+  triggerSave(close: boolean = false) {
+    this.grilleService.triggerSave(close);
     this.askToSave?.nativeElement.classList.add('hidden');
   }
 

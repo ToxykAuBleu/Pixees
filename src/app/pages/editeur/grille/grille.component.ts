@@ -4,9 +4,13 @@ import { Grille } from '../../../../Algo/scripts/Grille';
 import { RGB } from '../../../../Algo/scripts/color/RGB'
 import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 import { GrilleService } from '../../../grille-service.service';
+import { AppService } from '../../../app.service';
+import { PopupService } from '../../popup/popup.service';
+import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../../../../environment';
 import { log } from 'node:console';
-import { json } from 'stream/consumers';
 import { ActivatedRoute, Router } from '@angular/router';
 import { clearScreenDown } from 'node:readline';
 
@@ -41,11 +45,15 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
 
   public isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object, private grilleService: GrilleService, private router: Router) {
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private grilleService: GrilleService,
+    private popupService: PopupService,
+    private appService: AppService,
+    private http: HttpClient,
+    private router: Router) 
+  {
     this.isBrowser = isPlatformBrowser(platformId);
-    // this.isBrowser = true;
-    console.log("platformId : " + platformId);
-    console.log("isBrowser : " + this.isBrowser);
   }
 
   ngOnInit(): void {
@@ -53,15 +61,14 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       this.exportAsPNG();
     }));
 
-    this.subscriptions.push(this.grilleService.save$.subscribe(() => {
-      this.saveAsJSON();
+    this.subscriptions.push(this.grilleService.save$.subscribe((close: boolean) => {
+      this.saveAsJSON(close);
     }));
     console.log(this.hauteur);
   }
   
   ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
-      console.log(sub);
       sub.unsubscribe();
     }
   }
@@ -236,13 +243,98 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     console.log("exported !");
   }
 
-  saveAsJSON(): void {
-    console.log("saveAsJSON");
+  async saveAsJSON(close: boolean = false): Promise<string | void> {
+    if (!this.canvas) {
+      return;
+    }
+
+    // NOTE: Il faudra vérifier en amont que l'utilisateur soit bien connecté.
+    const abortController = new AbortController();
+    const saveFunction = new Promise<string | void>(async (resolve, reject) => {
+      // Création de l'objet projet à sauvegarder.
+      let data: DataProject = {
+        name: "projet",
+        taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
+        grille: {}
+      };
+
+      // Sauvegarde du projet.
+      // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
+      const largeur = this.grille?.getLargeur();
+      const hauteur = this.grille?.getHauteur();
+      for (let x = 0; x < largeur!; x++) {
+        data.grille[x] = [];
+        for (let y = 0; y < hauteur!; y++) {
+          if (abortController.signal.aborted) {
+            reject(void 0);
+          }
+
+          const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
+          const c = pixel?.RGBversHexa().slice(1);
+          data.grille[x].push(c);
+        }
+      }
+
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      // Résolution de la promesse avec les données sauvegardées.
+      resolve(JSON.stringify(data));
+    });
+
+    this.popupService.changePopup("Sauvegarde", "Sauvegarde en cours...", [
+      { name: "Annuler", action: () => {
+        abortController.abort();
+        this.popupService.closePopup();
+      }, color: ButtonColor.Red }
+    ]);
+
+    this.popupService.activePopup();
+    const result = await saveFunction;
+
+    if (result) {
+      // Envoi des données sauvegardées au serveur.
+      /* Pour la suite des opérations, il faut faire une requête POST au serveur.
+       * Cependant, il faut un identifiant pour le projet, donc 2 cas de figures:
+       * - soit on a déjà un identifiant pour ce projet, et on fait une requête avec cet identifiant;
+       * - soit on n'a pas d'identifiant pour ce projet, et on fait une requête pour en obtenir un, 
+       *  puis on fait une requête pour sauvegarder les données.
+       */
+      console.log(result);
+
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+        }),
+        withCredentials: true
+      };
+      this.http.post(`${environment.apiLink}/project/save.php`, result, httpOptions)
+        .subscribe({
+          next: (res) => {
+            if (res.valueOf().hasOwnProperty('error')) {
+              console.error(res);
+            } else {
+              // TODO: Ajouter une popup pour indiquer que la sauvegarde a réussi.
+            }
+          },
+          error: (err) => {
+            console.error(err);
+          },
+          complete: () => {
+            console.log("Terminado !");
+            this.popupService.closePopup();
+            if (close) {
+              this.appService.triggerCloseEditor();
+            }
+          }
+        });
+    }
   }
 }
 
-interface ProjectData {
-  nom: string;
-  taille: {hauteur: number, largeur: number};
-  couleur: RGB;
+interface DataProject {
+  name: string;
+  taille: [number, number];
+  grille: {
+    [y: number]: string[]
+  };
 }
