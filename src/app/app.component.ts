@@ -153,7 +153,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   closeProject() {
-    console.log("Close ça mère");
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
