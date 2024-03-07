@@ -26,7 +26,9 @@
         <div (click)="goToProjet()" class="black"><fa-icon [icon]="faPencil" size="xl"></fa-icon></div>
         <div (click)="goToDiscussion()" class="white"><fa-icon [icon]="faPaperPlane" size="xl"></fa-icon></div>
         <div (click)="goToNotification()" class="black"><fa-icon [icon]="faBell" size="xl"></fa-icon></div>
-        <div (click)="goToConnexion()" class="userIcon"><fa-icon [icon]="faCircleUser" size="xl"></fa-icon></div>
+        <div *ngIf="!isConnected" (click)="goToConnexion()" class="userIcon"><fa-icon [icon]="faCircleUser" size="xl"></fa-icon></div>
+        <div *ngIf="isConnected" (click)="goToProfil()" class="userIcon"><fa-icon [icon]="faCircleUser" size="xl"></fa-icon></div>
+        <div *ngIf="isConnected" (click)="logOut()" class="userIcon">Se déconnecter</div>
       </div>
     </header>
   </ng-template>

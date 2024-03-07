@@ -72,7 +72,7 @@ session_start();
 $_SESSION["id"] = $row["idUtilisateur"];
 $_SESSION["pseudo"] = $row["pseudo"];
 
-echo json_encode(array("success" => "Connexion réussie"));
+echo json_encode(array("connected" => true));
 
 mysqli_close($link);
 exit;

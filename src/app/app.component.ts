@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, Input, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -14,7 +14,7 @@ import { ProfilComponent } from './pages/profil/profil.component';
 import { ProjetComponent } from './pages/projet/projet.component';
 import { NotificationsComponent } from './pages/notifications/notifications.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faHouse, faPencil , faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faPencil, faPaperPlane, faBell, faMagnifyingGlass, faDownload, faFloppyDisk, faFileImport, faRotateLeft, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleUser, faXmarkCircle } from '@fortawesome/free-regular-svg-icons';
 import { gitRepoInfo } from '../version-info';
@@ -23,6 +23,7 @@ import { Subscription } from 'rxjs';
 import { AppService } from './app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environment';
+import { After } from 'v8';
 
 @Component({
   selector: 'app-root',
@@ -65,20 +66,23 @@ export class AppComponent implements OnInit, OnDestroy {
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
-  
+  public isConnected: boolean = false;
+
   constructor(
     private appService: AppService,
     private router: Router,
-    private grilleService: GrilleService, 
+    private grilleService: GrilleService,
     @Inject(PLATFORM_ID) private platformId: any,
     private http: HttpClient
-  ) {};
-  
+  ) {
+  };
+
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
     }
+
     this.subscriptions.push(this.appService.isInEditor.subscribe(isInEditor => {
       this.isInEditor = isInEditor;
     }));
@@ -86,6 +90,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.appService.closeEditor$.subscribe(() => {
       this.closeProject();
     }));
+
+    this.subscriptions.push(this.appService.isConnected$.subscribe(isConnected => {
+      this.isConnected = isConnected;
 
     this.subscriptions.push(this.appService.projectName.subscribe(projectName => {
       this.projectNameNav = projectName;
@@ -97,7 +104,7 @@ export class AppComponent implements OnInit, OnDestroy {
     for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
-  };
+  }
 
   goToHome() {
     this.router.navigate(['/', 'home']);
@@ -142,6 +149,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
+  
+  goToProfil() {
+    this.router.navigate(['/', 'profil']);
+    this.couleur = "couleurProfil";
+
   goToVitrine() {
     this.router.navigate(['/', 'vitrine']);
     this.couleur = "couleurAccueil";
@@ -156,13 +168,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showSave() {
-    console.log(this.isInEditor);  
+    console.log(this.isInEditor);
     if (this.isInEditor) {
       this.askToSave?.nativeElement.classList.remove('hidden');
     } else {
       this.goToHome();
     }
-      console.log("Pas dans l'éditeur");
+    console.log("Pas dans l'éditeur");
   }
 
   closeProject() {
@@ -180,6 +192,26 @@ export class AppComponent implements OnInit, OnDestroy {
           this.goToHome();
         }
       });
+  }
+
+  logOut() {
+    console.log("logout");
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+      }),
+      withCredentials: true
+    };
+
+    this.http.get(`${environment.apiLink}/user/logout.php`, httpOptions)
+      .subscribe({
+        complete: () => {
+          this.goToHome();
+        }
+      });
+    
+    this.appService.setIsConnected(false);
   }
 
   triggerSave(close: boolean = false) {
