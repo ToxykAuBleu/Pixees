@@ -35,8 +35,9 @@ import { After } from 'v8';
 })
 
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('askToSave', { static: true }) askToSave: ElementRef | undefined;
-  @ViewChild('gitInfo', { static: true }) gitInfo: ElementRef<HTMLElement> | undefined;
+  @Input() projectNameNav: string | undefined = "Pixees";
+  @ViewChild('askToSave', { static: true}) askToSave: ElementRef | undefined;
+  @ViewChild('gitInfo', { static: true}) gitInfo: ElementRef<HTMLElement> | undefined;
 
   // Icone de la barre de navigation côté réseau social
   faHouse = faHouse;
@@ -92,6 +93,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.appService.isConnected$.subscribe(isConnected => {
       this.isConnected = isConnected;
+
+    this.subscriptions.push(this.appService.projectName.subscribe(projectName => {
+      this.projectNameNav = projectName;
+      console.log(projectName);
     }));
   };
 
@@ -144,9 +149,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
   }
+  
   goToProfil() {
     this.router.navigate(['/', 'profil']);
     this.couleur = "couleurProfil";
+
+  goToVitrine() {
+    this.router.navigate(['/', 'vitrine']);
+    this.couleur = "couleurAccueil";
     this.isNavbarEditor = false;
     this.isInEditor = false;
     this.setInLocalStorage(this.couleur, this.isInEditor);
@@ -212,8 +222,4 @@ export class AppComponent implements OnInit, OnDestroy {
   triggerGrille() {
     this.grilleService.triggerGrille();
   }
-
-
 }
-
-

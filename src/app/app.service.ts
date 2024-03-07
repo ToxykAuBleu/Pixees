@@ -43,11 +43,18 @@ export class AppService {
     this.isConnectedSource.next(isConnected);
   }
 
+  private projectNameSource = new BehaviorSubject<string>('');
+  projectName = this.projectNameSource.asObservable();
+
   setIsInEditor(isInEditor: boolean): void {
     this.isInEditorSource.next(isInEditor);
   }
 
   triggerCloseEditor() {
     this.closeEditorSource.next();
+  }
+
+  setProjectName(projectName: string) {
+    this.projectNameSource.next(projectName);
   }
 }
