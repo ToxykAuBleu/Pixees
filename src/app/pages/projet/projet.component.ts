@@ -107,4 +107,12 @@ export class ProjetComponent {
       this.createForm.controls['taille'].setValue(`${hauteur}x${largeur}`);
     }
   }
+
+  changeActiveButton(button: string): void {
+    const buttons = document.getElementsByClassName('button');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('active');
+    }
+    document.getElementById(button)!.classList.add('active');
+  }
 }
