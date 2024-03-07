@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, ViewEncapsulation, Input } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
@@ -93,6 +93,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.appService.isConnected$.subscribe(isConnected => {
       this.isConnected = isConnected;
+    }));
 
     this.subscriptions.push(this.appService.projectName.subscribe(projectName => {
       this.projectNameNav = projectName;
@@ -153,6 +154,7 @@ export class AppComponent implements OnInit, OnDestroy {
   goToProfil() {
     this.router.navigate(['/', 'profil']);
     this.couleur = "couleurProfil";
+  }
 
   goToVitrine() {
     this.router.navigate(['/', 'vitrine']);
