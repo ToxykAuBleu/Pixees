@@ -52,7 +52,9 @@ export class ConnexionComponent {
             console.error(res);
           } else {
             console.log(res);
-            this.router.navigate(['/home'], { state: { data: Boolean(res) }})
+            this.router.navigate(['/home']).then(() => {
+              this.appService.setIsConnected(true);
+            });
           }
         },
         error: (err) => {

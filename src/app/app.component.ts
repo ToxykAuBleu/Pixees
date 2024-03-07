@@ -65,7 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public couleur = "couleurAccueil";
   public isNavbarEditor: boolean = false;
   public isInEditor: boolean = false;
-  public estConnecte: boolean = false;
+  public isConnected: boolean = false;
 
   constructor(
     private appService: AppService,
@@ -74,11 +74,6 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(PLATFORM_ID) private platformId: any,
     private http: HttpClient
   ) {
-    const navigation = this.router.getCurrentNavigation()?.extras.state;
-    if (navigation) {
-      const data = JSON.parse(navigation['data']);
-      this.estConnecte = data;
-    }
   };
 
   ngOnInit() {
@@ -86,6 +81,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.couleur = localStorage.getItem('couleur') || "couleurAccueil";
       this.isInEditor = JSON.parse(localStorage.getItem('isInEditor') || 'false');
     }
+
     this.subscriptions.push(this.appService.isInEditor.subscribe(isInEditor => {
       this.isInEditor = isInEditor;
     }));
@@ -93,13 +89,17 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.appService.closeEditor$.subscribe(() => {
       this.closeProject();
     }));
+
+    this.subscriptions.push(this.appService.isConnected$.subscribe(isConnected => {
+      this.isConnected = isConnected;
+    }));
   };
 
   ngOnDestroy() {
     for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
-  };
+  }
 
   goToHome() {
     this.router.navigate(['/', 'home']);
@@ -185,7 +185,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   logOut() {
-    console.log("Sign out");
+    console.log("logout");
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -193,12 +193,15 @@ export class AppComponent implements OnInit, OnDestroy {
       }),
       withCredentials: true
     };
+
     this.http.get(`${environment.apiLink}/user/logout.php`, httpOptions)
       .subscribe({
         complete: () => {
           this.goToHome();
         }
       });
+    
+    this.appService.setIsConnected(false);
   }
 
   triggerSave(close: boolean = false) {
