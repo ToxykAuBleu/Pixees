@@ -15,6 +15,7 @@ import { Calque } from '../../../../Algo/scripts/Calque';
 export class CalqueComponent {
   @Input() layerCount: number = 0;
   @Input() layerList: Calque[] = [];
+  selectedLayer: number = 0;
   @Output() addLayer = new EventEmitter<Calque>();
   @Output() deleteLayer = new EventEmitter<number>();
   @Output() selectLayer = new EventEmitter<number>();
@@ -39,7 +40,9 @@ export class CalqueComponent {
   }
 
   select(index: number) {
-    console.log("Layer Selected");
-    this.selectLayer.emit(index);
+    console.log(index);
+    this.selectedLayer = this.layerList.length - 1 - index;
+    console.log("Layer Selected" + this.selectedLayer);
+    this.selectLayer.emit(this.selectedLayer);
   }
 }

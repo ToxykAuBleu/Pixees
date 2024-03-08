@@ -17,6 +17,7 @@ export class LayerComponent implements OnInit {
   @Input() _largeur: number = 0;
   @Input() _position: number = 0;
   @Input() _layerNumber: number = 0;
+  @Input() isSelected: boolean = false;
   _layerCount: number = 0;
   private isInitialValueSet = false
   @Output() delete = new EventEmitter<void>();
@@ -45,6 +46,7 @@ export class LayerComponent implements OnInit {
   }
 
   selectLayer() {
+    console.log(this.isSelected);
     this.select.emit(this._position);
   }
 }

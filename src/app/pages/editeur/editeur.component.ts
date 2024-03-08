@@ -7,7 +7,6 @@ import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
 import { Calque } from '../../../Algo/scripts/Calque';
-import { layer } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-editeur',
