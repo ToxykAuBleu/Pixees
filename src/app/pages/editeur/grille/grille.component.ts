@@ -10,9 +10,8 @@ import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
-import { log } from 'node:console';
-import { ActivatedRoute, Router } from '@angular/router';
-import { clearScreenDown } from 'node:readline';
+import { Router } from '@angular/router';
+import { LayerComponent } from '../calque/layer/layer.component';
 
 @Component({
   selector: 'app-grille',
@@ -25,6 +24,7 @@ import { clearScreenDown } from 'node:readline';
 export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() hauteur!: number;
   @Input() largeur!: number;
+  @Input() layers: LayerComponent[] = [];
 
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 

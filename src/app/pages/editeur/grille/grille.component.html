@@ -1,4 +1,5 @@
 <div class="relative h-full">
-    <canvas id="mainCanvas" #mainCanvas class="absolute z-10 border-black border-solid border-2 w-full h-full"></canvas>
-    <canvas id="gridCanvas" #gridCanvas class="absolute z-0 border-black border-solid border-2 w-full h-full"></canvas>
+    <canvas *ngFor="let _ of layers; let i = index" height="{{hauteur}}" width="{{largeur}}" class="absolute border-black border-solid border-2 w-full h-full"></canvas>
+    <canvas id="mainCanvas" #mainCanvas class="absolute border-black border-solid border-2 w-full h-full"></canvas>
+    <canvas id="gridCanvas" #gridCanvas class="absolute -z-50 border-black border-solid border-2 w-full h-full"></canvas>
 </div>
