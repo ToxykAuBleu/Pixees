@@ -7,7 +7,6 @@ import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
 import { LayerComponent } from './calque/layer/layer.component';
-import { EditeurService } from '../../editeur.service';
 
 @Component({
   selector: 'app-editeur',
@@ -30,14 +29,13 @@ export class EditeurComponent implements OnInit {
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
 
-  constructor(private popupService: PopupService, private router: Router, private appService: AppService, private editeurService: EditeurService) {
+  constructor(private popupService: PopupService, private router: Router, private appService: AppService) {
     const navigation = this.router.getCurrentNavigation()?.extras.state;
     if (navigation) {
       const data = JSON.parse(navigation['data']).project;
       this.hauteur = data.taille.hauteur;
       this.largeur = data.taille.largeur;
       this.appService.setProjectName(data.name);
-      this.editeurService.setSize(this.hauteur, this.largeur);
     }
   }
 
