@@ -258,10 +258,11 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     // Tentative de connexion à l'API pour vérifier si l'utilisateur est connecté.
     // Si l'utilisateur n'est pas connecté, on affiche une popup pour l'en informer.
     // Si l'utilisateur est connecté, on sauvegarde le projet.
-    this.http.get(`${environment.apiLink}/user/connect.php`, httpOptions).subscribe({
+    this.http.get(`${environment.apiLink}/user/connected.php`, httpOptions).subscribe({
       next: async (res: any) => {
-        if (res.valueOf().hasOwnProperty('error')) {
-          if (res.error !== "Vous êtes déjà connecté") {
+        console.log(res);
+        if (res.valueOf().hasOwnProperty('connected')) {
+          if (res.connected !== true) {
             this.popupService.changePopup("Sauvegarde", "Vous n'êtes pas connecté. Veuillez vous connecter pour sauvegarder votre projet.", [
               { name: "Ok", action: () => {
                 this.popupService.closePopup();
@@ -331,6 +332,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
                   next: (res) => {
                     if (res.valueOf().hasOwnProperty('error')) {
                       displayErrorPopup(res);
+                    } else {
+                      console.log(res);
                     }
                   },
                   error: (err) => {
