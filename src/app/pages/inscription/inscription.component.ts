@@ -36,6 +36,9 @@ export class InscriptionComponent {
     private appService: AppService)
   { };
 
+  public error: boolean = false;
+  public success: boolean = false;
+
   onSubmit(): void {
     console.log('submitted');
     const submitButton: HTMLElement = document.getElementById('registerButton')!;
@@ -51,11 +54,17 @@ export class InscriptionComponent {
 
     this.http.post(`${environment.apiLink}/user/register.php`, this.signUpForm.value, httpOptions)
       .subscribe({
-        next: (res) => {
+        next: async (res) => {
           if (res.valueOf().hasOwnProperty('error')) {
             console.error(res);
+            this.error = true;
           } else {
             console.log(res);
+            this.error = false;
+            this.success = true;
+            // Afficher un retour puis attendre 3 secondes avant de rediriger vers la page de connexion
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            this.goToConnexion();
           }
         },
         error: (err) => {
