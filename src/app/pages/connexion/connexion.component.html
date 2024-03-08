@@ -44,6 +44,9 @@
                     <p (click)="goToInscription()" class="link">Créer un nouveau compte</p>
                 </div>
                 <button class="btn-connexion" id="connectButton">Connexion</button>
+                <div *ngIf="error" class="alert alert-danger text-red-500">Tentative de connexion échouée, veuillez réessayer !</div>
+                <div id="error" class="alert alert-danger text-red-500"></div>
+                <div *ngIf="success" class="alert alert-success text-green-500">Connexion réussie ! Redirection vers la page d'accueil...</div>
             </div>
         </form>
     </div>

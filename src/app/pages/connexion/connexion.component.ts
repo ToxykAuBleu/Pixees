@@ -32,10 +32,16 @@ export class ConnexionComponent {
     private appService: AppService)
   { };
 
+  public error: boolean = false;
+  public success: boolean = false;
+
   onSubmit(): void {
     console.log('submitted');
     const submitButton: HTMLElement = document.getElementById('connectButton')!;
     submitButton.setAttribute('disabled', 'true');
+
+    this.error = false;
+    this.success = false;
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -47,11 +53,16 @@ export class ConnexionComponent {
 
     this.http.post(`${environment.apiLink}/user/connect.php`, this.signInForm.value, httpOptions)
       .subscribe({
-        next: (res) => {
+        next: async (res: any) => {
           if (res.valueOf().hasOwnProperty('error')) {
             console.error(res);
+            this.error = true;
+            const errorText: HTMLElement = document.getElementById('error')!;
+            errorText.innerHTML = res.error;
           } else {
-            console.log(res);
+            this.error = false;
+            this.success = true;
+            await new Promise(resolve => setTimeout(resolve, 3000));
             this.router.navigate(['/home']).then(() => {
               this.appService.setIsConnected(true);
             });
