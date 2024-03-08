@@ -6,7 +6,8 @@ import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
-import { LayerComponent } from './calque/layer/layer.component';
+import { Calque } from '../../../Algo/scripts/Calque';
+import { layer } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'app-editeur',
@@ -23,13 +24,18 @@ export class EditeurComponent implements OnInit {
 
   hauteur: number = 0;
   largeur: number = 0;
-  layerList: LayerComponent[] = [];
-  
+  layerList: Calque[] = [];
+  selectedLayer: number = 0;
+  layerCount: number = 0;
+
   public popupTitre: string = "";
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
 
-  constructor(private popupService: PopupService, private router: Router, private appService: AppService) {
+  constructor(
+    private popupService: PopupService,
+    private router: Router,
+    private appService: AppService) {
     const navigation = this.router.getCurrentNavigation()?.extras.state;
     if (navigation) {
       const data = JSON.parse(navigation['data']).project;
@@ -53,14 +59,30 @@ export class EditeurComponent implements OnInit {
     });
   }
 
+  addLayer() {
+    this.layerCount++;
+    console.log(this.layerCount);
+    this.layerList.unshift(new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur));
+    console.log(this.hauteur, this.largeur, this.layerList.length);
+    console.log(this.layerList);
+  }
+
+  deleteLayer(index: number) {
+    console.log("Layer Deleted");
+    this.layerList.splice(index, 1);
+    for (let i = 0; i < this.layerList.length; i++) {
+      this.layerList[i].setPosition(this.layerList.length - i - 1)
+    }
+  }
+
+  selectLayer(index: number) {
+    this.selectedLayer = index;
+    console.log("Selected Layer: " + index);
+  }
+
   onGrilleClicked($event: { x: number; y: number; }) {
     // Effectuez l'action de l'outil actuel
     this.outil?.action(this.grille, $event.x, $event.y);
-  }
-
-  addLayer() {
-    this.layerList.push(new LayerComponent(this.hauteur, this.largeur));
-    console.log(this.layerList);
   }
 
   changePopup(titre: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {

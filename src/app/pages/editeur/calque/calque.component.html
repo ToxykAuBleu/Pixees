@@ -8,7 +8,7 @@
     <div class="inline-flex flex-col gap-2">
         <h2>Calques</h2>
         <div class="inline-flex flex-col mx-4 gap-1">
-            <app-layer *ngFor="let _ of layerList; let i = index" (delete)="deleteLayer(i)"></app-layer>
+            <app-layer *ngFor="let layer of layerList; let i = index" (delete)="delete(i)" (select)="select($event)" [_hauteur]="layer.getGrille().getHauteur()" [_largeur]="layer.getGrille().getLargeur()" [_position]="layer.getPosition() + 1" [_layerNumber]="layerCount"></app-layer>
         </div>
     </div>
 </div>

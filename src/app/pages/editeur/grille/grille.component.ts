@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
 import { Router } from '@angular/router';
 import { LayerComponent } from '../calque/layer/layer.component';
+import { Calque } from '../../../../Algo/scripts/Calque';
 
 @Component({
   selector: 'app-grille',
@@ -24,7 +25,7 @@ import { LayerComponent } from '../calque/layer/layer.component';
 export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() hauteur!: number;
   @Input() largeur!: number;
-  @Input() layers: LayerComponent[] = [];
+  @Input() layers: Calque[] = [];
 
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 
