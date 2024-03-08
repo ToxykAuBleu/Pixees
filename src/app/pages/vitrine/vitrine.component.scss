@@ -23,17 +23,13 @@
 }
 
 .left {
-    width: 33.3%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
     
     img {
         display: block;
         margin-left: auto;
         margin-right: auto;
         margin-top: 2em;
+        width:fit-content;
     }
 
     h2 {
@@ -43,12 +39,6 @@
 }
 
 .right {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 66.7%;
 
     .r {
         border: 3px solid black;
@@ -72,13 +62,12 @@
         border: 2px solid #000000;
         background-color: #7CEB60;
         font-weight: bold;
-        padding: 0.5em;
-        padding-left: 1em;
-        padding-right: 1em;
+        padding: 0.5em 1em; /* Utiliser une seule propriété pour définir le padding à gauche et à droite */
         cursor: pointer;
-        width: 15vw;
-        margin-top: 1.5em;
-        margin-left: auto;
-        margin-right: auto;
+        width: 100%; /* Utiliser la largeur de 100% pour qu'elle s'adapte à la largeur de son conteneur */
+        max-width: 200px; /* Ajouter une largeur maximale pour le bouton */
+        margin: 1.5em auto; /* Utiliser une seule propriété margin avec auto pour centrer le bouton horizontalement et l'espace vertical */
+        display: block; /* Assurer que le bouton occupe toute la largeur de son conteneur */
+        box-sizing: border-box; /* Garder la largeur totale du bouton incluant le padding et la bordure */
     }
 }
