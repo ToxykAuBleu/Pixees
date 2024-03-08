@@ -4,6 +4,12 @@ header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers");
 
+session_start();
+if ( isset($_SESSION["id"]) ) {
+    echo json_encode(array("error" => "Vous êtes déjà connecté"));
+    exit;
+}
+
 $ini = parse_ini_file("../config.ini", true);
 
 // Tentative de connexion à la base de données.
@@ -64,10 +70,6 @@ try {
     mysqli_close($link);
     exit;
 }
-
-// Création de la session
-
-session_start();
 
 $_SESSION["id"] = $row["idUtilisateur"];
 $_SESSION["pseudo"] = $row["pseudo"];
