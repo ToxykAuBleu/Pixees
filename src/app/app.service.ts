@@ -30,7 +30,7 @@ export class AppService {
           if (res.valueOf().hasOwnProperty('error')) {
             console.error(res);
           } else {
-            this.setIsConnected(true);
+            this.setIsConnected(Boolean(res.valueOf()));
           }
         },
         error: (err) => {

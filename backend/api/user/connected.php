@@ -9,7 +9,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 session_start();
 
 if (isset($_SESSION["id"])) {
-    echo json_encode(array("connected" => true));
+    echo json_encode(true);
 } else {
-    echo json_encode(array("connected" => false));
+    echo json_encode(false);
 }
