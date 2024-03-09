@@ -27,7 +27,15 @@
 
         <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit()">
             <div class="category-type">
-                <label>Nom du projet</label><input name="name" formControlName="name" type="text">
+                <label>Nom du projet</label> 
+                <div>
+                    <input name="name" formControlName="name" type="text" [ngClass]="{ 'border-red-900 border-2': (name.invalid && (name.dirty || name.touched)) ? true : false}">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger text-red-900">
+                        <div *ngIf="name.errors?.['required']">Nom du projet requis.</div>
+                        <div *ngIf="name.errors?.['minlength']">Nom trop court.</div>
+                        <div *ngIf="name.errors?.['maxlength']">Nom trop long.</div>
+                    </div>
+                </div>
             </div>
 
             <div class="category-type">
@@ -39,11 +47,19 @@
                 <button type="button" class="button" (click)="changeTaille(50, 50)" value="50x50" id="50x50" (click)="changeActiveButton('50x50')">50x50</button>
                 <button type="button" class="button" (click)="changeTaille(128, 128)" value="128x128" id="128x128" (click)="changeActiveButton('128x128')">128x128</button>
                 <button type="button" class="button" value="Personnalisé" (click)="personalisationProject()" id="personnalise" (click)="changeActiveButton('personnalise')">Personnalisée</button>
+                <div id="error-taille" class="alert alert-danger text-red-500 hidden">
+                    <div>La taille est requise.</div>
+                </div>
             </div>
             
             <div class="category-type">
                 <label>Couleur de fond</label>
-                <input name="bgcolor" formControlName="bgcolor" type="color" class="color-selector">
+                <div>
+                    <input name="bgcolor" formControlName="bgcolor" type="color" class="color-selector">
+                    <div *ngIf="bgcolor.invalid && (bgcolor.dirty || bgcolor.touched)" class="alert alert-danger text-red-900">
+                        <p>Couleur d'arrière plan incorrect.</p>
+                    </div>
+                </div>
             </div>
 
             <input id="createButton" type="submit" value="Créer" class="button">
