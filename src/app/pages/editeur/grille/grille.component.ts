@@ -258,93 +258,91 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     // Tentative de connexion à l'API pour vérifier si l'utilisateur est connecté.
     // Si l'utilisateur n'est pas connecté, on affiche une popup pour l'en informer.
     // Si l'utilisateur est connecté, on sauvegarde le projet.
-    this.http.get(`${environment.apiLink}/user/connect.php`, httpOptions).subscribe({
+    this.http.get(`${environment.apiLink}/user/connected.php`, httpOptions).subscribe({
       next: async (res: any) => {
-        if (res.valueOf().hasOwnProperty('error')) {
-          if (res.error !== "Vous êtes déjà connecté") {
-            this.popupService.changePopup("Sauvegarde", "Vous n'êtes pas connecté. Veuillez vous connecter pour sauvegarder votre projet.", [
-              { name: "Ok", action: () => {
-                this.popupService.closePopup();
-              }, color: ButtonColor.Green }
-            ]);
-            this.popupService.activePopup();
-            return;
-          } else {
-            const abortController = new AbortController();
-            const saveFunction = new Promise<string | void>(async (resolve, reject) => {
-              // Création de l'objet projet à sauvegarder.
-              // NOTE: le champ name n'est pas le bon.
-              // NOTE: le champ id doit correspondre à l'id du projet si on veut le mettre à jour (actuellement, il est ignoré)
-              let data: DataProject = {
-                name: "projet",
-                taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
-                grille: {}
-              };
-  
-              // Sauvegarde du projet.
-              // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
-              const largeur = this.grille?.getLargeur();
-              const hauteur = this.grille?.getHauteur();
-              for (let x = 0; x < largeur!; x++) {
-                data.grille[x] = [];
-                for (let y = 0; y < hauteur!; y++) {
-                  if (abortController.signal.aborted) {
-                    reject(void 0);
-                  }
-  
-                  const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
-                  const c = pixel?.RGBversHexa().slice(1);
-                  data.grille[x].push(c);
+        if (res === false) {
+          this.popupService.changePopup("Sauvegarde", "Vous n'êtes pas connecté. Veuillez vous connecter pour sauvegarder votre projet.", [
+            { name: "Ok", action: () => {
+              this.popupService.closePopup();
+            }, color: ButtonColor.Green }
+          ]);
+          this.popupService.activePopup();
+          return;
+        } else {
+          const abortController = new AbortController();
+          const saveFunction = new Promise<string | void>(async (resolve, reject) => {
+            // Création de l'objet projet à sauvegarder.
+            // NOTE: le champ name n'est pas le bon.
+            // NOTE: le champ id doit correspondre à l'id du projet si on veut le mettre à jour (actuellement, il est ignoré)
+            let data: DataProject = {
+              name: "projet",
+              taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
+              grille: {}
+            };
+
+            // Sauvegarde du projet.
+            // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
+            const largeur = this.grille?.getLargeur();
+            const hauteur = this.grille?.getHauteur();
+            for (let x = 0; x < largeur!; x++) {
+              data.grille[x] = [];
+              for (let y = 0; y < hauteur!; y++) {
+                if (abortController.signal.aborted) {
+                  reject(void 0);
                 }
+
+                const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
+                const c = pixel?.RGBversHexa().slice(1);
+                data.grille[x].push(c);
               }
-  
-              await new Promise(resolve => setTimeout(resolve, 3000));
-              // Résolution de la promesse avec les données sauvegardées.
-              resolve(JSON.stringify(data));
-            });
-  
-            this.popupService.changePopup("Sauvegarde", "Sauvegarde en cours...", [
-              { name: "Annuler", action: () => {
-                abortController.abort();
-                this.popupService.closePopup();
-              }, color: ButtonColor.Red }
-            ]);
-  
-            this.popupService.activePopup();
-            const result = await saveFunction;
-  
-            if (result) {
-              // Fonction pour afficher une popup contenant potentiellement une erreur.
-              // TODO: refaire le style des popups pour qu'elles soient plus jolies.
-              const displayErrorPopup = (err: any) => {
-                this.popupService.changePopup("Sauvegarde", "Une erreur est survenue lors de la sauvegarde.", [
-                  { name: "Ok", action: () => {
-                    this.popupService.closePopup();
-                  }, color: ButtonColor.Green }
-                ]);
-                console.error(err);
-              };
-              
-              // Envoi des données sauvegardées au serveur.
-              this.http.post(`${environment.apiLink}/project/save.php`, result, httpOptions)
-                .subscribe({
-                  next: (res) => {
-                    if (res.valueOf().hasOwnProperty('error')) {
-                      displayErrorPopup(res);
-                    }
-                  },
-                  error: (err) => {
-                    displayErrorPopup(err);
-                  },
-                  complete: () => {
-                    this.popupService.closePopup();
-                    // TODO: Ajouter une popup pour indiquer que la sauvegarde a réussi.
-                    if (close) {
-                      this.appService.triggerCloseEditor();
-                    }
-                  }
-                });
             }
+
+            await new Promise(resolve => setTimeout(resolve, 3000));
+            // Résolution de la promesse avec les données sauvegardées.
+            resolve(JSON.stringify(data));
+          });
+
+          this.popupService.changePopup("Sauvegarde", "Sauvegarde en cours...", [
+            { name: "Annuler", action: () => {
+              abortController.abort();
+              this.popupService.closePopup();
+            }, color: ButtonColor.Red }
+          ]);
+
+          this.popupService.activePopup();
+          const result = await saveFunction;
+
+          if (result) {
+            // Fonction pour afficher une popup contenant potentiellement une erreur.
+            // TODO: refaire le style des popups pour qu'elles soient plus jolies.
+            const displayErrorPopup = (err: any) => {
+              this.popupService.changePopup("Sauvegarde", "Une erreur est survenue lors de la sauvegarde.", [
+                { name: "Ok", action: () => {
+                  this.popupService.closePopup();
+                }, color: ButtonColor.Green }
+              ]);
+              console.error(err);
+            };
+            
+            // Envoi des données sauvegardées au serveur.
+            this.http.post(`${environment.apiLink}/project/save.php`, result, httpOptions)
+              .subscribe({
+                next: (res) => {
+                  if (res.valueOf().hasOwnProperty('error')) {
+                    displayErrorPopup(res);
+                  }
+                },
+                error: (err) => {
+                  displayErrorPopup(err);
+                },
+                complete: () => {
+                  this.popupService.closePopup();
+                  // TODO: Ajouter une popup pour indiquer que la sauvegarde a réussi.
+                  if (close) {
+                    this.appService.triggerCloseEditor();
+                  }
+                }
+              });
           }
         }
       }
