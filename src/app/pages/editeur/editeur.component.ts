@@ -58,6 +58,12 @@ export class EditeurComponent implements OnInit {
     });
   }
 
+  recalculateLayersPosition() {
+    for (let i = 0; i < this.layerList.length; i++) {
+      this.layerList[i].setPosition(i)
+    }
+  }
+
   addLayer() {
     this.layerCount++;
     console.log(this.layerCount);
@@ -69,9 +75,7 @@ export class EditeurComponent implements OnInit {
   deleteLayer(index: number) {
     console.log("Layer Deleted");
     this.layerList.splice(index, 1);
-    for (let i = 0; i < this.layerList.length; i++) {
-      this.layerList[i].setPosition(this.layerList.length - i - 1)
-    }
+    this.recalculateLayersPosition();
     console.log(this.layerList);
   }
 
@@ -86,8 +90,7 @@ export class EditeurComponent implements OnInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index - 1];
       this.layerList[index - 1] = temp;
-      this.layerList[index].setPosition(index - 1);
-      this.layerList[index - 1].setPosition(index);
+      this.recalculateLayersPosition();
       this.selectedLayer = index - 1;
       console.log(this.selectedLayer);
     }
@@ -99,8 +102,7 @@ export class EditeurComponent implements OnInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index + 1];
       this.layerList[index + 1] = temp;
-      this.layerList[index].setPosition(index + 1);
-      this.layerList[index + 1].setPosition(index);
+      this.recalculateLayersPosition();
       this.selectedLayer = index + 1;
       console.log(this.selectedLayer);
     }

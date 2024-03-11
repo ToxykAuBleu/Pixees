@@ -13,7 +13,7 @@
             (click)="select(layerList.length - i - 1)"
             [_hauteur]="layer.getGrille().getHauteur()"
             [_largeur]="layer.getGrille().getLargeur()"
-            [_position]="layer.getPosition() + 1"
+            [_position]="layerList.length - i - 1"
             [_layerNumber]="layerCount"
             [isSelected]="layerList.length - i - 1 === selectedLayer"
             [ngStyle]="{'background-color': layerList.length - i - 1 === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
