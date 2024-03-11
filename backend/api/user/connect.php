@@ -40,7 +40,7 @@ if (!filter_var($data->email, FILTER_VALIDATE_EMAIL)) {
 
 // Présence email dans la base de données
 try {
-    $query = "SELECT * FROM ".$ini["CONNEXION"]["Table"]." WHERE email ='".$data->email."';";
+    $query = mysqli_real_escape_string($link, "SELECT * FROM ".$ini["CONNEXION"]["Table"]." WHERE email ='".$data->email."';");
     $result = mysqli_query($link, $query);
     if (mysqli_num_rows($result) === 0) {
         echo json_encode(array("error" => "Email non trouvé"));
@@ -57,7 +57,7 @@ try {
 $hashed_mdp = hash("sha256", $data->mdp);
 
 try {
-    $query = "SELECT * FROM ".$ini["CONNEXION"]["Table"]." WHERE email ='".$data->email."';";
+    $query = mysqli_real_escape_string($link, "SELECT * FROM ".$ini["CONNEXION"]["Table"]." WHERE email ='".$data->email."';");
     $result = mysqli_query($link, $query);
     $row = mysqli_fetch_assoc($result);
     if ($hashed_mdp !== $row["passwd"]) {

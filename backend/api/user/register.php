@@ -54,7 +54,7 @@ if ($data->mdp !== $data->confirmation) {
 
 // Vérification de l'unicité de l'email
 try {
-    $query = "SELECT * FROM " . $ini["INSCRIPTION"]["Table"] . " WHERE email ='" . $data->email . "';";
+    $query = mysqli_real_escape_string($link, "SELECT * FROM " . $ini["INSCRIPTION"]["Table"] . " WHERE email ='" . $data->email . "';");
     $result = mysqli_query($link, $query);
     if (mysqli_num_rows($result) > 0) {
         echo json_encode(array("error" => "Email déjà utilisé"));
@@ -72,7 +72,7 @@ $hashed_mdp = hash("sha256", $data->mdp);
 
 // Insertion de l'utilisateur dans la base de données
 try {
-    $query = "INSERT INTO " . $ini["INSCRIPTION"]["Table"] . " (email, pseudo, passwd) VALUES ('" . $data->email . "', '" . $data->pseudo . "', '" . $hashed_mdp . "')";
+    $query = mysqli_real_escape_string($link, "INSERT INTO " . $ini["INSCRIPTION"]["Table"] . " (email, pseudo, passwd) VALUES ('" . $data->email . "', '" . $data->pseudo . "', '" . $hashed_mdp . "')");
     $result = mysqli_query($link, $query);
     if ($result) {
         echo json_encode(array("success" => "Inscription réussie"));
