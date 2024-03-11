@@ -35,7 +35,7 @@
 
   <ng-template #editorNavbar>
     <header id={{couleur}} class="flex flex-row justify-between py-2 px-4 gap-8 items-center">
-      <h1 (click)="goToHome()" class="font-title text-4xl">{{title}}</h1>
+      <h1 (click)="goToVitrine()" class="font-title text-4xl">{{title}}</h1>
       <div class="inline-flex gap-2">
         <fa-icon [icon]="faDownload" size="2xl" (click)="triggerGrille()" class="icone" aria-label="Exporter"></fa-icon>
         <fa-icon [icon]="faFloppyDisk" size="2xl" (click)="triggerSave()" class="icone" aria-label="Sauvegarder"></fa-icon>

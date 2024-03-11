@@ -174,7 +174,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (this.isInEditor) {
       this.askToSave?.nativeElement.classList.remove('hidden');
     } else {
-      this.goToHome();
+      this.goToVitrine();
     }
     console.log("Pas dans l'éditeur");
   }
