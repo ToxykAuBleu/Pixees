@@ -61,7 +61,7 @@ export class EditeurComponent implements OnInit {
   addLayer() {
     this.layerCount++;
     console.log(this.layerCount);
-    this.layerList.unshift(new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur));
+    this.layerList.push(new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur));
     console.log(this.hauteur, this.largeur, this.layerList.length);
     console.log(this.layerList);
   }
@@ -80,7 +80,7 @@ export class EditeurComponent implements OnInit {
     console.log("Selected Layer: " + index);
   }
 
-  layerUp(index: number) {
+  layerDown(index: number) {
     console.log("Layer Moved Up" + index);
     if (index > 0) {
       const temp = this.layerList[index];
@@ -93,7 +93,7 @@ export class EditeurComponent implements OnInit {
     }
   }
 
-  layerDown(index: number) {
+  layerUp(index: number) {
     console.log("Layer Moved Down" + index);
     if (index >= 0) {
       const temp = this.layerList[index];
@@ -107,6 +107,7 @@ export class EditeurComponent implements OnInit {
   }
 
   onGrilleClicked($event: { x: number; y: number; }) {
+    console.log("click  ");
     // Effectuez l'action de l'outil actuel
     this.outil?.action(this.grille, $event.x, $event.y);
   }

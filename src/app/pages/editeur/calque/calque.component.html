@@ -8,15 +8,15 @@
     <div class="inline-flex flex-col gap-2">
         <h2>Calques</h2>
         <div class="inline-flex flex-col mx-4 gap-1">
-            <app-layer *ngFor="let layer of layerList; let i = index"
-            (delete)="delete(i)"
-            (click)="select(i)"
+            <app-layer *ngFor="let layer of layerList.reverse(); let i = index"
+            (delete)="delete(layerList.length - i - 1)"
+            (click)="select(layerList.length - i - 1)"
             [_hauteur]="layer.getGrille().getHauteur()"
             [_largeur]="layer.getGrille().getLargeur()"
             [_position]="layer.getPosition() + 1"
             [_layerNumber]="layerCount"
-            [isSelected]="i === selectedLayer"
-            [ngStyle]="{'background-color': i === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
+            [isSelected]="layerList.length - i - 1 === selectedLayer"
+            [ngStyle]="{'background-color': layerList.length - i - 1 === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
         </div>
     </div>
 </div>
