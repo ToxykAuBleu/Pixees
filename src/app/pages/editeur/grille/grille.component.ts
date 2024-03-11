@@ -24,6 +24,7 @@ import { DataProject } from '../../projet/projet.component';
 export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
   @Input() hauteur!: number;
   @Input() largeur!: number;
+  @Input() id! : number;
 
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 
@@ -63,7 +64,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     this.subscriptions.push(this.grilleService.save$.subscribe((close: boolean) => {
       this.saveAsJSON(close);
     }));
-    console.log(this.hauteur);
+    console.log("ID: ", this.id);
   }
   
   ngOnDestroy(): void {

@@ -14,3 +14,4 @@ if (!isset($_SESSION["project"])) {
 unset($_SESSION["project"]);
 echo json_encode(array("success" => "Projet fermé avec succès"));
 exit();
+?>

@@ -18,8 +18,9 @@ enum View {
 export interface DataProject {
   user?: number;
   id?: number;
-  name?: string;
-  taille: [number, number];
+  name: string;
+  /** [largeur, hauteur] */ 
+  taille: [number, number]; 
   grille?: {
     [y: number]: string[]
   };

@@ -38,3 +38,5 @@ try {
 }
 
 echo json_encode($projects);
+exit;
+?>

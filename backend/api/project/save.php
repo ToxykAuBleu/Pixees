@@ -105,3 +105,4 @@ if ($isNew) {
     echo json_encode(array("success" => "Projet sauvegardé avec succès", "id" => $id));
 }
 exit();
+?>

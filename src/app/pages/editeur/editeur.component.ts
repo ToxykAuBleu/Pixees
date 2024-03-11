@@ -7,6 +7,7 @@ import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DataProject } from '../projet/projet.component';
 
 @Component({
   selector: 'app-editeur',
@@ -23,6 +24,7 @@ export class EditeurComponent implements OnInit, OnDestroy {
 
   hauteur: number = 0;
   largeur: number = 0;
+  id: number | undefined = 0;
 
   private subscriptions: Subscription[] = [];
   
@@ -33,10 +35,12 @@ export class EditeurComponent implements OnInit, OnDestroy {
   constructor(private popupService: PopupService, private router: Router, private appService: AppService) {
     const navigation = this.router.getCurrentNavigation()?.extras.state;
     if (navigation) {
-      const data = JSON.parse(navigation['data']).project;
-      this.hauteur = data.taille.hauteur;
-      this.largeur = data.taille.largeur;
+      const data = JSON.parse(navigation['data']).project as DataProject;
+      this.id = data.id;
+      this.largeur = data.taille[0];
+      this.hauteur = data.taille[1];
       this.appService.setProjectName(data.name);
+      // TODO: Charger la grille depuis data.grille
     }
   }
 

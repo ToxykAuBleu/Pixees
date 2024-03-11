@@ -58,9 +58,11 @@ if ($_GET["grille"] === "true") {
         echo json_encode(array("error" => "Le projet n'existe pas"));
         exit;
     }
-    $json = file_get_contents($file);
-    echo $json;
+    $json = json_decode(file_get_contents($file));
+    $json->id = intval($_GET["id"]);
+    echo json_encode(array("project" => $json));
 } else {
     // Récupération des métadonnées du projet.
     echo json_encode($project);
 }
+?>
