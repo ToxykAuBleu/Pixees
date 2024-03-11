@@ -15,10 +15,12 @@ import { Calque } from '../../../../Algo/scripts/Calque';
 export class CalqueComponent {
   @Input() layerCount: number = 0;
   @Input() layerList: Calque[] = [];
-  selectedLayer: number = 0;
+  @Input() selectedLayer: number = 0;
   @Output() addLayer = new EventEmitter<Calque>();
   @Output() deleteLayer = new EventEmitter<number>();
   @Output() selectLayer = new EventEmitter<number>();
+  @Output() moveLayerUp = new EventEmitter<number>();
+  @Output() moveLayerDown = new EventEmitter<number>();
 
   faCirclePlus = faCirclePlus;
   faTrashCan = faTrashCan;
@@ -40,9 +42,16 @@ export class CalqueComponent {
   }
 
   select(index: number) {
-    console.log(index);
-    this.selectedLayer = this.layerList.length - 1 - index;
-    console.log("Layer Selected" + this.selectedLayer);
-    this.selectLayer.emit(this.selectedLayer);
+    console.log("Layer Selected" + index);
+    this.selectLayer.emit(index)
+  }
+
+  layerUp(index: number) {
+    console.log("Layer Moved Up" + index);
+    this.moveLayerUp.emit(index);
+  }
+
+  layerDown(index: number) {
+    this.moveLayerDown.emit(index);
   }
 }

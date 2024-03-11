@@ -72,11 +72,38 @@ export class EditeurComponent implements OnInit {
     for (let i = 0; i < this.layerList.length; i++) {
       this.layerList[i].setPosition(this.layerList.length - i - 1)
     }
+    console.log(this.layerList);
   }
 
   selectLayer(index: number) {
     this.selectedLayer = index;
     console.log("Selected Layer: " + index);
+  }
+
+  layerUp(index: number) {
+    console.log("Layer Moved Up" + index);
+    if (index > 0) {
+      const temp = this.layerList[index];
+      this.layerList[index] = this.layerList[index - 1];
+      this.layerList[index - 1] = temp;
+      this.layerList[index].setPosition(index - 1);
+      this.layerList[index - 1].setPosition(index);
+      this.selectedLayer = index - 1;
+      console.log(this.selectedLayer);
+    }
+  }
+
+  layerDown(index: number) {
+    console.log("Layer Moved Down" + index);
+    if (index >= 0) {
+      const temp = this.layerList[index];
+      this.layerList[index] = this.layerList[index + 1];
+      this.layerList[index + 1] = temp;
+      this.layerList[index].setPosition(index + 1);
+      this.layerList[index + 1].setPosition(index);
+      this.selectedLayer = index + 1;
+      console.log(this.selectedLayer);
+    }
   }
 
   onGrilleClicked($event: { x: number; y: number; }) {

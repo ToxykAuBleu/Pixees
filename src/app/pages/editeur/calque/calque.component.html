@@ -1,8 +1,8 @@
 <div class="flex flex-col bg-[#D9D9D9] gap-4 p-4 h-full rounded-lg shadow-lg">
     <div class="inline-flex justify-between gap-4">
         <fa-icon (click)="newLayer()" [icon]="faCirclePlus" size="xl"></fa-icon>
-        <fa-icon [icon]="faArrowUp" size="xl"></fa-icon>
-        <fa-icon [icon]="faArrowDown" size="xl"></fa-icon>
+        <fa-icon (click)="layerUp(selectedLayer)" [icon]="faArrowUp" size="xl"></fa-icon>
+        <fa-icon (click)="layerDown(selectedLayer)" [icon]="faArrowDown" size="xl"></fa-icon>
         <fa-icon [icon]="faCopy" size="xl"></fa-icon>
     </div>
     <div class="inline-flex flex-col gap-2">
@@ -15,8 +15,8 @@
             [_largeur]="layer.getGrille().getLargeur()"
             [_position]="layer.getPosition() + 1"
             [_layerNumber]="layerCount"
-            [isSelected]="layerList.length - 1 - i === selectedLayer"
-            [ngStyle]="{'background-color': layerList.length - 1 - i === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
+            [isSelected]="i === selectedLayer"
+            [ngStyle]="{'background-color': i === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
         </div>
     </div>
 </div>
