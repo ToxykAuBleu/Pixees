@@ -40,15 +40,19 @@
 
             <div class="category-type">
                 <label>Taille</label>
-                <input formControlName="taille" [hidden]="true">
-                <button type="button" class="button" (click)="changeTaille(5, 5)" value="5x5" id="5x5" (click)="changeActiveButton('5x5')">5x5</button>
-                <button type="button" class="button" (click)="changeTaille(10, 10)" value="10x10" id="10x10" (click)="changeActiveButton('10x10')">10x10</button>
-                <button type="button" class="button" (click)="changeTaille(20, 20)" value="20x20" id="20x20" (click)="changeActiveButton('20x20')">20x20</button>
-                <button type="button" class="button" (click)="changeTaille(50, 50)" value="50x50" id="50x50" (click)="changeActiveButton('50x50')">50x50</button>
-                <button type="button" class="button" (click)="changeTaille(128, 128)" value="128x128" id="128x128" (click)="changeActiveButton('128x128')">128x128</button>
-                <button type="button" class="button" value="Personnalisé" (click)="personalisationProject()" id="personnalise" (click)="changeActiveButton('personnalise')">Personnalisée</button>
-                <div id="error-taille" class="alert alert-danger text-red-500 hidden">
-                    <div>La taille est requise.</div>
+                <div class="flex flex-col">
+                    <div class="flex flex-row">
+                        <input formControlName="taille" [hidden]="true">
+                        <button type="button" class="button" (click)="changeTaille(5, 5)" value="5x5" id="5x5" (click)="changeActiveButton('5x5')">5x5</button>
+                        <button type="button" class="button" (click)="changeTaille(10, 10)" value="10x10" id="10x10" (click)="changeActiveButton('10x10')">10x10</button>
+                        <button type="button" class="button" (click)="changeTaille(20, 20)" value="20x20" id="20x20" (click)="changeActiveButton('20x20')">20x20</button>
+                        <button type="button" class="button" (click)="changeTaille(50, 50)" value="50x50" id="50x50" (click)="changeActiveButton('50x50')">50x50</button>
+                        <button type="button" class="button" (click)="changeTaille(128, 128)" value="128x128" id="128x128" (click)="changeActiveButton('128x128')">128x128</button>
+                        <button type="button" class="button" value="Personnalisé" (click)="personalisationProject()" id="personnalise" (click)="changeActiveButton('personnalise')">Personnalisée</button>
+                    </div>
+                    <div *ngIf="taille.invalid && (taille.dirty || taille.touched)" class="alert alert-danger text-red-900">
+                        <p>La taille est requise.</p>
+                    </div>
                 </div>
             </div>
             

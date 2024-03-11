@@ -64,8 +64,9 @@ export class ProjetComponent {
           if (res.valueOf().hasOwnProperty('error')) {
             console.error(res);
             if (res.error === "Couleur d'arrière plan non défini") {
-              console.log("test");
               this.bgcolor.markAsDirty();
+            } else if (res.error === "Taille du projet non défini") {
+              this.taille.markAsDirty();
             }
           } else {
             console.log(res);
