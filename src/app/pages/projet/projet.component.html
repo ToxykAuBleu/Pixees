@@ -1,8 +1,6 @@
 <div id="projectHome" class="grid grid-cols-1 grid-rows-1 place-items-center h-full">
     <div class="center">
         <h1 class="text-left font-bold">Choisis ton projet</h1>
-        <fa-icon (click)="redirectHome()" [icon]="faXmark" size="xl"></fa-icon>
-
         <div id="cards" class="grid grid-cols-2 grid-rows-1 gap-4">
             <div (click)="newProject()" class="card min-h-2">
                 <p>Nouveau projet</p>
@@ -79,28 +77,12 @@
         </div>
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
         <div class="content">
-            <form id="formImportProject" (ngSubmit)="onSubmit(false)">
-                <!-- <div class="flex flex-row justify-around items-center">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>A</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>B</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>C</label>
-                    </div>
-                </div> -->
-                <div *ngFor="let project of projects">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>{{project.name}}</label>
-                        <label>{{project.id}}</label>
-                        <label>{{project.taille}}</label>
-                        <!-- <input type="radio" name="project" [value]="project.id" formControlName="project"> -->
+            <form id="formImportProject">
+                <div class="grid grid-cols-3 place-items-center">
+                    <div class="projet-type" *ngFor="let project of projects;">
+                        <img src="../../../assets/img/1.jpg" class="projet" (click)="onSubmit(false, project.id)">
+                        <p class="font-black text-lg">{{project.name}}</p>
+                        <p>{{project.taille[0]}} x {{project.taille[1]}}</p>
                     </div>
                 </div>
             </form>

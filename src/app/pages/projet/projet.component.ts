@@ -131,17 +131,17 @@ export class ProjetComponent {
           const projects = [];
           for (const project of res) {
             projects.push({
-              user: project["user"],
-              id: project["project"],
+              user: project["utilisateur"],
+              id: project["projet"],
               name: project["nom"],
               taille: [project["hauteurToile"], project["largeurToile"]],
               grille: project["grille"],
               dateCreation: project["dateCreation"],
               dateModif: project["dateModif"]
             } as DataProject);
-            this.projects = projects;
-            console.log(this.projects);
           }
+          this.projects = projects;
+          console.log(this.projects);
         }
       },
       error: (err) => {

@@ -292,7 +292,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
 
                 const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
                 const c = pixel?.RGBversHexa().slice(1);
-                data.grille![x].push(c);
+                data.grille![y].push(c);
               }
             }
 
