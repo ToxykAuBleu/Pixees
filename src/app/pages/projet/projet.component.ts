@@ -59,6 +59,7 @@ export class ProjetComponent {
     }),
     withCredentials: true
   };
+  hasSubmitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,11 +70,11 @@ export class ProjetComponent {
   { };
   
   onSubmit(create: boolean = false, idLoad: number | undefined = undefined): void {
-    const submitButton: HTMLElement = document.getElementById('createButton')!;
-    submitButton.setAttribute('disabled', 'true');
-
     // Création d'un nouveau projet.
     if (create) {
+      const submitButton: HTMLElement = document.getElementById('createButton')!;
+      submitButton.setAttribute('disabled', 'true');
+
       this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, this.httpOptions)
         .subscribe({
           next: (res: any) => {
@@ -92,6 +93,7 @@ export class ProjetComponent {
           },
           error: (err) => {
             console.error(err);
+            submitButton.removeAttribute('disabled');
           },
           complete: () => {
             submitButton.removeAttribute('disabled');
@@ -100,7 +102,10 @@ export class ProjetComponent {
     } 
     // Chargement d'un projet existant.
     else {
-      this.http.get(`${environment.apiLink}/project/load.php?id=${idLoad}`, this.httpOptions)
+      if (this.hasSubmitted) return;
+      
+      this.hasSubmitted = true;
+      this.http.get(`${environment.apiLink}/project/load.php?id=${idLoad}&grille=true`, this.httpOptions)
         .subscribe({
           next: (res: any) => {
             if (res.valueOf().hasOwnProperty('error')) {
@@ -113,9 +118,10 @@ export class ProjetComponent {
           },
           error: (err) => {
             console.error(err);
+            this.hasSubmitted = false;
           },
           complete: () => {
-            submitButton.removeAttribute('disabled');
+            this.hasSubmitted = false;
           }
         });
     }
