@@ -8,7 +8,7 @@
                 <p>Nouveau projet</p>
                 <fa-icon [icon]="faFileCirclePlus" size="xl"></fa-icon>
             </div>
-            <div (click)="importProject()" class="card min-h-2">
+            <div (click)="importProject(); getListProjects();" class="card min-h-2">
                 <p>Charger projet</p>
                 <fa-icon [icon]="faFileImport" size="xl"></fa-icon>
             </div>
@@ -25,7 +25,7 @@
         
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
 
-        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit()">
+        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit(true)">
             <div class="category-type">
                 <label>Nom du projet</label> 
                 <div>
@@ -79,8 +79,8 @@
         </div>
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
         <div class="content">
-            <form id="formImportProject" method="post">
-                <div class="flex flex-row justify-around items-center">
+            <form id="formImportProject" (ngSubmit)="onSubmit(false)">
+                <!-- <div class="flex flex-row justify-around items-center">
                     <div class="projet-type">
                         <img src="../../../assets/img/1.jpg" class="projet">
                         <label>A</label>
@@ -93,33 +93,14 @@
                         <img src="../../../assets/img/1.jpg" class="projet">
                         <label>C</label>
                     </div>
-                </div>
-                <div class="flex flex-row justify-around items-center">
+                </div> -->
+                <div *ngFor="let project of projects">
                     <div class="projet-type">
                         <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>D</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>E</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>F</label>
-                    </div>
-                </div>
-                <div class="flex flex-row justify-around items-center">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>G</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>H</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>I</label>
+                        <label>{{project.name}}</label>
+                        <label>{{project.id}}</label>
+                        <label>{{project.taille}}</label>
+                        <!-- <input type="radio" name="project" [value]="project.id" formControlName="project"> -->
                     </div>
                 </div>
             </form>

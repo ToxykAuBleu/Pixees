@@ -10,9 +10,8 @@ import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
-import { error, log } from 'node:console';
-import { ActivatedRoute, Router } from '@angular/router';
-import { clearScreenDown } from 'node:readline';
+import { Router } from '@angular/router';
+import { DataProject } from '../../projet/projet.component';
 
 @Component({
   selector: 'app-grille',
@@ -284,16 +283,16 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
             // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
             const largeur = this.grille?.getLargeur();
             const hauteur = this.grille?.getHauteur();
-            for (let x = 0; x < largeur!; x++) {
-              data.grille[x] = [];
-              for (let y = 0; y < hauteur!; y++) {
+            for (let y = 0; y < hauteur!; y++) {
+              data.grille![y] = [];
+              for (let x = 0; x < largeur!; x++) {
                 if (abortController.signal.aborted) {
                   reject(void 0);
                 }
 
                 const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
                 const c = pixel?.RGBversHexa().slice(1);
-                data.grille[x].push(c);
+                data.grille![x].push(c);
               }
             }
 
@@ -348,13 +347,4 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
       }
     });
   }
-}
-
-interface DataProject {
-  id?: number;
-  name?: string;
-  taille: [number, number];
-  grille: {
-    [y: number]: string[]
-  };
 }
