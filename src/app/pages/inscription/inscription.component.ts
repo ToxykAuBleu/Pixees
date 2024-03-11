@@ -66,6 +66,8 @@ export class InscriptionComponent {
           } else {
             this.error = false;
             this.success = true;
+            const errorText: HTMLElement = document.getElementById('error')!;
+            errorText.innerHTML = "";
             await new Promise(resolve => setTimeout(resolve, 3000));
             this.goToConnexion();
           }
