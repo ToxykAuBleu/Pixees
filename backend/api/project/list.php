@@ -22,7 +22,7 @@ try {
 $projects = [];
 // Récupération des métadonnées du projet dans la bdd.
 try {
-    $query = mysqli_real_escape_string($link, 'SELECT E.idUtilisateur utilisateur, P.idProjet projet, nom, hauteurToile, largeurToile, dateCreation, dateModif FROM ' . $ini["PROJET"]["Table_Project"] . ' P JOIN Editer E ON P.idProjet = E.idProjet WHERE idUtilisateur = ' . $_SESSION["id"] . ';');
+    $query = mysqli_real_escape_string($link, 'SELECT E.idUtilisateur utilisateur, P.idProjet projet, nom, hauteurToile, largeurToile, dateCreation, dateModif FROM ' . $ini["PROJET"]["Table_Project"] . ' P JOIN Editer E ON P.idProjet = E.idProjet WHERE idUtilisateur = ' . $_SESSION["id"] . ' ORDER BY dateCreation DESC;');
     $result = mysqli_query($link, $query);
     if (!$result) {
         echo json_encode(array("error" => "Erreur de récupération des projets"));
