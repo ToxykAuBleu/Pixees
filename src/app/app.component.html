@@ -37,13 +37,13 @@
     <header id={{couleur}} class="flex flex-row justify-between py-2 px-4 gap-8 items-center">
       <h1 (click)="goToHome()" class="font-title text-4xl">{{title}}</h1>
       <div class="inline-flex gap-2">
-        <fa-icon [icon]="faDownload" size="2xl" (click)="triggerGrille()"></fa-icon>
-        <fa-icon [icon]="faFloppyDisk" size="2xl" (click)="triggerSave()"></fa-icon>
-        <fa-icon [icon]="faFileImport" size="2xl"></fa-icon>
+        <fa-icon [icon]="faDownload" size="2xl" (click)="triggerGrille()" class="icone" aria-label="Exporter"></fa-icon>
+        <fa-icon [icon]="faFloppyDisk" size="2xl" (click)="triggerSave()" class="icone" aria-label="Sauvegarder"></fa-icon>
+        <fa-icon [icon]="faFileImport" size="2xl" class="icone" aria-label="Charger"></fa-icon>
       </div>
       <div class="inline-flex gap-2">
-        <fa-icon [icon]="faRotateLeft" size="2xl"></fa-icon>
-        <fa-icon [icon]="faRotateRight" size="2xl"></fa-icon>
+        <fa-icon [icon]="faRotateLeft" size="2xl" class="icone" aria-label="Retour arrière"></fa-icon>
+        <fa-icon [icon]="faRotateRight" size="2xl" class="icone" aria-label="Retour avant"></fa-icon>
       </div>
       <h1 class="flex-1 text-center">{{ projectNameNav }}</h1>
       <button class="border-solid border-white border-[1px] px-4 py-1 rounded-md bg-[#381663] text-white">Publier</button>

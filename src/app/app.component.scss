@@ -194,9 +194,11 @@ fa-icon svg {
 
 .icone{
     position: relative;
+    cursor: pointer;
 }
 
 .icone::after{
+    cursor: default;
     content: attr(aria-label);
     visibility: hidden;
     font-weight: bold;
