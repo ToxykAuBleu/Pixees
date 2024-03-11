@@ -24,6 +24,8 @@ export class CarouselVitrineComponent {
     "slidesToScroll": 1,
     "infinite": true,
     "autoplay": true,
+    "accessibility": false,
+    "draggable": false,
     "autoplaySpeed": 5000,
     "arrows": false,
     "touchMove": false,
