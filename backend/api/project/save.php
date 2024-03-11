@@ -26,8 +26,8 @@ $_POST = json_decode($json, true);
 // }
 
 // Vérification du projet reçu.
-$largeur = $_SESSION["project"]["taille"]["hauteur"];
-$hauteur = $_SESSION["project"]["taille"]["largeur"];
+$largeur = $_SESSION["project"]["taille"][0];
+$hauteur = $_SESSION["project"]["taille"][1];
 for ($x = 0; $x < $largeur; $x++) {
     if (count($_POST["grille"][$x]) != $hauteur) {
         echo json_encode(array("error" => "La grille n'est pas conforme"));
@@ -51,19 +51,21 @@ try {
 $isNew = false;
 try {
     if (!isset($_POST["id"])) {
-        $query = mysqli_real_escape_string($link, "INSERT INTO " . $ini["PROJET"]["Table_Project"] . " (nom, hauteurToile, largeurToile) VALUES ('" . $name . "', " . $hauteur . ", " . $largeur . ");");
+        $name = mysqli_real_escape_string($link, $name);
+        $query = "INSERT INTO " . $ini["PROJET"]["Table_Project"] . " (nom, hauteurToile, largeurToile) VALUES ('$name', $hauteur, $largeur);";
         $result = mysqli_query($link, $query);
         if (!$result) {
             throw new Exception();
         }
 
         // Récupération de l'id généré
-        $query = mysqli_real_escape_string($link, "SELECT * FROM " . $ini["PROJET"]["Table_Project"] . " ORDER BY idProjet DESC LIMIT 1;");
+        $query = "SELECT * FROM " . $ini["PROJET"]["Table_Project"] . " ORDER BY idProjet DESC LIMIT 1;";
         $id = mysqli_query($link, $query)->fetch_row()[0];
         $isNew = true;
     } else {
         $id = $_POST["id"];
-        $query = mysqli_real_escape_string($link, "UPDATE " . $ini["PROJET"]["Table_Project"] . " SET nom='" . $name . "', hauteurToile=" . $hauteur . ", largeurToile=" . $largeur . " WHERE id=" . $id . ";");
+        $name = mysqli_real_escape_string($link, $name);
+        $query = "UPDATE " . $ini["PROJET"]["Table_Project"] . " SET nom='" . $name . "', hauteurToile=" . $hauteur . ", largeurToile=" . $largeur . " WHERE id=" . $id . ";";
         $result = mysqli_query($link, $query);
         if (!$result) {
             throw new Exception();
