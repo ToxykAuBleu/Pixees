@@ -260,7 +260,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
     this.http.get(`${environment.apiLink}/user/connected.php`, httpOptions).subscribe({
       next: async (res: any) => {
         if (res === false) {
-          this.popupService.changePopup("<strong>Tentative de sauvegarde...</strong>", `
+          this.popupService.changePopup("Tentative de sauvegarde...", `
           <div class="flex alert alert-danger text-red-500">
           Vous n'êtes pas connecté.<br>Veuillez vous connecter pour sauvegarder votre projet.
           </div>
@@ -313,7 +313,11 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
             resolve(JSON.stringify(data));
           });
 
-          this.popupService.changePopup("Sauvegarde", "Sauvegarde en cours...", [
+          this.popupService.changePopup("Sauvegarde", `
+          <div class="flex alert alert-success text-green-500">
+          Sauvegarde en cours...
+          </div>
+          `, [
             {
               name: "Annuler", action: () => {
                 abortController.abort();
@@ -329,7 +333,11 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy {
             // Fonction pour afficher une popup contenant potentiellement une erreur.
             // TODO: refaire le style des popups pour qu'elles soient plus jolies.
             const displayErrorPopup = (err: any) => {
-              this.popupService.changePopup("Sauvegarde", "Une erreur est survenue lors de la sauvegarde.", [
+              this.popupService.changePopup("Sauvegarde", `
+              <div class="flex alert alert-danger text-red-500">
+              Une erreur est survenue lors de la sauvegarde.
+              </div>
+              `, [
                 {
                   name: "Ok", action: () => {
                     this.popupService.closePopup();
