@@ -16,11 +16,11 @@ input[type=number] {
   background-color: #77b6fe56;
 }
 
-.outil .active{
+.outil, .active{
   position: relative;
 }
 
-.outil::after .active::after{
+.outil::after, .active::after{
   content: attr(aria-label);
   visibility: hidden;
   background-color: #AF80EA;
@@ -37,7 +37,7 @@ input[type=number] {
   transition: opacity 0.3s;
 }
 
-.outil:hover::after .active:hover::after {
+.outil:hover::after, .active:hover::after {
   visibility: visible;
   opacity: 1;
 }
