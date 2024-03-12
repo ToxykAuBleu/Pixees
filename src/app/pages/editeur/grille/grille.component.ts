@@ -273,29 +273,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
   
   async saveAsJSON(close: boolean = false): Promise<string | void> {
-    // NOTE: Il faudra vérifier en amont que l'utilisateur soit bien connecté.
-    const abortController = new AbortController();
-    const saveFunction = new Promise<string | void>(async (resolve, reject) => {
-      // Création de l'objet projet à sauvegarder.
-      let data: DataProject = {
-        name: "projet",
-        taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
-        grille: {}
-      };
-
-      // Sauvegarde du projet.
-      // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
-      const largeur = this.grille?.getLargeur();
-      const hauteur = this.grille?.getHauteur();
-      for (let x = 0; x < largeur!; x++) {
-        data.grille[x] = [];
-        for (let y = 0; y < hauteur!; y++) {
-          if (abortController.signal.aborted) {
-            reject(void 0);
-          }
-        }
-      }
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
