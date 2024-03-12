@@ -1,6 +1,6 @@
 <?php
 session_start();
-// header("Content-Type: application/json");
+header("Content-Type: application/json");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Methods: *");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers");
@@ -18,8 +18,13 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
 
 // Récupération de la liste des projets depuis un appel vers list.php
 ob_start();
-include './list.php';
+try {
+    include './list.php';
+} catch (Throwable $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "\n";
+}
 $projects = json_decode(ob_get_clean(), true);
+ob_end_flush();
 
 // Récupération du projet.
 $project = null;
@@ -65,4 +70,3 @@ if ($_GET["grille"] === "true") {
     // Récupération des métadonnées du projet.
     echo json_encode($project);
 }
-?>
