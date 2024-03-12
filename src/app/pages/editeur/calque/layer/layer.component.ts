@@ -4,11 +4,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye, faEyeSlash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { EventEmitter } from '@angular/core';
 import { Calque } from '../../../../../Algo/scripts/Calque';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-layer',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, FormsModule],
   templateUrl: './layer.component.html',
   styleUrl: './layer.component.scss'
 })
@@ -19,14 +20,15 @@ export class LayerComponent implements OnInit {
   @Input() _position: number = 0;
   @Input() _layerNumber: number = 0;
   @Input() isSelected: boolean = false;
+  @Input() _calque!: Calque;
   _layerCount: number = 0;
   private isInitialValueSet = false
   isHidden: boolean = false;
+  isBeingRenamed: boolean = false;
   @Output() delete = new EventEmitter<void>();
   @Output() select = new EventEmitter<number>();
   @Output() hide = new EventEmitter<number>();
 
-  public _calque!: Calque;
 
   constructor() {}
 
@@ -47,7 +49,15 @@ export class LayerComponent implements OnInit {
   faPenToSquare = faPenToSquare;
 
   renameLayer() {
-    console.log("Layer Renamed");
+    if (this.isBeingRenamed) {
+      this._calque.setNom(this._name);
+      this.isBeingRenamed = !this.isBeingRenamed;
+    } else {
+      this.isBeingRenamed = !this.isBeingRenamed;
+    }
+  }
+
+  applyName() {
   }
 
   toggleVisibility() {
@@ -60,7 +70,7 @@ export class LayerComponent implements OnInit {
   }
 
   selectLayer() {
-    console.log(this.isSelected);
+    console.log(this._calque);
     this.select.emit(this._position);
   }
 }

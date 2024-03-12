@@ -1,14 +1,16 @@
 <div (click)="selectLayer()" class="w-full inline-flex flex-row justify-between">
-    <h3 class="flex-1">{{_name}}</h3>
+    <div *ngIf="isBeingRenamed; then rename else normal"></div>
+    <ng-template #rename>
+        <input class="flex-1" [(ngModel)]="_name" (blur)="renameLayer()" (keyup.enter)="renameLayer()">
+    </ng-template>
+    <ng-template #normal>
+        <h3 class="flex-1">{{_name}}</h3>
+    </ng-template>
     <div class="flex flex-row gap-2">
         <fa-icon (click)="renameLayer(); $event.stopPropagation()" [icon]="faPenToSquare"></fa-icon>
         <div *ngIf="isHidden; then hidden else showing"></div>
-        <ng-template #hidden>
-            <fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEyeSlash"></fa-icon>
-        </ng-template>
-        <ng-template #showing>
-            <fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEye"></fa-icon>
-        </ng-template>
+        <ng-template #hidden><fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEyeSlash"></fa-icon></ng-template>
+        <ng-template #showing><fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEye"></fa-icon></ng-template>
         <fa-icon (click)="deleteLayer(); $event.stopPropagation()" [icon]="faTrashCan"></fa-icon>
     </div>
 </div>

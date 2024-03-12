@@ -17,6 +17,7 @@
             [_largeur]="layer.getGrille().getLargeur()"
             [_position]="layerList.length - i - 1"
             [_layerNumber]="layerCount"
+            [_calque]="layer"
             [isSelected]="layerList.length - i - 1 === selectedLayer"
             [ngStyle]="{'background-color': layerList.length - i - 1 === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
         </div>
