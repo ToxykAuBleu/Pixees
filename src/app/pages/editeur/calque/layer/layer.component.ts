@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye, faEyeSlash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { EventEmitter } from '@angular/core';
 import { Calque } from '../../../../../Algo/scripts/Calque';
 
@@ -13,6 +13,7 @@ import { Calque } from '../../../../../Algo/scripts/Calque';
   styleUrl: './layer.component.scss'
 })
 export class LayerComponent implements OnInit {
+  @Input() _name: string = "";
   @Input() _hauteur: number = 0;
   @Input() _largeur: number = 0;
   @Input() _position: number = 0;
@@ -20,8 +21,10 @@ export class LayerComponent implements OnInit {
   @Input() isSelected: boolean = false;
   _layerCount: number = 0;
   private isInitialValueSet = false
+  isHidden: boolean = false;
   @Output() delete = new EventEmitter<void>();
   @Output() select = new EventEmitter<number>();
+  @Output() hide = new EventEmitter<number>();
 
   public _calque!: Calque;
 
@@ -40,6 +43,17 @@ export class LayerComponent implements OnInit {
   faArrowDown = faArrowDown;
   faCopy = faCopy;
   faEye = faEye;
+  faEyeSlash = faEyeSlash;
+  faPenToSquare = faPenToSquare;
+
+  renameLayer() {
+    console.log("Layer Renamed");
+  }
+
+  toggleVisibility() {
+    this.isHidden = !this.isHidden;
+    this.hide.emit();
+  }
 
   deleteLayer() {
     this.delete.emit();

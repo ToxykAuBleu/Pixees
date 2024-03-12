@@ -19,6 +19,11 @@ export class Calque {
      */
     private _nom: string;
 
+    /**
+     * Indique si le Calque est visible ou non.
+     */
+    private _estVisible: boolean = true;
+
     // CONSTRUCTEUR
     /**
      * Crée un nouveau Calque avec (par défaut) un nom, une position, une hauteur et une largeur.
@@ -49,6 +54,11 @@ export class Calque {
      * @returns {string} Le nom du Calque.
      */
     getNom(): string { return this._nom; }
+    /**
+     * Retourne si le Calque est visible ou non.
+     * @returns {boolean} true si le Calque est visible, false sinon.
+     */
+    getEstVisible(): boolean { return this._estVisible; }
     
     /**
      * Définit la Grille du Calque.
@@ -65,4 +75,9 @@ export class Calque {
      * @param {string} nom Le nouveau nom du Calque.
      */
     setNom(nom: string) { this._nom = nom; }
+    /**
+     * Définit si le Calque est visible ou non.
+     * @param {boolean} estVisible true si le Calque est visible, false sinon.
+     */
+    setEstVisible(estVisible: boolean) { this._estVisible = estVisible; }
 }

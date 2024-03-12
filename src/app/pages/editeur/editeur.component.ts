@@ -67,6 +67,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
     // TODO: Charger la grille depuis data.grille
     if (this.loadedGrid && this.grille && this.grille.ctx) {
       console.log("Test chargement grille");
@@ -96,9 +97,15 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addLayer() {
     this.layerCount++;
-    const newLayer = new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur)
+    const layerName = "Nouveau Calque " + this.layerCount;
+    const newLayer = new Calque(layerName, this.layerList.length ,this.hauteur, this.largeur)
     this.layerList = [...this.layerList, newLayer];
     this.recalculateLayersPosition();
+  }
+
+  hideLayer(index: number) {
+    console.log("Editor : Layer Hidden :" + index);
+    this.layerList[index].setEstVisible(!this.layerList[index].getEstVisible());
   }
 
   deleteLayer(index: number) {

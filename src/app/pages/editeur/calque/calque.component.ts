@@ -21,6 +21,7 @@ export class CalqueComponent implements OnChanges {
   @Output() selectLayer = new EventEmitter<number>();
   @Output() moveLayerUp = new EventEmitter<number>();
   @Output() moveLayerDown = new EventEmitter<number>();
+  @Output() hideLayer = new EventEmitter<number>();
 
   reversedLayerList: Calque[] = [];
 
@@ -53,6 +54,11 @@ export class CalqueComponent implements OnChanges {
   select(index: number) {
     console.log("Layer Selected" + index);
     this.selectLayer.emit(index)
+  }
+
+  hide(index: number) {
+    console.log("Layer Hidden" + index);
+    this.hideLayer.emit(index);
   }
 
   layerUp(index: number) {

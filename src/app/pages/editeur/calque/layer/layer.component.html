@@ -1,7 +1,14 @@
 <div (click)="selectLayer()" class="w-full inline-flex flex-row justify-between">
-    <h3 class="flex-1">Nouveau calque {{_layerCount}}</h3>
+    <h3 class="flex-1">{{_name}}</h3>
     <div class="flex flex-row gap-2">
-        <fa-icon [icon]="faEye"></fa-icon>
+        <fa-icon (click)="renameLayer(); $event.stopPropagation()" [icon]="faPenToSquare"></fa-icon>
+        <div *ngIf="isHidden; then hidden else showing"></div>
+        <ng-template #hidden>
+            <fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEyeSlash"></fa-icon>
+        </ng-template>
+        <ng-template #showing>
+            <fa-icon (click)="toggleVisibility(); $event.stopPropagation()" [icon]="faEye"></fa-icon>
+        </ng-template>
         <fa-icon (click)="deleteLayer(); $event.stopPropagation()" [icon]="faTrashCan"></fa-icon>
     </div>
 </div>

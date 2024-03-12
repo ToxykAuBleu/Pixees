@@ -2,5 +2,5 @@
 <div class="grid grid-cols-3 h-full place-items-center">
     <app-outil #outil></app-outil>
     <app-grille #grille class="aspect-square w-full" (grilleClicked)="onGrilleClicked($event)" [hauteur]="hauteur" [largeur]="largeur" [layers]="layerList" [selectedLayerIndex]="selectedLayer"></app-grille>
-    <app-calque #calque (addLayer)="addLayer()" (selectLayer)="selectLayer($event)" (deleteLayer)="deleteLayer($event)" (moveLayerUp)="layerUp($event)" (moveLayerDown)="layerDown($event)" [layerList]="layerList" [layerCount]="layerCount" [selectedLayer]="selectedLayer"></app-calque>
+    <app-calque #calque (addLayer)="addLayer()" (hideLayer)="hideLayer($event)" (selectLayer)="selectLayer($event)" (deleteLayer)="deleteLayer($event)" (moveLayerUp)="layerUp($event)" (moveLayerDown)="layerDown($event)" [layerList]="layerList" [layerCount]="layerCount" [selectedLayer]="selectedLayer"></app-calque>
 </div> 
