@@ -1,24 +1,22 @@
 <div class="flex flex-col bg-[#D9D9D9] gap-4 p-4 h-full rounded-lg shadow-lg">
     <div class="inline-flex justify-between gap-4">
-        <fa-icon [icon]="faCirclePlus" size="xl"></fa-icon>
-        <fa-icon [icon]="faArrowUp" size="xl"></fa-icon>
-        <fa-icon [icon]="faArrowDown" size="xl"></fa-icon>
+        <fa-icon (click)="newLayer()" [icon]="faCirclePlus" size="xl"></fa-icon>
+        <fa-icon (click)="layerUp(selectedLayer)" [icon]="faArrowUp" size="xl"></fa-icon>
+        <fa-icon (click)="layerDown(selectedLayer)" [icon]="faArrowDown" size="xl"></fa-icon>
         <fa-icon [icon]="faCopy" size="xl"></fa-icon>
     </div>
-    <div class="inline-flex flex-col">
+    <div class="inline-flex flex-col gap-2">
         <h2>Calques</h2>
-        <div class="inline-flex flex-col mx-4">
-            <div class="inline-flex flex-row gap-2">
-                <h3 class="flex-1">Nouveau calque</h3>
-                    <fa-icon [icon]="faEye"></fa-icon>
-                    <fa-icon [icon]="faTrashCan"></fa-icon>
-            </div>
-
-            <div class="inline-flex flex-row gap-2">
-                <h3 class="flex-1">Calque par défaut</h3>
-                <fa-icon [icon]="faEye"></fa-icon>
-                <fa-icon [icon]="faTrashCan"></fa-icon>
-            </div>
+        <div class="inline-flex flex-col mx-4 gap-1">
+            <app-layer *ngFor="let layer of layerList.reverse(); let i = index"
+            (delete)="delete(layerList.length - i - 1)"
+            (click)="select(layerList.length - i - 1)"
+            [_hauteur]="layer.getGrille().getHauteur()"
+            [_largeur]="layer.getGrille().getLargeur()"
+            [_position]="layerList.length - i - 1"
+            [_layerNumber]="layerCount"
+            [isSelected]="layerList.length - i - 1 === selectedLayer"
+            [ngStyle]="{'background-color': layerList.length - i - 1 === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
         </div>
     </div>
 </div>
