@@ -62,8 +62,10 @@ export class ConnexionComponent {
           } else {
             this.error = false;
             this.success = true;
+            const errorText: HTMLElement = document.getElementById('error')!;
+            errorText.innerHTML = "";
             await new Promise(resolve => setTimeout(resolve, 3000));
-            this.router.navigate(['/home']).then(() => {
+            this.router.navigate(['/vitrine']).then(() => {
               this.appService.setIsConnected(true);
             });
           }
@@ -83,5 +85,9 @@ export class ConnexionComponent {
 
   goToHome() {
     this.router.navigate(['/', 'home']);
+  }
+
+  goToVitrine() {
+    this.router.navigate(['/', 'vitrine']);
   }
 }

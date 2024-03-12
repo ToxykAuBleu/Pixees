@@ -1,26 +1,27 @@
-import { Inject, Component, PLATFORM_ID } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
-import { GrilleComponent } from '../grille/grille.component';
-import { InjectionToken } from '@angular/core';
-import { GrilleService } from '../../../grille-service.service';
-import { PopupService } from '../../popup/popup.service';
-import { HttpClient } from '@angular/common/http';
-import { AppService } from '../../../app.service';
-import { Router } from '@angular/router';
-
-export const POSITION = new InjectionToken<number>('Position');
-export const NOM = new InjectionToken<string>('Nom');
+import { LayerComponent } from './layer/layer.component';
+import { CommonModule } from '@angular/common';
+import { Calque } from '../../../../Algo/scripts/Calque';
 
 @Component({
   selector: 'app-calque',
   standalone: true,
-  imports: [FontAwesomeModule],
+  imports: [FontAwesomeModule, LayerComponent, CommonModule],
   templateUrl: './calque.component.html',
   styleUrl: './calque.component.scss',
-  providers: [{ provide: POSITION, useValue: 1 }, { provide: NOM, useValue: 'Calque' }]
 })
-export class CalqueComponent extends GrilleComponent {
+export class CalqueComponent {
+  @Input() layerCount: number = 0;
+  @Input() layerList: Calque[] = [];
+  @Input() selectedLayer: number = 0;
+  @Output() addLayer = new EventEmitter<Calque>();
+  @Output() deleteLayer = new EventEmitter<number>();
+  @Output() selectLayer = new EventEmitter<number>();
+  @Output() moveLayerUp = new EventEmitter<number>();
+  @Output() moveLayerDown = new EventEmitter<number>();
+
   faCirclePlus = faCirclePlus;
   faTrashCan = faTrashCan;
   faArrowUp = faArrowUp;
@@ -28,37 +29,29 @@ export class CalqueComponent extends GrilleComponent {
   faCopy = faCopy;
   faEye = faEye;
 
-  private _position: number;
-  private _nom: string;
+  constructor(){}
 
-  constructor(
-    @Inject(POSITION) private position: number,
-    @Inject(NOM) private nom: string,
-    @Inject(PLATFORM_ID) platformId: Object,
-    grilleService: GrilleService,
-    popupService: PopupService,
-    http: HttpClient,
-    appService: AppService,
-    router: Router)
-  {
-    super(platformId, grilleService, popupService, appService, http, router);
-    this._position = position;
-    this._nom = nom;
+  newLayer() {
+    console.log("New Layer Added");
+    this.addLayer.emit();
   }
 
-  getPosition(): number {
-    return this._position;
+  delete(index: number) {
+    console.log("Layer Deleted");
+    this.deleteLayer.emit(index);
   }
 
-  getNom(): string {
-    return this._nom;
+  select(index: number) {
+    console.log("Layer Selected" + index);
+    this.selectLayer.emit(index)
   }
 
-  setPosition(position: number): void {
-    this._position = position;
+  layerUp(index: number) {
+    console.log("Layer Moved Up" + index);
+    this.moveLayerUp.emit(index);
   }
 
-  setNom(nom: string): void {
-    this._nom = nom;
+  layerDown(index: number) {
+    this.moveLayerDown.emit(index);
   }
 }
