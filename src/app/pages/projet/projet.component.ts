@@ -15,6 +15,19 @@ enum View {
   Personalisation = "personalisationProject"
 };
 
+export interface DataProject {
+  user?: number;
+  id?: number;
+  name: string;
+  /** [largeur, hauteur] */ 
+  taille: [number, number]; 
+  grille?: {
+    [y: number]: string[]
+  };
+  dateCreation?: string;
+  dateModif?: string;
+}
+
 @Component({
   selector: 'app-projet',
   standalone: true,
@@ -39,6 +52,16 @@ export class ProjetComponent {
   get taille(): FormControl { return this.createForm.get('taille') as FormControl; }
   get bgcolor(): FormControl { return this.createForm.get('bgcolor') as FormControl; }
 
+  projects: DataProject[] = [];
+  httpOptions: { headers: HttpHeaders, withCredentials: boolean } = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
+    }),
+    withCredentials: true
+  };
+  hasSubmitted: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -47,40 +70,91 @@ export class ProjetComponent {
     )
   { };
   
-  onSubmit(): void {
-    const submitButton: HTMLElement = document.getElementById('createButton')!;
-    submitButton.setAttribute('disabled', 'true');
+  onSubmit(create: boolean = false, idLoad: number | undefined = undefined): void {
+    // Création d'un nouveau projet.
+    if (create) {
+      const submitButton: HTMLElement = document.getElementById('createButton')!;
+      submitButton.setAttribute('disabled', 'true');
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers'
-      }),
-      withCredentials: true
-    };
-    this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, httpOptions)
-      .subscribe({
-        next: (res: any) => {
-          if (res.valueOf().hasOwnProperty('error')) {
-            console.error(res);
-            if (res.error === "Couleur d'arrière plan non défini") {
-              this.bgcolor.markAsDirty();
-            } else if (res.error === "Taille du projet non défini") {
-              this.taille.markAsDirty();
+      this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, this.httpOptions)
+        .subscribe({
+          next: (res: any) => {
+            if (res.valueOf().hasOwnProperty('error')) {
+              console.error(res);
+              if (res.error === "Couleur d'arrière plan non défini") {
+                this.bgcolor.markAsDirty();
+              } else if (res.error === "Taille du projet non défini") {
+                this.taille.markAsDirty();
+              }
+            } else {
+              console.log(res);
+              this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
+              this.appService.setIsInEditor(true);
             }
-          } else {
-            console.log(res);
-            this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
-            this.appService.setIsInEditor(true);
+          },
+          error: (err) => {
+            console.error(err);
+            submitButton.removeAttribute('disabled');
+          },
+          complete: () => {
+            submitButton.removeAttribute('disabled');
           }
-        },
-        error: (err) => {
-          console.error(err);
-        },
-        complete: () => {
-          submitButton.removeAttribute('disabled');
+        });
+    } 
+    // Chargement d'un projet existant.
+    else {
+      if (this.hasSubmitted) return;
+      
+      this.hasSubmitted = true;
+      this.http.get(`${environment.apiLink}/project/load.php?id=${idLoad}&grille=true`, this.httpOptions)
+        .subscribe({
+          next: (res: any) => {
+            if (res.valueOf().hasOwnProperty('error')) {
+              console.error("Erreur: ", res);
+            } else {
+              console.log(res);
+              this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
+              this.appService.setIsInEditor(true);
+            }
+          },
+          error: (err) => {
+            console.error(err);
+            this.hasSubmitted = false;
+          },
+          complete: () => {
+            this.hasSubmitted = false;
+          }
+        });
+    }
+  }
+
+  getListProjects(): void {
+    this.http.get(`${environment.apiLink}/project/list.php`, this.httpOptions).subscribe({
+      next: (res: any) => {
+        if (res.valueOf().hasOwnProperty('error')) {
+          console.error("Erreur: ", res);
+        } else {
+          // console.log(res);
+          const projects = [];
+          for (const project of res) {
+            projects.push({
+              user: project["utilisateur"],
+              id: project["projet"],
+              name: project["nom"],
+              taille: [project["hauteurToile"], project["largeurToile"]],
+              grille: project["grille"],
+              dateCreation: project["dateCreation"],
+              dateModif: project["dateModif"]
+            } as DataProject);
+          }
+          this.projects = projects;
+          console.log(this.projects);
         }
-      });
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
   }
 
   switchView(view: string): void {

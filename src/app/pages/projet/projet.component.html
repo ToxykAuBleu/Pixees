@@ -1,14 +1,12 @@
 <div id="projectHome" class="grid grid-cols-1 grid-rows-1 place-items-center h-full">
     <div class="center">
         <h1 class="text-left font-bold">Choisis ton projet</h1>
-        <fa-icon (click)="redirectHome()" [icon]="faXmark" size="xl"></fa-icon>
-
         <div id="cards" class="grid grid-cols-2 grid-rows-1 gap-4">
             <div (click)="newProject()" class="card min-h-2">
                 <p>Nouveau projet</p>
                 <fa-icon [icon]="faFileCirclePlus" size="xl"></fa-icon>
             </div>
-            <div (click)="importProject()" class="card min-h-2">
+            <div (click)="importProject(); getListProjects();" class="card min-h-2">
                 <p>Charger projet</p>
                 <fa-icon [icon]="faFileImport" size="xl"></fa-icon>
             </div>
@@ -25,7 +23,7 @@
         
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
 
-        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit()">
+        <form [formGroup]="createForm" id="formNewProject" (ngSubmit)="onSubmit(true)">
             <div class="category-type">
                 <label>Nom du projet</label> 
                 <div>
@@ -79,47 +77,12 @@
         </div>
         <fa-icon (click)="projectHome()" [icon]="faXmark" size="xl"></fa-icon>
         <div class="content">
-            <form id="formImportProject" method="post">
-                <div class="flex flex-row justify-around items-center">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>A</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>B</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>C</label>
-                    </div>
-                </div>
-                <div class="flex flex-row justify-around items-center">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>D</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>E</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>F</label>
-                    </div>
-                </div>
-                <div class="flex flex-row justify-around items-center">
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>G</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>H</label>
-                    </div>
-                    <div class="projet-type">
-                        <img src="../../../assets/img/1.jpg" class="projet">
-                        <label>I</label>
+            <form id="formImportProject">
+                <div class="grid grid-cols-3 place-items-center">
+                    <div class="projet-type" *ngFor="let project of projects;">
+                        <img src="../../../assets/img/1.jpg" class="projet" (click)="onSubmit(false, project.id)">
+                        <p class="font-black text-lg">{{project.name}}</p>
+                        <p>{{project.taille[0]}} x {{project.taille[1]}}</p>
                     </div>
                 </div>
             </form>

@@ -10,6 +10,8 @@ import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
+import { Router } from '@angular/router';
+import { DataProject } from '../../projet/projet.component';
 import { error, log } from 'node:console';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calque } from '../../../../Algo/scripts/Calque';
@@ -25,6 +27,7 @@ import { Calque } from '../../../../Algo/scripts/Calque';
 export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChanges {
   @Input() hauteur!: number;
   @Input() largeur!: number;
+  @Input() id! : number;
   @Input() layers: Calque[] = [];
   @Input() selectedLayerIndex: number = 0;
 
@@ -64,10 +67,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
       this.exportAsPNG();
     }));
 
-    // this.subscriptions.push(this.grilleService.save$.subscribe((close: boolean) => {
-    //   this.saveAsJSON(close);
-    // }));
-    console.log(this.hauteur);
+    this.subscriptions.push(this.grilleService.save$.subscribe((close: boolean) => {
+      this.saveAsJSON(close);
+    }));
   }
 
   ngOnDestroy(): void {
@@ -320,16 +322,16 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
             // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
             const largeur = this.grille?.getLargeur();
             const hauteur = this.grille?.getHauteur();
-            for (let x = 0; x < largeur!; x++) {
-              data.grille[x] = [];
-              for (let y = 0; y < hauteur!; y++) {
+            for (let y = 0; y < hauteur!; y++) {
+              data.grille![y] = [];
+              for (let x = 0; x < largeur!; x++) {
                 if (abortController.signal.aborted) {
                   reject(void 0);
                 }
 
                 const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
                 const c = pixel?.RGBversHexa().slice(1);
-                data.grille[x].push(c);
+                data.grille![y].push(c);
               }
             }
 
@@ -396,13 +398,4 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
       }
     });
   }
-}
-
-interface DataProject {
-  id?: number;
-  name?: string;
-  taille: [number, number];
-  grille: {
-    [y: number]: string[]
-  };
 }
