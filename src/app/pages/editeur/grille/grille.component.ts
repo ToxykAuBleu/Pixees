@@ -10,10 +10,8 @@ import { ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
-import { Router } from '@angular/router';
 import { DataProject } from '../../projet/projet.component';
-import { error, log } from 'node:console';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Calque } from '../../../../Algo/scripts/Calque';
 
 @Component({
