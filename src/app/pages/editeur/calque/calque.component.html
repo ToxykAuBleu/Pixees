@@ -8,7 +8,7 @@
     <div class="inline-flex flex-col gap-2">
         <h2>Calques</h2>
         <div class="inline-flex flex-col mx-4 gap-1">
-            <app-layer *ngFor="let layer of layerList.reverse(); let i = index"
+            <app-layer *ngFor="let layer of reversedLayerList; let i = index"
             (delete)="delete(layerList.length - i - 1)"
             (click)="select(layerList.length - i - 1)"
             [_hauteur]="layer.getGrille().getHauteur()"

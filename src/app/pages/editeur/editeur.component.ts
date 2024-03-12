@@ -96,15 +96,15 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
 
   addLayer() {
     this.layerCount++;
-    console.log(this.layerCount);
-    this.layerList.push(new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur));
-    console.log(this.hauteur, this.largeur, this.layerList.length);
-    console.log(this.layerList);
+    const newLayer = new Calque("Nouveau Calque",this.layerList.length ,this.hauteur, this.largeur)
+    this.layerList = [...this.layerList, newLayer];
+    this.recalculateLayersPosition();
   }
 
   deleteLayer(index: number) {
     console.log("Layer Deleted");
     this.layerList.splice(index, 1);
+    this.layerList = [...this.layerList]
     this.recalculateLayersPosition();
     console.log(this.layerList);
   }

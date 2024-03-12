@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { LayerComponent } from './layer/layer.component';
@@ -12,7 +12,7 @@ import { Calque } from '../../../../Algo/scripts/Calque';
   templateUrl: './calque.component.html',
   styleUrl: './calque.component.scss',
 })
-export class CalqueComponent {
+export class CalqueComponent implements OnChanges {
   @Input() layerCount: number = 0;
   @Input() layerList: Calque[] = [];
   @Input() selectedLayer: number = 0;
@@ -22,6 +22,8 @@ export class CalqueComponent {
   @Output() moveLayerUp = new EventEmitter<number>();
   @Output() moveLayerDown = new EventEmitter<number>();
 
+  reversedLayerList: Calque[] = [];
+
   faCirclePlus = faCirclePlus;
   faTrashCan = faTrashCan;
   faArrowUp = faArrowUp;
@@ -30,6 +32,13 @@ export class CalqueComponent {
   faEye = faEye;
 
   constructor(){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+      if (changes['layerList']) {
+        this.reversedLayerList = [...this.layerList].reverse();
+      }
+  }
 
   newLayer() {
     console.log("New Layer Added");
