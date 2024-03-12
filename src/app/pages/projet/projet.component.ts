@@ -74,6 +74,8 @@ export class ProjetComponent {
     // Création d'un nouveau projet.
     if (create) {
       const submitButton: HTMLElement = document.getElementById('createButton')!;
+      const submitLoader: HTMLElement = document.querySelector('#createButton > .animate-spin')!;
+      submitLoader.classList.remove('hidden');
       submitButton.setAttribute('disabled', 'true');
 
       this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, this.httpOptions)
@@ -95,9 +97,11 @@ export class ProjetComponent {
           error: (err) => {
             console.error(err);
             submitButton.removeAttribute('disabled');
+            submitLoader.classList.add('hidden');
           },
           complete: () => {
             submitButton.removeAttribute('disabled');
+            submitLoader.classList.add('hidden');
           }
         });
     } 
