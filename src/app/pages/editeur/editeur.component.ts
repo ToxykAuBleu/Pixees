@@ -38,8 +38,10 @@ export class EditeurComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation()?.extras.state;
     if (navigation) {
       const data = JSON.parse(navigation['data']).project;
-      this.hauteur = data.taille.hauteur;
-      this.largeur = data.taille.largeur;
+      this.hauteur = data.taille[0];
+      this.largeur = data.taille[1];
+      console.log(this.hauteur, data.taille[0]);
+      console.log(this.largeur, data.taille[0]);
       this.appService.setProjectName(data.name);
     }
   }

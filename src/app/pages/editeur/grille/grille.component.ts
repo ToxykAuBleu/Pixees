@@ -236,14 +236,32 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
 
   exportAsPNG(): void {
-    // if (!this.canvas) {
-    //   return;
-    // }
-    // const dataURL = this.canvas.nativeElement.toDataURL("image/png");
-    // const link = document.createElement("a");
-    // link.download = "image.png";
-    // link.href = dataURL;
-    // link.click();
+    // Création du Canvas pour dessiner le pattern
+    const exportCanvas = document.createElement("canvas");
+    const exportContext = exportCanvas.getContext("2d");
+    // Ajustement de la taille du Canvas
+    exportCanvas.width = this.largeur;
+    exportCanvas.height = this.hauteur;
+
+    if (!exportContext) {
+      return;
+    }
+
+    for (let layer of this.layers) {
+      for (let x = 0; x < this.largeur; x++) {
+        for (let y = 0; y < this.hauteur; y++) {
+          const pixel = layer.getGrille().getPixelAt(x, y).getColor() as RGB;
+          exportContext.fillStyle = `rgba(${pixel.getComp(1)}, ${pixel.getComp(2)} ,${pixel.getComp(3)}, ${pixel.getAlpha()})`;
+          exportContext.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+
+    const dataURL = exportCanvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.download = "image.png";
+    link.href = dataURL;
+    link.click();
     console.log("exported !");
   }
 
