@@ -40,9 +40,10 @@ export class InscriptionComponent {
   public success: boolean = false;
 
   onSubmit(): void {
-    console.log('submitted');
     const submitButton: HTMLElement = document.getElementById('registerButton')!;
+    const submitLoader: HTMLElement = document.querySelector('#registerButton > .animate-spin')!;
     submitButton.setAttribute('disabled', 'true');
+    submitLoader.classList.remove('hidden');
 
     this.error = false;
     this.success = false;
@@ -74,9 +75,12 @@ export class InscriptionComponent {
         },
         error: (err) => {
           console.error(err);
+          submitButton.removeAttribute('disabled');
+          submitLoader.classList.add('hidden');
         },
         complete: () => {
           submitButton.removeAttribute('disabled');
+          submitLoader.classList.add('hidden');
         }
       });
   }

@@ -36,9 +36,10 @@ export class ConnexionComponent {
   public success: boolean = false;
 
   onSubmit(): void {
-    console.log('submitted');
     const submitButton: HTMLElement = document.getElementById('connectButton')!;
+    const submitLoader: HTMLElement = document.querySelector('#connectButton > .animate-spin')!;
     submitButton.setAttribute('disabled', 'true');
+    submitLoader.classList.remove('hidden');
 
     this.error = false;
     this.success = false;
@@ -72,9 +73,12 @@ export class ConnexionComponent {
         },
         error: (err) => {
           console.error(err);
+          submitButton.removeAttribute('disabled');
+          submitLoader.classList.add('hidden');
         },
         complete: () => {
           submitButton.removeAttribute('disabled');
+          submitLoader.classList.add('hidden');
         }
       });
   }

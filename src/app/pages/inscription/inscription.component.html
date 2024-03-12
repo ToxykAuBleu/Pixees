@@ -69,7 +69,12 @@
                     <input type="checkbox" class="checkbox"><a> J'accepte les <p class="link">conditions d'utilisation
                         </p></a>
                 </div>
-                <button class="btn-inscription self-center" type="submit" id="registerButton">Inscription</button>
+                <button class="btn-inscription self-center" type="submit" id="registerButton">
+                    <div class="inline-block h-4 w-4 mr-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] hidden" role="status">
+                        <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Chargement</span>
+                    </div>
+                    Inscription
+                </button>
                 <div *ngIf="error" class="alert alert-danger text-red-500 text-center">Veuillez remplir tous les champs correctement !</div>
                 <div id="error" class="alert alert-danger text-red-500 text-center"></div>
                 <div *ngIf="success" class="alert alert-success text-green-500 text-center">Inscription réussie ! Redirection vers la page de connexion...</div>
