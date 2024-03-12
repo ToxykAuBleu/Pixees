@@ -70,6 +70,12 @@
                         </p></a>
                 </div>
                 <button class="btn-inscription self-center" type="submit" id="registerButton">Inscription</button>
+                <div *ngIf="error" class="alert alert-danger text-red-500 text-center">Veuillez remplir tous les champs correctement !</div>
+                <div id="error" class="alert alert-danger text-red-500 text-center"></div>
+                <div *ngIf="success" class="alert alert-success text-green-500 text-center">Inscription réussie ! Redirection vers la page de connexion...</div>
+                <div class="link-zone">
+                    <a (click)="goToConnexion()" class="link">Déjà inscrit ?</a>
+                </div>
             </form>
         </div>
     </div>

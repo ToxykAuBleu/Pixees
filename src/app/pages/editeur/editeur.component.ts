@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { CalqueComponent } from './calque/calque.component';
 import { GrilleComponent } from './grille/grille.component';
 import { OutilComponent } from './outil/outil.component';
@@ -7,6 +7,7 @@ import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
 import { Calque } from '../../../Algo/scripts/Calque';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-editeur',
@@ -16,16 +17,19 @@ import { Calque } from '../../../Algo/scripts/Calque';
   styleUrl: './editeur.component.scss'
 })
 
-export class EditeurComponent implements OnInit {
+export class EditeurComponent implements OnInit, OnDestroy {
   @ViewChild('calque', { static: true }) calque: CalqueComponent | undefined;
   @ViewChild('grille', { static: true }) grille: GrilleComponent | undefined;
   @ViewChild('outil', { static: true }) outil: OutilComponent | undefined;
 
   hauteur: number = 0;
   largeur: number = 0;
+
   layerList: Calque[] = [];
   selectedLayer: number = 0;
   layerCount: number = 0;
+
+  private subscriptions: Subscription[] = [];
 
   public popupTitre: string = "";
   public popupDesc: string = "";
@@ -47,17 +51,22 @@ export class EditeurComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.popupService.popupChange$.subscribe((popup) => {
+    this.subscriptions.push(this.popupService.popupChange$.subscribe((popup) => {
       this.changePopup(popup.titre, popup.desc, popup.listeBoutons);
-    });
+    }));
 
-    this.popupService.popupActive$.subscribe(() => {
+    this.subscriptions.push(this.popupService.popupActive$.subscribe(() => {
       this.activePopup();
-    });
+    }));
 
-    this.popupService.popupClose$.subscribe(() => {
+    this.subscriptions.push(this.popupService.popupClose$.subscribe(() => {
       this.closePopup();
-    });
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.appService.setProjectName('');
   }
 
   recalculateLayersPosition() {

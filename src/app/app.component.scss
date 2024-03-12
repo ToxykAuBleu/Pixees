@@ -147,22 +147,37 @@ fa-icon svg {
 
 #couleurProfil {
     background-color: #EA8080;
+    form {
+        background-color: #EBAFAF;
+    }
 }
 
 #couleurAdmin {
     background-color: #EBBC60;
+    form {
+        background-color: #EBC884;
+    }
 }
 
 #couleurDiscussion {
     background-color: #80D7EA;
+    form {
+        background-color: #AFE0EB;
+    }
 }
 
 #couleurAdmin {
     background-color: #EBBC60;
+    form {
+        background-color: #EBC884;
+    }
 }
 
 #couleurCreation {
     background-color: #AF80EA;
+    form {
+        background-color: #C6B6DA;
+    }
 }
 
 #git-info {
@@ -171,8 +186,37 @@ fa-icon svg {
     transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
     opacity: 0;
 }
-  
+
 #git-info:not(.show) {
     transform: scale(1);
+    opacity: 1;
+}
+
+.icone{
+    position: relative;
+    cursor: pointer;
+}
+
+.icone::after{
+    cursor: default;
+    content: attr(aria-label);
+    visibility: hidden;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 10px;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
+.icone:hover::after{
+    visibility: visible;
     opacity: 1;
 }

@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Injectable } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, Injectable, } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileCirclePlus, faFileImport, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { environment } from '../../../../environment';
 import { AppService } from '../../app.service';
+import { CommonModule } from '@angular/common';
 
 enum View {
   Accueil = "projectHome",
@@ -17,7 +18,7 @@ enum View {
 @Component({
   selector: 'app-projet',
   standalone: true,
-  imports: [FontAwesomeModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, ReactiveFormsModule, CommonModule],
   templateUrl: './projet.component.html',
   styleUrl: './projet.component.scss'
 })
@@ -29,11 +30,15 @@ export class ProjetComponent {
   faXmark = faXmark;
 
   createForm: FormGroup = this.formBuilder.group({
-    name: '',
-    taille: '',
-    bgcolor: '',
+    name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(26)]],
+    taille: ['', [Validators.required]],
+    bgcolor: ['', [Validators.required, Validators.pattern(/^#[0-9A-Fa-f]{6}$/)]],
   });
   
+  get name(): FormControl { return this.createForm.get('name') as FormControl; }
+  get taille(): FormControl { return this.createForm.get('taille') as FormControl; }
+  get bgcolor(): FormControl { return this.createForm.get('bgcolor') as FormControl; }
+
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -55,9 +60,14 @@ export class ProjetComponent {
     };
     this.http.post(`${environment.apiLink}/project/create.php`, this.createForm.value, httpOptions)
       .subscribe({
-        next: (res) => {
+        next: (res: any) => {
           if (res.valueOf().hasOwnProperty('error')) {
             console.error(res);
+            if (res.error === "Couleur d'arrière plan non défini") {
+              this.bgcolor.markAsDirty();
+            } else if (res.error === "Taille du projet non défini") {
+              this.taille.markAsDirty();
+            }
           } else {
             console.log(res);
             this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
@@ -106,5 +116,13 @@ export class ProjetComponent {
     } else {
       this.createForm.controls['taille'].setValue(`${hauteur}x${largeur}`);
     }
+  }
+
+  changeActiveButton(button: string): void {
+    const buttons = document.getElementsByClassName('button');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('active');
+    }
+    document.getElementById(button)!.classList.add('active');
   }
 }
