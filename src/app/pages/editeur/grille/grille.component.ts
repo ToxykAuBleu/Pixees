@@ -55,8 +55,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     private popupService: PopupService,
     private appService: AppService,
     private http: HttpClient,
-    private router: Router) 
-  {
+    private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -70,13 +69,13 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     // }));
     console.log(this.hauteur);
   }
-  
+
   ngOnDestroy(): void {
     for (const sub of this.subscriptions) {
       sub.unsubscribe();
     }
   }
-  
+
   ngAfterViewInit(): void {
     // this.ctx = this.canvas?.nativeElement.getContext('2d');
     this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
@@ -101,7 +100,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
         this.y_init = y;
       }
     });
-    
+
     this.clickHandler?.nativeElement.addEventListener('mouseup', (e) => {
       this.mouseDown = false;
       if (this.ctx){
@@ -239,7 +238,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
       return new RGB(0, 0, 0, 0);
     }
     const data = this.ctx.getImageData(x, y, 1, 1).data;
-    return new RGB(data[0], data[1], data[2], data[3]/255);
+    return new RGB(data[0], data[1], data[2], data[3] / 255);
   }
 
   exportAsPNG(): void {
@@ -286,10 +285,22 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     this.http.get(`${environment.apiLink}/user/connected.php`, httpOptions).subscribe({
       next: async (res: any) => {
         if (res === false) {
-          this.popupService.changePopup("Sauvegarde", "Vous n'êtes pas connecté. Veuillez vous connecter pour sauvegarder votre projet.", [
-            { name: "Ok", action: () => {
-              this.popupService.closePopup();
-            }, color: ButtonColor.Green }
+          this.popupService.changePopup("Tentative de sauvegarde...", `
+          <div class="flex alert alert-danger text-red-500">
+          Vous n'êtes pas connecté.<br>Veuillez vous connecter pour sauvegarder votre projet.
+          </div>
+          `, [
+            {
+              name: "Connexion", action: () => {
+                this.popupService.closePopup();
+                this.router.navigate(['/connexion']);
+              }, color: ButtonColor.Green
+            },
+            {
+              name: "Retour", action: () => {
+                this.popupService.closePopup();
+              }, color: ButtonColor.Red
+            }
           ]);
           this.popupService.activePopup();
           return;
@@ -327,11 +338,17 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
             resolve(JSON.stringify(data));
           });
 
-          this.popupService.changePopup("Sauvegarde", "Sauvegarde en cours...", [
-            { name: "Annuler", action: () => {
-              abortController.abort();
-              this.popupService.closePopup();
-            }, color: ButtonColor.Red }
+          this.popupService.changePopup("Sauvegarde", `
+          <div class="flex alert alert-success text-green-500">
+          Sauvegarde en cours...
+          </div>
+          `, [
+            {
+              name: "Annuler", action: () => {
+                abortController.abort();
+                this.popupService.closePopup();
+              }, color: ButtonColor.Red
+            }
           ]);
 
           this.popupService.activePopup();
@@ -341,14 +358,20 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
             // Fonction pour afficher une popup contenant potentiellement une erreur.
             // TODO: refaire le style des popups pour qu'elles soient plus jolies.
             const displayErrorPopup = (err: any) => {
-              this.popupService.changePopup("Sauvegarde", "Une erreur est survenue lors de la sauvegarde.", [
-                { name: "Ok", action: () => {
-                  this.popupService.closePopup();
-                }, color: ButtonColor.Green }
+              this.popupService.changePopup("Sauvegarde", `
+              <div class="flex alert alert-danger text-red-500">
+              Une erreur est survenue lors de la sauvegarde.
+              </div>
+              `, [
+                {
+                  name: "Ok", action: () => {
+                    this.popupService.closePopup();
+                  }, color: ButtonColor.Green
+                }
               ]);
               console.error(err);
             };
-            
+
             // Envoi des données sauvegardées au serveur.
             this.http.post(`${environment.apiLink}/project/save.php`, result, httpOptions)
               .subscribe({
