@@ -106,9 +106,14 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   deleteLayer(index: number) {
-    this.layerList.splice(index, 1);
-    this.layerList = [...this.layerList]
-    this.recalculateLayersPosition();
+    if (this.layerList.length > 1) {
+      this.layerList.splice(index, 1);
+      this.layerList = [...this.layerList]
+      this.recalculateLayersPosition();
+    }
+    if (index === this.layerList.length) {
+      this.selectedLayer = index - 1;
+    }
   }
 
   selectLayer(index: number) {
@@ -120,6 +125,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index - 1];
       this.layerList[index - 1] = temp;
+      this.layerList = [...this.layerList];
       this.recalculateLayersPosition();
       this.selectedLayer = index - 1;
     }
@@ -130,6 +136,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index + 1];
       this.layerList[index + 1] = temp;
+      this.layerList = [...this.layerList];
       this.recalculateLayersPosition();
       this.selectedLayer = index + 1;
     }
