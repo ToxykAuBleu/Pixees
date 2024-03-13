@@ -32,7 +32,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   layerCount: number = 0;
 
   private subscriptions: Subscription[] = [];
-  private loadedGrid: { [y:number] : string[] } = {};
+  private loadedGrid: { [name: string]: { pos: number , grille?: { [y: number]: string[] }} } = {};
   public popupTitre: string = "";
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
@@ -48,7 +48,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       this.largeur = data.taille[0];
       this.hauteur = data.taille[1];
       this.appService.setProjectName(data.name);
-      if (data.grille) this.loadedGrid = data.grille;
+      if (data.calques) this.loadedGrid = data.calques;
     }
   }
 
@@ -68,18 +68,18 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
-    // TODO: Charger la grille depuis data.grille
-    if (this.loadedGrid && this.grille && this.grille.ctx) {
-      for (let y = 0; y < this.hauteur; y++) {
-        for (let x = 0; x < this.largeur; x++) {
-          const color = this.loadedGrid[y][x];
-          const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`
-          this.grille.ctx.fillStyle = formattedColor;
-          this.grille.ctx.fillRect(x, y, 1, 1);
-        }
-      }
-      this.loadedGrid = {};
-    }
+    // // TODO: Charger la grille depuis data.grille
+    // if (this.loadedGrid && this.grille && this.grille.ctx) {
+    //   for (let y = 0; y < this.hauteur; y++) {
+    //     for (let x = 0; x < this.largeur; x++) {
+    //       const color = this.loadedGrid[y][x];
+    //       const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`
+    //       this.grille.ctx.fillStyle = formattedColor;
+    //       this.grille.ctx.fillRect(x, y, 1, 1);
+    //     }
+    //   }
+    //   this.loadedGrid = {};
+    // }
   }
 
   ngOnDestroy(): void {

@@ -302,29 +302,30 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
         } else {
           const abortController = new AbortController();
           const saveFunction = new Promise<string | void>(async (resolve, reject) => {
+            const largeur = this.largeur;
+            const hauteur = this.hauteur;
+
             // Création de l'objet projet à sauvegarder.
             // NOTE: le champ name n'est pas le bon.
             // NOTE: le champ id doit correspondre à l'id du projet si on veut le mettre à jour (actuellement, il est ignoré)
             let data: DataProject = {
-              name: "projet",
-              taille: [this.grille?.getLargeur()!, this.grille?.getHauteur()!],
-              grille: {}
+              name: "projet", taille: [largeur, hauteur], calques: {}
             };
 
             // Sauvegarde du projet.
-            // NOTE: Pour le moment, ceci ne sauvegarde que le calque par défaut.
-            const largeur = this.grille?.getLargeur();
-            const hauteur = this.grille?.getHauteur();
-            for (let y = 0; y < hauteur!; y++) {
-              data.grille![y] = [];
-              for (let x = 0; x < largeur!; x++) {
-                if (abortController.signal.aborted) {
-                  reject(void 0);
-                }
+            for (let layer of this.layers) {
+              data.calques![layer.getNom()] = { pos: layer.getPosition(), grille: {} };
+              for (let y = 0; y < hauteur!; y++) {
+                data.calques![layer.getNom()].grille![y] = [];
+                for (let x = 0; x < largeur!; x++) {
+                  if (abortController.signal.aborted) {
+                    reject(void 0);
+                  }
 
-                const pixel = this.grille?.getPixelAt(x, y).getColor() as RGB;
-                const c = pixel?.RGBversHexa().slice(1);
-                data.grille![y].push(c);
+                  const pixel = layer.getGrille().getPixelAt(x, y).getColor() as RGB;
+                  const c = pixel?.RGBversHexa().slice(1);
+                  data.calques![layer.getNom()].grille![y].push(c);
+                }
               }
             }
 
@@ -347,8 +348,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
           ]);
 
           this.popupService.activePopup();
-          const result = await saveFunction;
-
+          const result = await saveFunction as string;
+          console.log(JSON.parse(result));
+          
           if (result) {
             // Fonction pour afficher une popup contenant potentiellement une erreur.
             // TODO: refaire le style des popups pour qu'elles soient plus jolies.

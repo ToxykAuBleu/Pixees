@@ -21,8 +21,11 @@ export interface DataProject {
   name: string;
   /** [largeur, hauteur] */ 
   taille: [number, number]; 
-  grille?: {
-    [y: number]: string[]
+  calques?: {
+    [name: string]: {
+      pos: number
+      grille?: { [y: number]: string[] }
+    }
   };
   dateCreation?: string;
   dateModif?: string;
