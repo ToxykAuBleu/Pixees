@@ -92,7 +92,6 @@ export class ProjetComponent {
                 this.taille.markAsDirty();
               }
             } else {
-              console.log(res);
               this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
               this.appService.setIsInEditor(true);
             }
@@ -119,7 +118,6 @@ export class ProjetComponent {
             if (res.valueOf().hasOwnProperty('error')) {
               console.error("Erreur: ", res);
             } else {
-              console.log(res);
               this.router.navigate(['/editeur'], { state: { data: JSON.stringify(res) }})
               this.appService.setIsInEditor(true);
             }
@@ -141,7 +139,6 @@ export class ProjetComponent {
         if (res.valueOf().hasOwnProperty('error')) {
           console.error("Erreur: ", res);
         } else {
-          // console.log(res);
           const projects = [];
           for (const project of res) {
             projects.push({
@@ -155,7 +152,6 @@ export class ProjetComponent {
             } as DataProject);
           }
           this.projects = projects;
-          console.log(this.projects);
         }
       },
       error: (err) => {

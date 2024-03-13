@@ -101,7 +101,6 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       // Création d'un calque par défaut.
       this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
     }
-    console.log("Layerlist: ", this.layerList);
   }
 
   ngOnDestroy(): void {

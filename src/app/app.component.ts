@@ -97,7 +97,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.appService.projectName.subscribe(projectName => {
       this.projectNameNav = projectName;
-      console.log(projectName);
     }));
   };
 
@@ -170,13 +169,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   showSave() {
-    console.log(this.isInEditor);
     if (this.isInEditor) {
       this.askToSave?.nativeElement.classList.remove('hidden');
     } else {
       this.goToVitrine();
     }
-    console.log("Pas dans l'éditeur");
   }
 
   closeProject() {

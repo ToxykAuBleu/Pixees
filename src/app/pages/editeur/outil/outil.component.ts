@@ -270,7 +270,6 @@ export class OutilComponent implements AfterViewInit {
   formes() {
     this.changeActive("formes");
     this.outilActuel = Outil.Formes;
-    console.log("Formes selected");
     this.isResizable = false;
     this.isTolerance = false;
   }
@@ -295,7 +294,7 @@ export class OutilComponent implements AfterViewInit {
     this.finalColor = grille.pickColor(x, y) as RGB;
     this.hexaColor = this.finalColor.RGBversHexa().slice(0,7);
     this.hexInput!.nativeElement.value = this.hexaColor.slice(1,7);
-    console.log(this.hexaColor);
+    // console.log(this.hexaColor);
     this.redInput!.nativeElement.value = this.finalColor.getComp(1)?.toString()!;
     this.greenInput!.nativeElement.value = this.finalColor.getComp(2)?.toString()!;
     this.blueInput!.nativeElement.value = this.finalColor.getComp(3)?.toString()!;
