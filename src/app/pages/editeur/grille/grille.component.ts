@@ -83,9 +83,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     this.drawGrid(this.hauteur, this.largeur);
 
     this.clickHandler?.nativeElement.addEventListener('mousedown', (e) => {
-      console.log("object");
       let { x, y } = this.getMousePos(this.gridCanvas!.nativeElement, e);
-      console.log(x, y);
       this.x_init = x;
       this.y_init = y;
       this.onGrilleClick(x, y);
@@ -121,10 +119,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
     if (changes['selectedLayerIndex']) {
       this.ctx = this.canvases?.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
-      console.log(this.ctx);
     }
   }
 
@@ -137,7 +133,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
 
   onGrilleClick(x: number, y: number) {
-    console.log("grille clicked");
     this.grilleClicked.emit({ x, y })
   }
 
@@ -211,7 +206,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
       this.ctx.fill();
       this.ctx.closePath();
     }
-    console.log("drawn !");
     // this.grille?.canvasToGrid(this.ctx);
   }
 
@@ -268,7 +262,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     link.download = "image.png";
     link.href = dataURL;
     link.click();
-    console.log("exported !");
   }
   
   async saveAsJSON(close: boolean = false): Promise<string | void> {

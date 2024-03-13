@@ -35,34 +35,28 @@ export class CalqueComponent implements OnChanges {
   constructor(){}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-      if (changes['layerList']) {
-        this.reversedLayerList = [...this.layerList].reverse();
-      }
+    if (changes['layerList']) {
+      this.reversedLayerList = [...this.layerList].reverse();
+    }
   }
 
   newLayer() {
-    console.log("New Layer Added");
     this.addLayer.emit();
   }
 
   delete(index: number) {
-    console.log("Layer Deleted");
     this.deleteLayer.emit(index);
   }
 
   select(index: number) {
-    console.log("Layer Selected" + index);
     this.selectLayer.emit(index)
   }
 
   hide(index: number) {
-    console.log("Layer Hidden" + index);
     this.hideLayer.emit(index);
   }
 
   layerUp(index: number) {
-    console.log("Layer Moved Up" + index);
     this.moveLayerUp.emit(index);
   }
 

@@ -70,12 +70,10 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
     this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
     // TODO: Charger la grille depuis data.grille
     if (this.loadedGrid && this.grille && this.grille.ctx) {
-      console.log("Test chargement grille");
       for (let y = 0; y < this.hauteur; y++) {
         for (let x = 0; x < this.largeur; x++) {
           const color = this.loadedGrid[y][x];
           const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`
-          console.log(formattedColor);
           this.grille.ctx.fillStyle = formattedColor;
           this.grille.ctx.fillRect(x, y, 1, 1);
         }
@@ -104,49 +102,40 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   hideLayer(index: number) {
-    console.log("Editor : Layer Hidden :" + index);
     this.layerList[index].setEstVisible(!this.layerList[index].getEstVisible());
   }
 
   deleteLayer(index: number) {
-    console.log("Layer Deleted");
     this.layerList.splice(index, 1);
     this.layerList = [...this.layerList]
     this.recalculateLayersPosition();
-    console.log(this.layerList);
   }
 
   selectLayer(index: number) {
     this.selectedLayer = index;
-    console.log("Selected Layer: " + index);
   }
 
   layerDown(index: number) {
-    console.log("Layer Moved Up" + index);
     if (index > 0) {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index - 1];
       this.layerList[index - 1] = temp;
       this.recalculateLayersPosition();
       this.selectedLayer = index - 1;
-      console.log(this.selectedLayer);
     }
   }
 
   layerUp(index: number) {
-    console.log("Layer Moved Down" + index);
     if (index >= 0) {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index + 1];
       this.layerList[index + 1] = temp;
       this.recalculateLayersPosition();
       this.selectedLayer = index + 1;
-      console.log(this.selectedLayer);
     }
   }
 
   onGrilleClicked($event: { x: number; y: number; }) {
-    console.log("click  ");
     // Effectuez l'action de l'outil actuel
     this.outil?.action(this.grille, $event.x, $event.y);
   }

@@ -29,7 +29,6 @@ export class LayerComponent implements OnInit {
   @Output() select = new EventEmitter<number>();
   @Output() hide = new EventEmitter<number>();
 
-
   constructor() {}
 
   ngOnInit(): void {
@@ -70,7 +69,6 @@ export class LayerComponent implements OnInit {
   }
 
   selectLayer() {
-    console.log(this._calque);
     this.select.emit(this._position);
   }
 }
