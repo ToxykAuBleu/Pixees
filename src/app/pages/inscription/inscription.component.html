@@ -13,7 +13,7 @@
 
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
-                            <p class="connexion">Pseudo</p>
+                            <p class="connexion">Pseudo <span class="text-red-500">*</span></p>
                             <div>
                                 <input type="text" class="input-box" formControlName="pseudo" required>
                                 <div *ngIf="pseudo.invalid && (pseudo.dirty || pseudo.touched)" class="alert alert-danger text-red-500">
@@ -26,7 +26,7 @@
 
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
-                            <p class="connexion">Email</p>
+                            <p class="connexion">Email <span class="text-red-500">*</span></p>
                             <div>
                                 <input type="email" class="input-box" formControlName="email" required>
                                 <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger text-red-500">
@@ -40,7 +40,7 @@
 
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
-                            <p class="connexion">Mot de passe</p>
+                            <p class="connexion">Mot de passe <span class="text-red-500">*</span></p>
                             <div>
                                 <input type="password" class="input-box" formControlName="mdp" required>
                                 <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger text-red-500">
@@ -54,7 +54,7 @@
 
                     <div class="input-label-container flex flex-col">
                         <div class="justify-between gap-4 flex flex-row">
-                            <p class="connexion">Confirmation</p>
+                            <p class="connexion">Confirmation <span class="text-red-500">*</span></p>
                             <div>
                                 <input type="password" class="input-box" formControlName="confirmation" required>
                                 <div *ngIf="confirmation.invalid && (confirmation.dirty || confirmation.touched)" class="alert alert-danger text-red-500">
@@ -63,11 +63,11 @@
                             </div>
                         </div>
                     </div>
+                    <p class="text-center text-sm italic"><span class="text-red-500">*</span> Champ obligatoire</p>
 
                 </div>
                 <div class="link-zone">
-                    <input type="checkbox" class="checkbox"><a> J'accepte les <p class="link">conditions d'utilisation
-                        </p></a>
+                    <input type="checkbox" class="checkbox"><a> J'accepte les <p class="link">conditions d'utilisation</p></a>
                 </div>
                 <button class="btn-inscription self-center" type="submit" id="registerButton">
                     <div class="inline-block h-4 w-4 mr-3 animate-spin rounded-full border-2 border-solid border-current border-e-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] hidden" role="status">
