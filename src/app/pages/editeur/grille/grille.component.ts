@@ -265,6 +265,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
   
   async saveAsJSON(close: boolean = false): Promise<string | void> {
+    if (!this.canvases) { return; }
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

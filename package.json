@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "node git-version.ts && ng build",
+    "dev": "node git-version.ts && ng build --configuration development",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
     "doc": "jsdoc src -c jsdoc-conf.json --verbose",
     "serve:ssr:Pixees": "node dist/pixees/server/server.mjs"
   },
