@@ -106,9 +106,11 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   deleteLayer(index: number) {
-    this.layerList.splice(index, 1);
-    this.layerList = [...this.layerList]
-    this.recalculateLayersPosition();
+    if (this.layerList.length > 1) {
+      this.layerList.splice(index, 1);
+      this.layerList = [...this.layerList]
+      this.recalculateLayersPosition();
+    }
   }
 
   selectLayer(index: number) {
