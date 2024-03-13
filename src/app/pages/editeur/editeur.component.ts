@@ -125,6 +125,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index - 1];
       this.layerList[index - 1] = temp;
+      this.layerList = [...this.layerList];
       this.recalculateLayersPosition();
       this.selectedLayer = index - 1;
     }
@@ -135,6 +136,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       const temp = this.layerList[index];
       this.layerList[index] = this.layerList[index + 1];
       this.layerList[index + 1] = temp;
+      this.layerList = [...this.layerList];
       this.recalculateLayersPosition();
       this.selectedLayer = index + 1;
     }
