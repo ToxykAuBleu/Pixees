@@ -111,6 +111,9 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       this.layerList = [...this.layerList]
       this.recalculateLayersPosition();
     }
+    if (index === this.layerList.length) {
+      this.selectedLayer = index - 1;
+    }
   }
 
   selectLayer(index: number) {

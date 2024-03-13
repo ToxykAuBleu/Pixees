@@ -79,6 +79,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   ngAfterViewInit(): void {
     // this.ctx = this.canvas?.nativeElement.getContext('2d');
     this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
+    this.canvases!.changes.subscribe(() => {
+      this.ctx = this.canvases!.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
+    });
     // Récupération de la hauteur et de la largeur du canvas
     this.drawGrid(this.hauteur, this.largeur);
 
@@ -120,7 +123,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedLayerIndex']) {
-      this.ctx = this.canvases?.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
+      this.ctx = this.canvases!.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
     }
   }
 
