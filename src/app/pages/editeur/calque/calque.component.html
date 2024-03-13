@@ -11,10 +11,13 @@
             <app-layer *ngFor="let layer of reversedLayerList; let i = index"
             (delete)="delete(layerList.length - i - 1)"
             (click)="select(layerList.length - i - 1)"
+            (hide)="hide(layerList.length - i - 1)"
+            [_name]="layer.getNom()"
             [_hauteur]="layer.getGrille().getHauteur()"
             [_largeur]="layer.getGrille().getLargeur()"
             [_position]="layerList.length - i - 1"
             [_layerNumber]="layerCount"
+            [_calque]="layer"
             [isSelected]="layerList.length - i - 1 === selectedLayer"
             [ngStyle]="{'background-color': layerList.length - i - 1 === selectedLayer ? 'grey' : 'transparent'}"></app-layer>
         </div>

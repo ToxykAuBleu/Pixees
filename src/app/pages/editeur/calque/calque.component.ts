@@ -21,6 +21,7 @@ export class CalqueComponent implements OnChanges {
   @Output() selectLayer = new EventEmitter<number>();
   @Output() moveLayerUp = new EventEmitter<number>();
   @Output() moveLayerDown = new EventEmitter<number>();
+  @Output() hideLayer = new EventEmitter<number>();
 
   reversedLayerList: Calque[] = [];
 
@@ -34,29 +35,28 @@ export class CalqueComponent implements OnChanges {
   constructor(){}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-      if (changes['layerList']) {
-        this.reversedLayerList = [...this.layerList].reverse();
-      }
+    if (changes['layerList']) {
+      this.reversedLayerList = [...this.layerList].reverse();
+    }
   }
 
   newLayer() {
-    console.log("New Layer Added");
     this.addLayer.emit();
   }
 
   delete(index: number) {
-    console.log("Layer Deleted");
     this.deleteLayer.emit(index);
   }
 
   select(index: number) {
-    console.log("Layer Selected" + index);
     this.selectLayer.emit(index)
   }
 
+  hide(index: number) {
+    this.hideLayer.emit(index);
+  }
+
   layerUp(index: number) {
-    console.log("Layer Moved Up" + index);
     this.moveLayerUp.emit(index);
   }
 
