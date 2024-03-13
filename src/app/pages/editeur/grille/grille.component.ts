@@ -28,6 +28,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   @Input() id! : number;
   @Input() layers: Calque[] = [];
   @Input() selectedLayerIndex: number = 0;
+  @Input() isLoadingProject: boolean = false;
 
   @Output() grilleClicked = new EventEmitter<{ x: number, y: number }>();
 
@@ -124,6 +125,28 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['selectedLayerIndex']) {
       this.ctx = this.canvases!.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
+    } 
+    // Chargement des calques
+    if (changes['isLoadingProject'] && (changes['isLoadingProject'].previousValue === false && changes['isLoadingProject'].currentValue === true)) {
+      console.log("Chargement des layers !");
+      for (const layer of this.layers) {
+        const grille = layer.getGrille();
+        const pos = layer.getPosition();
+        // FIXME: this.canvases totalement vide !!!! 
+        console.log("Liste canvases: ", this.canvases!.toArray());
+        console.log("Ctx: ", this.canvases!.toArray()[pos]);
+        const ctx = this.canvases!.toArray()[pos].nativeElement.getContext('2d') as CanvasRenderingContext2D;
+        for (let x = 0; x < this.largeur; x++) {
+          for (let y = 0; y < this.hauteur; y++) {
+            const color = (grille.getPixelAt(x, y).getColor() as RGB).RGBversHexa().slice(1);
+            const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`;
+            console.log(formattedColor);
+            ctx.fillStyle = formattedColor;
+            ctx.fillRect(x, y, 1, 1);
+          }
+        }
+      }
+      console.log("Chargement terminé !");
     }
   }
 

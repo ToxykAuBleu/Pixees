@@ -16,24 +16,9 @@ if (!isset($_SESSION["id"])) {
 $json = file_get_contents('php://input');
 $_POST = json_decode($json, true);
 
-// Vérification des entrées utilisateur.
-// $verifs = ["name", "taille"];
-// foreach ($verifs as $key) {
-//     if ( !isset($_POST[$key]) || empty($_POST[$key]) ) {
-//         echo json_encode(array("error" => "Le champ $key est obligatoire"));
-//         exit();
-//     }
-// }
-
-// Vérification du projet reçu.
+// TODO: Vérification du projet reçu.
 $largeur = $_SESSION["project"]["taille"][0];
 $hauteur = $_SESSION["project"]["taille"][1];
-for ($x = 0; $x < $largeur; $x++) {
-    if (count($_POST["grille"][$x]) != $hauteur) {
-        echo json_encode(array("error" => "La grille n'est pas conforme"));
-        exit();
-    }
-}
 $name = $_SESSION["project"]["name"];
 $_POST["name"] = $name;
 

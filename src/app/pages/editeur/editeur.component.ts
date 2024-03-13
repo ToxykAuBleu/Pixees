@@ -9,6 +9,9 @@ import { Router } from '@angular/router';
 import { Calque } from '../../../Algo/scripts/Calque';
 import { Subscription } from 'rxjs';
 import { DataProject } from '../projet/projet.component';
+import { Grille } from '../../../Algo/scripts/Grille';
+import { RGB } from '../../../Algo/scripts/color/RGB';
+import { Pixel } from '../../../Algo/scripts/Pixel';
 
 @Component({
   selector: 'app-editeur',
@@ -26,13 +29,14 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   hauteur: number = 0;
   largeur: number = 0;
   id: number | undefined = 0;
+  isLoadingProject: boolean = false;
 
   layerList: Calque[] = [];
   selectedLayer: number = 0;
   layerCount: number = 0;
 
   private subscriptions: Subscription[] = [];
-  private loadedGrid: { [name: string]: { pos: number , grille?: { [y: number]: string[] }} } = {};
+  private loadedCalques: { [name: string]: { pos: number , grille?: { [y: number]: string[] }} } = {};
   public popupTitre: string = "";
   public popupDesc: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
@@ -48,7 +52,10 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       this.largeur = data.taille[0];
       this.hauteur = data.taille[1];
       this.appService.setProjectName(data.name);
-      if (data.calques) this.loadedGrid = data.calques;
+      if (data.calques) {
+        this.loadedCalques = data.calques
+        console.log("Calques reçus: ", this.loadedCalques);
+      };
     }
   }
 
@@ -67,19 +74,35 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
-    // // TODO: Charger la grille depuis data.grille
-    // if (this.loadedGrid && this.grille && this.grille.ctx) {
-    //   for (let y = 0; y < this.hauteur; y++) {
-    //     for (let x = 0; x < this.largeur; x++) {
-    //       const color = this.loadedGrid[y][x];
-    //       const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`
-    //       this.grille.ctx.fillStyle = formattedColor;
-    //       this.grille.ctx.fillRect(x, y, 1, 1);
-    //     }
-    //   }
-    //   this.loadedGrid = {};
-    // }
+    // TODO: Charger les calques
+    const loadedCalquesKeys = Object.keys(this.loadedCalques);
+    if (loadedCalquesKeys.length > 0) {
+      for (let calque of loadedCalquesKeys) {
+        const dataCalque = this.loadedCalques[calque];
+        const nomCalque = calque;
+        const objCalque = new Calque(nomCalque, dataCalque.pos, this.hauteur, this.largeur);
+        const objGrille = new Grille(this.hauteur, this.largeur);
+
+        for (let y = 0; y < this.hauteur; y++) {
+          for (let x = 0; x < this.largeur; x++) {
+            const color = new RGB();
+            color.HexaversRGB(dataCalque.grille![y][x]);
+            const pixel = new Pixel(); pixel.setColor(color);
+            objGrille.setPixelAt(x, y, pixel);
+          }
+        }
+
+        objCalque.setGrille(objGrille);
+        this.layerList.push(objCalque);
+      }
+      this.loadedCalques = {};
+      this.layerList = [...this.layerList];
+      this.isLoadingProject = true;
+    } else {
+      // Création d'un calque par défaut.
+      this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
+    }
+    console.log("Layerlist: ", this.layerList);
   }
 
   ngOnDestroy(): void {
