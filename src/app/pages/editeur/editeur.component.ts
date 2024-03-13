@@ -53,8 +53,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       this.hauteur = data.taille[1];
       this.appService.setProjectName(data.name);
       if (data.calques) {
-        this.loadedCalques = data.calques
-        console.log("Calques reçus: ", this.loadedCalques);
+        this.loadedCalques = data.calques;
       };
     }
   }
