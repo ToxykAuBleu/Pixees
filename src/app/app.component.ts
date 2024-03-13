@@ -58,6 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
   gitRepoInfo = gitRepoInfo;
   gitLastModifDate = new Date(gitRepoInfo.date).toLocaleString();
   showGitInfo = false;
+  isAppProduction = environment.production;
 
   title = 'Pixees';
 
