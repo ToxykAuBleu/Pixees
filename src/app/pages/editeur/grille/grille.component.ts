@@ -398,10 +398,18 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
                   displayErrorPopup(err);
                 },
                 complete: () => {
-                  this.popupService.closePopup();
-                  // TODO: Ajouter une popup pour indiquer que la sauvegarde a réussi.
                   if (close) {
                     this.appService.triggerCloseEditor();
+                  } else {
+                    this.popupService.changePopup("Sauvegarde", BgColor.Editeur, `
+                    <div class="flex alert alert-danger text-red-900">Sauvegarde réussie.</div>
+                    `, [
+                      {
+                        name: "Ok", action: () => {
+                          this.popupService.closePopup();
+                        }, color: ButtonColor.Green
+                      }
+                    ]);
                   }
                 }
               });

@@ -135,6 +135,9 @@ export class ProjetComponent {
   }
 
   getListProjects(): void {
+    const loadingSpinnerImport: HTMLElement = document.getElementById('loadingSpinnerImport')!;
+    loadingSpinnerImport.classList.remove('hidden');
+    
     this.http.get(`${environment.apiLink}/project/list.php`, this.httpOptions).subscribe({
       next: (res: any) => {
         if (res.valueOf().hasOwnProperty('error')) {
@@ -158,6 +161,10 @@ export class ProjetComponent {
       },
       error: (err) => {
         console.error(err);
+        loadingSpinnerImport.classList.add('hidden');
+      },
+      complete: () => {
+        loadingSpinnerImport.classList.add('hidden');
       }
     });
   }
