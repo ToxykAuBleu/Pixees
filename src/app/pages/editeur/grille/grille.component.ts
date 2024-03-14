@@ -90,7 +90,6 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
           for (let x = 0; x < this.largeur; x++) {
             for (let y = 0; y < this.hauteur; y++) {
               const color = (grille.getPixelAt(x, y).getColor() as RGB).RGBversHexa().slice(1);
-              console.log(color);
               const formattedColor = `rgba(${parseInt(color.slice(0,2), 16)}, ${parseInt(color.slice(2,4), 16)}, ${parseInt(color.slice(4,6), 16)}, ${parseInt(color.slice(6,8), 16)})`;
               ctx.fillStyle = formattedColor;
               ctx.fillRect(x, y, 1, 1);

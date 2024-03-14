@@ -28,6 +28,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
 
   hauteur: number = 0;
   largeur: number = 0;
+  couleur: string = "#FFFFFF";
   id: number | undefined = 0;
   isLoadingProject: boolean = false;
 
@@ -44,20 +45,21 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private popupService: PopupService,
     private router: Router,
-    private appService: AppService) {
-    const navigation = this.router.getCurrentNavigation()?.extras.state;
-    if (navigation) {
-      const data = JSON.parse(navigation['data']).project as DataProject;
-      this.id = data.id;
-      this.largeur = data.taille[0];
-      this.hauteur = data.taille[1];
-      this.appService.setProjectName(data.name);
-      if (data.calques) {
-        this.loadedCalques = data.calques
-        console.log("Calques reçus: ", this.loadedCalques);
-      };
+      private appService: AppService) {
+      const navigation = this.router.getCurrentNavigation()?.extras.state;
+      if (navigation) {
+        const data = JSON.parse(navigation['data']).project as DataProject;
+        this.id = data.id;
+        this.largeur = data.taille[0];
+        this.hauteur = data.taille[1];
+        this.couleur = data.bgcolor ?? '';
+        this.appService.setProjectName(data.name);
+        if (data.calques) {
+          this.loadedCalques = data.calques
+          console.log("Calques reçus: ", this.loadedCalques);
+        };
+      }
     }
-  }
 
   ngOnInit(): void {
     this.subscriptions.push(this.popupService.popupChange$.subscribe((popup) => {
@@ -99,8 +101,17 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
       this.layerList = [...this.layerList];
       this.isLoadingProject = true;
     } else {
-      // Création d'un calque par défaut.
-      this.layerList = [new Calque("Calque par défaut", 0, this.hauteur, this.largeur)];
+        // Création d'un calque par défaut.
+        const defaultLayer = new Calque("Calque par défaut", 0, this.hauteur, this.largeur);
+        for (let y = 0; y < this.hauteur; y++) {
+          for (let x = 0; x < this.largeur; x++) {
+            const pixel = new Pixel();
+            pixel.setColor(new RGB(parseInt(this.couleur.slice(1,3), 16), parseInt(this.couleur.slice(3,5), 16), parseInt(this.couleur.slice(5,7), 16), 255));
+            defaultLayer.getGrille().setPixelAt(x, y, pixel);
+          }
+        }
+        this.layerList = [defaultLayer];
+        this.isLoadingProject = true;
     }
     console.log("Layerlist: ", this.layerList);
   }

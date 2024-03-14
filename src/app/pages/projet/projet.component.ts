@@ -21,6 +21,7 @@ export interface DataProject {
   name: string;
   /** [largeur, hauteur] */ 
   taille: [number, number]; 
+  bgcolor?: string;
   calques?: {
     [name: string]: {
       pos: number
@@ -149,6 +150,7 @@ export class ProjetComponent {
               id: project["projet"],
               name: project["nom"],
               taille: [project["hauteurToile"], project["largeurToile"]],
+              bgcolor: project["bgcolor"],
               grille: project["grille"],
               dateCreation: project["dateCreation"],
               dateModif: project["dateModif"]
