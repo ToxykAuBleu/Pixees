@@ -39,9 +39,6 @@
     backdrop-filter: blur(2vw);
     flex-direction: column;
     justify-content: flex-start;
-    height: 60vh;
-    width: 40vw;
-    max-width: 80%;
     margin: 0 auto;
 
     h1 {
@@ -176,7 +173,6 @@
         justify-content: center;
         align-items: center;
         margin: auto;
-        font-weight: bold;
 
         label {
             margin-top: 2vh;
