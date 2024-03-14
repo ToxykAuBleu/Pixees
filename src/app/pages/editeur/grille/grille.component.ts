@@ -299,7 +299,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
       next: async (res: any) => {
         if (res === false) {
           this.popupService.changePopup("Tentative de sauvegarde...", BgColor.Editeur, `
-          <div class="flex alert alert-danger text-red-500">
+          <div class="flex alert alert-danger text-red-900">
           Vous n'êtes pas connecté.<br>Veuillez vous connecter pour sauvegarder votre projet.
           </div>
           `, [
@@ -353,7 +353,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
           });
 
           this.popupService.changePopup("Sauvegarde", BgColor.Editeur, `
-          <div class="flex alert alert-success text-green-500">
+          <div class="flex alert alert-success text-green-900">
           Sauvegarde en cours...
           </div>
           `, [
@@ -371,10 +371,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
           
           if (result) {
             // Fonction pour afficher une popup contenant potentiellement une erreur.
-            // TODO: refaire le style des popups pour qu'elles soient plus jolies.
             const displayErrorPopup = (err: any) => {
               this.popupService.changePopup("Sauvegarde", BgColor.Editeur, `
-              <div class="flex alert alert-danger text-red-500">
+              <div class="flex alert alert-danger text-red-900">
               Une erreur est survenue lors de la sauvegarde.
               </div>
               `, [
