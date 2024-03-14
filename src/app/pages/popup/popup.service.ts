@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class PopupService {
-  private popupChangeSource = new Subject<{titre: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]}>();
+  private popupChangeSource = new Subject<{titre: string, bgColor: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]}>();
   public popupChange$ = this.popupChangeSource.asObservable();
 
   private popupActiveSource = new Subject<void>();
@@ -14,8 +14,8 @@ export class PopupService {
   private popupCloseSource = new Subject<void>();
   popupClose$ = this.popupCloseSource.asObservable();
 
-  changePopup(titre: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {
-    this.popupChangeSource.next({titre, desc, listeBoutons});
+  changePopup(titre: string, bgColor: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {
+    this.popupChangeSource.next({titre, bgColor, desc, listeBoutons});
   }
 
   activePopup() {

@@ -1,5 +1,5 @@
 <div class="grid place-items-center w-full h-full z-50">
-    <div class="flex flex-col bg-zinc-400 rounded-lg p-4 gap-2">
+    <div [ngStyle]="{'background-color' : popupBgColor}" class="flex flex-col rounded-lg p-4 gap-2">
         <strong><h1 [innerHTML]="popupTitle"></h1></strong>
         <div class="flex" [innerHTML]="popupContent"></div>
         <div class="flex flex-row justify-end gap-2">
