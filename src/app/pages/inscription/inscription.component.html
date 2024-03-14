@@ -5,7 +5,7 @@
             alt="2" class="img-left" id="img_2"><img src="../../../assets/img/1.jpg" alt="3" class="img-left"
             id="img_3">
     </div>
-    <div class="center">
+    <div class="center w-1/4">
         <h1 class="title">S'inscrire</h1>
         <div class="zone-connexion gap-4">
             <form [formGroup]="signUpForm" id="formRegister" (ngSubmit)="onSubmit()" class="gap-4 flex flex-col">
@@ -76,7 +76,7 @@
                     Inscription
                 </button>
                 <div *ngIf="error" class="alert alert-danger text-red-500 text-center">Veuillez remplir tous les champs correctement !</div>
-                <div id="error" class="alert alert-danger text-red-500 text-center"></div>
+                <div id="error" class="alert alert-danger text-red-500 text-center w-full"></div>
                 <div *ngIf="success" class="alert alert-success text-green-500 text-center">Inscription réussie ! Redirection vers la page de connexion...</div>
                 <div class="link-zone">
                     <a (click)="goToConnexion()" class="link">Déjà inscrit ?</a>
