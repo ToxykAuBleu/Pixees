@@ -109,5 +109,8 @@ export class RGB extends Couleur {
         for (let i = 1; i < 4; i++) {
             this.setComp(i, parseInt(hexa.slice(2 * i - 2, 2 * i), 16));
         }
+        if (hexa.length >= 7) {
+            this.setAlpha(parseInt(hexa.slice(6, 8), 16) / 255);
+        }
     }
 }

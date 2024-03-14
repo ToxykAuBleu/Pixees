@@ -6,7 +6,7 @@ import { Couleur } from '../../../../Algo/scripts/color/Couleur';
 import { GrilleService } from '../../../grille-service.service';
 import { AppService } from '../../../app.service';
 import { PopupService } from '../../popup/popup.service';
-import { ButtonColor } from '../../popup/popup.component';
+import { BgColor, ButtonColor } from '../../popup/popup.component';
 import { Subscription } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
@@ -78,14 +78,12 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
   }
 
   ngAfterViewInit(): void {
-    // this.ctx = this.canvas?.nativeElement.getContext('2d');
     this.gridCtx = this.gridCanvas?.nativeElement.getContext('2d');
     this.canvases!.changes.subscribe(() => {
       if (this.isLoadingProject) {
         for (const layer of this.layers) {
           const grille = layer.getGrille();
           const pos = layer.getPosition();
-          // FIXME: this.canvases totalement vide !!!! 
           const ctx = this.canvases!.toArray()[pos].nativeElement.getContext('2d') as CanvasRenderingContext2D;
           for (let x = 0; x < this.largeur; x++) {
             for (let y = 0; y < this.hauteur; y++) {
@@ -95,9 +93,7 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
               ctx.fillRect(x, y, 1, 1);
             }
           }
-          console.log(ctx);
         }
-        console.log("Chargement terminé !");
       }
       this.ctx = this.canvases!.toArray()[this.selectedLayerIndex].nativeElement.getContext('2d');
     });
@@ -302,8 +298,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
     this.http.get(`${environment.apiLink}/user/connected.php`, httpOptions).subscribe({
       next: async (res: any) => {
         if (res === false) {
-          this.popupService.changePopup("Tentative de sauvegarde...", `
-          <div class="flex alert alert-danger text-red-500">
+          this.popupService.changePopup("Tentative de sauvegarde...", BgColor.Editeur, `
+          <div class="flex alert alert-danger text-red-900">
           Vous n'êtes pas connecté.<br>Veuillez vous connecter pour sauvegarder votre projet.
           </div>
           `, [
@@ -356,8 +352,8 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
             resolve(JSON.stringify(data));
           });
 
-          this.popupService.changePopup("Sauvegarde", `
-          <div class="flex alert alert-success text-green-500">
+          this.popupService.changePopup("Sauvegarde", BgColor.Editeur, `
+          <div class="flex alert alert-success text-green-900">
           Sauvegarde en cours...
           </div>
           `, [
@@ -375,10 +371,9 @@ export class GrilleComponent implements AfterViewInit, OnInit, OnDestroy, OnChan
           
           if (result) {
             // Fonction pour afficher une popup contenant potentiellement une erreur.
-            // TODO: refaire le style des popups pour qu'elles soient plus jolies.
             const displayErrorPopup = (err: any) => {
-              this.popupService.changePopup("Sauvegarde", `
-              <div class="flex alert alert-danger text-red-500">
+              this.popupService.changePopup("Sauvegarde", BgColor.Editeur, `
+              <div class="flex alert alert-danger text-red-900">
               Une erreur est survenue lors de la sauvegarde.
               </div>
               `, [

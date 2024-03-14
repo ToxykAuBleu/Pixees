@@ -8,6 +8,15 @@ export enum ButtonColor {
   White = "#ffffff",
 }
 
+export enum BgColor {
+  Default = "#A1A1AA",
+  Accueil = "#7CEB60",
+  Profil = "#EA8080",
+  Editeur = "#AF80EA",
+  Discussion = "#80D7EA",
+  Admin = "#EBBC60",
+}
+
 @Component({
   selector: 'app-popup',
   standalone: true,
@@ -18,5 +27,6 @@ export enum ButtonColor {
 export class PopupComponent {
   @Input() popupTitle!: string;
   @Input() popupContent!: string;
+  @Input() popupBgColor: string = BgColor.Default;
   @Input() popupButtonList!: {name: string, action: () => void, color: String }[];
 }

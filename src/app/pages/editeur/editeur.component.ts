@@ -40,6 +40,7 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
   private loadedCalques: { [name: string]: { pos: number , grille?: { [y: number]: string[] }} } = {};
   public popupTitre: string = "";
   public popupDesc: string = "";
+  public popupBgColor: string = "";
   public popupListeBoutons: {name: string, action: () => void, color: string }[] = [];
 
   constructor(
@@ -56,14 +57,13 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
         this.appService.setProjectName(data.name);
         if (data.calques) {
           this.loadedCalques = data.calques
-          console.log("Calques reçus: ", this.loadedCalques);
         };
       }
     }
 
   ngOnInit(): void {
     this.subscriptions.push(this.popupService.popupChange$.subscribe((popup) => {
-      this.changePopup(popup.titre, popup.desc, popup.listeBoutons);
+      this.changePopup(popup.titre, popup.bgColor, popup.desc, popup.listeBoutons);
     }));
 
     this.subscriptions.push(this.popupService.popupActive$.subscribe(() => {
@@ -113,7 +113,6 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
         this.layerList = [defaultLayer];
         this.isLoadingProject = true;
     }
-    console.log("Layerlist: ", this.layerList);
   }
 
   ngOnDestroy(): void {
@@ -181,8 +180,9 @@ export class EditeurComponent implements OnInit, OnDestroy, AfterViewInit {
     this.outil?.action(this.grille, $event.x, $event.y);
   }
 
-  changePopup(titre: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {
+  changePopup(titre: string, bgColor: string, desc: string, listeBoutons: {name: string, action: () => void, color: string }[]) {
     this.popupTitre = titre;
+    this.popupBgColor = bgColor;
     this.popupDesc = desc;
     this.popupListeBoutons = listeBoutons;
   }
