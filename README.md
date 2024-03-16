@@ -26,17 +26,12 @@ Vous pouvez accéder à la documentation du projet [ici](https://toxykaubleu.git
 ``[-]`` → suppression de contenu (code ou fichier)  
 ``[~]`` → fix au niveau du code  
 
-# Branches & PR
-
-```
-*   master  
-\_  editeur  
-\_  social  
-```
+# PR
 
 Chaque PR devra suivre le formalisme suivant:
 - ``feature/<nom>`` si la PR implémente une nouvelle fonctionnalité
 - ``fix/<nom>`` si la PR corrige des problèmes
+- ``upgrade/<nom>`` si la PR améliore une fonctionnatlié déjà existante.
 
 # Membres 
 
@@ -55,24 +50,64 @@ Chaque PR devra suivre le formalisme suivant:
 Pour ce faire, vous devez vous assurer d'avoir d'installé:
 - git (Optionnel, permet de télécharger tout le projet + simplement)
 - Node.js (>= 20.9.0)
-- Docker Desktop
+- Apache2
+- Php (>= 8.2)
+- MySQL (>= 8)
 
+### Front-end
+
+Nous allons pour le moment nous occuper de l'installation de Angular sur la machine.
 Exécuter les lignes suivantes dans une invite de commande:
 ```powershell
 git clone https://github.com/ToxykAuBleu/Pixees.git
 cd Pixees/
 npm ci
+npm run build
+npm run serve:ssr:Pixees
 ```
+Il est conseillé de lancer l'application dans un screen afin qu'elle fonctionne sans l'arrêt involontaire de l'utilisateur.
+Lorsque l'application est lancé, vous aurez une ip et un port. Pour la rendre publique à travers un nom de domaine, vous pouvez utiliser le reverse-proxy de Apache2.
 
-Afin de lancer Docker, vous devez vous assurer que l'application a été build: 
-- soit avec ``npm run build`` (ne se reconstruira pas s'il y a des changements)
-- [RECOMMANDE] soit avec ``npm run watch`` (actualisation à chaque changement du code)
+### Back-end
 
-Enfin, lancer Docker avec ``docker compose up -d``, puis rendez vous à l'adresse http://localhost:4000.
-Pour arrêter l'application, simplement ``docker compose down``.
-
-En cas de gros soucis avec Docker et les images créées/en cache, faites les commandes suivantes:
+Pour ce qui est de l'API (intéraction avec la BDD), déplacez tout le contenu de ``backend`` à la racine du serveur Apache:
+```powershell
+mv backend/ /var/www/Pixees
 ```
-docker builer prune -a
-docker image prune -a
+Créer un nouvelle configuration apache pour l'API: ``sudo nano /etc/apache2/sites-available/pixees.conf``
+Puis, copiez-collez cette configuration minimale:
 ```
+<VirtualHost *:80>
+        ServerName <Insérer nom de domaine>
+
+        ServerAdmin <Insérer mail de contact>
+        DocumentRoot /var/www/api
+
+        <Directory /var/www/api>
+                Options -Indexes +FollowSymLinks +MultiViews
+                AllowOverride All
+                Require all granted
+        </Directory>
+
+        <FilesMatch "\.ini$">
+            Require all denied
+        </FilesMatch>
+
+        <Directory /var/www/api/data>
+                Require all denied
+        </Directory>
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+```
+Activer le site avec ``sudo a2ensite pixees.conf`` puis redémarrer le service apache avec ``sudo systemctl restart apache2``
+
+### BDD
+Cette section sera détaillé ultérieurement.
