@@ -1,8 +1,8 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, Inject, PLATFORM_ID, Output, EventEmitter, OnInit, OnDestroy, Input, ViewChildren, QueryList, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Grille } from '../../../../Algo/scripts/Grille';
-import { RGB } from '../../../../Algo/scripts/color/RGB'
-import { Couleur } from '../../../../Algo/scripts/color/Couleur';
+import { Grille } from '../../../classes/Grille';
+import { RGB } from '../../../classes/color/RGB'
+import { Couleur } from '../../../classes/color/Couleur';
 import { GrilleService } from '../../../grille-service.service';
 import { AppService } from '../../../app.service';
 import { PopupService } from '../../popup/popup.service';
@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../../../environment';
 import { DataProject } from '../../projet/projet.component';
 import { Router } from '@angular/router';
-import { Calque } from '../../../../Algo/scripts/Calque';
+import { Calque } from '../../../classes/Calque';
 
 @Component({
   selector: 'app-grille',

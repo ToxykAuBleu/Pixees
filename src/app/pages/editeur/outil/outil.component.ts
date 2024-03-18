@@ -3,7 +3,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPencil, faEraser, faVectorSquare, faFillDrip, faEyeDropper, faWandMagic, faShapes } from '@fortawesome/free-solid-svg-icons';
 import { ColorPickerModule } from 'primeng/colorpicker';
-import { RGB } from '../../../../Algo/scripts/color/RGB';
+import { RGB } from '../../../classes/color/RGB';
 import { GrilleComponent } from '../grille/grille.component';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';

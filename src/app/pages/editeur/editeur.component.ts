@@ -6,12 +6,12 @@ import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../popup/popup.service';
 import { AppService } from '../../app.service';
 import { Router } from '@angular/router';
-import { Calque } from '../../../Algo/scripts/Calque';
+import { Calque } from '../../classes/Calque';
 import { Subscription } from 'rxjs';
 import { DataProject } from '../projet/projet.component';
-import { Grille } from '../../../Algo/scripts/Grille';
-import { RGB } from '../../../Algo/scripts/color/RGB';
-import { Pixel } from '../../../Algo/scripts/Pixel';
+import { Grille } from '../../classes/Grille';
+import { RGB } from '../../classes/color/RGB';
+import { Pixel } from '../../classes/Pixel';
 
 @Component({
   selector: 'app-editeur',
