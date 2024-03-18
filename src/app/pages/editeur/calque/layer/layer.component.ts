@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye, faEyeSlash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { EventEmitter } from '@angular/core';
-import { Calque } from '../../../../../Algo/scripts/Calque';
+import { Calque } from '../../../../classes/Calque';
 import { FormsModule } from '@angular/forms';
 
 @Component({

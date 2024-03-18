@@ -3,7 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCirclePlus, faTrashCan, faArrowUp, faArrowDown, faCopy, faEye } from '@fortawesome/free-solid-svg-icons';
 import { LayerComponent } from './layer/layer.component';
 import { CommonModule } from '@angular/common';
-import { Calque } from '../../../../Algo/scripts/Calque';
+import { Calque } from '../../../classes/Calque';
 
 @Component({
   selector: 'app-calque',
